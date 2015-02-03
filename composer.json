@@ -18,7 +18,8 @@
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "braincrafted/bootstrap-bundle": "~2.0"
+        "braincrafted/bootstrap-bundle": "~2.0",
+        "oyejorge/less.php": "~1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

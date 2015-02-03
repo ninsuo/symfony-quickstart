@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+.navbar-logo {
+   float: left;
+   margin-right: 5px;
+}
+
+.navbar-logo img {
+   max-height: 30px;
+   max-width: 100px;
+   margin-top: -7px;
+}
+

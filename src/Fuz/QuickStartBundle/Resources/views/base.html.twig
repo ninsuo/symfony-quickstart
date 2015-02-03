@@ -1,0 +1,105 @@
+{# FuzQuickStartBundle::base.html.twig #}
+
+{% import "FuzQuickStartBundle::macros.html.twig" as macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="{% block description %}An empty Symfony2 project that provides lots of ready-to-use tools for quick & not-so-dirty development{% endblock %}">
+
+        <meta name="author" content="{% block author %}{% endblock %}">
+        <title>{% block title %}My Empty Project{% endblock %}</title>
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
+         {# CSS #}
+        {% block css %}
+            <link rel="stylesheet" href="{{ asset('bundles/fuzquickstart/css/bootstrap.css') }}">
+            {% block extra_css %}{% endblock %}
+            <link rel="stylesheet" href="{{ asset('bundles/fuzquickstart/css/custom.css') }}">
+        {% endblock %}
+
+    </head>
+
+    <body>
+
+         {# Start Container #}
+        <div class="container-fluid">
+            {% block navigation %}
+               <nav class="navbar navbar-default">
+                 <div class="container-fluid">
+                   <div class="navbar-header">
+                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                       <span class="sr-only">Toggle navigation</span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                     </button>
+                     <a class="navbar-brand" href="{% block home %}#{% endblock %}">
+                        <div class="navbar-logo">
+                          <img src="{{ asset('apple-touch-icon.png') }}">
+                        </div>
+                        <div class="pull-left">
+                           {% block brand %}QuickStart{% endblock %}
+                        </div>
+                     </a>
+                   </div>
+                   <div id="navbar" class="navbar-collapse collapse">
+                     <ul class="nav navbar-nav">
+                       <li class="active"><a href="{{ block('home') }}">Home</a></li>
+                       <li><a href="#">About</a></li>
+                       <li><a href="#">Contact</a></li>
+                       <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                         <ul class="dropdown-menu" role="menu">
+                           <li><a href="#">Action</a></li>
+                           <li><a href="#">Another action</a></li>
+                           <li><a href="#">Something else here</a></li>
+                           <li class="divider"></li>
+                           <li class="dropdown-header">Nav header</li>
+                           <li><a href="#">Separated link</a></li>
+                           <li><a href="#">One more separated link</a></li>
+                         </ul>
+                       </li>
+                     </ul>
+                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="">Login</a></li>
+                     </ul>
+                   </div><!--/.nav-collapse -->
+                 </div><!--/.container-fluid -->
+               </nav>
+            {% endblock %}
+
+           <div class="clear">&nbsp;</div>
+
+           <div id="body">
+              {% block body %}{% endblock %}
+           </div>
+
+       </div>
+
+         {# End Container #}
+
+         {# Wait gif #}
+        <div id="wait" class="hide" aria-hidden="true">
+            <div class="text-center">
+                <img src="{{ asset('bundles/fuzquickstart/img/wait.gif') }}" alt="Please wait..."/>
+            </div>
+        </div>
+
+         {# JS #}
+        {% block js %}
+            <script src="{{ asset('bundles/fuzquickstart/js/jquery-2.1.1.min.js') }}"></script>
+            <script src="{{ asset('bundles/fuzquickstart/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/fuzquickstart/js/ie10-viewport-bug-workaround.js') }}"></script>
+            <script src="{{ asset('bundles/fuzquickstart/js/jquery.domajax.js') }}"></script>
+            <script src="{{ asset('bundles/fuzquickstart/js/jquery.symfony2.js') }}"></script>
+            {% block extra_js %}{% endblock %}
+        {% endblock %}
+
+        {% block script %}{% endblock %}
+
+    </body>
+</html>
