@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle;
+namespace Fuz\AppBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AppBundle extends Bundle
+class FuzAppBundle extends Bundle
 {
 }

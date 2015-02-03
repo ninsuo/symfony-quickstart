@@ -1,3 +1,9 @@
-app:
-    resource: @AppBundle/Controller/
+fuz_quick_start:
+    resource: "@FuzQuickStartBundle/Controller/"
     type:     annotation
+    prefix:   /
+
+fuz_app:
+    resource: "@FuzAppBundle/Controller/"
+    type:     annotation
+    prefix:   /
