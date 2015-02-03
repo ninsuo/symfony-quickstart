@@ -65,3 +65,10 @@ swiftmailer:
 braincrafted_bootstrap:
     jquery_path: %kernel.root_dir%/../src/Fuz/QuickStartBundle/Resources/public/js/jquery-2.1.1.min.js
     less_filter: lessphp
+
+# Ornicar APC configuration
+ornicar_apc:
+    host: %site_url%
+    web_dir: %kernel.root_dir%/../web
+    mode: curl
+

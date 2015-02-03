@@ -1,0 +1,12 @@
+parameters:
+    quickstart.oauth_user_provider.class: Fuz\QuickStartBundle\Provider\OAuthUserProvider
+    hwi_oauth.account.connector: Fuz\QuickStartBundle\Connect\AccountConnect
+
+services:
+
+    quickstart.oauth_user_provider:
+        class: %quickstart.oauth_user_provider.class%
+        arguments: [@session, @doctrine.orm.entity_manager]
+
+    hwi_oauth.account.connector:
+        class: %hwi_oauth.account.connector%
