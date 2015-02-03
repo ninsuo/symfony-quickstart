@@ -16,7 +16,7 @@
 
          {# CSS #}
         {% block css %}
-            <link rel="stylesheet" href="{{ asset('bundles/fuzquickstart/css/bootstrap.css') }}">
+            <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
             {% block extra_css %}{% endblock %}
             <link rel="stylesheet" href="{{ asset('bundles/fuzquickstart/css/custom.css') }}">
         {% endblock %}
@@ -91,9 +91,8 @@
 
          {# JS #}
         {% block js %}
-            <script src="{{ asset('bundles/fuzquickstart/js/jquery-2.1.1.min.js') }}"></script>
-            <script src="{{ asset('bundles/fuzquickstart/js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('bundles/fuzquickstart/js/ie10-viewport-bug-workaround.js') }}"></script>
+            <script src="{{ asset('js/jquery.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
             <script src="{{ asset('bundles/fuzquickstart/js/jquery.domajax.js') }}"></script>
             <script src="{{ asset('bundles/fuzquickstart/js/jquery.symfony2.js') }}"></script>
             {% block extra_js %}{% endblock %}

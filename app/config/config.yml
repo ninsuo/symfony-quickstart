@@ -33,7 +33,7 @@ assetic:
     use_controller: false
     bundles:        [ ]
     filters:
-       less:
+       lessphp:
             file: %kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php
             apply_to: "\.less$"
        cssrewrite: ~
@@ -60,3 +60,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# BootstrapBundle Configuration
+braincrafted_bootstrap:
+    jquery_path: %kernel.root_dir%/../src/Fuz/QuickStartBundle/Resources/public/js/jquery-2.1.1.min.js
+    less_filter: lessphp
