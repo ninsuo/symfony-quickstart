@@ -23,11 +23,11 @@
 {% block login %}
     <ul class="nav navbar-nav navbar-right">
         {% if is_granted('ROLE_USER') %}
-            <p class="navbar-text">Logged as {{ macros.me() }}</p>
-            <li><a href="{{ path('logout') }}">Logout</a></li>
+            <p class="navbar-text">{{ 'quickstart.login.as' | trans }} {{ macros.me() }}</p>
+            <li><a href="{{ path('logout') }}">{{ 'quickstart.logout.title' | trans }}</a></li>
             {% else %}
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'quickstart.login.title' | trans }} <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="{{ hwi_oauth_login_url('google') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/google-small.png') }}" alt=""/> Google</a></li>
                     <li><a href="{{ hwi_oauth_login_url('facebook') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/facebook-small.png') }}" alt=""/> Facebook</a></li>
@@ -41,11 +41,11 @@
 {% block translations %}
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Language <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'quickstart.locale.title' | trans }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 {% block supported_locales %}
-                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}"><img class="lang-image" src="{{ asset('bundles/fuzquickstart/img/countries/France.png') }}" alt=""/> English</a></li>
-                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}"><img class="lang-image" src="{{ asset('bundles/fuzquickstart/img/countries/United-Kingdom.png') }}" alt=""/> Fran&ccedil;ais</a></li>
+                <li><a href="{{ path('reload', {'_locale': 'en'}) }}"><img class="lang-image" src="{{ asset('bundles/fuzquickstart/img/countries/United-Kingdom.png') }}" alt=""/> English</a></li>
+                <li><a href="{{ path('reload', {'_locale': 'fr'}) }}"><img class="lang-image" src="{{ asset('bundles/fuzquickstart/img/countries/France.png') }}" alt=""/> Fran&ccedil;ais</a></li>
                 {% endblock %}
             </ul>
         </li>

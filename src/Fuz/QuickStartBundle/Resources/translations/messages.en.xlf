@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="zz" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="1">
+        <source>quickstart.login.title</source>
+        <target><![CDATA[Login]]></target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>quickstart.logout.title</source>
+        <target><![CDATA[Logout]]></target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>quickstart.login.as</source>
+        <target><![CDATA[Logged as]]></target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>quickstart.login.subtitle</source>
+        <target><![CDATA[Login using one of the following services]]></target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>quickstart.login.using</source>
+        <target><![CDATA[Login using %provider%]]></target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>quickstart.unsuscribe.title</source>
+        <target><![CDATA[You are going to unsuscribe.]]></target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>quickstart.unsuscribe.explain</source>
+        <target><![CDATA[All data associated with your account will be]]></target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>quickstart.unsuscribe.removed</source>
+        <target><![CDATA[removed]]></target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>quickstart.unsuscribe.confirm</source>
+        <target><![CDATA[Confirm]]></target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>quickstart.locale.title</source>
+        <target><![CDATA[Language]]></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,14 +1,14 @@
 {# FuzQuickStartBundle:User:unsuscribe.html.twig #}
 
-{% extends 'FuzQuickStartBundle::base.html.twig' %}
+{% extends 'FuzQuickStartBundle::layout.html.twig' %}
 
 {% block body %}
 
     <div class="jumbotron">
 
-        <h1>You are going to unsuscribe.</h1>
+        <h1>{{ 'quickstart.unsuscribe.title' | trans }}</h1>
 
-        <p>All data associated with your account will be <span class="text-danger">removed</span>.</p>
+        <p>{{ 'quickstart.unsuscribe.explain' | trans }} <span class="text-danger">{{ 'quickstart.unsuscribe.removed' | trans }}</span>.</p>
 
         <div>
             {{ form_start(form) }}

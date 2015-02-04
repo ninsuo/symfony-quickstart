@@ -1,0 +1,26 @@
+fuz_quickstart_user:
+    resource: "@FuzQuickStartBundle/Controller/UserController.php"
+    type:     annotation
+    prefix:   /
+
+fuz_quickstart_reload:
+    resource: "@FuzQuickStartBundle/Controller/ReloadController.php"
+    type:     annotation
+    prefix:   /
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+google_login:
+    pattern: /login/check-google
+
+facebook_login:
+    pattern: /login/check-facebook
+
+twitter_login:
+    pattern: /login/check-twitter

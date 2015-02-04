@@ -134,12 +134,20 @@ class BaseController extends Controller
      */
     protected function goBack(Request $request)
     {
+        if ($request->getSession()->has('previous_route'))
+        {
+            $route = $request->getSession()->get('previous_route');
+            $route['params']['_locale'] = $request->getLocale();
+            return $this->redirect($this->generateUrl($route['name'], $route['params']));
+        }
+
         $referer = $request->headers->get('referer');
         if (!is_null($referer))
         {
             return $this->redirect($referer);
         }
-        return $this->redirect($this->generateUrl('fiddle'));
+        
+        return $this->redirect($this->generateUrl('home'));
     }
 
 }

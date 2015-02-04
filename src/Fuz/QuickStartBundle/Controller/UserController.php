@@ -88,7 +88,7 @@ class UserController extends BaseController
            ->createFormBuilder()
            ->add('submit', 'submit',
               array (
-                   'label' => 'Confirm',
+                   'label' => 'quickstart.unsuscribe.confirm',
                    'attr' => array (
                            'class' => 'btn btn-danger',
                    )

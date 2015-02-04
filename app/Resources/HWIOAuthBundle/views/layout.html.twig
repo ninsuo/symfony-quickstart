@@ -1,7 +1,7 @@
 
-{% extends 'FuzQuickStartBundle::base.html.twig' %}
+{% extends 'FuzQuickStartBundle::layout.html.twig' %}
 
-{% block title %}Login using one of the following services{% endblock %}
+{% block title %}{{ 'quickstart.login.subtitle' | trans }}{% endblock %}
 
 {% block body %}
     {% block hwi_oauth_content %}
