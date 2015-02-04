@@ -20,6 +20,8 @@ class AppKernel extends Kernel
                 new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
                 new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
                 new Ornicar\ApcBundle\OrnicarApcBundle(),
+                new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+                new JMS\TranslationBundle\JMSTranslationBundle(),
                 new Fuz\QuickStartBundle\FuzQuickStartBundle(),
                 new Fuz\AppBundle\FuzAppBundle(),
         );

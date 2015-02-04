@@ -14,17 +14,19 @@ php app/console doctrine:schema:create
 
 ## Usage
 
-### [Bootstrap](http://bootstrap.braincrafted.com/) is preinstalled with a base layout
+[Bootstrap](http://bootstrap.braincrafted.com/) is preinstalled with a base layout
 
 To use it in a view:
 
 ```jinja
-{% extends 'FuzQuickStartBundle::base.html.twig' %}
+{% extends 'FuzQuickStartBundle::layout.html.twig' %}
 ```
 
 Look at the source code to know what are the blocks that can be overwritten.
 
-### [HWIOAuthBundle](https://github.com/hwi/HWIOAuthBundle) is ready for letting your users log-in using their Google, Facebook and Twitter accounts.
+---
+
+[HWIOAuthBundle](https://github.com/hwi/HWIOAuthBundle) is ready for letting your users log-in using their Google, Facebook and Twitter accounts.
 
 You need to create apps with the minimum permissions at the following urls:
 
@@ -32,3 +34,13 @@ You need to create apps with the minimum permissions at the following urls:
 - Facebook Login: https://developers.facebook.com/apps/
 - Twitter Login: https://apps.twitter.com/
 
+---
+
+[JMSI18nRoutingBundle](http://jmsyst.com/bundles/JMSI18nRoutingBundle) is ready to let you switch between languages.
+
+To configure supported languages:
+
+- in app/config/config.yml, define your locales and default_locale
+- in src/Fuz/QuickStartBundle/layout.html.twig, copy/paste your languages menus in translations block (or overwrite supported_locales for better compliance)
+
+You'll probably find the right flags for your supported countries in the bundles/fuzquickstart/img/countries directory.

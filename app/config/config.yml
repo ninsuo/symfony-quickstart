@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
 
 framework:
+    translator:      { fallback: %locale% }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -72,3 +73,7 @@ ornicar_apc:
     web_dir: %kernel.root_dir%/../web
     mode: curl
 
+jms_i18n_routing:
+    default_locale: en
+    locales: [en, fr]
+    strategy: prefix_except_default

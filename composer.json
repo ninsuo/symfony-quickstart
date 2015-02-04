@@ -22,7 +22,9 @@
       "twbs/bootstrap": "3.0.*",
       "oyejorge/less.php": "~1.5",
       "hwi/oauth-bundle": "0.4.*@dev",
-      "ornicar/apc-bundle": "~1.0"
+      "ornicar/apc-bundle": "~1.0",
+      "jms/i18n-routing-bundle": "~1.1",
+      "jms/translation-bundle": "~1.1"
    },
    "require-dev": {
       "sensio/generator-bundle": "~2.3"

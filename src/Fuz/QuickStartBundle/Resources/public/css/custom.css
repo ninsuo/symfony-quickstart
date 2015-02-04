@@ -48,7 +48,7 @@
     border: 1px solid #333366;
 }
 
-.oauth-image {
+.oauth-image, .lang-image {
     margin-left:3px;
     margin-right:3px;
     padding-bottom:3px;

@@ -1,0 +1,53 @@
+{% extends 'FuzQuickStartBundle::base.html.twig' %}
+
+{% block menu %}
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="{{ block('home') }}">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block login %}
+    <ul class="nav navbar-nav navbar-right">
+        {% if is_granted('ROLE_USER') %}
+            <p class="navbar-text">Logged as {{ macros.me() }}</p>
+            <li><a href="{{ path('logout') }}">Logout</a></li>
+            {% else %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ hwi_oauth_login_url('google') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/google-small.png') }}" alt=""/> Google</a></li>
+                    <li><a href="{{ hwi_oauth_login_url('facebook') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/facebook-small.png') }}" alt=""/> Facebook</a></li>
+                    <li><a href="{{ hwi_oauth_login_url('twitter') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/twitter-small.png') }}" alt=""/> Twitter</a></li>
+                </ul>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block translations %}
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                {% block supported_locales %}
+                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}"><img class="lang-image" src="{{ asset('bundles/fuzquickstart/img/countries/France.png') }}" alt=""/> English</a></li>
+                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}"><img class="lang-image" src="{{ asset('bundles/fuzquickstart/img/countries/United-Kingdom.png') }}" alt=""/> Fran&ccedil;ais</a></li>
+                {% endblock %}
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
