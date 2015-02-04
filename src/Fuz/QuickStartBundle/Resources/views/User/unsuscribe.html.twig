@@ -1,0 +1,21 @@
+{# FuzQuickStartBundle:User:unsuscribe.html.twig #}
+
+{% extends 'FuzQuickStartBundle::base.html.twig' %}
+
+{% block body %}
+
+    <div class="jumbotron">
+
+        <h1>You are going to unsuscribe.</h1>
+
+        <p>All data associated with your account will be <span class="text-danger">removed</span>.</p>
+
+        <div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Fuz\AppBundle\Base\BaseController;
+use Fuz\QuickStartBundle\Base\BaseController;
 
 class UserController extends BaseController
 {
@@ -80,7 +80,7 @@ class UserController extends BaseController
     {
         if (is_null($this->getUser()))
         {
-            return $this->redirect($this->generateUrl('fiddle'));
+            return $this->redirect($this->generateUrl('home'));
         }
 
         // CRSF

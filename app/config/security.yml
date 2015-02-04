@@ -1,7 +1,7 @@
 security:
     providers:
-        in_memory:
-            memory: ~
+        oauth_provider:
+             id: quickstart.oauth_user_provider
 
     firewalls:
         dev:

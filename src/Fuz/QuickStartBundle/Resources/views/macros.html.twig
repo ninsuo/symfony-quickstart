@@ -105,7 +105,7 @@
     {%- spaceless %}
         {% if user != null %}
             {{ prefix }}
-           <img class="user-image" src="{{ asset('bundles/fuzquickstart/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/>
+           <img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/>
            {{ user.username }}
         {% endif %}
     {% endspaceless -%}

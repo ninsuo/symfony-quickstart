@@ -1,0 +1,62 @@
+{# FuzQuickStartBundle:Login:login.html.twig #}
+
+<div class="row" id="login">
+
+    <div class="col-md-12 text-center">
+        <h4>Login using one of the following services</h4>
+    </div>
+
+    <div class="clear">&nbsp;</div>
+
+    <div class="col-md-1">
+        &nbsp;
+    </div>
+
+    <div class="col-md-10">
+        <div class="row" id="login">
+
+            {# Google #}
+            <a
+                title="Login using your Google account"
+                aria-label="Login using your Google account"
+                href="{{ hwi_oauth_login_url('google') }}"
+                class="black">
+                <div class="oauth col-md-4">
+                    <img src="{{ asset('bundles/fuzquickstart/img/oauth/google.png') }}" alt="Google"/>
+                    <p>Login using Google</p>
+                </div>
+            </a>
+
+            {# Facebook #}
+            <a
+                title="Login using your Facebook account"
+                aria-label="Login using your Facebook account"
+                href="{{ hwi_oauth_login_url('facebook') }}"
+                class="black">
+                <div class="oauth col-md-4">
+                    <img src="{{ asset('bundles/fuzquickstart/img/oauth/facebook.png') }}" alt="Facebook"/>
+                    <p>Login using Facebook</p>
+                </div>
+            </a>
+
+             {# Twitter #}
+            <a
+                title="Login using your Twitter account"
+                aria-label="Login using your Twitter account"
+                href="{{ hwi_oauth_login_url('twitter') }}"
+                class="black">
+                <div class="oauth col-md-4">
+                    <img src="{{ asset('bundles/fuzquickstart/img/oauth/twitter.png') }}" alt="Twitter"/>
+                    <p>Login using Twitter</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="col-md-1">
+        &nbsp;
+    </div>
+
+    <div class="clear">&nbsp;</div>
+</div>
