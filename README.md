@@ -34,6 +34,12 @@ You need to create apps with the minimum permissions at the following urls:
 - Facebook Login: https://developers.facebook.com/apps/
 - Twitter Login: https://apps.twitter.com/
 
+To configure supported resource owners:
+
+- in src/Fuz/QuickStartBundle/Resources/views/layout.html.twig are defined available locales
+
+You can overwrite the `login` twig block to set your own resource owners.
+
 ---
 
 [JMSI18nRoutingBundle](http://jmsyst.com/bundles/JMSI18nRoutingBundle) is ready to let you switch between languages.
@@ -41,6 +47,15 @@ You need to create apps with the minimum permissions at the following urls:
 To configure supported languages:
 
 - in app/config/config.yml, define your locales and default_locale
-- in src/Fuz/QuickStartBundle/layout.html.twig, copy/paste your languages menus in translations block (or overwrite supported_locales for better compliance)
+- in src/Fuz/QuickStartBundle/Resources/views/layout.html.twig are defined available locales
+
+You can overwrite the `translations` twig block to set your custom locales
 
 You'll probably find the right flags for your supported countries in the bundles/fuzquickstart/img/countries directory.
+
+---
+
+[KnpMenuBundle](http://symfony.com/doc/master/bundles/KnpMenuBundle/index.html) is ready to let you define your navigation menu.
+
+It automatically manages which part of the menu should be considered as active, and has helpers to quickly add routes and submenus.
+

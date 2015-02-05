@@ -66,6 +66,8 @@ swiftmailer:
 braincrafted_bootstrap:
     jquery_path: %kernel.root_dir%/../src/Fuz/QuickStartBundle/Resources/public/js/jquery-2.1.1.min.js
     less_filter: lessphp
+    auto_configure:
+      knp_menu: false
 
 # Ornicar APC configuration
 ornicar_apc:
@@ -77,3 +79,7 @@ jms_i18n_routing:
     default_locale: en
     locales: [en, fr]
     strategy: prefix_except_default
+
+knp_menu:
+    twig:
+        template: FuzQuickStartBundle::knp_menu.html.twig
