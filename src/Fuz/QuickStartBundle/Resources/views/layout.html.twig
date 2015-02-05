@@ -1,7 +1,11 @@
 {% extends 'FuzQuickStartBundle::base.html.twig' %}
 
 {% block menu %}
-   {{ knp_menu_render('FuzQuickStartBundle:Builder:mainMenu') }}
+    {% if is_granted('ROLE_USER') %}
+        {{ knp_menu_render('FuzQuickStartBundle:Builder:userMenu') }}
+    {% else %}
+        {{ knp_menu_render('FuzQuickStartBundle:Builder:mainMenu') }}
+    {% endif %}
 {% endblock %}
 
 {% block login %}

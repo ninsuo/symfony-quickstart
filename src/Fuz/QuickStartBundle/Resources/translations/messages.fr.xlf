@@ -58,6 +58,38 @@
         <source>quickstart.menu.home</source>
         <target><![CDATA[Accueil]]></target>
       </trans-unit>
+      <trans-unit id="15">
+        <source>quickstart.error.back_sentence</source>
+        <target><![CDATA[Utilisez le bouton Page précédente, le menu de navigation ou cliquez sur le bouton Accueil pour continuer.]]></target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>quickstart.error.back</source>
+        <target><![CDATA[Retour à l'accueil]]></target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>quickstart.error.403.title</source>
+        <target><![CDATA[Permission non accordée]]></target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>quickstart.error.403.explain</source>
+        <target><![CDATA[Vous devez être connecté(e) ou/et n'avez pas les privilèges requis pour accéder à cette ressource.]]></target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>quickstart.error.500.title</source>
+        <target><![CDATA[Une erreur s'est produite.]]></target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>quickstart.error.500.explain</source>
+        <target><![CDATA[Si vous êtes arrivé(e) sur cette page, c'est que quelque chose a planté chez nous.]]></target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>quickstart.error.404.title</source>
+        <target><![CDATA[Page introuvable]]></target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>quickstart.error.404.explain</source>
+        <target><![CDATA[La page que vous recherchez a peut-être été supprimée, déplacée, ou est temporairement indisponible.]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

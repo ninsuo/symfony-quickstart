@@ -35,4 +35,10 @@ class Builder extends BaseMenu
         return $menu;
     }
 
+    public function userMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $this->createMenu($factory);
+        $this->addRoute($menu, 'quickstart.menu.home', 'home');
+    }
+
 }
