@@ -8,9 +8,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="{% block description %}An empty Symfony2 project that provides lots of ready-to-use tools for quick & not-so-dirty development{% endblock %}">
+        <meta name="description" content="{% block description %}{{ 'quickstart.description' | trans }}{% endblock %}">
         <meta name="author" content="{% block author %}{% endblock %}">
-        <title>{% block title %}My Empty Project{% endblock %}</title>
+        <title>{% block title %}{{ 'quickstart.title' | trans }}{% endblock %}</title>
         <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
          {# CSS #}
@@ -31,7 +31,7 @@
                  <div class="container-fluid">
                    <div class="navbar-header">
                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                       <span class="sr-only">Toggle navigation</span>
+                       <span class="sr-only">{{ 'quickstart.nav' | trans }}</span>
                        <span class="icon-bar"></span>
                        <span class="icon-bar"></span>
                        <span class="icon-bar"></span>

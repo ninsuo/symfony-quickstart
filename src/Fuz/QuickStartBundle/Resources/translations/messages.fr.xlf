@@ -42,6 +42,22 @@
         <source>quickstart.locale.title</source>
         <target><![CDATA[Langue]]></target>
       </trans-unit>
+      <trans-unit id="11">
+        <source>quickstart.title</source>
+        <target><![CDATA[Mon Projet Vide]]></target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>quickstart.description</source>
+        <target><![CDATA[Un projet Symfony2 contenant des outils indispensables pour un développement rapide et efficace.]]></target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>quickstart.nav</source>
+        <target><![CDATA[Afficher/Masquer le menu]]></target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>quickstart.menu.home</source>
+        <target><![CDATA[Accueil]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
