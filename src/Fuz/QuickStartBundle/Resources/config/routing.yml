@@ -1,10 +1,5 @@
-fuz_quickstart_user:
-    resource: "@FuzQuickStartBundle/Controller/UserController.php"
-    type:     annotation
-    prefix:   /
-
-fuz_quickstart_reload:
-    resource: "@FuzQuickStartBundle/Controller/ReloadController.php"
+fuz_quickstart:
+    resource: "@FuzQuickStartBundle/Controller/"
     type:     annotation
     prefix:   /
 

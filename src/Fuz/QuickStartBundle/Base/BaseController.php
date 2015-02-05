@@ -146,8 +146,28 @@ class BaseController extends Controller
         {
             return $this->redirect($referer);
         }
-        
+
         return $this->redirect($this->generateUrl('home'));
+    }
+
+    public function info($message)
+    {
+        $this->addFlash('info', $message);
+    }
+
+    public function alert($message)
+    {
+        $this->addFlash('alert', $message);
+    }
+
+    public function danger($message)
+    {
+        $this->addFlash('danger', $message);
+    }
+
+    public function success($message)
+    {
+        $this->addFlash('success', $message);
     }
 
 }
