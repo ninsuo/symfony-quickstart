@@ -39,6 +39,8 @@ class Builder extends BaseMenu
     {
         $menu = $this->createMenu($factory);
         $this->addRoute($menu, 'quickstart.menu.home', 'home');
+
+        return $menu;
     }
 
 }
