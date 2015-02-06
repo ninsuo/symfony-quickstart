@@ -21,13 +21,13 @@
     </table>
 
             <a href="{{ path('test_edit', { 'id': entity.id }) }}" class="btn btn-default">
-        Edit
+        {{ 'quickstart.crud.edit.button' | trans }}
     </a>
     <div class="clear">&nbsp;</div>
     {{ form(delete_form) }}
 <div class="text-center">
     <a href="{{ path('test') }}" class="btn btn-default">
-        Back to the list
+        {{ 'quickstart.crud.back' | trans }}
     </a>
 </div>
 {% endblock %}

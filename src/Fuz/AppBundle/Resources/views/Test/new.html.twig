@@ -1,13 +1,13 @@
 {% extends 'FuzQuickStartBundle::layout.html.twig' %}
 
 {% block body -%}
-    <h1>Test creation</h1>
+    <h1>{{ 'quickstart.crud.new.title' | trans({'%entity%': 'Test'}) }}</h1>
 
     {{ form(form) }}
 
         <div class="text-center">
     <a href="{{ path('test') }}" class="btn btn-default">
-        Back to the list
+        {{ 'quickstart.crud.back' | trans }}
     </a>
 </div>
 {% endblock %}

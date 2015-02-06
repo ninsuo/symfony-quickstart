@@ -25,10 +25,11 @@
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find {{ entity }} entity.');
             }
-            $this->success('quickstart.form.delete.success');
 
             $em->remove($entity);
             $em->flush();
+
+            $this->success('quickstart.crud.delete.success');
         }
 {% endblock method_body %}
 
@@ -50,7 +51,7 @@
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('{{ route_name_prefix }}_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'quickstart.crud.button.delete'))
             ->getForm()
         ;
     }

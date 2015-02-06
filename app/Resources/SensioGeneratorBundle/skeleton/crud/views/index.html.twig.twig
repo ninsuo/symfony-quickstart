@@ -4,7 +4,7 @@
 
 {% block body %}
 {{ "{% block body -%}" }}
-    <h1>{{ entity }} list</h1>
+    <h1>{{ "{{ 'quickstart.crud.index.title' | trans({'%entity%': '" ~ entity ~ "'}) }}" }}</h1>
 
     <table class="records_list table table-striped">
         <thead>
@@ -15,7 +15,7 @@
 
             {%- endfor %}
 
-                <th>Actions</th>
+                <th>{{ "{{ 'quickstart.crud.index.actions' | trans }}" }}</th>
             </tr>
         </thead>
         <tbody>
@@ -53,7 +53,7 @@
 
     {% if 'new' in actions %}
     <a href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}" class="btn btn-primary">
-        Create a new entry
+        {{ "{{ 'quickstart.crud.new.button' | trans }}" }}
     </a>
     {% endif %}
 {{ "{% endblock %}" }}

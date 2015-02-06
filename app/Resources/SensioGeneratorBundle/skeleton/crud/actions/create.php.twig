@@ -24,7 +24,7 @@
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            $this->success('quickstart.form.create.success');
+            $this->success('quickstart.crud.create.success');
 
             {% if 'show' in actions -%}
                 return $this->redirect($this->generateUrl('{{ route_name_prefix }}_show', array('id' => $entity->getId())));
@@ -65,7 +65,7 @@
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'quickstart.crud.button.create'));
 
         return $form;
     }

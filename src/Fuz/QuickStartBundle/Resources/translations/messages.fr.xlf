@@ -91,16 +91,64 @@
         <target><![CDATA[La page que vous recherchez a peut-être été supprimée, déplacée, ou est temporairement indisponible.]]></target>
       </trans-unit>
       <trans-unit id="23">
-        <source>quickstart.form.create.success</source>
+        <source>quickstart.crud.create.success</source>
         <target><![CDATA[L'entrée a correctement été ajoutée.]]></target>
       </trans-unit>
       <trans-unit id="24">
-        <source>quickstart.form.delete.success</source>
+        <source>quickstart.crud.delete.success</source>
         <target><![CDATA[L'entrée a correctement été supprimée.]]></target>
       </trans-unit>
       <trans-unit id="25">
-        <source>quickstart.form.update.success</source>
+        <source>quickstart.crud.update.success</source>
         <target><![CDATA[Entrée modifiée avec succès.]]></target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>quickstart.crud.new.title</source>
+        <target><![CDATA[Nouvelle entrée %entity%]]></target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>quickstart.crud.index.actions</source>
+        <target><![CDATA[Actions]]></target>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>quickstart.crud.index.title</source>
+        <target><![CDATA[Liste des %entity%]]></target>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>quickstart.crud.new.button</source>
+        <target><![CDATA[Créer une nouvelle entrée]]></target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>quickstart.crud.back</source>
+        <target><![CDATA[Retourner à la liste]]></target>
+      </trans-unit>
+      <trans-unit id="31">
+        <source>quickstart.crud.edit.button</source>
+        <target><![CDATA[Editer]]></target>
+      </trans-unit>
+      <trans-unit id="32">
+        <source>quickstart.crud.edit.title</source>
+        <target><![CDATA[Modifier une entrée %entity%]]></target>
+      </trans-unit>
+      <trans-unit id="33">
+        <source>quickstart.crud.action.show</source>
+        <target><![CDATA[Afficher]]></target>
+      </trans-unit>
+      <trans-unit id="34">
+        <source>quickstart.crud.action.edit</source>
+        <target><![CDATA[Editer]]></target>
+      </trans-unit>
+      <trans-unit id="35">
+        <source>quickstart.crud.button.create</source>
+        <target><![CDATA[Créer]]></target>
+      </trans-unit>
+      <trans-unit id="36">
+        <source>quickstart.crud.button.update</source>
+        <target><![CDATA[Modifier]]></target>
+      </trans-unit>
+      <trans-unit id="37">
+        <source>quickstart.crud.button.delete</source>
+        <target><![CDATA[Supprimer]]></target>
       </trans-unit>
     </body>
   </file>

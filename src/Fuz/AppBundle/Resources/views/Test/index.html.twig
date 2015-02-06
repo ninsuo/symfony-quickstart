@@ -1,7 +1,7 @@
 {% extends 'FuzQuickStartBundle::layout.html.twig' %}
 
 {% block body -%}
-    <h1>Test list</h1>
+    <h1>{{ 'quickstart.crud.index.title' | trans({'%entity%': 'Test'}) }}</h1>
 
     <table class="records_list table table-striped">
         <thead>
@@ -9,7 +9,7 @@
                 <th>Id</th>
                 <th>Phone</th>
                 <th>Name</th>
-                <th>Actions</th>
+                <th>{{ 'quickstart.crud.index.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -19,8 +19,8 @@
                 <td>{{ entity.phone }}</td>
                 <td>{{ entity.name }}</td>
                 <td>
-                <a href="{{ path('test_show', { 'id': entity.id }) }}" class="btn btn-default">show</a>
-                <a href="{{ path('test_edit', { 'id': entity.id }) }}" class="btn btn-default">edit</a>
+                <a href="{{ path('test_show', { 'id': entity.id }) }}" class="btn btn-default">{{ 'quickstart.crud.action.show' | trans }}</a>
+                <a href="{{ path('test_edit', { 'id': entity.id }) }}" class="btn btn-default">{{ 'quickstart.crud.action.edit' | trans }}</a>
                 </td>
             </tr>
         {% endfor %}
@@ -28,6 +28,6 @@
     </table>
 
         <a href="{{ path('test_new') }}" class="btn btn-primary">
-        Create a new entry
+        {{ 'quickstart.crud.new.button' | trans }}
     </a>
     {% endblock %}

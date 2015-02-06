@@ -52,7 +52,7 @@ class TestController extends BaseController
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            $this->success('quickstart.form.create.success');
+            $this->success('quickstart.crud.create.success');
 
             return $this->redirect($this->generateUrl('test_show', array('id' => $entity->getId())));
         }
@@ -77,7 +77,7 @@ class TestController extends BaseController
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'quickstart.crud.button.create'));
 
         return $form;
     }
@@ -166,7 +166,7 @@ class TestController extends BaseController
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'quickstart.crud.button.update'));
 
         return $form;
     }
@@ -192,8 +192,8 @@ class TestController extends BaseController
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $this->success('quickstart.form.update.success');
             $em->flush();
+            $this->success('quickstart.crud.update.success');
 
             return $this->redirect($this->generateUrl('test_edit', array('id' => $id)));
         }
@@ -222,10 +222,11 @@ class TestController extends BaseController
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Test entity.');
             }
-            $this->success('quickstart.form.delete.success');
 
             $em->remove($entity);
             $em->flush();
+
+            $this->success('quickstart.crud.delete.success');
         }
 
         return $this->redirect($this->generateUrl('test'));
@@ -243,7 +244,7 @@ class TestController extends BaseController
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('test_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'quickstart.crud.button.delete'))
             ->getForm()
         ;
     }

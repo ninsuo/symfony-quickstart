@@ -29,8 +29,8 @@
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $this->success('quickstart.form.update.success');
             $em->flush();
+            $this->success('quickstart.crud.update.success');
 
             return $this->redirect($this->generateUrl('{{ route_name_prefix }}_edit', array('id' => $id)));
         }
