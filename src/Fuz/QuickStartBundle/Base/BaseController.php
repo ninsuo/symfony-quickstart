@@ -150,24 +150,29 @@ class BaseController extends Controller
         return $this->redirect($this->generateUrl('home'));
     }
 
-    public function info($message)
+    public function info($message, array $parameters = array())
     {
-        $this->addFlash('info', $message);
+        $this->addFlash('info', $this->trans($message, $parameters));
     }
 
-    public function alert($message)
+    public function alert($message, array $parameters = array())
     {
-        $this->addFlash('alert', $message);
+        $this->addFlash('alert', $this->trans($message, $parameters));
     }
 
-    public function danger($message)
+    public function danger($message, array $parameters = array())
     {
-        $this->addFlash('danger', $message);
+        $this->addFlash('danger', $this->trans($message, $parameters));
     }
 
-    public function success($message)
+    public function success($message, array $parameters = array())
     {
-        $this->addFlash('success', $message);
+        $this->addFlash('success', $this->trans($message, $parameters));
+    }
+
+    public function trans($property, array $parameters = array())
+    {
+        return $this->container->get('translator')->trans($property, $parameters);
     }
 
 }

@@ -90,6 +90,18 @@
         <source>quickstart.error.404.explain</source>
         <target><![CDATA[The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.]]></target>
       </trans-unit>
+      <trans-unit id="23">
+        <source>quickstart.form.create.success</source>
+        <target><![CDATA[Entry added successfully.]]></target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>quickstart.form.delete.success</source>
+        <target><![CDATA[Entry removed successfully.]]></target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>quickstart.form.update.success</source>
+        <target><![CDATA[Entry updated successfully.]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

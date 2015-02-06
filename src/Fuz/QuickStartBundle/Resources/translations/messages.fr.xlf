@@ -90,6 +90,18 @@
         <source>quickstart.error.404.explain</source>
         <target><![CDATA[La page que vous recherchez a peut-être été supprimée, déplacée, ou est temporairement indisponible.]]></target>
       </trans-unit>
+      <trans-unit id="23">
+        <source>quickstart.form.create.success</source>
+        <target><![CDATA[L'entrée a correctement été ajoutée.]]></target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>quickstart.form.delete.success</source>
+        <target><![CDATA[L'entrée a correctement été supprimée.]]></target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>quickstart.form.update.success</source>
+        <target><![CDATA[Entrée modifiée avec succès.]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

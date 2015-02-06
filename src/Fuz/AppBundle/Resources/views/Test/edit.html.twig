@@ -1,0 +1,14 @@
+{% extends 'FuzQuickStartBundle::layout.html.twig' %}
+
+{% block body -%}
+    <h1>Test edit</h1>
+
+    {{ form(edit_form) }}
+
+            {{ form(delete_form) }}
+<div class="text-center">
+    <a href="{{ path('test') }}" class="btn btn-default">
+        Back to the list
+    </a>
+</div>
+{% endblock %}

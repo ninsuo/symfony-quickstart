@@ -1,0 +1,33 @@
+{% extends 'FuzQuickStartBundle::layout.html.twig' %}
+
+{% block body -%}
+    <h1>Test list</h1>
+
+    <table class="records_list table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Phone</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('test_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.phone }}</td>
+                <td>{{ entity.name }}</td>
+                <td>
+                <a href="{{ path('test_show', { 'id': entity.id }) }}" class="btn btn-default">show</a>
+                <a href="{{ path('test_edit', { 'id': entity.id }) }}" class="btn btn-default">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <a href="{{ path('test_new') }}" class="btn btn-primary">
+        Create a new entry
+    </a>
+    {% endblock %}
