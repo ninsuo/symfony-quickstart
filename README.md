@@ -60,3 +60,5 @@ You'll probably find the right flags for your supported countries in the bundles
 
 It automatically manages which part of the menu should be considered as active, and has helpers to quickly add routes and submenus.
 
+- You can copy/paste FuzQuickStartBundle:Builder:Menu class and overwrite the menu block to define your own menus.
+

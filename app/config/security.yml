@@ -44,7 +44,7 @@ hwi_oauth:
             options:
                 display: page
                 access_type: online
-                approval_prompt: auto
+                approval_prompt: force
                 login_hint: email address
         facebook:
             type: facebook
