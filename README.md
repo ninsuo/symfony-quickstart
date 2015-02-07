@@ -1,7 +1,7 @@
 Symfony2 Quick Starter
 ========================
 
-This is the [Symfony2 Standard Edition](https://github.com/symfony/symfony-standard) with some ready-to-use tools to get started quickly:
+This is the [Symfony2 Standard Edition](https://github.com/symfony/symfony-standard) with some ready-to-use tools to get started quickly.
 
 ## Installation
 
