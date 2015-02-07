@@ -62,3 +62,8 @@ It automatically manages which part of the menu should be considered as active, 
 
 - You can copy/paste FuzQuickStartBundle:Builder:Menu class and overwrite the menu block to define your own menus.
 
+## License
+
+- This project is released under the MIT license
+
+- Fuz logo is © 2013-2015 Alain Tiemblo
