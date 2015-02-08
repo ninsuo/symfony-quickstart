@@ -3,6 +3,8 @@ Symfony2 Quick Starter
 
 This is the [Symfony2 Standard Edition](https://github.com/symfony/symfony-standard) with some ready-to-use tools to get started quickly.
 
+When I tell "Ready to use", this is basically really ready to use, no need to configure or code anything. Just overwriting and copy/pasting to customize.
+
 ## Installation
 
 ```sh
@@ -54,6 +56,8 @@ You can overwrite the `translations` twig block to set your custom locales
 
 You'll probably find the right flags for your supported countries in the bundles/fuzquickstart/img/countries directory.
 
+It implements the  "come back where you were" logic for better ergonomics.
+
 ---
 
 [KnpMenuBundle](http://symfony.com/doc/master/bundles/KnpMenuBundle/index.html) is ready to let you define your navigation menu.
@@ -62,8 +66,17 @@ It automatically manages which part of the menu should be considered as active, 
 
 - You can copy/paste FuzQuickStartBundle:Builder:Menu class and overwrite the menu block to define your own menus.
 
+---
+
+Bonus
+
+- project already implements 403, 404, 500 and generic error pages
+- CRUD generator generates bootstrap-ready and translated views
+- Flash messages are automatically rendered in the base layout
+
 ## License
 
 - This project is released under the MIT license
 
 - Fuz logo is © 2013-2015 Alain Tiemblo
+
