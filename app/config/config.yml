@@ -69,8 +69,8 @@ braincrafted_bootstrap:
     auto_configure:
       knp_menu: false
 
-# Ornicar APC configuration
-ornicar_apc:
+# cache cleaning
+accelerator_cache:
     host: %site_url%
     web_dir: %kernel.root_dir%/../web
     mode: curl

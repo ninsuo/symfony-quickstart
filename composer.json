@@ -22,10 +22,10 @@
       "twbs/bootstrap": "3.0.*",
       "oyejorge/less.php": "~1.5",
       "hwi/oauth-bundle": "0.4.*@dev",
-      "ornicar/apc-bundle": "~1.0",
       "jms/i18n-routing-bundle": "~1.1",
       "jms/translation-bundle": "~1.1",
-      "knplabs/knp-menu-bundle": "~2"
+      "knplabs/knp-menu-bundle": "~2",
+      "smart-core/accelerator-cache-bundle": "~1"
    },
    "require-dev": {
       "sensio/generator-bundle": "~2.3"
@@ -42,7 +42,7 @@
          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
          "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-         "Fuz\\QuickStartBundle\\Composer\\ScriptHandler::clearApcCache"
+         "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache"
       ],
       "post-update-cmd": [
          "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -52,7 +52,7 @@
          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
          "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-         "Fuz\\QuickStartBundle\\Composer\\ScriptHandler::clearApcCache"
+         "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache"
       ]
    },
    "config": {
