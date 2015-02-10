@@ -4,7 +4,7 @@ namespace Fuz\AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Fuz\QuickStartBundle\Base\BaseController;
+use Fuz\AppBundle\Base\BaseController;
 
 class DefaultController extends BaseController
 {

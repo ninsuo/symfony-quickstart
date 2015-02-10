@@ -40,10 +40,10 @@
                      </button>
                      <a class="navbar-brand" href="{{ path('home') }}">
                         <div class="navbar-logo">
-                          <img src="{{ asset('apple-touch-icon.png') }}">
+                            {% block logo %} <img src="{{ asset('apple-touch-icon.png') }}">{% endblock %}
                         </div>
                         <div class="pull-left">
-                           {% block brand %}QuickStart{% endblock %}
+                            {% block brand %}QuickStart{% endblock %}
                         </div>
                      </a>
                    </div>
@@ -66,7 +66,7 @@
          {# Ajax-loader gif #}
         <div id="wait" class="hide" aria-hidden="true">
             <div class="text-center">
-                <img src="{{ asset('bundles/fuzquickstart/img/wait.gif') }}" alt="Please wait..."/>
+                <img src="{{ asset('bundles/fuzquickstart/img/wait.gif') }}" alt="{{ 'quickstart.wait' | trans }}"/>
             </div>
         </div>
 

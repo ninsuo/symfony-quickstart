@@ -150,6 +150,10 @@
         <source>quickstart.crud.button.delete</source>
         <target><![CDATA[Supprimer]]></target>
       </trans-unit>
+      <trans-unit id="38">
+        <source>quickstart.wait</source>
+        <target><![CDATA[Veuillez patienter...]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
