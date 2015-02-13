@@ -86,7 +86,7 @@ class BaseController extends Controller
      * @param Form $form
      * @return array
      * @see Symfony\Component\Form\Extension\DataCollector\FormDataExtractor::buildId
-     * @see Fuz\AppBundle\Resources\public\js\jquery.symfony2.js
+     * @see Fuz\QuickStartBundle\Resources\public\js\jquery.symfony2.js
      */
     protected function getErrorMessagesAjaxFormat(Form $form)
     {

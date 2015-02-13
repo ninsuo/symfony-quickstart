@@ -55,7 +55,7 @@ class LastRouteListener implements EventSubscriberInterface
     {
         $routeParams = $this->router->match($request->getPathInfo());
         $routeName = $routeParams['_route'];
-        if ($routeName[0] == '_')
+        if (substr($routeName, 0, 1) === '_')
         {
             return null;
         }
