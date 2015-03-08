@@ -2,11 +2,19 @@
 
 {% extends 'FuzQuickStartBundle::base.html.twig' %}
 
-{% block menu %}
+{% block left_menu %}
     {% if is_granted('ROLE_USER') %}
-        {{ knp_menu_render('FuzQuickStartBundle:Builder:userMenu') }}
+        {{ knp_menu_render('FuzQuickStartBundle:Builder:userLeftMenu') }}
     {% else %}
-        {{ knp_menu_render('FuzQuickStartBundle:Builder:mainMenu') }}
+        {{ knp_menu_render('FuzQuickStartBundle:Builder:mainLeftMenu') }}
+    {% endif %}
+{% endblock %}
+
+{% block right_menu %}
+    {% if is_granted('ROLE_USER') %}
+        {{ knp_menu_render('FuzQuickStartBundle:Builder:userRightMenu') }}
+    {% else %}
+        {{ knp_menu_render('FuzQuickStartBundle:Builder:mainRightMenu') }}
     {% endif %}
 {% endblock %}
 

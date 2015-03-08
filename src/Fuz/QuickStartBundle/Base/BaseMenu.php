@@ -9,10 +9,20 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 class BaseMenu extends ContainerAware
 {
 
-    protected function createMenu(FactoryInterface $factory)
+    const POSITION_LEFT = 'left';
+    const POSITION_RIGHT = 'right';
+
+    protected function createMenu(FactoryInterface $factory, $position)
     {
         $menu = $factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav navbar-nav');
+        if (self::POSITION_LEFT === $position)
+        {
+            $menu->setChildrenAttribute('class', 'nav navbar-nav');
+        }
+        else
+        {
+            $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
+        }
         return $menu;
     }
 
@@ -30,8 +40,7 @@ class BaseMenu extends ContainerAware
         $key = sha1($name);
 
         $item = $menu->addChild($key,
-           array_merge($childParams,
-              array (
+           array_merge($childParams, array (
                 'uri' => $uri,
                 'label' => $name,
         )));

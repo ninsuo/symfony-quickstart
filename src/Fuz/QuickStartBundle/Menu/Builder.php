@@ -8,9 +8,9 @@ use Fuz\QuickStartBundle\Base\BaseMenu;
 class Builder extends BaseMenu
 {
 
-    public function mainMenu(FactoryInterface $factory, array $options)
+    public function mainLeftMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $this->createMenu($factory);
+        $menu = $this->createMenu($factory, parent::POSITION_LEFT);
         $this->addRoute($menu, 'quickstart.menu.home', 'home');
 
         /*
@@ -35,10 +35,26 @@ class Builder extends BaseMenu
         return $menu;
     }
 
-    public function userMenu(FactoryInterface $factory, array $options)
+    public function userLeftMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $this->createMenu($factory);
+        $menu = $this->createMenu($factory, parent::POSITION_LEFT);
         $this->addRoute($menu, 'quickstart.menu.home', 'home');
+
+        return $menu;
+    }
+
+    public function mainRightMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $this->createMenu($factory, parent::POSITION_RIGHT);
+        $this->addUri($menu, 'GitHub', 'https://github.com/ninsuo/symfony2-quickstart');
+
+        return $menu;
+    }
+
+    public function userRightMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $this->createMenu($factory, parent::POSITION_RIGHT);
+        $this->addUri($menu, 'GitHub', 'https://github.com/ninsuo/symfony2-quickstart');
 
         return $menu;
     }
