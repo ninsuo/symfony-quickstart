@@ -105,8 +105,12 @@
     {%- spaceless %}
         {% if user != null %}
             {{ prefix }}
-           <img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/>
-           {{ user.username }}
+            {% if user.resourceOwner == constant('Fuz\\QuickStartBundle\\Entity\\User::DEFAULT_RESOURCE_OWNER') %}
+               <img class="oauth-image" src="{{ asset('apple-touch-icon.png') }}" alt=""/>
+            {% else %}
+               <img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/>
+            {% endif %}
+           {{ user.nickname }}
         {% endif %}
     {% endspaceless -%}
 {% endmacro %}

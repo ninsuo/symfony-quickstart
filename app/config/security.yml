@@ -1,16 +1,29 @@
 security:
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     providers:
-        oauth_provider:
-             id: quickstart.oauth_user_provider
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
 
-        oauth:
+        main:
             pattern: ^/
             anonymous: true
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: security.csrf.token_manager
+                login_path: /login
+                check_path: /login_chec
             oauth:
                 resource_owners:
                     google: "/login/check-google"
@@ -31,30 +44,3 @@ security:
         - { path: ^/user, role: ROLE_USER }
         - { path: ^/logout, role: ROLE_USER }
 
-hwi_oauth:
-    firewall_name: oauth
-    connect:
-        confirmation: false
-    resource_owners:
-        google:
-            type: google
-            client_id: %google_client_id%
-            client_secret: %google_secret%
-            scope: "profile"
-            options:
-                display: page
-                access_type: online
-                approval_prompt: force
-                login_hint: email address
-        facebook:
-            type: facebook
-            client_id: %facebook_client_id%
-            client_secret: %facebook_secret%
-            scope: "public_profile"
-            options:
-                display: page
-        twitter:
-            type: twitter
-            client_id: %twitter_client_id%
-            client_secret: %twitter_secret%
-            scope: ""

@@ -4,29 +4,24 @@ namespace Fuz\QuickStartBundle\Provider;
 
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseUserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use Fuz\QuickStartBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
 
 class OAuthUserProvider extends BaseUserProvider
 {
-    protected $session;
-    protected $em;
+    protected $userRepository;
+    protected $userManager;
 
-    public function __construct($session, $em)
+    public function __construct(EntityManagerInterface $em, UserManagerInterface $userManager)
     {
-        $this->session = $session;
-        $this->em      = $em;
+        $this->userRepository = $em->getRepository('FuzQuickStartBundle:User');
+        $this->userManager    = $userManager;
     }
 
     public function loadUserByUsername($username)
     {
-        if (!is_null($this->session->get('user'))) {
-            $username = $this->session->get('user');
-        }
-        if (is_null($username)) {
-            return null;
-        }
         list($resourceOwner, $resourceOwnerId) = json_decode($username);
-        return $this->em->getRepository('FuzQuickStartBundle:User')->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
+        return $this->userRepository->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
@@ -34,25 +29,25 @@ class OAuthUserProvider extends BaseUserProvider
         $resourceOwner   = $response->getResourceOwner()->getName();
         $resourceOwnerId = $response->getUsername();
         $name            = $this->getNameToDisplay($resourceOwner, $response);
+        $json            = json_encode(array($resourceOwner, $resourceOwnerId));
 
-        $user = $this->em->getRepository('FuzQuickStartBundle:User')->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
+        $user = $this->userRepository->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
+
         if (is_null($user)) {
-            $user = new User();
+            $user = $this->userManager->createUser();
+            $user->setUsername($json);
+            $user->setEnabled(true);
+            $user->setNickname($name);
             $user->setResourceOwner($resourceOwner);
             $user->setResourceOwnerId($resourceOwnerId);
-            $user->setUsername($name);
             $user->setSigninCount(1);
-            $this->em->persist($user);
-            $this->em->flush($user);
+            $this->userManager->updateUser($user);
+            return $this->loadUserByUsername($json);
         } else {
             $user->setSigninCount($user->getSigninCount() + 1);
-            $this->em->persist($user);
-            $this->em->flush($user);
+            $this->userManager->updateUser($user);
+            return $user;
         }
-
-        $json = json_encode(array($resourceOwner, $resourceOwnerId));
-        $this->session->set('user', $json);
-        return $this->loadUserByUsername($json);
     }
 
     public function getNameToDisplay($resourceOwner, $response)

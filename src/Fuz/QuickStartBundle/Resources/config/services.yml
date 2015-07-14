@@ -8,7 +8,7 @@ services:
 
     quickstart.oauth_user_provider:
         class: %quickstart.oauth_user_provider.class%
-        arguments: [@session, @doctrine.orm.entity_manager]
+        arguments: [@doctrine.orm.entity_manager, @fos_user.user_manager]
 
     hwi_oauth.account.connector:
         class: %hwi_oauth.account.connector.class%

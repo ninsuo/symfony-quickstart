@@ -30,6 +30,8 @@
                <li class="dropdown">
                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'quickstart.login.title' | trans }} <span class="caret"></span></a>
                    <ul class="dropdown-menu" role="menu">
+                       {% block app_login %}<li><a href="{{ path('login') }}"><img class="oauth-image" src="{{ asset('apple-touch-icon.png') }}" alt=""/> {{ block('brand') }}</a></li>{% endblock %}
+                       <li class="divider"></li>
                        {% block google_login %}<li><a href="{{ hwi_oauth_login_url('google') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/google-small.png') }}" alt=""/> Google</a></li>{% endblock %}
                        {% block facebook_login %}<li><a href="{{ hwi_oauth_login_url('facebook') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/facebook-small.png') }}" alt=""/> Facebook</a></li>{% endblock %}
                        {% block twitter_login %}<li><a href="{{ hwi_oauth_login_url('twitter') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/twitter-small.png') }}" alt=""/> Twitter</a></li>{% endblock %}

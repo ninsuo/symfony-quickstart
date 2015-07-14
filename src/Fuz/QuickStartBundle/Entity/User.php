@@ -4,6 +4,7 @@ namespace Fuz\QuickStartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 
@@ -19,8 +20,11 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  * @ORM\Entity(repositoryClass="Fuz\QuickStartBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class User implements UserInterface, EquatableInterface
+class User extends BaseUser implements UserInterface, EquatableInterface
 {
+
+    const DEFAULT_RESOURCE_OWNER = "app";
+
     /**
      * @var integer
      *
@@ -29,6 +33,13 @@ class User implements UserInterface, EquatableInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nickname", type="string", length=255)
+     */
+    protected $nickname;
 
     /**
      * @var string
@@ -43,13 +54,6 @@ class User implements UserInterface, EquatableInterface
      * @ORM\Column(name="resource_owner_id", type="string", length=255)
      */
     protected $resourceOwnerId;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255)
-     */
-    protected $username;
 
     /**
      * @var \DateTime
@@ -74,7 +78,18 @@ class User implements UserInterface, EquatableInterface
 
     public function __construct()
     {
+        parent::__construct();
+        $this->email = $this->rand();
+        $this->password = $this->rand();
+        $this->resourceOwner = static::DEFAULT_RESOURCE_OWNER;
+        $this->resourceOwnerId = $this->rand();
         $this->preferences = new ArrayCollection();
+    }
+
+    protected function rand()
+    {
+        // microtime?
+        return base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
     /**
@@ -85,6 +100,28 @@ class User implements UserInterface, EquatableInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set nickname
+     *
+     * @param string $nickname
+     * @return User
+     */
+    public function setNickname($nickname)
+    {
+        $this->nickname = $nickname;
+        return $this;
+    }
+
+    /**
+     * Get nickname
+     *
+     * @return string
+     */
+    public function getNickname()
+    {
+        return $this->nickname;
     }
 
     /**
@@ -131,27 +168,6 @@ class User implements UserInterface, EquatableInterface
     public function getResourceOwnerId()
     {
         return $this->resourceOwnerId;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUsername()
-    {
-        return $this->username;
     }
 
     /**
@@ -237,38 +253,6 @@ class User implements UserInterface, EquatableInterface
     public function onPreUpdate()
     {
         $this->setLastSeen(new \DateTime());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getPassword()
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getSalt()
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function eraseCredentials()
-    {
-        return true;
     }
 
     /**

@@ -75,6 +75,41 @@ accelerator_cache:
     web_dir: %kernel.root_dir%/../web
     mode: curl
 
+# HWIOAuthBundle Configuration
+hwi_oauth:
+    firewall_name: main
+    connect:
+        confirmation: false
+    resource_owners:
+        google:
+            type: google
+            client_id: %google_client_id%
+            client_secret: %google_secret%
+            scope: "profile"
+            options:
+                display: page
+                access_type: online
+                approval_prompt: force
+                login_hint: email address
+        facebook:
+            type: facebook
+            client_id: %facebook_client_id%
+            client_secret: %facebook_secret%
+            scope: "public_profile"
+            options:
+                display: page
+        twitter:
+            type: twitter
+            client_id: %twitter_client_id%
+            client_secret: %twitter_secret%
+            scope: ""
+
+# FOSUserBundle Configuration
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Fuz\QuickStartBundle\Entity\User
+
 jms_i18n_routing:
     default_locale: en
     locales: [en, fr]
