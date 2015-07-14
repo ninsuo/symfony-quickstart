@@ -30,24 +30,18 @@ class BaseController extends Controller
      */
     protected function getErrorMessages(Form $form)
     {
-        $errors = array ();
+        $errors = array();
 
-        foreach ($form->getErrors() as $error)
-        {
-            if ($form->isRoot())
-            {
+        foreach ($form->getErrors() as $error) {
+            if ($form->isRoot()) {
                 $errors['#'][] = $error->getMessage();
-            }
-            else
-            {
+            } else {
                 $errors[] = $error->getMessage();
             }
         }
 
-        foreach ($form->all() as $child)
-        {
-            if (!$child->isValid())
-            {
+        foreach ($form->all() as $child) {
+            if (!$child->isValid()) {
                 $errors[$child->getName()] = $this->getErrorMessages($child);
             }
         }
@@ -93,15 +87,13 @@ class BaseController extends Controller
         $originalErrors = $this->getErrorMessages($form);
 
         $globalErrors = null;
-        if (array_key_exists('#', $originalErrors))
-        {
+        if (array_key_exists('#', $originalErrors)) {
             $globalErrors = $originalErrors['#'];
             unset($originalErrors['#']);
         }
 
         $normalizedErrors = $this->normalizeErrorMessagesAjaxFormat($originalErrors, $form->getName());
-        if (!is_null($globalErrors))
-        {
+        if (!is_null($globalErrors)) {
             $normalizedErrors['#'] = $globalErrors;
         }
 
@@ -110,16 +102,11 @@ class BaseController extends Controller
 
     private function normalizeErrorMessagesAjaxFormat(array $errors, $prefix)
     {
-        $normalizedErrors = array ();
-        foreach ($errors as $key => $error)
-        {
-            if (is_array($error))
-            {
-                $normalizedErrors = array_merge($normalizedErrors,
-                   $this->normalizeErrorMessagesAjaxFormat($error, "{$prefix}_{$key}"));
-            }
-            else
-            {
+        $normalizedErrors = array();
+        foreach ($errors as $key => $error) {
+            if (is_array($error)) {
+                $normalizedErrors = array_merge($normalizedErrors, $this->normalizeErrorMessagesAjaxFormat($error, "{$prefix}_{$key}"));
+            } else {
                 $normalizedErrors[$prefix][$key] = $error;
             }
         }
@@ -134,16 +121,14 @@ class BaseController extends Controller
      */
     protected function goBack(Request $request)
     {
-        if ($request->getSession()->has('previous_route'))
-        {
-            $route = $request->getSession()->get('previous_route');
+        if ($request->getSession()->has('previous_route')) {
+            $route                      = $request->getSession()->get('previous_route');
             $route['params']['_locale'] = $request->getLocale();
             return $this->redirect($this->generateUrl($route['name'], $route['params']));
         }
 
         $referer = $request->headers->get('referer');
-        if (!is_null($referer))
-        {
+        if (!is_null($referer)) {
             return $this->redirect($referer);
         }
 

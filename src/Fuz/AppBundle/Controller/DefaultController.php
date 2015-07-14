@@ -9,13 +9,13 @@ use Fuz\AppBundle\Base\BaseController;
 class DefaultController extends BaseController
 {
 
-   /**
-    * @Route("/", name="home")
-    * @Template()
-    */
-   public function indexAction()
-   {
-      return array ();
-   }
+    /**
+     * @Route("/", name="home")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        return array();
+    }
 
 }

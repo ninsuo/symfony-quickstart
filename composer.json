@@ -25,7 +25,8 @@
       "jms/i18n-routing-bundle": "~1.1",
       "jms/translation-bundle": "~1.1",
       "knplabs/knp-menu-bundle": "~2",
-      "smart-core/accelerator-cache-bundle": "~1"
+      "smart-core/accelerator-cache-bundle": "~1",
+      "friendsofsymfony/user-bundle": "~2.0@dev"
    },
    "require-dev": {
       "sensio/generator-bundle": "~2.3"

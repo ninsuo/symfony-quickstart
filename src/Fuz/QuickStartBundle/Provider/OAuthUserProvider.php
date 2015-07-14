@@ -8,24 +8,21 @@ use Fuz\QuickStartBundle\Entity\User;
 
 class OAuthUserProvider extends BaseUserProvider
 {
-
     protected $session;
     protected $em;
 
     public function __construct($session, $em)
     {
         $this->session = $session;
-        $this->em = $em;
+        $this->em      = $em;
     }
 
     public function loadUserByUsername($username)
     {
-        if (!is_null($this->session->get('user')))
-        {
+        if (!is_null($this->session->get('user'))) {
             $username = $this->session->get('user');
         }
-        if (is_null($username))
-        {
+        if (is_null($username)) {
             return null;
         }
         list($resourceOwner, $resourceOwnerId) = json_decode($username);
@@ -34,13 +31,12 @@ class OAuthUserProvider extends BaseUserProvider
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $resourceOwner = $response->getResourceOwner()->getName();
+        $resourceOwner   = $response->getResourceOwner()->getName();
         $resourceOwnerId = $response->getUsername();
-        $name = $this->getNameToDisplay($resourceOwner, $response);
+        $name            = $this->getNameToDisplay($resourceOwner, $response);
 
         $user = $this->em->getRepository('FuzQuickStartBundle:User')->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
-        if (is_null($user))
-        {
+        if (is_null($user)) {
             $user = new User();
             $user->setResourceOwner($resourceOwner);
             $user->setResourceOwnerId($resourceOwnerId);
@@ -48,15 +44,13 @@ class OAuthUserProvider extends BaseUserProvider
             $user->setSigninCount(1);
             $this->em->persist($user);
             $this->em->flush($user);
-        }
-        else
-        {
+        } else {
             $user->setSigninCount($user->getSigninCount() + 1);
             $this->em->persist($user);
             $this->em->flush($user);
         }
 
-        $json = json_encode(array ($resourceOwner, $resourceOwnerId));
+        $json = json_encode(array($resourceOwner, $resourceOwnerId));
         $this->session->set('user', $json);
         return $this->loadUserByUsername($json);
     }
@@ -64,8 +58,7 @@ class OAuthUserProvider extends BaseUserProvider
     public function getNameToDisplay($resourceOwner, $response)
     {
         $name = null;
-        switch ($resourceOwner)
-        {
+        switch ($resourceOwner) {
             case 'google':
                 $name = $response->getNickname();
                 break;

@@ -21,7 +21,6 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  */
 class User implements UserInterface, EquatableInterface
 {
-
     /**
      * @var integer
      *
@@ -245,7 +244,7 @@ class User implements UserInterface, EquatableInterface
      */
     public function getRoles()
     {
-        return array ('ROLE_USER');
+        return array('ROLE_USER');
     }
 
     /**
@@ -277,8 +276,7 @@ class User implements UserInterface, EquatableInterface
      */
     public function isEqualTo(UserInterface $user)
     {
-        if ((int) $this->getId() === $user->getId())
-        {
+        if ((int) $this->getId() === $user->getId()) {
             return true;
         }
 

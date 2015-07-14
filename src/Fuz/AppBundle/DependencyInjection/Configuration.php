@@ -12,13 +12,14 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+
     /**
      * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('fuz_app');
+        $rootNode    = $treeBuilder->root('fuz_app');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
@@ -26,4 +27,5 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
+
 }

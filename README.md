@@ -1,9 +1,17 @@
-Symfony2 Quick Starter
+Symfony2 Quick Start
 ========================
+
+## What is it?
 
 This is the [Symfony2 Standard Edition](https://github.com/symfony/symfony-standard) with some ready-to-use tools to get started quickly.
 
-When I tell "Ready to use", this is basically really ready to use, no need to configure or code anything. Just overwriting and copy/pasting to customize.
+Most common stuff, such as login, translations or menus are built-in: no need to configure or code anything. Just overwrite and copy/paste to customize.
+
+You'll find here 2 bundles:
+
+- Fuz\QuickStartBundle contains well-known bundles implementations, you'll probably not need to modify those files.
+
+- AppBundle is a skeleton, it contains your app implementation.
 
 ## Installation
 
@@ -37,11 +45,7 @@ You need to create apps with the minimum permissions at the following urls:
 - Facebook Login: https://developers.facebook.com/apps/
 - Twitter Login: https://apps.twitter.com/
 
-To configure supported resource owners:
-
-- in src/Fuz/QuickStartBundle/Resources/views/layout.html.twig are defined available locales
-
-You can overwrite the `login` twig block to set your own resource owners.
+To configure supported resource owners, you can overwrite `google_login`, `facebook_login` and/or `twitter_login` blocks in your base layout.
 
 ---
 
@@ -64,7 +68,13 @@ It implements the  "come back where you were" logic for better ergonomics.
 
 It automatically manages which part of the menu should be considered as active, and has helpers to quickly add routes and submenus.
 
-- You can copy/paste FuzQuickStartBundle:Builder:Menu class and overwrite the menu block to define your own menus.
+a) You can see samples in Fuz\QuickStartBundle\Menu\Builder class and overwrite the menu block to define your own menus.
+
+b) You can create your own menus in view with the following code:
+
+```jinja
+{{ knp_menu_render('FuzAppBundle:Builder:myMenu') }}
+```
 
 ---
 

@@ -19,9 +19,9 @@ class UserRepository extends EntityRepository
             AND u.resourceOwnerId = :resourceOwnerId
         ");
 
-        $params = array (
-                'resourceOwner' => $resourceOwner,
-                'resourceOwnerId' => $resourceOwnerId,
+        $params = array(
+            'resourceOwner'   => $resourceOwner,
+            'resourceOwnerId' => $resourceOwnerId,
         );
 
         $user = $query

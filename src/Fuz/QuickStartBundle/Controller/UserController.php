@@ -19,12 +19,9 @@ class UserController extends BaseController
      */
     public function loginAction()
     {
-        if ($this->getUser())
-        {
+        if ($this->getUser()) {
             return new RedirectResponse($this->generateUrl('home'));
-        }
-        else
-        {
+        } else {
             return $this->forward('HWIOAuthBundle:Connect:connect');
         }
     }
@@ -50,7 +47,7 @@ class UserController extends BaseController
     public function connectAction(Request $request, $service)
     {
         $this->get('session')->set('referer', $request->headers->get('referer'));
-        return $this->forward('HWIOAuthBundle:Connect:redirectToService', array ('service' => $service));
+        return $this->forward('HWIOAuthBundle:Connect:redirectToService', array('service' => $service));
     }
 
     /**
@@ -62,8 +59,7 @@ class UserController extends BaseController
     public function welcomeAction()
     {
         $referer = $this->get('session')->get('referer');
-        if (is_null($referer))
-        {
+        if (is_null($referer)) {
             return new RedirectResponse($this->generateUrl('home'));
         }
         return new RedirectResponse($referer);
@@ -78,31 +74,27 @@ class UserController extends BaseController
      */
     public function unsuscribeAction(Request $request)
     {
-        if (is_null($this->getUser()))
-        {
+        if (is_null($this->getUser())) {
             return $this->redirect($this->generateUrl('home'));
         }
 
         // CRSF
         $form = $this
            ->createFormBuilder()
-           ->add('submit', 'submit',
-              array (
-                   'label' => 'quickstart.unsuscribe.confirm',
-                   'attr' => array (
-                           'class' => 'btn btn-danger',
-                   )
+           ->add('submit', 'submit', array(
+               'label' => 'quickstart.unsuscribe.confirm',
+               'attr'  => array(
+                   'class' => 'btn btn-danger',
+               )
            ))
            ->getForm()
         ;
 
-        if ($request->getMethod() === 'POST')
-        {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 $user = $this->getUser();
-                $em = $this->get('doctrine.orm.entity_manager');
+                $em   = $this->get('doctrine.orm.entity_manager');
                 $em->remove($user);
                 $em->flush($user);
                 return $this->forward('FuzQuickStartBundle:User:logout');
@@ -110,9 +102,8 @@ class UserController extends BaseController
             return $this->goBack($request);
         }
 
-        return $this->render("FuzQuickStartBundle:User:unsuscribe.html.twig",
-              array (
-                   'form' => $form->createView(),
+        return $this->render("FuzQuickStartBundle:User:unsuscribe.html.twig", array(
+               'form' => $form->createView(),
         ));
     }
 

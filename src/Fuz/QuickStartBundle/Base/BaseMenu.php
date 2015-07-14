@@ -8,65 +8,54 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 
 class BaseMenu extends ContainerAware
 {
-
-    const POSITION_LEFT = 'left';
+    const POSITION_LEFT  = 'left';
     const POSITION_RIGHT = 'right';
 
     protected function createMenu(FactoryInterface $factory, $position)
     {
         $menu = $factory->createItem('root');
-        if (self::POSITION_LEFT === $position)
-        {
+        if (self::POSITION_LEFT === $position) {
             $menu->setChildrenAttribute('class', 'nav navbar-nav');
-        }
-        else
-        {
+        } else {
             $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
         }
         return $menu;
     }
 
-    protected function addRoute(ItemInterface $menu, $name, $route, array $routeParams = array (),
-       array $childParams = array (), $divider = false)
+    protected function addRoute(ItemInterface $menu, $name, $route, array $routeParams = array(), array $childParams = array(), $divider = false)
     {
         $uri = $this->container->get('router')->generate($route, $routeParams);
         return $this->addUri($menu, $name, $uri, $childParams, $divider);
     }
 
-    protected function addUri(ItemInterface $menu, $name, $uri, array $childParams = array (), $divider = false)
+    protected function addUri(ItemInterface $menu, $name, $uri, array $childParams = array(), $divider = false)
     {
         $currentUri = $this->container->get('request')->getRequestUri();
 
         $key = sha1($name);
 
-        $item = $menu->addChild($key,
-           array_merge($childParams, array (
-                'uri' => $uri,
-                'label' => $name,
+        $item = $menu->addChild($key, array_merge($childParams, array(
+            'uri'   => $uri,
+            'label' => $name,
         )));
 
-        if ($divider)
-        {
+        if ($divider) {
             $menu[$key]->setAttribute('divider', true);
         }
 
         $isCurrent = false;
-        $first = null;
-        $elem = $item;
-        while (!$elem->isRoot())
-        {
-            if (strcmp($currentUri, $elem->getUri()) == 0)
-            {
+        $first     = null;
+        $elem      = $item;
+        while (!$elem->isRoot()) {
+            if (strcmp($currentUri, $elem->getUri()) == 0) {
                 $isCurrent = true;
             }
             $first = $elem;
-            $elem = $elem->getParent();
+            $elem  = $elem->getParent();
         }
 
-        if (!is_null($first))
-        {
-            if ($isCurrent)
-            {
+        if (!is_null($first)) {
+            if ($isCurrent) {
                 $first->setAttribute('class', 'active');
             }
             $first->setCurrent($isCurrent);
@@ -77,10 +66,9 @@ class BaseMenu extends ContainerAware
 
     protected function addSubMenu(ItemInterface $menu, $label)
     {
-        $menu->addChild($label, array ('uri' => '#'));
+        $menu->addChild($label, array('uri' => '#'));
         $menu[$label]->setAttribute('class', 'dropdown');
-        if ($menu->getParent())
-        {
+        if ($menu->getParent()) {
             $menu[$label]->setAttribute('class', 'dropdown-submenu');
             $menu[$label]->setExtra('submenu', true);
         }
@@ -92,7 +80,7 @@ class BaseMenu extends ContainerAware
         $menu[$label]->setLinkAttribute('aria-expanded', 'false');
     }
 
-    protected function trans($property, array $parameters = array ())
+    protected function trans($property, array $parameters = array())
     {
         return $this->container->get('translator')->trans($property, $parameters);
     }
