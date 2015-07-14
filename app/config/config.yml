@@ -27,6 +27,11 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - BraincraftedBootstrapBundle:Form:bootstrap.html.twig
+    globals:
+        brand: QuickStart
 
 # Assetic Configuration
 assetic:

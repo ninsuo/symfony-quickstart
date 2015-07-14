@@ -54,3 +54,11 @@
     padding-bottom:3px;
     height:18px;
 }
+
+.right-line {
+    border-right: 1px dashed #333;
+}
+
+.left-line {
+    border-left: 1px dashed #333;
+}

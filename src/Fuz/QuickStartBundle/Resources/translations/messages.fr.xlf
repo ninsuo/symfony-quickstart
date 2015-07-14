@@ -15,8 +15,8 @@
         <target><![CDATA[Connecté en tant que]]></target>
       </trans-unit>
       <trans-unit id="4">
-        <source>quickstart.login.subtitle</source>
-        <target><![CDATA[Connectez-vous en utilisant l'un des services suivants]]></target>
+        <source>quickstart.login.oauth.title</source>
+        <target><![CDATA[Ou connectez-vous en utilisant l'un des services suivants]]></target>
       </trans-unit>
       <trans-unit id="5">
         <source>quickstart.login.using</source>
@@ -153,6 +153,22 @@
       <trans-unit id="38">
         <source>quickstart.wait</source>
         <target><![CDATA[Veuillez patienter...]]></target>
+      </trans-unit>
+      <trans-unit id="39">
+        <source>quickstart.login.user.login</source>
+        <target><![CDATA[Connexion]]></target>
+      </trans-unit>
+      <trans-unit id="40">
+        <source>quickstart.login.user.register</source>
+        <target><![CDATA[Enregistrement]]></target>
+      </trans-unit>
+      <trans-unit id="41">
+        <source>quickstart.login.user.subtitle</source>
+        <target><![CDATA[Connectez-vous à l'aide de votre compte %brand%]]></target>
+      </trans-unit>
+      <trans-unit id="42">
+        <source>quickstart.login.oauth.label</source>
+        <target><![CDATA[Connexion à l'aide de votre compte %provider%]]></target>
       </trans-unit>
     </body>
   </file>

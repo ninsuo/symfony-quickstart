@@ -3,8 +3,8 @@
 {% macro displayProvider(name) %}
 
     <a
-        title="{{ 'quickstart.login.label' | trans({'%provider%': name|title}) }}"
-        aria-label="{{ 'quickstart.login.label' | trans({'%provider%': name|title}) }}"
+        title="{{ 'quickstart.login.oauth.label' | trans({'%provider%': name|title}) }}"
+        aria-label="{{ 'quickstart.login.oauth.label' | trans({'%provider%': name|title}) }}"
         href="{{ hwi_oauth_login_url(name|lower) }}"
         class="black">
         <div class="oauth col-md-4">
@@ -15,13 +15,30 @@
 
 {% endmacro %}
 
-<div class="row" id="login">
-
+<div class="row" id="title">
     <div class="col-md-12 text-center">
-        <h4>{{ 'quickstart.login.subtitle' | trans }}</h4>
+        <h4>{{ 'quickstart.login.user.subtitle' | trans({'%brand%': brand}) }}</h4>
+    </div>
+</div>
+<div class="row" id="user">
+
+    <div class="col-md-6">
+        <h4>{{ 'quickstart.login.user.login' | trans }}</h4>
+        {{ render(controller('FOSUserBundle:Security:login')) }}
+    </div>
+
+    <div class="col-md-6 left-line">
+        <h4>{{ 'quickstart.login.user.register' | trans }}</h4>
+        {{ render(controller('FOSUserBundle:Registration:register')) }}
     </div>
 
     <div class="clear">&nbsp;</div>
+
+    <div class="col-md-12 text-center">
+        <h4>{{ 'quickstart.login.oauth.title' | trans }}</h4>
+    </div>
+</div>
+<div class="row" id="oauth">
 
     <div class="col-md-1">
         &nbsp;
