@@ -46,7 +46,6 @@ class Builder extends BaseMenu
     public function mainRightMenu(FactoryInterface $factory, array $options)
     {
         $menu = $this->createMenu($factory, parent::POSITION_RIGHT);
-        $this->addUri($menu, 'GitHub', 'https://github.com/ninsuo/symfony2-quickstart');
 
         return $menu;
     }
@@ -54,7 +53,6 @@ class Builder extends BaseMenu
     public function userRightMenu(FactoryInterface $factory, array $options)
     {
         $menu = $this->createMenu($factory, parent::POSITION_RIGHT);
-        $this->addUri($menu, 'GitHub', 'https://github.com/ninsuo/symfony2-quickstart');
 
         return $menu;
     }
