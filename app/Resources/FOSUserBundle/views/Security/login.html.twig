@@ -1,0 +1,47 @@
+
+{% import "FuzQuickStartBundle::macros.html.twig" as macros %}
+
+{% block fos_user_content %}
+
+    <fieldset>
+        <legend>{{ 'quickstart.login.user.login' | trans({'%brand%': brand}) }}</legend>
+
+        {% if error %}
+            {{ macros.flash_error(error.messageKey|trans(error.messageData, 'security')) }}
+        {% endif %}
+
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+            <div class="form-group">
+                <label class="control-label" for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                <div class="controls">
+                    <input class="form-control" id="username" name="_username" placeholder="{{ 'quickstart.login.form.example' | trans }}" required="" value="{{ last_username }}" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                <div class="controls">
+                    <input class="form-control" id="password" name="_password" placeholder="" required="" type="password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="controls">
+                    <label class="checkbox" for="remember_me-tick">
+                        <input name="_remember_me" id="remember_me-tick" value="on" type="checkbox">
+                        {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>
+
+        </form>
+    </fieldset>
+
+{% endblock fos_user_content %}

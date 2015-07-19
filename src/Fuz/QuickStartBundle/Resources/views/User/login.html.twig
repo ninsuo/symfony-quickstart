@@ -3,60 +3,56 @@
 {% macro displayProvider(name) %}
 
     <a
-        title="{{ 'quickstart.login.oauth.label' | trans({'%provider%': name|title}) }}"
-        aria-label="{{ 'quickstart.login.oauth.label' | trans({'%provider%': name|title}) }}"
+        title="{{ 'quickstart.login.using'|trans({'%provider%': name|title}) }}"
         href="{{ hwi_oauth_login_url(name|lower) }}"
         class="black">
         <div class="oauth col-md-4">
             <img src="{{ asset('bundles/fuzquickstart/img/oauth/' ~ name|lower ~ '.png') }}" alt="{{ name|title }}"/>
-            <p>{{ 'quickstart.login.using' | trans({'%provider%': name|title}) }}</p>
+            <p>{{ 'quickstart.login.using'|trans({'%provider%': name|title}) }}</p>
         </div>
     </a>
 
 {% endmacro %}
 
-<div class="row" id="title">
-    <div class="col-md-12 text-center">
-        <h4>{{ 'quickstart.login.user.subtitle' | trans({'%brand%': brand}) }}</h4>
+<fieldset>
+    <legend>{{ 'quickstart.login.resource_owners'|trans }}</legend>
+
+    <div class="row" id="oauth">
+
+        <div class="col-md-1">
+            &nbsp;
+        </div>
+
+        <div class="col-md-10">
+            <div class="row" id="login">
+
+                {{ _self.displayProvider('Google') }}
+                {{ _self.displayProvider('Facebook') }}
+                {{ _self.displayProvider('Twitter') }}
+
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            &nbsp;
+        </div>
+
+        <div class="clear">&nbsp;</div>
     </div>
-</div>
+</fieldset>
+
+<hr/>
+
 <div class="row" id="user">
 
     <div class="col-md-6">
-        <h4>{{ 'quickstart.login.user.login' | trans }}</h4>
         {{ render(controller('FOSUserBundle:Security:login')) }}
     </div>
 
-    <div class="col-md-6 left-line">
-        <h4>{{ 'quickstart.login.user.register' | trans }}</h4>
+    <div class="col-md-6">
         {{ render(controller('FOSUserBundle:Registration:register')) }}
     </div>
 
     <div class="clear">&nbsp;</div>
 
-    <div class="col-md-12 text-center">
-        <h4>{{ 'quickstart.login.oauth.title' | trans }}</h4>
-    </div>
-</div>
-<div class="row" id="oauth">
-
-    <div class="col-md-1">
-        &nbsp;
-    </div>
-
-    <div class="col-md-10">
-        <div class="row" id="login">
-
-            {{ _self.displayProvider('Google') }}
-            {{ _self.displayProvider('Facebook') }}
-            {{ _self.displayProvider('Twitter') }}
-
-        </div>
-    </div>
-
-    <div class="col-md-1">
-        &nbsp;
-    </div>
-
-    <div class="clear">&nbsp;</div>
 </div>

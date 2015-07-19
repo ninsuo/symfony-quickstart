@@ -1,14 +1,14 @@
 @charset "utf-8";
 
 .navbar-logo {
-   float: left;
-   margin-right: 5px;
+    float: left;
+    margin-right: 5px;
 }
 
 .navbar-logo img {
-   max-height: 30px;
-   max-width: 100px;
-   margin-top: -7px;
+    max-height: 30px;
+    max-width: 100px;
+    margin-top: -7px;
 }
 
 .box-style {
@@ -53,12 +53,4 @@
     margin-right:3px;
     padding-bottom:3px;
     height:18px;
-}
-
-.right-line {
-    border-right: 1px dashed #333;
-}
-
-.left-line {
-    border-left: 1px dashed #333;
 }

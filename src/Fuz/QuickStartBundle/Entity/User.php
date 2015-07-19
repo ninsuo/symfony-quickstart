@@ -2,6 +2,7 @@
 
 namespace Fuz\QuickStartBundle\Entity;
 
+use Fuz\QuickStartBundle\Tools\Math;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -20,7 +21,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  * @ORM\Entity(repositoryClass="Fuz\QuickStartBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class User extends BaseUser implements UserInterface, EquatableInterface
+class User extends BaseUser implements EquatableInterface
 {
 
     const DEFAULT_RESOURCE_OWNER = "app";
@@ -79,17 +80,11 @@ class User extends BaseUser implements UserInterface, EquatableInterface
     public function __construct()
     {
         parent::__construct();
-        $this->email = $this->rand();
-        $this->password = $this->rand();
+        $this->email = Math::rand();
+        $this->password = Math::rand();
         $this->resourceOwner = static::DEFAULT_RESOURCE_OWNER;
-        $this->resourceOwnerId = $this->rand();
+        $this->resourceOwnerId = Math::rand();
         $this->preferences = new ArrayCollection();
-    }
-
-    protected function rand()
-    {
-        // microtime?
-        return base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
     /**
