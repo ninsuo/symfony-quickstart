@@ -50,7 +50,7 @@
     </div>
 
     <div class="col-md-6">
-        {{ render(controller('FOSUserBundle:Registration:register')) }}
+        {{ render(controller('FOSUserBundle:Registration:register', {'parent': true})) }}
     </div>
 
     <div class="clear">&nbsp;</div>
