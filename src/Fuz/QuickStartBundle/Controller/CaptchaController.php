@@ -30,7 +30,7 @@ class CaptchaController extends BaseController
      * @Route("/captcha/validate/{key}", name="captcha")
      * @Method({"POST"})
      */
-    public function captchaValidate($key)
+    public function captchaValidateAction($key)
     {
 
     }
