@@ -35,10 +35,16 @@ class FOSUserBundleListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
+            FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInitialize',
             FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
 //                FOSUserEvents::PROFILE_EDIT_INITIALIZE => 'onProfileEditInitialize',
 //                FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onProfileEditSuccess',
         );
+    }
+
+    public function onRegistrationInitialize(GetResponseUserEvent $event)
+    {
+        $event->getUser()->setEmail(null);
     }
 
     public function onRegistrationSuccess(FormEvent $event)

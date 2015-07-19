@@ -166,6 +166,10 @@
         <source>quickstart.login.resource_owners</source>
         <target><![CDATA[Connexion à l'aide de votre compte...]]></target>
       </trans-unit>
+      <trans-unit id="42">
+        <source>quickstart.login.email</source>
+        <target><![CDATA[E-Mail :]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

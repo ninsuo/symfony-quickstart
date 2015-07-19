@@ -21,9 +21,52 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode    = $treeBuilder->root('fuz_quick_start');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+           ->children()
+                ->arrayNode('no_captcha')
+                    ->isRequired()
+                    ->children()
+                        ->scalarNode("check_url")
+                            ->defaultValue('https://www.google.com/recaptcha/api/siteverify')
+                        ->end()
+                        ->scalarNode("post_param")
+                            ->defaultValue('g-recaptcha-response')
+                        ->end()
+                        ->scalarNode("site_key")
+                            ->isRequired()
+                        ->end()
+                        ->scalarNode("secret_key")
+                            ->isRequired()
+                        ->end()
+                        ->arrayNode('sessions_per_ip')
+                            ->isRequired()
+                            ->children()
+                                ->integerNode('max')
+                                    ->defaultValue(20)
+                                ->end()
+                                ->integerNode('delay')
+                                    ->defaultValue(3600)
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('strategies')
+                            ->defaultValue(array())
+                            ->useAttributeAsKey('name')
+                            ->prototype('array')
+                                ->children()
+                                    ->integerNode('hits')
+                                        ->isRequired()
+                                    ->end()
+                                    ->integerNode('delay')
+                                        ->isRequired()
+                                    ->end()
+                                ->end()
+                            ->end()
+                       ->end()
+                   ->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

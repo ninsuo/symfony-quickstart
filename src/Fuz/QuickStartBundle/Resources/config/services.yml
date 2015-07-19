@@ -4,6 +4,7 @@ parameters:
     quickstart.locale.listener.class: Fuz\QuickStartBundle\EventListener\LocaleListener
     quickstart.last_route.listener.class: Fuz\QuickStartBundle\EventListener\LastRouteListener
     quickstart.fos_user_bundle.listener.class: Fuz\QuickStartBundle\EventListener\FOSUserBundleListener
+    quickstart.no_captcha.class: Fuz\QuickStartBundle\Services\NoCaptcha
 
 services:
 
@@ -31,3 +32,10 @@ services:
         arguments: ['@fos_user.mailer', '@fos_user.util.token_generator', '@router', '@session', '@security.context']
         tags:
         - { name: kernel.event_subscriber }
+
+    quickstart.no_captcha:
+         class: %quickstart.no_captcha.class%
+         arguments: [@logger, @session, @doctrine.orm.entity_manager, %no_captcha%]
+         tags:
+             - { name: monolog.logger, channel: services.no_captcha }
+ 

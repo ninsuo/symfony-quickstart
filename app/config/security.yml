@@ -23,7 +23,7 @@ security:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager
                 login_path: /login
-                check_path: /login_chec
+                check_path: /login_check
             oauth:
                 resource_owners:
                     google: "/login/check-google"

@@ -32,3 +32,7 @@ parameters:
     # Twitter Login: https://apps.twitter.com/
     twitter_client_id: <your client id>
     twitter_secret: <your secret>
+
+    # noCaptcha Credentials:
+    nocaptcha_site_key: <your site key>
+    nocaptcha_secret_key: <your secret key>

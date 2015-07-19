@@ -15,9 +15,9 @@
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
             <div class="form-group">
-                <label class="control-label" for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                <label class="control-label" for="username">{{ 'quickstart.login.email'|trans }}</label>
                 <div class="controls">
-                    <input class="form-control" id="username" name="_username" placeholder="{{ 'quickstart.login.form.example' | trans }}" required="" value="{{ last_username }}" type="text">
+                    <input class="form-control" id="username" name="_username" placeholder="{{ 'quickstart.login.form.example' | trans }}" required="" type="text">
                 </div>
             </div>
 

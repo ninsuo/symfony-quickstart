@@ -1,10 +1,8 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
-{% block title %}{{ brand }} - Registration confirmed{% endblock %}
-
 {% block fos_user_content %}
 
-    <div class="row" id="login">
+    <div>
         <div class="col-md-12 alert alert-success text-center">
             <span class="success">{{ 'registration.confirmed'|trans({'%username%': macros.me()}, 'FOSUserBundle')|raw }}</span>
         </div>

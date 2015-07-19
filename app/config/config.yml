@@ -115,11 +115,25 @@ fos_user:
     firewall_name: main
     user_class: Fuz\QuickStartBundle\Entity\User
 
+# Supported Website Languages
 jms_i18n_routing:
     default_locale: en
     locales: [en, fr]
     strategy: prefix_except_default
 
+# KnpMenu template configuration
 knp_menu:
     twig:
         template: FuzQuickStartBundle::knp_menu.html.twig
+
+# Common tools Configuration
+fuz_quick_start:
+    no_captcha:
+        check_url: https://www.google.com/recaptcha/api/siteverify
+        post_param: g-recaptcha-response
+        site_key: %nocaptcha_site_key%
+        secret_key: %nocaptcha_secret_key%
+        sessions_per_ip: { max: 20, delay: 3600 }
+        strategies:
+            register: { hits: 1, delay: 60 }
+            login: { hits: 5, delay: 60 }
