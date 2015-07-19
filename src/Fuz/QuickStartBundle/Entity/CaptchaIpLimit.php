@@ -1,22 +1,13 @@
 <?php
 
-/*
- * This file is part of twigfiddle.com project.
- *
- * (c) Alain Tiemblo <alain@fuz.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace Fuz\AppBundle\Entity;
+namespace Fuz\QuickStartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CaptchaIpLimit
  *
- * @ORM\Entity(repositoryClass="Fuz\AppBundle\Repository\CaptchaIpLimitRepository")
+ * @ORM\Entity(repositoryClass="Fuz\QuickStartBundle\Repository\CaptchaIpLimitRepository")
  * @ORM\Table(name="captcha_ip_limit")
  * @ORM\HasLifecycleCallbacks
  */

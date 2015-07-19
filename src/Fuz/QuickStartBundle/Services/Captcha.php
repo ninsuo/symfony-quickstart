@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 
-class NoCaptcha
+class Captcha
 {
     protected $logger;
     protected $session;

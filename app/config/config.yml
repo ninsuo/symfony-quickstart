@@ -32,6 +32,7 @@ twig:
             - BraincraftedBootstrapBundle:Form:bootstrap.html.twig
     globals:
         brand: QuickStart
+        nocaptcha_site_key: %nocaptcha_site_key%
 
 # Assetic Configuration
 assetic:
@@ -135,5 +136,5 @@ fuz_quick_start:
         secret_key: %nocaptcha_secret_key%
         sessions_per_ip: { max: 20, delay: 3600 }
         strategies:
-            register: { hits: 1, delay: 60 }
-            login: { hits: 5, delay: 60 }
+            fos_user_registration_register: { hits: 1, delay: 60 }
+            fos_user_security_check: { hits: 5, delay: 60 }

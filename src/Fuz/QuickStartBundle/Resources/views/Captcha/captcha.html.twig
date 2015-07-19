@@ -1,0 +1,39 @@
+{# FuzQuickStartBundle:Captcha:captcha.html.twig #}
+
+{% extends 'FuzQuickStartBundle::layout.html.twig' %}
+
+{% block body %}
+
+    <fieldset>
+        <legend>{{ 'quickstart.captcha.title' }}</legend>
+
+        <div class="col-md-12">
+            <p>{{ 'quickstart.captcha.explaination' | trans }}</p>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <div id="captcha-modal-container"></div>
+        </div>
+
+    </fieldset>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src='https://www.google.com/recaptcha/api.js?onload=noCaptchaNowReady&render=explicit' async defer></script>
+{% endblock %}
+
+{% block script %}
+
+    <script type="text/javascript">
+
+        var noCaptchaNowReady = function () {
+            grecaptcha.render('captcha-modal-container', {
+                'sitekey': '{{ nocaptcha_site_key }}'
+            });
+        };
+
+    </script>
+
+{% endblock %}
+

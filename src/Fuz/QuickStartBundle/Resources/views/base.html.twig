@@ -22,11 +22,8 @@
             {% block extra_css %}{% endblock %}
             <link rel="stylesheet" href="{{ asset('bundles/fuzquickstart/css/custom.css') }}">
         {% endblock %}
-
     </head>
-
     <body>
-
          <div class="container">
             {% block head %}
                 <nav class="navbar navbar-default">
@@ -85,6 +82,7 @@
         <script type="text/javascript">
            $('.dropdown-submenu > a').submenupicker();
         </script>
+
         {% block script %}{% endblock %}
 
     </body>

@@ -170,6 +170,14 @@
         <source>quickstart.login.email</source>
         <target><![CDATA[E-Mail :]]></target>
       </trans-unit>
+      <trans-unit id="43">
+        <source>quickstart.captcha.explaination</source>
+        <target><![CDATA[Merci de bien vouloir remplir le formulaire ci-dessous avant de continuer.]]></target>
+      </trans-unit>
+      <trans-unit id="44">
+        <source>quickstart.captcha.title</source>
+        <target><![CDATA[Etes-vous un humain ?]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

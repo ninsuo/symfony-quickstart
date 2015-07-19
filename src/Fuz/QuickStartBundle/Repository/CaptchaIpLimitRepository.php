@@ -11,7 +11,7 @@ class CaptchaIpLimitRepository extends EntityRepository
     public function deleteExpired(\DateTime $expiry)
     {
         $query = $this->_em->createQuery("
-            DELETE Fuz\AppBundle\Entity\CaptchaIpLimit cil
+            DELETE Fuz\QuickStartBundle\Entity\CaptchaIpLimit cil
             WHERE cil.updateTm < :expiry
         ");
 

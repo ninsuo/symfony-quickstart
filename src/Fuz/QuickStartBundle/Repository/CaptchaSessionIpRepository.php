@@ -11,7 +11,7 @@ class CaptchaSessionIpRepository extends EntityRepository
     public function deleteExpired(\DateTime $expiry)
     {
         $query = $this->_em->createQuery("
-            DELETE Fuz\AppBundle\Entity\CaptchaSessionIp csi
+            DELETE Fuz\QuickStartBundle\Entity\CaptchaSessionIp csi
             WHERE csi.creationTm < :expiry_date
         ");
 
@@ -43,7 +43,7 @@ class CaptchaSessionIpRepository extends EntityRepository
     {
         $query = $this->_em->createQuery("
             SELECT COUNT(csi.ip)
-            FROM Fuz\AppBundle\Entity\CaptchaSessionIp csi
+            FROM Fuz\QuickStartBundle\Entity\CaptchaSessionIp csi
             WHERE csi.ip = :ip
         ");
 

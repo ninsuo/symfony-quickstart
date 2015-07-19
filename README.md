@@ -49,6 +49,16 @@ To configure supported resource owners, you can overwrite `google_login`, `faceb
 
 ---
 
+[FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) let your users create an account in your website.
+
+If they prefer create an account in your website without using resource owners, they can use the integrated FOSUserBundle.
+
+Note that to avoid robots, NoCaptcha is also integrated, you need register to NoCaptcha and configure your credentials in parameters.yml.
+
+More info: https://www.google.com/recaptcha/admin
+
+---
+
 [JMSI18nRoutingBundle](http://jmsyst.com/bundles/JMSI18nRoutingBundle) is ready to let you switch between languages.
 
 To configure supported languages:

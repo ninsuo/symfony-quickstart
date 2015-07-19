@@ -11,7 +11,7 @@ class CaptchaSessionHitRepository extends EntityRepository
     public function deleteExpired($strategy, \DateTime $expiry)
     {
         $query = $this->_em->createQuery("
-            DELETE Fuz\AppBundle\Entity\CaptchaSessionHit csh
+            DELETE Fuz\QuickStartBundle\Entity\CaptchaSessionHit csh
             WHERE csh.strategy = :strategy
             AND csh.creationTm < :expiry
         ");
