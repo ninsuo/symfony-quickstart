@@ -59,7 +59,7 @@
         <target><![CDATA[Utilisez le bouton Page précédente, le menu de navigation ou cliquez sur le bouton Accueil pour continuer.]]></target>
       </trans-unit>
       <trans-unit id="15">
-        <source>quickstart.error.back</source>
+        <source>quickstart.button.home</source>
         <target><![CDATA[Retour à l'accueil]]></target>
       </trans-unit>
       <trans-unit id="16">

@@ -59,8 +59,8 @@
         <target><![CDATA[Use the Back button, the navigation menu or click on the Home button to continue.]]></target>
       </trans-unit>
       <trans-unit id="15">
-        <source>quickstart.error.back</source>
-        <target><![CDATA[Back to home]]></target>
+        <source>quickstart.button.home</source>
+        <target><![CDATA[Go back to the homepage]]></target>
       </trans-unit>
       <trans-unit id="16">
         <source>quickstart.error.403.title</source>
