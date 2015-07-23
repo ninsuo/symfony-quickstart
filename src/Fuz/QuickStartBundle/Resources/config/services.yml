@@ -30,7 +30,7 @@ services:
 
     quickstart.fos_user_bundle.listener:
         class: %quickstart.fos_user_bundle.listener.class%
-        arguments: ['@fos_user.mailer', '@fos_user.util.token_generator', '@router', '@session', '@security.context']
+        arguments: ['@fos_user.mailer', '@fos_user.util.token_generator', '@router', '@session', '@security.token_storage', @fos_user.user_manager, @translator]
         tags:
         - { name: kernel.event_subscriber }
 

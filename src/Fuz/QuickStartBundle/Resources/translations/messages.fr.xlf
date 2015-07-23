@@ -178,6 +178,10 @@
         <source>quickstart.captcha.title</source>
         <target><![CDATA[Etes-vous un humain ?]]></target>
       </trans-unit>
+      <trans-unit id="45">
+        <source>quickstart.login.invalid_credentials</source>
+        <target><![CDATA[Email ou mot de passe incorrect.]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

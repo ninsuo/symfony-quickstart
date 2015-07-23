@@ -4,7 +4,6 @@ namespace Fuz\QuickStartBundle\Entity;
 
 use Fuz\QuickStartBundle\Tools\Math;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -19,11 +18,9 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  *      }
  * )
  * @ORM\Entity(repositoryClass="Fuz\QuickStartBundle\Repository\UserRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class User extends BaseUser implements EquatableInterface
 {
-
     const DEFAULT_RESOURCE_OWNER = "app";
 
     /**
@@ -57,13 +54,6 @@ class User extends BaseUser implements EquatableInterface
     protected $resourceOwnerId;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="last_seen", type="datetime")
-     */
-    protected $lastSeen;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="signin_count", type="integer")
@@ -71,20 +61,20 @@ class User extends BaseUser implements EquatableInterface
     protected $signinCount = 0;
 
     /**
-     * @var ArrayCollection[UserPreference]
+     * @var bool
      *
-     * @ORM\OneToMany(targetEntity="UserPreference", mappedBy="user", cascade={"all"})
+     * @ORM\Column(name="can_login", type="boolean")
      */
-    protected $preferences;
+    protected $canLogin;
 
     public function __construct()
     {
         parent::__construct();
-        $this->email = Math::rand();
-        $this->password = Math::rand();
-        $this->resourceOwner = static::DEFAULT_RESOURCE_OWNER;
+        $this->email           = Math::rand();
+        $this->password        = Math::rand();
+        $this->resourceOwner   = static::DEFAULT_RESOURCE_OWNER;
         $this->resourceOwnerId = Math::rand();
-        $this->preferences = new ArrayCollection();
+        $this->canLogin        = true;
     }
 
     /**
@@ -166,29 +156,6 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Set lastSeen
-     *
-     * @param \DateTime $lastSeen
-     * @return User
-     */
-    public function setLastSeen($lastSeen)
-    {
-        $this->lastSeen = $lastSeen;
-
-        return $this;
-    }
-
-    /**
-     * Get lastSeen
-     *
-     * @return \DateTime
-     */
-    public function getLastSeen()
-    {
-        return $this->lastSeen;
-    }
-
-    /**
      * Set signinCount
      *
      * @param integer $signinCount
@@ -212,42 +179,26 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Set preferences
+     * Set canLogin
      *
-     * @param ArrayCollection[UserPreference] $preferences
+     * @param bool $canLogin
      * @return User
      */
-    public function setPreferences(ArrayCollection $preferences)
+    public function setCanLogin($canLogin)
     {
-        $this->preferences = $preferences;
+        $this->canLogin = $canLogin;
 
         return $this;
     }
 
     /**
-     * Get preferences
+     * Get canLogin
      *
-     * @return ArrayCollection[UserPreference]
+     * @return bool
      */
-    public function getPreferences()
+    public function getCanLogin()
     {
-        return $this->preferences;
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function onPrePersist()
-    {
-        $this->setLastSeen(new \DateTime());
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function onPreUpdate()
-    {
-        $this->setLastSeen(new \DateTime());
+        return $this->canLogin;
     }
 
     /**

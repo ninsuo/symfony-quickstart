@@ -41,6 +41,7 @@ class OAuthUserProvider extends BaseUserProvider
             $user->setResourceOwner($resourceOwner);
             $user->setResourceOwnerId($resourceOwnerId);
             $user->setSigninCount(1);
+            $user->setCanLogin(false);
             $this->userManager->updateUser($user);
             return $this->loadUserByUsername($json);
         } else {
