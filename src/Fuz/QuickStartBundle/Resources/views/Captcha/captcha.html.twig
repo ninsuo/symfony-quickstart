@@ -5,18 +5,25 @@
 {% block body %}
 
     <fieldset>
-        <legend>{{ 'quickstart.captcha.title' }}</legend>
-
-        <!-- here the form -->
-
+        <legend>{{ 'quickstart.captcha.title' | trans }}</legend>
 
         <div class="col-md-12">
             <p>{{ 'quickstart.captcha.explaination' | trans }}</p>
         </div>
 
-        <div class="col-md-12 text-center">
-            <div id="captcha-modal-container"></div>
-        </div>
+        <form method="post" action="{{ path('captcha_validate', {'key': key}) }}">
+
+            <div class="col-md-12">
+
+                <div id="captcha-modal-container"></div>
+
+                <br/>
+
+                <input type="submit" class="btn btn-primary" value="{{ 'quickstart.captcha.continue' | trans }}" />
+
+            </div>
+
+        </form>
 
     </fieldset>
 

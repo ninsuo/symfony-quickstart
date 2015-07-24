@@ -2,11 +2,10 @@
 
 namespace Fuz\QuickStartBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Fuz\QuickStartBundle\Base\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Fuz\QuickStartBundle\Base\BaseController;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User is automatically redirected here by the CaptchaListener,
@@ -17,7 +16,6 @@ class CaptchaController extends BaseController
 
     /**
      * @Route("/captcha/{key}", name="captcha")
-     * @Method({"GET"})
      */
     public function captchaRequiredAction($key)
     {
@@ -27,12 +25,14 @@ class CaptchaController extends BaseController
     }
 
     /**
-     * @Route("/captcha/validate/{key}", name="captcha")
+     * @Route("/captcha/validate/{key}", name="captcha_validate")
      * @Method({"POST"})
      */
-    public function captchaValidateAction($key)
+    public function captchaValidationFailedAction($key)
     {
+        $this->alert('quickstart.captcha.invalid');
 
+        return $this->captchaRequiredAction($key);
     }
 
 }

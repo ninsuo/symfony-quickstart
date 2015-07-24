@@ -182,6 +182,14 @@
         <source>quickstart.login.invalid_credentials</source>
         <target><![CDATA[Email ou mot de passe incorrect.]]></target>
       </trans-unit>
+      <trans-unit id="46">
+        <source>quickstart.captcha.invalid</source>
+        <target><![CDATA[Veuillez réessayer s'il vous plaît.]]></target>
+      </trans-unit>
+      <trans-unit id="47">
+        <source>quickstart.captcha.continue</source>
+        <target><![CDATA[Continuer...]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

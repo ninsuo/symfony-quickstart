@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Captcha
 {
+    const CHECK_URL = 'https://www.google.com/recaptcha/api/siteverify';
+
     protected $logger;
     protected $session;
     protected $sessionIpRepo;
@@ -66,7 +68,7 @@ class Captcha
                 'remoteip' => $ip,
             );
 
-            $query = $this->config['check_url'].'?'.http_build_query($parameters);
+            $query = self::CHECK_URL.'?'.http_build_query($parameters);
             $json  = json_decode(file_get_contents($query));
 
             return $json->success;

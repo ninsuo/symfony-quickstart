@@ -5,6 +5,7 @@ parameters:
     quickstart.last_route.listener.class: Fuz\QuickStartBundle\EventListener\LastRouteListener
     quickstart.fos_user_bundle.listener.class: Fuz\QuickStartBundle\EventListener\FOSUserBundleListener
     quickstart.captcha.class: Fuz\QuickStartBundle\Services\Captcha
+    quickstart.captcha.controller.class: Fuz\QuickStartBundle\Controller\CaptchaController
     quickstart.captcha.listener.class: Fuz\QuickStartBundle\EventListener\CaptchaListener
 
 services:
@@ -40,8 +41,11 @@ services:
          tags:
              - { name: monolog.logger, channel: services.captcha }
 
+    quickstart.captcha.controller:
+        class: %quickstart.captcha.controller.class%
+
     quickstart.captcha.listener:
         class: %quickstart.captcha.listener.class%
-        arguments: [@router, @quickstart.captcha, %no_captcha%]
+        arguments: [@router, @quickstart.captcha, @quickstart.captcha.controller, %no_captcha%]
         tags:
         - { name: kernel.event_subscriber }
