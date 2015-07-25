@@ -43,6 +43,8 @@ services:
 
     quickstart.captcha.controller:
         class: %quickstart.captcha.controller.class%
+        calls:
+        - [setContainer, ["@service_container"]]
 
     quickstart.captcha.listener:
         class: %quickstart.captcha.listener.class%

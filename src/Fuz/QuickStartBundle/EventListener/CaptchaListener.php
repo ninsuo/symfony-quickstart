@@ -42,24 +42,16 @@ class CaptchaListener implements EventSubscriberInterface
         $route   = $session->get('current_route');
 
         if ('captcha_validate' === $route['name'] && isset($route['params']['key'])) {
-            $cache    = $session->get('noCaptcha');
-            $key      = $route['params']['key'];
-//            if (array_key_exists($key, $cache)) {
-
-            $strategy = $cache[$key]['route']['name'];
-            //$test = $this->captcha->check($request, $strategy);
-
-            $test = true;
-
-            if (true === $test) {
-                $this->redirectToOriginalController($event, $key);
+            $cache = $session->get('noCaptcha');
+            $key   = $route['params']['key'];
+            if (array_key_exists($key, $cache)) {
+                $strategy = $cache[$key]['route']['name'];
+                if (true === $this->captcha->check($request, $strategy)) {
+                    $this->redirectToOriginalController($event, $key);
+                }
             }
-
-            // }
-
         } else if ('captcha' !== $route['name'] && array_key_exists($route['name'], $this->config['strategies'])) {
-            $test = $this->captcha->check($request, $route['name']);
-            if (false === $test) {
+            if (false === $this->captcha->check($request, $route['name'])) {
                 $this->redirectToCaptchaPage($event, $route);
             }
         }
@@ -107,8 +99,8 @@ class CaptchaListener implements EventSubscriberInterface
 
         $this->redirect = $cache[$key]['route'];
 
-        //unset($cache[$key]);
-        //$session->set('noCaptcha', $cache);
+        unset($cache[$key]);
+        $session->set('noCaptcha', $cache);
     }
 
     public function onController(FilterControllerEvent $event)
