@@ -134,5 +134,4 @@ fuz_quick_start:
         secret_key: %nocaptcha_secret_key%
         sessions_per_ip: { max: 20, delay: 3600 }
         strategies:
-            fos_user_registration_register: { hits: 1, delay: 3600 }
-            fos_user_security_check: { hits: 5, delay: 60 }
+            fos_user_registration_register: { hits: 1, delay: 3600, reset: false }

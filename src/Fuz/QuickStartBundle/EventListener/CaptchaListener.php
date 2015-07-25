@@ -46,7 +46,8 @@ class CaptchaListener implements EventSubscriberInterface
             $key   = $route['params']['key'];
             if (array_key_exists($key, $cache)) {
                 $strategy = $cache[$key]['route']['name'];
-                if (true === $this->captcha->check($request, $strategy)) {
+                if (true) {
+                //if (true === $this->captcha->check($request, $strategy)) {
                     $this->redirectToOriginalController($event, $key);
                 }
             }
@@ -120,8 +121,8 @@ class CaptchaListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::REQUEST    => array(array('onRequest', -20)),
-            KernelEvents::CONTROLLER => array(array('onController', -20)),
+            KernelEvents::REQUEST    => array(array('onRequest', 10)),
+            KernelEvents::CONTROLLER => array(array('onController', 10)),
         );
     }
 

@@ -42,7 +42,11 @@ class Captcha
 
         if ($this->validateCaptcha($request)) {
             $this->ipLimitRepo->increaseLimit($ip, $this->config['sessions_per_ip']['max']);
-            $this->sessionHitRepo->resetHits($sessionId, $strategy);
+
+            if ($this->config['strategies'][$strategy]['reset']) {
+                $this->sessionHitRepo->resetHits($sessionId, $strategy);
+            }
+
             return true;
         }
 
