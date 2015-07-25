@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Captcha
 {
-    const CHECK_URL = 'https://www.google.com/recaptcha/api/siteverify';
+    const CHECK_URL  = 'https://www.google.com/recaptcha/api/siteverify';
+    const POST_PARAM = 'g-recaptcha-response';
 
     protected $logger;
     protected $session;
@@ -58,7 +59,7 @@ class Captcha
 
     public function validateCaptcha(Request $request)
     {
-        $response = $request->request->get($this->config['post_param']);
+        $response = $request->request->get(self::POST_PARAM);
         if ($response) {
             $ip = ip2long($request->getClientIp()) ? $request->getClientIp() : '127.0.0.1';
 
