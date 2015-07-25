@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuz\AppBundle;
+namespace AppBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class FuzAppBundle extends Bundle
+class AppBundle extends Bundle
 {
 
 }

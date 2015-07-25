@@ -4,7 +4,7 @@
    "type": "project",
    "description": "An empty Symfony2 project that provides lots of ready-to-use tools for quick & not-so-dirty developments",
    "autoload": {
-      "psr-0": {"": "src/", "SymfonyStandard": "app/"}
+      "psr-4": { "": "src/", "SymfonyStandard\\": "app/SymfonyStandard/" }
    },
    "require": {
       "php": ">=5.3.3",

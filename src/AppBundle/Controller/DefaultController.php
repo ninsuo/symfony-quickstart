@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuz\AppBundle\Controller;
+namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Fuz\AppBundle\Base\BaseController;
+use AppBundle\Base\BaseController;
 
 class DefaultController extends BaseController
 {

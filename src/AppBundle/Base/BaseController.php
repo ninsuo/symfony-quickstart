@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuz\AppBundle\Base;
+namespace AppBundle\Base;
 
 use Fuz\QuickStartBundle\Base\BaseController as QuickStartBase;
 

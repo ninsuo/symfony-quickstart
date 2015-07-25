@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuz\AppBundle\Menu;
+namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Fuz\QuickStartBundle\Base\BaseMenu;

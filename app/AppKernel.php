@@ -25,7 +25,7 @@ class AppKernel extends Kernel
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Fuz\QuickStartBundle\FuzQuickStartBundle(),
-            new Fuz\AppBundle\FuzAppBundle(),
+            new AppBundle\AppBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

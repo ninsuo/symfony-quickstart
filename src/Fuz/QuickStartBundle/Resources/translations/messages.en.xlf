@@ -188,7 +188,7 @@
       </trans-unit>
       <trans-unit id="47">
         <source>quickstart.captcha.continue</source>
-        <target><![CDATA[Continue...]]></target>
+        <target><![CDATA[Continue]]></target>
       </trans-unit>
     </body>
   </file>
