@@ -93,6 +93,7 @@ Bonus
 - project already implements 403, 404, 500 and generic error pages
 - CRUD generator generates bootstrap-ready and translated views
 - Flash messages are automatically rendered in the base layout
+- noCaptcha is implemented to protect your registration/login forms
 
 ## License
 
