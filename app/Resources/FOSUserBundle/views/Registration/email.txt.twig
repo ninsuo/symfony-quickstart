@@ -1,12 +1,22 @@
-{% trans_default_domain 'FOSUserBundle' %}
 {% block subject %}
 {% autoescape false %}
-{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{{ 'quickstart.register.email.subject'|trans({'%brand%': brand, '%username%': user.username}) }}
 {% endautoescape %}
 {% endblock %}
 {% block body_text %}
 {% autoescape false %}
-{{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{{ 'quickstart.register.email.1'|trans({'%username%': user.username}) }}
+
+{{ 'quickstart.register.email.2'|trans }}
+{{ confirmationUrl }}
+
+{{ 'quickstart.email.error'|trans }}
+
+{{ 'quickstart.email.auto'|trans }}
+
+{{ 'quickstart.email.seeyou'|trans }}
+
+{{ brand }} (c) {{ "now"|date('Y') }}
 {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}

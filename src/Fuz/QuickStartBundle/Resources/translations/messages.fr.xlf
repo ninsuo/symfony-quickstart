@@ -190,6 +190,42 @@
         <source>quickstart.captcha.continue</source>
         <target><![CDATA[Continuer]]></target>
       </trans-unit>
+      <trans-unit id="48">
+        <source>quickstart.reset.link</source>
+        <target><![CDATA[Réinitialiser votre mot de passe]]></target>
+      </trans-unit>
+      <trans-unit id="49">
+        <source>quickstart.reset.title</source>
+        <target><![CDATA[Réinitialiser votre mot de passe]]></target>
+      </trans-unit>
+      <trans-unit id="50">
+        <source>quickstart.reset.email</source>
+        <target><![CDATA[Votre email :]]></target>
+      </trans-unit>
+      <trans-unit id="51">
+        <source>quickstart.reset.example</source>
+        <target><![CDATA[email@example.com]]></target>
+      </trans-unit>
+      <trans-unit id="52">
+        <source>quickstart.register.email.1</source>
+        <target><![CDATA[Bienvenue %username%,]]></target>
+      </trans-unit>
+      <trans-unit id="53">
+        <source>quickstart.email.error</source>
+        <target><![CDATA[Si vous avez recu ce message par erreur, vous pouvez simplement l'ignorer. Aucune action de votre part n'est requise.]]></target>
+      </trans-unit>
+      <trans-unit id="54">
+        <source>quickstart.email.auto</source>
+        <target><![CDATA[Note : ce message a ete envoye automatiquement, merci de ne pas y repondre.]]></target>
+      </trans-unit>
+      <trans-unit id="55">
+        <source>fuz.email.seeyou</source>
+        <target><![CDATA[A bientot !]]></target>
+      </trans-unit>
+      <trans-unit id="56">
+        <source>quickstart.register.email.2</source>
+        <target><![CDATA[Pour activer votre compte, merci de bien vouloir cliquer sur le lien suivant :]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

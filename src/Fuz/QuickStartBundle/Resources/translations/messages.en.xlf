@@ -190,6 +190,42 @@
         <source>quickstart.captcha.continue</source>
         <target><![CDATA[Continue]]></target>
       </trans-unit>
+      <trans-unit id="48">
+        <source>quickstart.reset.link</source>
+        <target><![CDATA[Reset your password]]></target>
+      </trans-unit>
+      <trans-unit id="49">
+        <source>quickstart.reset.title</source>
+        <target><![CDATA[Reset your password]]></target>
+      </trans-unit>
+      <trans-unit id="50">
+        <source>quickstart.reset.email</source>
+        <target><![CDATA[Your email:]]></target>
+      </trans-unit>
+      <trans-unit id="51">
+        <source>quickstart.reset.example</source>
+        <target><![CDATA[email@example.com]]></target>
+      </trans-unit>
+      <trans-unit id="52">
+        <source>quickstart.register.email.1</source>
+        <target><![CDATA[Welcome %username%,]]></target>
+      </trans-unit>
+      <trans-unit id="53">
+        <source>quickstart.email.error</source>
+        <target><![CDATA[If you wasn't expecting this e-mail, just ignore it. No further actions are required from you.]]></target>
+      </trans-unit>
+      <trans-unit id="54">
+        <source>quickstart.email.auto</source>
+        <target><![CDATA[Note: this e-mail was sent automatically, please, do not reply to it.]]></target>
+      </trans-unit>
+      <trans-unit id="55">
+        <source>fuz.email.seeyou</source>
+        <target><![CDATA[See you soon!]]></target>
+      </trans-unit>
+      <trans-unit id="56">
+        <source>quickstart.register.email.2</source>
+        <target><![CDATA[To activate your account, please follow this link:]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

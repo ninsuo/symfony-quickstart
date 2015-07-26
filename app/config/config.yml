@@ -62,11 +62,14 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    transport:  "%mailer_transport%"
+    encryption: "%mailer_encryption%"
+    host:       "%mailer_host%"
+    port:       "%mailer_port%"
+    username:   "%mailer_user%"
+    password:   "%mailer_password%"
+    spool:      { type: memory }
+    auth_mode:  login
 
 # BootstrapBundle Configuration
 braincrafted_bootstrap:
@@ -115,6 +118,12 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Fuz\QuickStartBundle\Entity\User
+    from_email:
+      address: auto@fuz.org
+      sender_name: fuz.org
+    registration:
+      confirmation:
+          enabled: true
 
 # Supported Website Languages
 jms_i18n_routing:
@@ -134,4 +143,4 @@ fuz_quick_start:
         secret_key: %nocaptcha_secret_key%
         sessions_per_ip: { max: 20, delay: 3600 }
         strategies:
-            fos_user_registration_register: { hits: 1, delay: 3600, reset: false }
+#            fos_user_registration_register: { hits: 1, delay: 3600, reset: false }

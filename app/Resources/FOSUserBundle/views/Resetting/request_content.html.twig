@@ -1,0 +1,22 @@
+<fieldset>
+    <legend>{{ 'quickstart.reset.title'|trans }}</legend>
+
+    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+
+        <div class="form-group">
+            <label class="control-label" for="username">{{ 'quickstart.reset.email'|trans }}</label>
+            {% if invalid_username is defined %}
+                <p class="alert">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+            {% endif %}
+            <div class="controls">
+                <input class="form-control" id="username" name="username" placeholder="{{ 'quickstart.reset.example' | trans }}" required="required" type="text">
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <input class="btn btn-primary" type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+        </div>
+        
+    </form>
+
+</fieldset>
