@@ -62,14 +62,6 @@ class FOSUserBundleListener implements EventSubscriberInterface
         if ($event instanceof InteractiveLoginEvent) {
             $user = $event->getAuthenticationToken()->getUser();
         }
-
-        if (!$user->getCanLogin()) {
-            $this->security->setToken();
-            throw new AuthenticationException(
-            $this->translator->trans('quickstart.login.invalid_credentials')
-            );
-        }
-
         $user->setSigninCount($user->getSigninCount() + 1);
         $this->userManager->updateUser($user);
     }
@@ -78,7 +70,6 @@ class FOSUserBundleListener implements EventSubscriberInterface
     {
         $user = $event->getUser();
         $user->setEmail(null);
-        $user->setCanLogin(true);
     }
 
     public function onRegistrationSuccess(FormEvent $event)

@@ -60,21 +60,13 @@ class User extends BaseUser implements EquatableInterface
      */
     protected $signinCount = 0;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="can_login", type="boolean")
-     */
-    protected $canLogin;
-
     public function __construct()
     {
         parent::__construct();
         $this->email           = Math::rand();
-        $this->password        = Math::rand();
+        $this->password        = '*';
         $this->resourceOwner   = static::DEFAULT_RESOURCE_OWNER;
         $this->resourceOwnerId = Math::rand();
-        $this->canLogin        = true;
     }
 
     /**
@@ -176,29 +168,6 @@ class User extends BaseUser implements EquatableInterface
     public function getSigninCount()
     {
         return $this->signinCount;
-    }
-
-    /**
-     * Set canLogin
-     *
-     * @param bool $canLogin
-     * @return User
-     */
-    public function setCanLogin($canLogin)
-    {
-        $this->canLogin = $canLogin;
-
-        return $this;
-    }
-
-    /**
-     * Get canLogin
-     *
-     * @return bool
-     */
-    public function getCanLogin()
-    {
-        return $this->canLogin;
     }
 
     /**
