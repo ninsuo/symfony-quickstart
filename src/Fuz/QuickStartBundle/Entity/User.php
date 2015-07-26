@@ -21,6 +21,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  */
 class User extends BaseUser implements EquatableInterface
 {
+
     const DEFAULT_RESOURCE_OWNER = "app";
 
     /**

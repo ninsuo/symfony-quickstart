@@ -6,9 +6,11 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseUserProvi
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Model\UserInterface;
 
 class OAuthUserProvider extends BaseUserProvider
 {
+
     protected $userRepository;
     protected $userManager;
 
@@ -41,10 +43,12 @@ class OAuthUserProvider extends BaseUserProvider
             $user->setResourceOwner($resourceOwner);
             $user->setResourceOwnerId($resourceOwnerId);
             $user->setSigninCount(1);
+            $this->updateEmail($response, $user);
             $this->userManager->updateUser($user);
             return $this->loadUserByUsername($json);
         } else {
             $user->setSigninCount($user->getSigninCount() + 1);
+            $this->updateEmail($response, $user);
             $this->userManager->updateUser($user);
             return $user;
         }
@@ -67,6 +71,14 @@ class OAuthUserProvider extends BaseUserProvider
                 break;
         }
         return $name;
+    }
+
+    public function updateEmail(UserResponseInterface $response, UserInterface $user)
+    {
+        $email = $response->getEmail();
+        if ($email && $email !== $user->getEmail() && !$this->userManager->findUserBy(array('email' => $email))) {
+            $user->setEmail($email);
+        }
     }
 
     public function supportsClass($class)
