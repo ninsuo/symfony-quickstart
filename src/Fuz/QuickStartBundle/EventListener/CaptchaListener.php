@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CaptchaListener implements EventSubscriberInterface
 {
+
     const MAX_CACHED_CAPTCHAS = 10;
 
     protected $router;
@@ -46,14 +47,16 @@ class CaptchaListener implements EventSubscriberInterface
             $key   = $route['params']['key'];
             if (array_key_exists($key, $cache)) {
                 $strategy = $cache[$key]['route']['name'];
-                if (true) {
-                //if (true === $this->captcha->check($request, $strategy)) {
+                if (true === $this->captcha->check($request, $strategy)) {
                     $this->redirectToOriginalController($event, $key);
                 }
             }
         } else if ('captcha' !== $route['name'] && array_key_exists($route['name'], $this->config['strategies'])) {
-            if (false === $this->captcha->check($request, $route['name'])) {
-                $this->redirectToCaptchaPage($event, $route);
+            $strategy = $this->config['strategies'][$route['name']];
+            if (empty($strategy['method']) || in_array(strtoupper($request->getMethod()), $strategy['method'])) {
+                if (false === $this->captcha->check($request, $route['name'])) {
+                    $this->redirectToCaptchaPage($event, $route);
+                }
             }
         }
     }

@@ -136,11 +136,11 @@ knp_menu:
     twig:
         template: FuzQuickStartBundle::knp_menu.html.twig
 
-# Common tools Configuration
+# QuickStart custom tools configuration
 fuz_quick_start:
     no_captcha:
         site_key: %nocaptcha_site_key%
         secret_key: %nocaptcha_secret_key%
         sessions_per_ip: { max: 20, delay: 3600 }
         strategies:
-#            fos_user_registration_register: { hits: 1, delay: 3600, reset: false }
+            fos_user_registration_register: { hits: 1, delay: 3600, reset: false, methods: [POST] }

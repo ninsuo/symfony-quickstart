@@ -57,6 +57,22 @@ class Configuration implements ConfigurationInterface
                                     ->booleanNode('reset')
                                         ->isRequired()
                                     ->end()
+                                    ->arrayNode('methods')
+                                        ->beforeNormalization()
+                                            ->ifTrue(function($v) { return $v === null; })
+                                            ->then(function($v) { return array(); })
+                                        ->end()
+                                        ->prototype('scalar')->end()
+                                        ->defaultValue(array())
+                                        ->validate()
+                                            ->ifTrue(function($methods) {
+                                                $allowed = array('HEAD', 'GET', 'POST', 'PUT', 'DELETE');
+                                                $diff = array_diff(array_map('strtoupper', $methods), $allowed);
+                                                return count($diff);
+                                            })
+                                            ->thenInvalid("Captcha configuration: unknown HTTP method: %s")
+                                        ->end()
+                                    ->end()
                                 ->end()
                             ->end()
                        ->end()
