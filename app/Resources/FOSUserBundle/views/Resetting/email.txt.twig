@@ -1,12 +1,24 @@
-{% trans_default_domain 'FOSUserBundle' %}
 {% block subject %}
 {% autoescape false %}
-{{ 'resetting.email.subject'|trans }}
+{{ 'quickstart.reset.email.subject'|trans({'%brand%': brand}) }}
 {% endautoescape %}
 {% endblock %}
 {% block body_text %}
 {% autoescape false %}
-{{ 'resetting.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{{ 'quickstart.reset.email.1'|trans({'%username%': user.nickname}) }}
+
+{{ 'quickstart.reset.email.2'|trans }}
+
+{{ 'quickstart.reset.email.3'|trans }}
+{{ confirmationUrl }}
+
+{{ 'quickstart.email.error'|trans }}
+
+{{ 'quickstart.email.auto'|trans }}
+
+{{ 'quickstart.email.seeyou'|trans }}
+
+{{ brand }} (c) {{ "now"|date('Y') }}
 {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}

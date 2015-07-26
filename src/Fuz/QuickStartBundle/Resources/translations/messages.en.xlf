@@ -219,12 +219,40 @@
         <target><![CDATA[Note: this e-mail was sent automatically, please, do not reply to it.]]></target>
       </trans-unit>
       <trans-unit id="55">
-        <source>fuz.email.seeyou</source>
+        <source>quickstart.email.seeyou</source>
         <target><![CDATA[See you soon!]]></target>
       </trans-unit>
       <trans-unit id="56">
         <source>quickstart.register.email.2</source>
         <target><![CDATA[To activate your account, please follow this link:]]></target>
+      </trans-unit>
+      <trans-unit id="57">
+        <source>quickstart.reset.email.subject</source>
+        <target><![CDATA[Your %brand% account's password reset]]></target>
+      </trans-unit>
+      <trans-unit id="58">
+        <source>quickstart.reset.email.1</source>
+        <target><![CDATA[%username%,]]></target>
+      </trans-unit>
+      <trans-unit id="59">
+        <source>quickstart.reset.email.2</source>
+        <target><![CDATA[You have requested to reset your password.]]></target>
+      </trans-unit>
+      <trans-unit id="60">
+        <source>quickstart.reset.email.3</source>
+        <target><![CDATA[To proceed, please visit:]]></target>
+      </trans-unit>
+      <trans-unit id="61">
+        <source>quickstart.register.email.subject</source>
+        <target><![CDATA[Welcome to %brand%, %username%!]]></target>
+      </trans-unit>
+      <trans-unit id="62">
+        <source>quickstart.reset.invalid</source>
+        <target><![CDATA[E-mail %username% is not registered.]]></target>
+      </trans-unit>
+      <trans-unit id="63">
+        <source>quickstart.changepassword.title</source>
+        <target><![CDATA[Change password]]></target>
       </trans-unit>
     </body>
   </file>

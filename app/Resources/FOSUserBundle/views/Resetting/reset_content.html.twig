@@ -1,8 +1,14 @@
-{% trans_default_domain 'FOSUserBundle' %}
+<fieldset>
+    <legend>{{ 'quickstart.reset.title'|trans }}</legend>
 
-<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
-    </div>
-</form>
+    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+        {{ form_widget(form) }}
+        <div>
+            <input class="btn btn-primary" type="submit" value="{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}" />
+        </div>
+    </form>
+
+    <br/>
+    <a href="{{ path('home') }}">{{ 'quickstart.button.home'|trans }}</a>
+
+</fieldset>

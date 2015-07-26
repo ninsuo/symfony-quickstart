@@ -4,10 +4,14 @@
     <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
 
         <div class="form-group">
-            <label class="control-label" for="username">{{ 'quickstart.reset.email'|trans }}</label>
             {% if invalid_username is defined %}
-                <p class="alert">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+                <div>
+                    <div class="alert alert-danger text-center">
+                        <span class="success">{{ 'quickstart.reset.invalid'|trans({'%username%': invalid_username}) }}</span>
+                    </div>
+                </div>
             {% endif %}
+            <label class="control-label" for="username">{{ 'quickstart.reset.email'|trans }}</label>
             <div class="controls">
                 <input class="form-control" id="username" name="username" placeholder="{{ 'quickstart.reset.example' | trans }}" required="required" type="text">
             </div>
@@ -16,7 +20,9 @@
         <div class="form-group text-center">
             <input class="btn btn-primary" type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
         </div>
-        
+
     </form>
+
+    <a href="{{ path('home') }}">{{ 'quickstart.button.home'|trans }}</a>
 
 </fieldset>
