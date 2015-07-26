@@ -43,7 +43,8 @@
          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
          "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-         "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache"
+         "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache",
+         "php app/console assetic:dump web/"
       ],
       "post-update-cmd": [
          "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -53,7 +54,8 @@
          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
          "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
          "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-         "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache"
+         "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache",
+         "php app/console assetic:dump web/"
       ]
    },
    "config": {
