@@ -4,6 +4,8 @@ parameters:
     quickstart.locale.listener.class: Fuz\QuickStartBundle\EventListener\LocaleListener
     quickstart.last_route.listener.class: Fuz\QuickStartBundle\EventListener\LastRouteListener
     quickstart.fos_user_bundle.listener.class: Fuz\QuickStartBundle\EventListener\FOSUserBundleListener
+    quickstart.hwi_oauth_bundle.listener.class: Fuz\QuickStartBundle\EventListener\HWIOAuthBundleListener
+    quickstart.routing.class: Fuz\QuickStartBundle\Services\Routing
     quickstart.captcha.class: Fuz\QuickStartBundle\Services\Captcha
     quickstart.captcha.controller.class: Fuz\QuickStartBundle\Controller\CaptchaController
     quickstart.captcha.listener.class: Fuz\QuickStartBundle\EventListener\CaptchaListener
@@ -25,7 +27,7 @@ services:
 
     quickstart.last_route.listener:
         class: %quickstart.last_route.listener.class%
-        arguments: [@router]
+        arguments: [@quickstart.routing]
         tags:
             - { name: kernel.event_subscriber }
 
@@ -33,7 +35,17 @@ services:
         class: %quickstart.fos_user_bundle.listener.class%
         arguments: ['@fos_user.mailer', '@fos_user.util.token_generator', '@router', '@session', '@security.token_storage', @fos_user.user_manager, @translator]
         tags:
-        - { name: kernel.event_subscriber }
+            - { name: kernel.event_subscriber }
+
+    quickstart.hwi_oauth_bundle.listener:
+        class: %quickstart.hwi_oauth_bundle.listener.class%
+        arguments: [@quickstart.routing, %google_enabled%, %facebook_enabled%, %twitter_enabled%]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    quickstart.routing:
+         class: %quickstart.routing.class%
+         arguments: [@router]
 
     quickstart.captcha:
          class: %quickstart.captcha.class%
@@ -44,10 +56,10 @@ services:
     quickstart.captcha.controller:
         class: %quickstart.captcha.controller.class%
         calls:
-        - [setContainer, ["@service_container"]]
+            - [setContainer, ["@service_container"]]
 
     quickstart.captcha.listener:
         class: %quickstart.captcha.listener.class%
         arguments: [@router, @quickstart.captcha, @quickstart.captcha.controller, %no_captcha%]
         tags:
-        - { name: kernel.event_subscriber }
+            - { name: kernel.event_subscriber }

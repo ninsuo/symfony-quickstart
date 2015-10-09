@@ -2,13 +2,15 @@
 
 {# HWIOAuthBundle integration #}
 
-{% macro displayProvider(name) %}
+{% set nb_oauth = fuz.google_enabled + fuz.facebook_enabled + fuz.twitter_enabled %}
+
+{% macro displayProvider(name, nb_oauth) %}
 
     <a
         title="{{ 'quickstart.login.using'|trans({'%provider%': name|title}) }}"
         href="{{ hwi_oauth_login_url(name|lower) }}"
         class="black">
-        <div class="oauth col-md-4">
+        <div class="oauth col-md-{{ 12 / nb_oauth }}">
             <img src="{{ asset('bundles/fuzquickstart/img/oauth/' ~ name|lower ~ '.png') }}" alt="{{ name|title }}"/>
             <p>{{ 'quickstart.login.using'|trans({'%provider%': name|title}) }}</p>
         </div>
@@ -16,32 +18,42 @@
 
 {% endmacro %}
 
-<fieldset>
-    <legend>{{ 'quickstart.login.resource_owners'|trans }}</legend>
+{% if nb_oauth > 0 %}
+    <fieldset>
+        <legend>{{ 'quickstart.login.resource_owners'|trans }}</legend>
 
-    <div class="row" id="oauth">
+        <div class="row" id="oauth">
 
-        <div class="col-md-1">
-            &nbsp;
-        </div>
-
-        <div class="col-md-10">
-            <div class="row" id="login">
-
-                {{ _self.displayProvider('Google') }}
-                {{ _self.displayProvider('Facebook') }}
-                {{ _self.displayProvider('Twitter') }}
-
+            <div class="col-md-1">
+                &nbsp;
             </div>
-        </div>
 
-        <div class="col-md-1">
-            &nbsp;
-        </div>
+            <div class="col-md-10">
+                <div class="row" id="login">
 
-        <div class="clear">&nbsp;</div>
-    </div>
-</fieldset>
+                    {% if fuz.google_enabled %}
+                        {{ _self.displayProvider('Google', nb_oauth) }}
+                    {% endif %}
+
+                    {% if fuz.facebook_enabled %}
+                        {{ _self.displayProvider('Facebook', nb_oauth) }}
+                    {% endif %}
+
+                    {% if fuz.twitter_enabled %}
+                        {{ _self.displayProvider('Twitter', nb_oauth) }}
+                    {% endif %}
+
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                &nbsp;
+            </div>
+
+            <div class="clear">&nbsp;</div>
+        </div>
+    </fieldset>
+{% endif %}
 
 {# FOSUserBundle integration #}
 <br/>

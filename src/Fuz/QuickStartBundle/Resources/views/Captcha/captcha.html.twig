@@ -12,24 +12,18 @@
         </div>
 
         <form method="post" action="{{ path('captcha_validate', {'key': key}) }}">
-
             <div class="col-md-12">
-
                 <div id="captcha-modal-container"></div>
-
                 <br/>
-
                 <input type="submit" class="btn btn-primary" value="{{ 'quickstart.captcha.continue' | trans }}" />
-
             </div>
-
         </form>
-
     </fieldset>
 
 {% endblock %}
 
-{% block extra_js %}
+{% block js %}
+    {{ parent() }}
     <script src='https://www.google.com/recaptcha/api.js?onload=noCaptchaNowReady&render=explicit' async defer></script>
 {% endblock %}
 
@@ -39,7 +33,7 @@
 
         var noCaptchaNowReady = function () {
             grecaptcha.render('captcha-modal-container', {
-                'sitekey': '{{ nocaptcha_site_key }}'
+                'sitekey': '{{ fuz.nocaptcha_site_key }}'
             });
         };
 

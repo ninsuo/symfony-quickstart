@@ -4,7 +4,7 @@
 {% block fos_user_content %}
 
     <fieldset>
-        <legend>{{ 'quickstart.login.user.login' | trans({'%brand%': brand}) }}</legend>
+        <legend>{{ 'quickstart.login.user.login' | trans({'%brand%': fuz.site_brand}) }}</legend>
 
         {% if error %}
             {{ macros.flash_error(error.messageKey|trans(error.messageData, 'security')) }}

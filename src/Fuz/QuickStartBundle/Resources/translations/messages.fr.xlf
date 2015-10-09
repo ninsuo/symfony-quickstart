@@ -152,7 +152,7 @@
       </trans-unit>
       <trans-unit id="38">
         <source>quickstart.login.user.login</source>
-        <target><![CDATA[Ou connexion à votre compte %brand%]]></target>
+        <target><![CDATA[Connexion à votre compte %brand%]]></target>
       </trans-unit>
       <trans-unit id="39">
         <source>quickstart.login.user.register</source>

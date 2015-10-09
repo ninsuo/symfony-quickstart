@@ -11,89 +11,36 @@ You'll find here 2 bundles:
 
 - Fuz\QuickStartBundle contains well-known bundles implementations, you'll probably not need to modify those files.
 
-- AppBundle is a skeleton, it contains your app implementation.
+- AppBundle is a skeleton, it will contain your app implementation.
+
+## Ready-to-use bundles
+
+- bootstrap is preinstalled with a base layout, and will automatically render your forms the right way
+- hwioauthbundle is ready for letting your users log-in using their Google, Facebook or Twitter accounts
+- fosuserbundle is also available if your users prefer registering an account on your website directly
+- i18n support with language switcher and specific routes for each supported locales
+- knpmenu awaits your routes and labels as an associative array for logged and non-logged users in a single class
+- project already implements 403, 404, 500 and generic error pages
+- CRUD generator generates bootstrap-ready and translated views
+- Flash messages are automatically rendered in the base layout
+- noCaptcha is implemented to protect your registration form
 
 ## Installation
 
 ```sh
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar update
-php app/console assetic:dump
 php app/console assets:install web --symlink
 php app/console doctrine:schema:create
 ```
 
 ## Usage
 
-[Bootstrap](http://bootstrap.braincrafted.com/) is preinstalled with a base layout
+Most of the features can be configured or disabled inside the `parameters.yml` configuration file.
 
-To use it in a view:
 
-```jinja
-{% extends 'FuzQuickStartBundle::layout.html.twig' %}
-```
+(to be continued)
 
-Look at the source code to know what are the blocks that can be overwritten.
-
----
-
-[HWIOAuthBundle](https://github.com/hwi/HWIOAuthBundle) is ready for letting your users log-in using their Google, Facebook and Twitter accounts.
-
-You need to create apps with the minimum permissions at the following urls:
-
-- Google Login: https://console.developers.google.com/project
-- Facebook Login: https://developers.facebook.com/apps/
-- Twitter Login: https://apps.twitter.com/
-
-To configure supported resource owners, you can overwrite `google_login`, `facebook_login` and/or `twitter_login` blocks in your base layout.
-
----
-
-[FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) let your users create an account in your website.
-
-If they prefer create an account in your website without using resource owners, they can use the integrated FOSUserBundle.
-
-Note that to avoid robots, NoCaptcha is also integrated, you need register to NoCaptcha and configure your credentials in parameters.yml.
-
-More info: https://www.google.com/recaptcha/admin
-
----
-
-[JMSI18nRoutingBundle](http://jmsyst.com/bundles/JMSI18nRoutingBundle) is ready to let you switch between languages.
-
-To configure supported languages:
-
-- in app/config/config.yml, define your locales and default_locale
-- in src/Fuz/QuickStartBundle/Resources/views/layout.html.twig are defined available locales
-
-You can overwrite the `translations` twig block to set your custom locales
-
-You'll probably find the right flags for your supported countries in the bundles/fuzquickstart/img/countries directory.
-
-It implements the  "come back where you were" logic for better ergonomics.
-
----
-
-[KnpMenuBundle](http://symfony.com/doc/master/bundles/KnpMenuBundle/index.html) is ready to let you define your navigation menu.
-
-It automatically manages which part of the menu should be considered as active, and has helpers to quickly add routes and submenus.
-
-a) You can see samples in Fuz\QuickStartBundle\Menu\Builder class and overwrite the menu block to define your own menus.
-
-b) You can create your own menus in view with the following code:
-
-```jinja
-{{ knp_menu_render('FuzAppBundle:Builder:myMenu') }}
-```
-
----
-
-Bonus
-
-- project already implements 403, 404, 500 and generic error pages
-- CRUD generator generates bootstrap-ready and translated views
-- Flash messages are automatically rendered in the base layout
-- noCaptcha is implemented to protect your registration form
 
 ## License
 

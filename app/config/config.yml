@@ -31,8 +31,14 @@ twig:
         resources:
             - BraincraftedBootstrapBundle:Form:bootstrap.html.twig
     globals:
-        brand: QuickStart
-        nocaptcha_site_key: %nocaptcha_site_key%
+        fuz:
+            site_brand: %site_brand%
+            site_description: %site_description%
+            site_default_title: %site_default_title%
+            nocaptcha_site_key: %nocaptcha_site_key%
+            google_enabled: %google_enabled%
+            facebook_enabled: %facebook_enabled%
+            twitter_enabled: %twitter_enabled%
 
 # Assetic Configuration
 assetic:
@@ -119,8 +125,8 @@ fos_user:
     firewall_name: main
     user_class: Fuz\QuickStartBundle\Entity\User
     from_email:
-      address: auto@fuz.org
-      sender_name: fuz.org
+      address: %mailer_sender_email%
+      sender_name: %mailer_sender_name%
     registration:
       confirmation:
           enabled: true
@@ -141,6 +147,6 @@ fuz_quick_start:
     no_captcha:
         site_key: %nocaptcha_site_key%
         secret_key: %nocaptcha_secret_key%
-        sessions_per_ip: { max: 20, delay: 3600 }
+        sessions_per_ip: { max: %nocaptcha_sessions_per_ip_max%, delay: %nocaptcha_sessions_per_ip_delay% }
         strategies:
             fos_user_registration_register: { hits: 1, delay: 3600, reset: false, methods: [POST] }
