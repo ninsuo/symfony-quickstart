@@ -27,7 +27,7 @@ You'll find here 2 bundles:
 
 - Project already implements 403, 404, 500 and generic error pages, no need to worry about the common pitfalls on the subject.
 
-- CRUD generator generates bootstrap-ready and translated views, because if you need this bundle, you're not against generating most of the application.
+- CRUD generator generates bootstrap-ready and translated views, because if you need this app, you're not against generating most of the application.
 
 - noCaptcha is implemented to protect your registration form, and can be used as a service for your other needs.
 
