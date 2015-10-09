@@ -7,7 +7,6 @@ use Fuz\QuickStartBundle\Base\BaseMenu;
 
 class Builder extends BaseMenu
 {
-
     public function mainLeftMenu(FactoryInterface $factory, array $options)
     {
         $menu = $this->createMenu($factory, parent::POSITION_LEFT);
@@ -56,5 +55,4 @@ class Builder extends BaseMenu
 
         return $menu;
     }
-
 }

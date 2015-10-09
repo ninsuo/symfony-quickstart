@@ -13,7 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CaptchaSessionIp
 {
-
     /**
      * @var int
      *
@@ -80,5 +79,4 @@ class CaptchaSessionIp
     {
         $this->setCreationTm(new \DateTime());
     }
-
 }

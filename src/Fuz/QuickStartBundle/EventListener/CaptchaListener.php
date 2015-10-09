@@ -14,7 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CaptchaListener implements EventSubscriberInterface
 {
-
     const MAX_CACHED_CAPTCHAS = 10;
 
     protected $router;
@@ -51,7 +50,7 @@ class CaptchaListener implements EventSubscriberInterface
                     $this->redirectToOriginalController($event, $key);
                 }
             }
-        } else if ('captcha' !== $route['name'] && array_key_exists($route['name'], $this->config['strategies'])) {
+        } elseif ('captcha' !== $route['name'] && array_key_exists($route['name'], $this->config['strategies'])) {
             $strategy = $this->config['strategies'][$route['name']];
             if (empty($strategy['method']) || in_array(strtoupper($request->getMethod()), $strategy['method'])) {
                 if (false === $this->captcha->check($request, $route['name'])) {
@@ -94,6 +93,7 @@ class CaptchaListener implements EventSubscriberInterface
             $url      = $this->router->generate('home');
             $response = new RedirectResponse($url);
             $event->setResponse($response);
+
             return;
         }
 
@@ -115,7 +115,7 @@ class CaptchaListener implements EventSubscriberInterface
 
         if (!is_null($this->redirect)) {
             $controller = $this->redirect['params'];
-            $event->setController(function() use ($controller) {
+            $event->setController(function () use ($controller) {
                 return $this->controller->forward($controller['_controller'], $controller);
             });
         }
@@ -128,5 +128,4 @@ class CaptchaListener implements EventSubscriberInterface
             KernelEvents::CONTROLLER => array(array('onController', 10)),
         );
     }
-
 }

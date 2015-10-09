@@ -7,7 +7,6 @@ use Fuz\QuickStartBundle\Entity\CaptchaIpLimit;
 
 class CaptchaIpLimitRepository extends EntityRepository
 {
-
     public function deleteExpired(\DateTime $expiry)
     {
         $query = $this->_em->createQuery("
@@ -43,5 +42,4 @@ class CaptchaIpLimitRepository extends EntityRepository
             $this->_em->flush($entity);
         }
     }
-
 }

@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class FOSUserBundleListener implements EventSubscriberInterface
@@ -105,5 +104,4 @@ class FOSUserBundleListener implements EventSubscriberInterface
             $event->setResponse(new RedirectResponse($url));
         }
     }
-
 }

@@ -12,9 +12,8 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class AppExtension extends Extension
+class FuzAppExtension extends Extension
 {
-
     /**
      * {@inheritdoc}
      */
@@ -26,5 +25,4 @@ class AppExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
-
 }

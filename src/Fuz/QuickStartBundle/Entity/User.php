@@ -21,7 +21,6 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  */
 class User extends BaseUser implements EquatableInterface
 {
-
     const DEFAULT_RESOURCE_OWNER = "app";
 
     /**
@@ -83,12 +82,13 @@ class User extends BaseUser implements EquatableInterface
     /**
      * Set nickname
      *
-     * @param string $nickname
+     * @param  string $nickname
      * @return User
      */
     public function setNickname($nickname)
     {
         $this->nickname = $nickname;
+
         return $this;
     }
 
@@ -105,7 +105,7 @@ class User extends BaseUser implements EquatableInterface
     /**
      * Set resourceOwner
      *
-     * @param string $resourceOwner
+     * @param  string $resourceOwner
      * @return User
      */
     public function setResourceOwner($resourceOwner)
@@ -128,7 +128,7 @@ class User extends BaseUser implements EquatableInterface
     /**
      * Set resourceOwnerId
      *
-     * @param string $resourceOwnerId
+     * @param  string $resourceOwnerId
      * @return User
      */
     public function setResourceOwnerId($resourceOwnerId)
@@ -151,7 +151,7 @@ class User extends BaseUser implements EquatableInterface
     /**
      * Set signinCount
      *
-     * @param integer $signinCount
+     * @param  integer $signinCount
      * @return User
      */
     public function setSigninCount($signinCount)
@@ -182,5 +182,4 @@ class User extends BaseUser implements EquatableInterface
 
         return false;
     }
-
 }

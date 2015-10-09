@@ -13,7 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CaptchaIpLimit
 {
-
     /**
      * @var int
      *
@@ -80,5 +79,4 @@ class CaptchaIpLimit
     {
         $this->setUpdateTm(new \DateTime());
     }
-
 }

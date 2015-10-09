@@ -11,7 +11,6 @@ use Fuz\QuickStartBundle\Services\Routing;
 
 class HWIOAuthBundleListener implements EventSubscriberInterface
 {
-
     protected $routing;
     protected $services;
 
@@ -47,9 +46,9 @@ class HWIOAuthBundleListener implements EventSubscriberInterface
 
     public function checkService($service)
     {
-            if (isset($this->services[$service]) && !$this->services[$service]) {
-                throw new NotFoundHttpException();
-            }
+        if (isset($this->services[$service]) && !$this->services[$service]) {
+            throw new NotFoundHttpException();
+        }
     }
 
     public static function getSubscribedEvents()
@@ -58,5 +57,4 @@ class HWIOAuthBundleListener implements EventSubscriberInterface
             KernelEvents::REQUEST => array(array('onKernelRequest', 15)),
         );
     }
-
 }

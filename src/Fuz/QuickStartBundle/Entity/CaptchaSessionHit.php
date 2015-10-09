@@ -13,7 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CaptchaSessionHit
 {
-
     /**
      * @var string
      *
@@ -104,5 +103,4 @@ class CaptchaSessionHit
     {
         $this->setCreationTm(new \DateTime());
     }
-
 }

@@ -49,5 +49,4 @@ class LastRouteListener implements EventSubscriberInterface
             KernelEvents::REQUEST => array(array('onKernelRequest', 15)),
         );
     }
-
 }

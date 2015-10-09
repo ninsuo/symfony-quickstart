@@ -8,7 +8,6 @@ use AppBundle\Base\BaseController;
 
 class DefaultController extends BaseController
 {
-
     /**
      * @Route("/", name="home")
      * @Template()
@@ -17,5 +16,4 @@ class DefaultController extends BaseController
     {
         return array();
     }
-
 }

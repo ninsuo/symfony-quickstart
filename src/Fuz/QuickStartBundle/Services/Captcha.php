@@ -37,7 +37,7 @@ class Captcha
 
         $this->clearExpiredInformation($strategy);
 
-        $ip        = ip2long($request->getClientIp()) ? : ip2long('127.0.0.1');
+        $ip        = ip2long($request->getClientIp()) ?: ip2long('127.0.0.1');
         $sessionId = $this->session->getId();
 
         if ($this->validateCaptcha($request)) {
@@ -112,5 +112,4 @@ class Captcha
 
         return false;
     }
-
 }

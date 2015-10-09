@@ -7,7 +7,6 @@ use Fuz\QuickStartBundle\Entity\CaptchaSessionHit;
 
 class CaptchaSessionHitRepository extends EntityRepository
 {
-
     public function deleteExpired($strategy, \DateTime $expiry)
     {
         $query = $this->_em->createQuery("
@@ -68,5 +67,4 @@ class CaptchaSessionHitRepository extends EntityRepository
             $this->_em->flush($entity);
         }
     }
-
 }

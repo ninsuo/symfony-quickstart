@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class BaseController extends Controller
 {
-
     /**
      * Symfony's var_dump
      *
@@ -25,7 +24,7 @@ class BaseController extends Controller
      * This method comes from Flip's answer on Stackoverflow:
      * http://stackoverflow.com/a/17428869/731138
      *
-     * @param Form $form
+     * @param  Form  $form
      * @return array
      */
     protected function getErrorMessages(Form $form)
@@ -77,7 +76,7 @@ class BaseController extends Controller
      *
      * $('.error-container').html('');
      *
-     * @param Form $form
+     * @param  Form  $form
      * @return array
      * @see Symfony\Component\Form\Extension\DataCollector\FormDataExtractor::buildId
      * @see Fuz\QuickStartBundle\Resources\public\js\jquery.symfony2.js
@@ -110,13 +109,14 @@ class BaseController extends Controller
                 $normalizedErrors[$prefix][$key] = $error;
             }
         }
+
         return $normalizedErrors;
     }
 
     /**
      * This method sends user back to the last url he comes from.
      *
-     * @param Request $request
+     * @param  Request          $request
      * @return RedirectResponse
      */
     protected function goBack(Request $request)
@@ -124,6 +124,7 @@ class BaseController extends Controller
         if ($request->getSession()->has('previous_route')) {
             $route                      = $request->getSession()->get('previous_route');
             $route['params']['_locale'] = $request->getLocale();
+
             return $this->redirect($this->generateUrl($route['name'], $route['params']));
         }
 
@@ -159,5 +160,4 @@ class BaseController extends Controller
     {
         return $this->container->get('translator')->trans($property, $parameters);
     }
-
 }

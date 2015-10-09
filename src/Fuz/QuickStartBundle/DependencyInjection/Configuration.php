@@ -12,7 +12,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-
     /**
      * {@inheritdoc}
      */
@@ -59,15 +58,16 @@ class Configuration implements ConfigurationInterface
                                     ->end()
                                     ->arrayNode('methods')
                                         ->beforeNormalization()
-                                            ->ifTrue(function($v) { return $v === null; })
-                                            ->then(function($v) { return array(); })
+                                            ->ifTrue(function ($v) { return $v === null; })
+                                            ->then(function ($v) { return array(); })
                                         ->end()
                                         ->prototype('scalar')->end()
                                         ->defaultValue(array())
                                         ->validate()
-                                            ->ifTrue(function($methods) {
+                                            ->ifTrue(function ($methods) {
                                                 $allowed = array('HEAD', 'GET', 'POST', 'PUT', 'DELETE');
                                                 $diff = array_diff(array_map('strtoupper', $methods), $allowed);
+
                                                 return count($diff);
                                             })
                                             ->thenInvalid("Captcha configuration: unknown HTTP method: %s")
@@ -83,5 +83,4 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
-
 }

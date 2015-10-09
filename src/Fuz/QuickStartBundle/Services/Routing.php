@@ -7,7 +7,6 @@ use Symfony\Component\Routing\Router;
 
 class Routing
 {
-
     protected $router;
     protected $cache = array();
 
@@ -27,17 +26,17 @@ class Routing
         $routeParams = $this->router->match($pathInfo);
         $routeName   = $routeParams['_route'];
         if (substr($routeName, 0, 1) === '_') {
-            return null;
+            return;
         }
         unset($routeParams['_route']);
 
         $data = array(
             'name'   => $routeName,
-            'params' => $routeParams
+            'params' => $routeParams,
         );
 
         $this->cache[$hash] = $data;
+
         return $data;
     }
-
 }

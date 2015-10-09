@@ -7,7 +7,6 @@ use Fuz\QuickStartBundle\Entity\CaptchaSessionIp;
 
 class CaptchaSessionIpRepository extends EntityRepository
 {
-
     public function deleteExpired(\DateTime $expiry)
     {
         $query = $this->_em->createQuery("
@@ -15,7 +14,7 @@ class CaptchaSessionIpRepository extends EntityRepository
             WHERE csi.creationTm < :expiry_date
         ");
 
-        $params = array (
+        $params = array(
                 'expiry_date' => $expiry,
         );
 
@@ -24,13 +23,12 @@ class CaptchaSessionIpRepository extends EntityRepository
 
     public function record($ip, $sessionId)
     {
-        $entity = $this->findOneBy(array (
+        $entity = $this->findOneBy(array(
                 'ip' => $ip,
                 'sessionId' => $sessionId,
         ));
 
-        if (!$entity)
-        {
+        if (!$entity) {
             $new = new CaptchaSessionIp();
             $new->setIp($ip);
             $new->setSessionId($sessionId);
@@ -47,7 +45,7 @@ class CaptchaSessionIpRepository extends EntityRepository
             WHERE csi.ip = :ip
         ");
 
-        $params = array (
+        $params = array(
                 'ip' => $ip,
         );
 
@@ -58,5 +56,4 @@ class CaptchaSessionIpRepository extends EntityRepository
 
         return $count;
     }
-
 }

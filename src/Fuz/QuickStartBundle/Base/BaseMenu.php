@@ -19,12 +19,14 @@ class BaseMenu extends ContainerAware
         } else {
             $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
         }
+
         return $menu;
     }
 
     protected function addRoute(ItemInterface $menu, $name, $route, array $routeParams = array(), array $childParams = array(), $divider = false)
     {
         $uri = $this->container->get('router')->generate($route, $routeParams);
+
         return $this->addUri($menu, $name, $uri, $childParams, $divider);
     }
 
@@ -84,5 +86,4 @@ class BaseMenu extends ContainerAware
     {
         return $this->container->get('translator')->trans($property, $parameters);
     }
-
 }

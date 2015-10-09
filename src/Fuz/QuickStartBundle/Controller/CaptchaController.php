@@ -5,7 +5,6 @@ namespace Fuz\QuickStartBundle\Controller;
 use Fuz\QuickStartBundle\Base\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User is automatically redirected here by the CaptchaListener,
@@ -13,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CaptchaController extends BaseController
 {
-
     /**
      * @Route("/captcha/{key}", name="captcha")
      */
@@ -34,5 +32,4 @@ class CaptchaController extends BaseController
 
         return $this->captchaRequiredAction($key);
     }
-
 }

@@ -10,7 +10,6 @@ use Fuz\QuickStartBundle\Base\BaseController;
 
 class UserController extends BaseController
 {
-
     /**
      * Login failure action or login direct access
      *
@@ -35,6 +34,7 @@ class UserController extends BaseController
     public function logoutAction(Request $request)
     {
         $this->container->get('security.context')->setToken(null);
+
         return $this->goBack($request);
     }
 
@@ -47,6 +47,7 @@ class UserController extends BaseController
     public function connectAction(Request $request, $service)
     {
         $this->get('session')->set('referer', $request->headers->get('referer'));
+
         return $this->forward('HWIOAuthBundle:Connect:redirectToService', array('service' => $service));
     }
 
@@ -62,6 +63,7 @@ class UserController extends BaseController
         if (is_null($referer)) {
             return new RedirectResponse($this->generateUrl('home'));
         }
+
         return new RedirectResponse($referer);
     }
 
@@ -69,7 +71,7 @@ class UserController extends BaseController
      * User unsubscription confirmation
      *
      * @Route("/unsuscribe", name="unsuscribe")
-     * @param Request $request
+     * @param  Request                   $request
      * @return RedirectResponse|Response
      */
     public function unsuscribeAction(Request $request)
@@ -85,7 +87,7 @@ class UserController extends BaseController
                'label' => 'quickstart.unsuscribe.confirm',
                'attr'  => array(
                    'class' => 'btn btn-danger',
-               )
+               ),
            ))
            ->getForm()
         ;
@@ -97,8 +99,10 @@ class UserController extends BaseController
                 $em   = $this->get('doctrine.orm.entity_manager');
                 $em->remove($user);
                 $em->flush($user);
+
                 return $this->forward('FuzQuickStartBundle:User:logout');
             }
+
             return $this->goBack($request);
         }
 
@@ -106,5 +110,4 @@ class UserController extends BaseController
                'form' => $form->createView(),
         ));
     }
-
 }

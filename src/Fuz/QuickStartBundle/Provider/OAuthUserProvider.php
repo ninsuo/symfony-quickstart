@@ -10,7 +10,6 @@ use FOS\UserBundle\Model\UserInterface;
 
 class OAuthUserProvider extends BaseUserProvider
 {
-
     protected $userRepository;
     protected $userManager;
 
@@ -23,6 +22,7 @@ class OAuthUserProvider extends BaseUserProvider
     public function loadUserByUsername($username)
     {
         list($resourceOwner, $resourceOwnerId) = json_decode($username);
+
         return $this->userRepository->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
     }
 
@@ -45,11 +45,13 @@ class OAuthUserProvider extends BaseUserProvider
             $user->setSigninCount(1);
             $this->updateEmail($response, $user);
             $this->userManager->updateUser($user);
+
             return $this->loadUserByUsername($json);
         } else {
             $user->setSigninCount($user->getSigninCount() + 1);
             $this->updateEmail($response, $user);
             $this->userManager->updateUser($user);
+
             return $user;
         }
     }
@@ -70,6 +72,7 @@ class OAuthUserProvider extends BaseUserProvider
             default:
                 break;
         }
+
         return $name;
     }
 
@@ -85,5 +88,4 @@ class OAuthUserProvider extends BaseUserProvider
     {
         return $class === 'Fuz\\QuickStartBundle\\Entity\\User';
     }
-
 }
