@@ -2,7 +2,7 @@
 parameters:
 
     # General
-    site_url:           http://localhost/quickstart/web/
+    site_url:           http://127.0.0.1:8000
     site_brand:         QuickStart
     site_description:   quickstart.description
     site_default_title: quickstart.title
