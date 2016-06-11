@@ -61,3 +61,7 @@ parameters:
     nocaptcha_secret_key:            <your secret key>
     nocaptcha_sessions_per_ip_max:   20
     nocaptcha_sessions_per_ip_delay: 3600
+
+    # Website menus at the top
+    menu_left_enabled: true
+    menu_right_enabled: true

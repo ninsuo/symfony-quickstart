@@ -41,6 +41,8 @@ twig:
             facebook_enabled: %facebook_enabled%
             twitter_enabled: %twitter_enabled%
             supported_locales: %supported_locales%
+            menu_left: %menu_left_enabled%
+            menu_right: %menu_right_enabled%
 
 # Assetic Configuration
 assetic:

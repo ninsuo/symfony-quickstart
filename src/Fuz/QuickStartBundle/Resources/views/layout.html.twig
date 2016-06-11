@@ -5,18 +5,22 @@
 {% set oauth_enabled = fuz.google_enabled or fuz.facebook_enabled or fuz.twitter_enabled %}
 
 {% block left_menu %}
-    {% if is_granted('ROLE_USER') %}
-        {{ knp_menu_render('FuzQuickStartBundle:Builder:userLeftMenu') }}
-    {% else %}
-        {{ knp_menu_render('FuzQuickStartBundle:Builder:mainLeftMenu') }}
+    {% if fuz.menu_left %}
+        {% if is_granted('ROLE_USER') %}
+            {{ knp_menu_render('AppBundle:Builder:userLeftMenu') }}
+        {% else %}
+            {{ knp_menu_render('AppBundle:Builder:mainLeftMenu') }}
+        {% endif %}
     {% endif %}
 {% endblock %}
 
 {% block right_menu %}
-    {% if is_granted('ROLE_USER') %}
-        {{ knp_menu_render('FuzQuickStartBundle:Builder:userRightMenu') }}
-    {% else %}
-        {{ knp_menu_render('FuzQuickStartBundle:Builder:mainRightMenu') }}
+    {% if fuz.menu_right %}
+        {% if is_granted('ROLE_USER') %}
+            {{ knp_menu_render('AppBundle:Builder:userRightMenu') }}
+        {% else %}
+            {{ knp_menu_render('AppBundle:Builder:mainRightMenu') }}
+        {% endif %}
     {% endif %}
 {% endblock %}
 
