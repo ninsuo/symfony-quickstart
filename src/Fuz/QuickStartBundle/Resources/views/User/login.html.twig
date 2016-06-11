@@ -19,6 +19,7 @@
 {% endmacro %}
 
 {% if nb_oauth > 0 %}
+
     <fieldset>
         <legend>{{ 'quickstart.login.resource_owners'|trans }}</legend>
 
@@ -53,21 +54,30 @@
             <div class="clear">&nbsp;</div>
         </div>
     </fieldset>
+
+{% endif %}
+
+{% if nb_oauth > 0 and fuz.login_form %}
+
+    <br/>
+
 {% endif %}
 
 {# FOSUserBundle integration #}
-<br/>
+{% if fuz.login_form %}
 
-<div class="row" id="user">
+    <div class="row" id="user">
 
-    <div class="col-md-6">
-        {{ render(controller('FOSUserBundle:Security:login')) }}
+        <div class="col-md-6">
+            {{ render(controller('FOSUserBundle:Security:login')) }}
+        </div>
+
+        <div class="col-md-6">
+            {{ render(controller('FOSUserBundle:Registration:register', {'parent': true})) }}
+        </div>
+
+        <div class="clear">&nbsp;</div>
+
     </div>
 
-    <div class="col-md-6">
-        {{ render(controller('FOSUserBundle:Registration:register', {'parent': true})) }}
-    </div>
-
-    <div class="clear">&nbsp;</div>
-
-</div>
+{% endif %}

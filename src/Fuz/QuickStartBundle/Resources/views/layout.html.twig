@@ -21,55 +21,73 @@
 {% endblock %}
 
 {% block login %}
-    <ul class="nav navbar-nav navbar-right">
-        {% if is_granted('ROLE_USER') %}
-            {% block logged_in %}
-               <p class="navbar-text">{{ 'quickstart.login.as' | trans }} {{ macros.me() }}</p>
-               <li><a href="{{ path('logout') }}">{{ 'quickstart.logout.title' | trans }}</a></li>
-            {% endblock %}
-        {% else %}
-           {% block logged_out %}
-               <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'quickstart.login.title' | trans }} <span class="caret"></span></a>
-                   <ul class="dropdown-menu" role="menu">
-                       {% block app_login %}<li><a href="{{ path('login') }}"><img class="oauth-image" src="{{ asset('apple-touch-icon.png') }}" alt=""/> {{ fuz.site_brand }}</a></li>{% endblock %}
-                       {% if oauth_enabled %}
-                           <li class="divider"></li>
-                       {% endif %}
-                       {% if oauth_enabled %}
-                            {% block google_login %}
-                                {% if fuz.google_enabled %}
-                                     <li><a href="{{ hwi_oauth_login_url('google') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/google-small.png') }}" alt=""/> Google</a></li>
-                                {% endif %}
-                            {% endblock %}
-                            {% block facebook_login %}
-                                {% if fuz.facebook_enabled %}
-                                    <li><a href="{{ hwi_oauth_login_url('facebook') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/facebook-small.png') }}" alt=""/> Facebook</a></li>
-                                {% endif %}
-                            {% endblock %}
-                            {% block twitter_login %}
-                                {% if fuz.twitter_enabled %}
-                                    <li><a href="{{ hwi_oauth_login_url('twitter') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/twitter-small.png') }}" alt=""/> Twitter</a></li>
-                                {% endif %}
-                            {% endblock %}
-                       {% endif %}
-                   </ul>
-               </li>
-            {% endblock %}
-        {% endif %}
-    </ul>
+    {% if fuz.login_form or oauth_enabled %}
+        <ul class="nav navbar-nav navbar-right">
+            {% if is_granted('ROLE_USER') %}
+                {% block logged_in %}
+                   <p class="navbar-text">{{ 'quickstart.login.as' | trans }} {{ macros.me() }}</p>
+                   <li><a href="{{ path('logout') }}">{{ 'quickstart.logout.title' | trans }}</a></li>
+                {% endblock %}
+            {% else %}
+               {% block logged_out %}
+                   <li class="dropdown">
+                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'quickstart.login.title' | trans }} <span class="caret"></span></a>
+                       <ul class="dropdown-menu" role="menu">
+                           {% block app_login %}
+                               {% if fuz.login_form %}
+                                   <li>
+                                       <a href="{{ path('login') }}">
+                                           <img class="oauth-image" src="{{ asset('apple-touch-icon.png') }}" alt=""/> {{ fuz.site_brand }}
+                                       </a>
+                                   </li>
+                               {% endif %}
+                           {% endblock %}
+                           {% if fuz.login_form and oauth_enabled %}
+                               <li class="divider"></li>
+                           {% endif %}
+                           {% if oauth_enabled %}
+                                {% block google_login %}
+                                    {% if fuz.google_enabled %}
+                                         <li><a href="{{ hwi_oauth_login_url('google') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/google-small.png') }}" alt=""/> Google</a></li>
+                                    {% endif %}
+                                {% endblock %}
+                                {% block facebook_login %}
+                                    {% if fuz.facebook_enabled %}
+                                        <li><a href="{{ hwi_oauth_login_url('facebook') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/facebook-small.png') }}" alt=""/> Facebook</a></li>
+                                    {% endif %}
+                                {% endblock %}
+                                {% block twitter_login %}
+                                    {% if fuz.twitter_enabled %}
+                                        <li><a href="{{ hwi_oauth_login_url('twitter') }}"><img class="oauth-image" src="{{ asset('bundles/fuzquickstart/img/oauth/twitter-small.png') }}" alt=""/> Twitter</a></li>
+                                    {% endif %}
+                                {% endblock %}
+                           {% endif %}
+                       </ul>
+                   </li>
+                {% endblock %}
+            {% endif %}
+        </ul>
+    {% endif %}
 {% endblock %}
 
 {% block translations %}
-    <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'quickstart.locale.title' | trans }} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-                {% block supported_locales %}
-                    {% block locale_en %}<li><a href="{{ path('reload', {'_locale': 'en'}) }}"><img class="lang-image" src="{{ asset('bundles/fuzquickstart/img/countries/United-Kingdom.png') }}" alt=""/> English</a></li>{% endblock %}
-                    {% block locale_fr %}<li><a href="{{ path('reload', {'_locale': 'fr'}) }}"><img class="lang-image" src="{{ asset('bundles/fuzquickstart/img/countries/France.png') }}" alt=""/> Fran&ccedil;ais</a></li>{% endblock %}
-                {% endblock %}
-            </ul>
-        </li>
-    </ul>
+    {% if fuz.supported_locales|length %}
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'quickstart.locale.title' | trans }} <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    {% block supported_locales %}
+                        {% for locale, data in fuz.supported_locales %}
+                        <li>
+                            <a href="{{ path('reload', {'_locale': locale}) }}">
+                                <img class="lang-image" src="{{ asset('bundles/fuzquickstart/img/countries/' ~ data.flag ~ '.png') }}" alt=""/>
+                                {{ data.menu }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    {% endblock %}
+                </ul>
+            </li>
+        </ul>
+    {% endif %}
 {% endblock %}
