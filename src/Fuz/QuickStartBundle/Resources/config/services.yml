@@ -4,7 +4,7 @@ parameters:
     quickstart.locale.listener.class: Fuz\QuickStartBundle\EventListener\LocaleListener
     quickstart.last_route.listener.class: Fuz\QuickStartBundle\EventListener\LastRouteListener
     quickstart.fos_user_bundle.listener.class: Fuz\QuickStartBundle\EventListener\FOSUserBundleListener
-    quickstart.hwi_oauth_bundle.listener.class: Fuz\QuickStartBundle\EventListener\HWIOAuthBundleListener
+    quickstart.toggle.listener.class: Fuz\QuickStartBundle\EventListener\ToggleListener
     quickstart.routing.class: Fuz\QuickStartBundle\Services\Routing
     quickstart.captcha.class: Fuz\QuickStartBundle\Services\Captcha
     quickstart.captcha.controller.class: Fuz\QuickStartBundle\Controller\CaptchaController
@@ -37,9 +37,10 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    quickstart.hwi_oauth_bundle.listener:
-        class: %quickstart.hwi_oauth_bundle.listener.class%
-        arguments: [@quickstart.routing, %google_enabled%, %facebook_enabled%, %twitter_enabled%]
+    quickstart.toggle.listener:
+        class: %quickstart.toggle.listener.class%
+        calls:
+            - [setContainer, ["@service_container"]]
         tags:
             - { name: kernel.event_subscriber }
 

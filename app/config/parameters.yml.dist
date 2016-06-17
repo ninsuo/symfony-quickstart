@@ -2,7 +2,7 @@
 parameters:
 
     # General
-    site_url:           http://localhost/quickstart/web/
+    site_url:           http://127.0.0.1:8000
     site_brand:         QuickStart
     site_description:   quickstart.description
     site_default_title: quickstart.title
@@ -27,10 +27,19 @@ parameters:
     mailer_sender_email: auto@fuz.org
     mailer_sender_name:  fuz.org
 
-    locale:            en
+    # Choose flag names in: src/Fuz/QuickStartBundle/Resources/public/img/countries
+    # Implement translations in: src/AppBundle/translations/messages.XX.xlf
+    # Do not forget to add your new locales in config.yml, below jms_i18n_routing
+    locale: en
+    supported_locales:
+        en: {flag: United-Kingdom, menu: English}
+        fr: {flag: France, menu: Français}
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    # On-site registration (standard login form)
+    login_form: false
 
     # Google Login: https://console.developers.google.com/project
     google_enabled:   true
@@ -52,3 +61,7 @@ parameters:
     nocaptcha_secret_key:            <your secret key>
     nocaptcha_sessions_per_ip_max:   20
     nocaptcha_sessions_per_ip_delay: 3600
+
+    # Website menus at the top
+    menu_left_enabled: true
+    menu_right_enabled: true

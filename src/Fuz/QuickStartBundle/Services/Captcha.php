@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * quickstart.captcha
+ */
 class Captcha
 {
     const CHECK_URL  = 'https://www.google.com/recaptcha/api/siteverify';

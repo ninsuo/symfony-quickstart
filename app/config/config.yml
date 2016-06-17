@@ -35,10 +35,14 @@ twig:
             site_brand: %site_brand%
             site_description: %site_description%
             site_default_title: %site_default_title%
+            login_form: %login_form%
             nocaptcha_site_key: %nocaptcha_site_key%
             google_enabled: %google_enabled%
             facebook_enabled: %facebook_enabled%
             twitter_enabled: %twitter_enabled%
+            supported_locales: %supported_locales%
+            menu_left: %menu_left_enabled%
+            menu_right: %menu_right_enabled%
 
 # Assetic Configuration
 assetic:
@@ -80,7 +84,7 @@ swiftmailer:
 # BootstrapBundle Configuration
 braincrafted_bootstrap:
     jquery_path: %kernel.root_dir%/../src/Fuz/QuickStartBundle/Resources/public/js/jquery-2.1.1.min.js
-    less_filter: lessphp
+    css_preprocessor: lessphp
     auto_configure:
       knp_menu: false
 
@@ -100,7 +104,7 @@ hwi_oauth:
             type: google
             client_id: %google_client_id%
             client_secret: %google_secret%
-            scope: "profile"
+            scope: "email"
             options:
                 display: page
                 access_type: online
@@ -110,7 +114,7 @@ hwi_oauth:
             type: facebook
             client_id: %facebook_client_id%
             client_secret: %facebook_secret%
-            scope: "public_profile"
+            scope: "email"
             options:
                 display: page
         twitter:

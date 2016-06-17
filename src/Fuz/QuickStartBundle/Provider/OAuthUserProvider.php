@@ -6,7 +6,6 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseUserProvi
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
-use FOS\UserBundle\Model\UserInterface;
 
 class OAuthUserProvider extends BaseUserProvider
 {
@@ -31,6 +30,7 @@ class OAuthUserProvider extends BaseUserProvider
         $resourceOwner   = $response->getResourceOwner()->getName();
         $resourceOwnerId = $response->getUsername();
         $name            = $this->getNameToDisplay($resourceOwner, $response);
+        $contact         = $response->getEmail();
         $json            = json_encode(array($resourceOwner, $resourceOwnerId));
 
         $user = $this->userRepository->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
@@ -39,17 +39,18 @@ class OAuthUserProvider extends BaseUserProvider
             $user = $this->userManager->createUser();
             $user->setUsername($json);
             $user->setEnabled(true);
-            $user->setNickname($name);
             $user->setResourceOwner($resourceOwner);
             $user->setResourceOwnerId($resourceOwnerId);
+            $user->setNickname($name);
+            $user->setContact($contact);
             $user->setSigninCount(1);
-            $this->updateEmail($response, $user);
             $this->userManager->updateUser($user);
 
             return $this->loadUserByUsername($json);
         } else {
+            $user->setNickname($name);
+            $user->setContact($contact);
             $user->setSigninCount($user->getSigninCount() + 1);
-            $this->updateEmail($response, $user);
             $this->userManager->updateUser($user);
 
             return $user;
@@ -74,14 +75,6 @@ class OAuthUserProvider extends BaseUserProvider
         }
 
         return $name;
-    }
-
-    public function updateEmail(UserResponseInterface $response, UserInterface $user)
-    {
-        $email = $response->getEmail();
-        if ($email && $email !== $user->getEmail() && !$this->userManager->findUserBy(array('email' => $email))) {
-            $user->setEmail($email);
-        }
     }
 
     public function supportsClass($class)

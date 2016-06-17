@@ -7,32 +7,30 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Fuz\QuickStartBundle\Services\Routing;
+use Fuz\QuickStartBundle\Base\BaseService;
 
-class HWIOAuthBundleListener implements EventSubscriberInterface
+/**
+ * This class throws 404 exceptions when a requested
+ * service has been disabled in application's
+ * parameters.
+ */
+class ToggleListener extends BaseService implements EventSubscriberInterface
 {
-    protected $routing;
-    protected $services;
-
-    public function __construct(Routing $routing, $isGoogleEnabled, $isFacebookEnabled, $isTwitterEnabled)
-    {
-        $this->routing              = $routing;
-        $this->services['google']   = $isGoogleEnabled;
-        $this->services['facebook'] = $isFacebookEnabled;
-        $this->services['twitter']  = $isTwitterEnabled;
-    }
-
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
 
         try {
-            $currentRoute = $this->routing->getCurrentRoute($request);
+            $currentRoute = $this->get('quickstart.routing')->getCurrentRoute($request);
         } catch (ResourceNotFoundException $ex) {
             return;
         }
         if (is_null($currentRoute)) {
             return;
+        }
+
+        if (false !== strpos($currentRoute['name'], 'fos_') && !$this->getParameter('login_form')) {
+            throw new NotFoundHttpException();
         }
 
         if ('connect' === $currentRoute['name'] && isset($currentRoute['params']['service'])) {
@@ -44,9 +42,9 @@ class HWIOAuthBundleListener implements EventSubscriberInterface
         }
     }
 
-    public function checkService($service)
+    public function checkService($resourceOwner)
     {
-        if (isset($this->services[$service]) && !$this->services[$service]) {
+        if (!$this->getParameter("{$resourceOwner}_enabled")) {
             throw new NotFoundHttpException();
         }
     }

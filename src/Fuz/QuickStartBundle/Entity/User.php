@@ -42,6 +42,13 @@ class User extends BaseUser implements EquatableInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="contact", type="string", length=255, nullable=true)
+     */
+    protected $contact;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="resource_owner", type="string", length=16)
      */
     protected $resourceOwner;
@@ -82,7 +89,7 @@ class User extends BaseUser implements EquatableInterface
     /**
      * Set nickname
      *
-     * @param  string $nickname
+     * @param string $nickname
      * @return User
      */
     public function setNickname($nickname)
@@ -100,6 +107,29 @@ class User extends BaseUser implements EquatableInterface
     public function getNickname()
     {
         return $this->nickname;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param string $contact
+     * @return User
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return string
+     */
+    public function getContact()
+    {
+        return $this->contact;
     }
 
     /**

@@ -3,35 +3,9 @@
 namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Fuz\QuickStartBundle\Base\BaseMenu;
+use Fuz\QuickStartBundle\Menu\Builder as DemoBuilder;
 
-class Builder extends BaseMenu
+class Builder extends DemoBuilder
 {
-    public function mainLeftMenu(FactoryInterface $factory, array $options)
-    {
-        $menu = $this->createMenu($factory, parent::POSITION_LEFT);
-
-        return $menu;
-    }
-
-    public function userLeftMenu(FactoryInterface $factory, array $options)
-    {
-        $menu = $this->createMenu($factory, parent::POSITION_LEFT);
-
-        return $menu;
-    }
-
-    public function mainRightMenu(FactoryInterface $factory, array $options)
-    {
-        $menu = $this->createMenu($factory, parent::POSITION_RIGHT);
-
-        return $menu;
-    }
-
-    public function userRightMenu(FactoryInterface $factory, array $options)
-    {
-        $menu = $this->createMenu($factory, parent::POSITION_RIGHT);
-
-        return $menu;
-    }
+    // overwrite what you want from demo builder
 }

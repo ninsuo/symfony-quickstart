@@ -5,6 +5,9 @@ namespace Fuz\QuickStartBundle\Services;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
 
+/**
+ * quickstart.routing
+ */
 class Routing
 {
     protected $router;
