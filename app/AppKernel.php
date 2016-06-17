@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Fuz\QuickStartBundle\FuzQuickStartBundle(),
+            new EasyCorp\Bundle\EasySecurityBundle\EasySecurityBundle(),
             new AppBundle\AppBundle(),
         );
 
