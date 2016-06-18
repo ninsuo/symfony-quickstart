@@ -2,11 +2,11 @@
 
 namespace Fuz\QuickStartBundle\EventListener;
 
+use Fuz\QuickStartBundle\Services\Routing;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use Fuz\QuickStartBundle\Services\Routing;
 
 class LastRouteListener implements EventSubscriberInterface
 {

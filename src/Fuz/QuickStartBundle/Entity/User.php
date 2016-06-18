@@ -2,11 +2,11 @@
 
 namespace Fuz\QuickStartBundle\Entity;
 
-use Fuz\QuickStartBundle\Tools\Math;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Fuz\QuickStartBundle\Tools\Math;
 use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User.

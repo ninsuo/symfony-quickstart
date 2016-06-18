@@ -2,8 +2,8 @@
 
 namespace AppBundle\Menu;
 
+use Fuz\QuickStartBundle\Base\BaseMenu;
 use Knp\Menu\FactoryInterface;
-use Fuz\QuickStartBundle\Menu\Builder as DemoBuilder;
 
 class Builder extends DemoBuilder
 {

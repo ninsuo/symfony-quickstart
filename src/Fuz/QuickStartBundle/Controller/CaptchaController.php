@@ -3,8 +3,8 @@
 namespace Fuz\QuickStartBundle\Controller;
 
 use Fuz\QuickStartBundle\Base\BaseController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * User is automatically redirected here by the CaptchaListener,

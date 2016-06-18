@@ -2,8 +2,8 @@
 
 namespace Fuz\QuickStartBundle\Menu;
 
-use Knp\Menu\FactoryInterface;
 use Fuz\QuickStartBundle\Base\BaseMenu;
+use Knp\Menu\FactoryInterface;
 
 class Builder extends BaseMenu
 {
