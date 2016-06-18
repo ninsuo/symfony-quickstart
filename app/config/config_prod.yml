@@ -1,5 +1,5 @@
 imports:
-    - { resource: config.yml }
+    - { resource: "config.yml" }
 
 #framework:
 #    validation:
@@ -14,12 +14,12 @@ imports:
 monolog:
     handlers:
         main:
-            type:         fingers_crossed
-            action_level: error
-            handler:      nested
+            type:         "fingers_crossed"
+            action_level: "error"
+            handler:      "nested"
         nested:
-            type:  stream
+            type:  "stream"
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
+            level: "debug"
         console:
-            type:  console
+            type:  "console"

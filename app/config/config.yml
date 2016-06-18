@@ -29,20 +29,21 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            - BraincraftedBootstrapBundle:Form:bootstrap.html.twig
+            - "BraincraftedBootstrapBundle:Form:bootstrap.html.twig"
     globals:
         fuz:
-            site_brand: %site_brand%
-            site_description: %site_description%
-            site_default_title: %site_default_title%
-            login_form: %login_form%
-            nocaptcha_site_key: %nocaptcha_site_key%
-            google_enabled: %google_enabled%
-            facebook_enabled: %facebook_enabled%
-            twitter_enabled: %twitter_enabled%
-            supported_locales: %supported_locales%
-            menu_left: %menu_left_enabled%
-            menu_right: %menu_right_enabled%
+            site_brand: "%site_brand%"
+            site_description: "%site_description%"
+            site_default_title: "%site_default_title%"
+            login_form: "%login_form%"
+            nocaptcha_site_key: "%nocaptcha_site_key%"
+            google_enabled: "%google_enabled%"
+            facebook_enabled: "%facebook_enabled%"
+            twitter_enabled: "%twitter_enabled%"
+            supported_locales: "%supported_locales%"
+            menu_left: "%menu_left_enabled%"
+            menu_right: "%menu_right_enabled%"
+            nocaptcha_site_key: "%nocaptcha_site_key%"
 
 # Assetic Configuration
 assetic:
@@ -51,8 +52,8 @@ assetic:
     bundles:        [ ]
     filters:
        lessphp:
-            file: %kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php
-            apply_to: "\.less$"
+            file: "%kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php"
+            apply_to: '.less$'
        cssrewrite: ~
 
 # Doctrine Configuration
@@ -79,78 +80,78 @@ swiftmailer:
     username:   "%mailer_user%"
     password:   "%mailer_password%"
     spool:      { type: memory }
-    auth_mode:  login
+    auth_mode:  "login"
 
 # BootstrapBundle Configuration
 braincrafted_bootstrap:
-    jquery_path: %kernel.root_dir%/../src/Fuz/QuickStartBundle/Resources/public/js/jquery-2.1.1.min.js
-    css_preprocessor: lessphp
+    jquery_path: "%kernel.root_dir%/../src/Fuz/QuickStartBundle/Resources/public/js/jquery-2.1.1.min.js"
+    css_preprocessor: "lessphp"
     auto_configure:
       knp_menu: false
 
 # cache cleaning
 accelerator_cache:
-    host: %site_url%
-    web_dir: %kernel.root_dir%/../web
-    mode: curl
+    host: "%site_url%"
+    web_dir: "%kernel.root_dir%/../web"
+    mode: "curl"
 
 # HWIOAuthBundle Configuration
 hwi_oauth:
-    firewall_name: main
+    firewall_name: "main"
     connect:
         confirmation: false
     resource_owners:
         google:
-            type: google
-            client_id: %google_client_id%
-            client_secret: %google_secret%
+            type: "google"
+            client_id: "%google_client_id%"
+            client_secret: "%google_secret%"
             scope: "email"
             options:
-                display: page
-                access_type: online
-                approval_prompt: force
-                login_hint: email address
+                display: "page"
+                access_type: "online"
+                approval_prompt: "force"
+                login_hint: "email address"
         facebook:
-            type: facebook
-            client_id: %facebook_client_id%
-            client_secret: %facebook_secret%
+            type: "facebook"
+            client_id: "%facebook_client_id%"
+            client_secret: "%facebook_secret%"
             scope: "email"
             options:
-                display: page
+                display: "page"
         twitter:
-            type: twitter
-            client_id: %twitter_client_id%
-            client_secret: %twitter_secret%
+            type: "twitter"
+            client_id: "%twitter_client_id%"
+            client_secret: "%twitter_secret%"
             scope: ""
 
 # FOSUserBundle Configuration
 fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: Fuz\QuickStartBundle\Entity\User
+    db_driver: "orm"
+    firewall_name: "main"
+    user_class: 'Fuz\QuickStartBundle\Entity\User'
     from_email:
-      address: %mailer_sender_email%
-      sender_name: %mailer_sender_name%
+      address: "%mailer_sender_email%"
+      sender_name: "%mailer_sender_name%"
     registration:
       confirmation:
           enabled: true
 
 # Supported Website Languages
 jms_i18n_routing:
-    default_locale: en
-    locales: [en, fr]
-    strategy: prefix_except_default
+    default_locale: "en"
+    locales: ["en", "fr"]
+    strategy: "prefix_except_default"
 
 # KnpMenu template configuration
 knp_menu:
     twig:
-        template: FuzQuickStartBundle::knp_menu.html.twig
+        template: "FuzQuickStartBundle::knp_menu.html.twig"
 
 # QuickStart custom tools configuration
 fuz_quick_start:
     no_captcha:
-        site_key: %nocaptcha_site_key%
-        secret_key: %nocaptcha_secret_key%
-        sessions_per_ip: { max: %nocaptcha_sessions_per_ip_max%, delay: %nocaptcha_sessions_per_ip_delay% }
+        site_key: "%nocaptcha_site_key%"
+        secret_key: "%nocaptcha_secret_key%"
+        sessions_per_ip: { max: "%nocaptcha_sessions_per_ip_max%", delay: "%nocaptcha_sessions_per_ip_delay%" }
         strategies:
-            fos_user_registration_register: { hits: 1, delay: 3600, reset: false, methods: [POST] }
+            fos_user_registration_register: { hits: 1, delay: 3600, reset: false, methods: ["POST"] }

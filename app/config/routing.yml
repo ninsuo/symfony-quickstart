@@ -4,5 +4,5 @@ fuz_quickstart:
 
 app:
     resource: "@AppBundle/Controller/"
-    type:     annotation
+    type:     "annotation"
     prefix:   /

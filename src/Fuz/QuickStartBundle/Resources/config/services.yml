@@ -13,27 +13,38 @@ parameters:
 services:
 
     quickstart.oauth_user_provider:
-        class: %quickstart.oauth_user_provider.class%
-        arguments: [@doctrine.orm.entity_manager, @fos_user.user_manager]
+        class: '%quickstart.oauth_user_provider.class%'
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@fos_user.user_manager'
 
     hwi_oauth.account.connector:
-        class: %hwi_oauth.account.connector.class%
+        class: '%hwi_oauth.account.connector.class%'
 
     quickstart.locale.listener:
-        class: %quickstart.locale.listener.class%
-        arguments: ["%kernel.default_locale%"]
+        class: '%quickstart.locale.listener.class%'
+        arguments:
+            - '%kernel.default_locale%'
         tags:
             - { name: kernel.event_subscriber }
 
     quickstart.last_route.listener:
-        class: %quickstart.last_route.listener.class%
-        arguments: [@quickstart.routing]
+        class: '%quickstart.last_route.listener.class%'
+        arguments:
+            - '@quickstart.routing'
         tags:
             - { name: kernel.event_subscriber }
 
     quickstart.fos_user_bundle.listener:
-        class: %quickstart.fos_user_bundle.listener.class%
-        arguments: ['@fos_user.mailer', '@fos_user.util.token_generator', '@router', '@session', '@security.token_storage', @fos_user.user_manager, @translator]
+        class: '%quickstart.fos_user_bundle.listener.class%'
+        arguments:
+            - '@fos_user.mailer'
+            - '@fos_user.util.token_generator'
+            - '@router'
+            - '@session'
+            - '@security.token_storage'
+            - '@fos_user.user_manager'
+            - '@translator'
         tags:
             - { name: kernel.event_subscriber }
 
@@ -45,22 +56,31 @@ services:
             - { name: kernel.event_subscriber }
 
     quickstart.routing:
-         class: %quickstart.routing.class%
-         arguments: [@router]
+        class: '%quickstart.routing.class%'
+        arguments:
+            - '@router'
 
     quickstart.captcha:
-         class: %quickstart.captcha.class%
-         arguments: [@logger, @session, @doctrine.orm.entity_manager, %no_captcha%]
-         tags:
-             - { name: monolog.logger, channel: services.captcha }
+        class: '%quickstart.captcha.class%'
+        arguments:
+            - '@logger'
+            - '@session'
+            - '@doctrine.orm.entity_manager'
+            - '%no_captcha%'
+        tags:
+            - { name: monolog.logger, channel: services.captcha }
 
     quickstart.captcha.controller:
-        class: %quickstart.captcha.controller.class%
+        class: '%quickstart.captcha.controller.class%'
         calls:
-            - [setContainer, ["@service_container"]]
+            - [setContainer, ['@service_container']]
 
     quickstart.captcha.listener:
-        class: %quickstart.captcha.listener.class%
-        arguments: [@router, @quickstart.captcha, @quickstart.captcha.controller, %no_captcha%]
+        class: '%quickstart.captcha.listener.class%'
+        arguments:
+            - '@router'
+            - '@quickstart.captcha'
+            - '@quickstart.captcha.controller'
+            - '%no_captcha%'
         tags:
             - { name: kernel.event_subscriber }
