@@ -5,7 +5,7 @@ namespace Fuz\QuickStartBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CaptchaIpLimit
+ * CaptchaIpLimit.
  *
  * @ORM\Entity(repositoryClass="Fuz\QuickStartBundle\Repository\CaptchaIpLimitRepository")
  * @ORM\Table(name="captcha_ip_limit")

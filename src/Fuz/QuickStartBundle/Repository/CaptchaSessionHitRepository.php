@@ -17,7 +17,7 @@ class CaptchaSessionHitRepository extends EntityRepository
 
         $params = array(
             'strategy' => $strategy,
-            'expiry'   => $expiry,
+            'expiry' => $expiry,
         );
 
         $query->execute($params);
@@ -27,7 +27,7 @@ class CaptchaSessionHitRepository extends EntityRepository
     {
         $entity = $this->findOneBy(array(
             'sessionId' => $sessionId,
-            'strategy'  => $strategy,
+            'strategy' => $strategy,
         ));
 
         if (!$entity) {
@@ -47,7 +47,7 @@ class CaptchaSessionHitRepository extends EntityRepository
     public function getHits($sessionId, $strategy)
     {
         $entity = $this->findOneBy(array(
-            'strategy'  => $strategy,
+            'strategy' => $strategy,
             'sessionId' => $sessionId,
         ));
 
@@ -58,7 +58,7 @@ class CaptchaSessionHitRepository extends EntityRepository
     {
         $entity = $this->findOneBy(array(
             'sessionId' => $sessionId,
-            'strategy'  => $strategy,
+            'strategy' => $strategy,
         ));
 
         if ($entity) {

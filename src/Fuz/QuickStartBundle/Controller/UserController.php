@@ -11,7 +11,7 @@ use Fuz\QuickStartBundle\Base\BaseController;
 class UserController extends BaseController
 {
     /**
-     * Login failure action or login direct access
+     * Login failure action or login direct access.
      *
      * @Route("/login", name="login")
      * @Method({"GET"})
@@ -26,7 +26,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Logout action
+     * Logout action.
      *
      * @Route("/logout", name="logout")
      * @Method({"GET"})
@@ -39,7 +39,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Login action
+     * Login action.
      *
      * @Route("/connect/{service}", name="connect")
      * @Method({"GET"})
@@ -52,7 +52,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Login success action
+     * Login success action.
      *
      * @Route("/welcome", name="welcome")
      * @Method({"GET"})
@@ -68,10 +68,12 @@ class UserController extends BaseController
     }
 
     /**
-     * User unsubscription confirmation
+     * User unsubscription confirmation.
      *
      * @Route("/unsuscribe", name="unsuscribe")
-     * @param  Request                   $request
+     *
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function unsuscribeAction(Request $request)
@@ -85,7 +87,7 @@ class UserController extends BaseController
            ->createFormBuilder()
            ->add('submit', 'submit', array(
                'label' => 'quickstart.unsuscribe.confirm',
-               'attr'  => array(
+               'attr' => array(
                    'class' => 'btn btn-danger',
                ),
            ))
@@ -96,7 +98,7 @@ class UserController extends BaseController
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $user = $this->getUser();
-                $em   = $this->get('doctrine.orm.entity_manager');
+                $em = $this->get('doctrine.orm.entity_manager');
                 $em->remove($user);
                 $em->flush($user);
 
@@ -106,7 +108,7 @@ class UserController extends BaseController
             return $this->goBack($request);
         }
 
-        return $this->render("FuzQuickStartBundle:User:unsuscribe.html.twig", array(
+        return $this->render('FuzQuickStartBundle:User:unsuscribe.html.twig', array(
                'form' => $form->createView(),
         ));
     }

@@ -27,14 +27,14 @@ class Routing
         }
 
         $routeParams = $this->router->match($pathInfo);
-        $routeName   = $routeParams['_route'];
+        $routeName = $routeParams['_route'];
         if (substr($routeName, 0, 1) === '_') {
             return;
         }
         unset($routeParams['_route']);
 
         $data = array(
-            'name'   => $routeName,
+            'name' => $routeName,
             'params' => $routeParams,
         );
 

@@ -10,7 +10,7 @@ use Fuz\QuickStartBundle\Base\BaseController;
 class ReloadController extends BaseController
 {
     /**
-     * Get back to the previous route
+     * Get back to the previous route.
      *
      * @Route("/reload", name="reload")
      * @Method({"GET"})

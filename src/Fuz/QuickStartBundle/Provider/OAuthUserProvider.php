@@ -15,7 +15,7 @@ class OAuthUserProvider extends BaseUserProvider
     public function __construct(EntityManagerInterface $em, UserManagerInterface $userManager)
     {
         $this->userRepository = $em->getRepository('FuzQuickStartBundle:User');
-        $this->userManager    = $userManager;
+        $this->userManager = $userManager;
     }
 
     public function loadUserByUsername($username)
@@ -27,12 +27,11 @@ class OAuthUserProvider extends BaseUserProvider
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $resourceOwner   = $response->getResourceOwner()->getName();
+        $resourceOwner = $response->getResourceOwner()->getName();
         $resourceOwnerId = $response->getUsername();
-        $name            = $this->getNameToDisplay($resourceOwner, $response);
-        $contact         = $response->getEmail();
-        $json            = json_encode(array($resourceOwner, $resourceOwnerId));
-
+        $contact = $response->getEmail();
+        $name = $this->getNameToDisplay($resourceOwner, $response);
+        $json = json_encode(array($resourceOwner, $resourceOwnerId));
         $user = $this->userRepository->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
 
         if (is_null($user)) {

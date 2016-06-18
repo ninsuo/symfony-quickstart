@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
- * User
+ * User.
  *
  * @ORM\Table(
  *      name="user",
@@ -21,10 +21,10 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  */
 class User extends BaseUser implements EquatableInterface
 {
-    const DEFAULT_RESOURCE_OWNER = "app";
+    const DEFAULT_RESOURCE_OWNER = 'app';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -61,7 +61,7 @@ class User extends BaseUser implements EquatableInterface
     protected $resourceOwnerId;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="signin_count", type="integer")
      */
@@ -70,16 +70,16 @@ class User extends BaseUser implements EquatableInterface
     public function __construct()
     {
         parent::__construct();
-        $this->email           = Math::rand();
-        $this->password        = '*';
-        $this->resourceOwner   = static::DEFAULT_RESOURCE_OWNER;
+        $this->email = Math::rand();
+        $this->password = '*';
+        $this->resourceOwner = static::DEFAULT_RESOURCE_OWNER;
         $this->resourceOwnerId = Math::rand();
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -87,9 +87,10 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Set nickname
+     * Set nickname.
      *
      * @param string $nickname
+     *
      * @return User
      */
     public function setNickname($nickname)
@@ -100,7 +101,7 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Get nickname
+     * Get nickname.
      *
      * @return string
      */
@@ -135,7 +136,8 @@ class User extends BaseUser implements EquatableInterface
     /**
      * Set resourceOwner
      *
-     * @param  string $resourceOwner
+     * @param string $resourceOwner
+     *
      * @return User
      */
     public function setResourceOwner($resourceOwner)
@@ -146,7 +148,7 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Get resourceOwner
+     * Get resourceOwner.
      *
      * @return string
      */
@@ -156,9 +158,10 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Set resourceOwnerId
+     * Set resourceOwnerId.
      *
-     * @param  string $resourceOwnerId
+     * @param string $resourceOwnerId
+     *
      * @return User
      */
     public function setResourceOwnerId($resourceOwnerId)
@@ -169,7 +172,7 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Get resourceOwnerId
+     * Get resourceOwnerId.
      *
      * @return string
      */
@@ -179,9 +182,10 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Set signinCount
+     * Set signinCount.
      *
-     * @param  integer $signinCount
+     * @param int $signinCount
+     *
      * @return User
      */
     public function setSigninCount($signinCount)
@@ -192,9 +196,9 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Get signinCount
+     * Get signinCount.
      *
-     * @return integer
+     * @return int
      */
     public function getSigninCount()
     {
@@ -202,7 +206,7 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isEqualTo(UserInterface $user)
     {

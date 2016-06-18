@@ -6,7 +6,7 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files
+ * This is the class that validates and merges configuration from your app/config files.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
@@ -18,17 +18,17 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode    = $treeBuilder->root('fuz_quick_start');
+        $rootNode = $treeBuilder->root('fuz_quick_start');
 
         $rootNode
            ->children()
                 ->arrayNode('no_captcha')
                     ->isRequired()
                     ->children()
-                        ->scalarNode("site_key")
+                        ->scalarNode('site_key')
                             ->isRequired()
                         ->end()
-                        ->scalarNode("secret_key")
+                        ->scalarNode('secret_key')
                             ->isRequired()
                         ->end()
                         ->arrayNode('sessions_per_ip')
@@ -70,7 +70,7 @@ class Configuration implements ConfigurationInterface
 
                                                 return count($diff);
                                             })
-                                            ->thenInvalid("Captcha configuration: unknown HTTP method: %s")
+                                            ->thenInvalid('Captcha configuration: unknown HTTP method: %s')
                                         ->end()
                                     ->end()
                                 ->end()

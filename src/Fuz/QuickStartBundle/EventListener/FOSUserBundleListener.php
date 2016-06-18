@@ -32,22 +32,22 @@ class FOSUserBundleListener implements EventSubscriberInterface
        UrlGeneratorInterface $router, SessionInterface $session, TokenStorageInterface $security,
        UserManagerInterface $userManager, TranslatorInterface $translator)
     {
-        $this->mailer         = $mailer;
+        $this->mailer = $mailer;
         $this->tokenGenerator = $tokenGenerator;
-        $this->router         = $router;
-        $this->session        = $session;
-        $this->security       = $security;
-        $this->userManager    = $userManager;
-        $this->translator     = $translator;
+        $this->router = $router;
+        $this->session = $session;
+        $this->security = $security;
+        $this->userManager = $userManager;
+        $this->translator = $translator;
     }
 
     public static function getSubscribedEvents()
     {
         return array(
-            SecurityEvents::INTERACTIVE_LOGIN      => 'onLoginSuccess',
+            SecurityEvents::INTERACTIVE_LOGIN => 'onLoginSuccess',
             FOSUserEvents::SECURITY_IMPLICIT_LOGIN => 'onLoginSuccess',
             FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInitialize',
-            FOSUserEvents::REGISTRATION_SUCCESS    => 'onRegistrationSuccess',
+            FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
 //                FOSUserEvents::PROFILE_EDIT_INITIALIZE => 'onProfileEditInitialize',
 //                FOSUserEvents::PROFILE_EDIT_SUCCESS => 'onProfileEditSuccess',
         );

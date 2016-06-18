@@ -5,7 +5,7 @@ namespace Fuz\QuickStartBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * UserRepository
+ * UserRepository.
  */
 class UserRepository extends EntityRepository
 {
@@ -19,7 +19,7 @@ class UserRepository extends EntityRepository
         ");
 
         $params = array(
-            'resourceOwner'   => $resourceOwner,
+            'resourceOwner' => $resourceOwner,
             'resourceOwnerId' => $resourceOwnerId,
         );
 

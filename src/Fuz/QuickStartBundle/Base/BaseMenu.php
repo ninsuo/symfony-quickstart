@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 
 class BaseMenu extends ContainerAware
 {
-    const POSITION_LEFT  = 'left';
+    const POSITION_LEFT = 'left';
     const POSITION_RIGHT = 'right';
 
     protected function createMenu(FactoryInterface $factory, $position)
@@ -37,7 +37,7 @@ class BaseMenu extends ContainerAware
         $key = sha1($name);
 
         $item = $menu->addChild($key, array_merge($childParams, array(
-            'uri'   => $uri,
+            'uri' => $uri,
             'label' => $name,
         )));
 
@@ -46,14 +46,14 @@ class BaseMenu extends ContainerAware
         }
 
         $isCurrent = false;
-        $first     = null;
-        $elem      = $item;
+        $first = null;
+        $elem = $item;
         while (!$elem->isRoot()) {
             if (strcmp($currentUri, $elem->getUri()) == 0) {
                 $isCurrent = true;
             }
             $first = $elem;
-            $elem  = $elem->getParent();
+            $elem = $elem->getParent();
         }
 
         if (!is_null($first)) {

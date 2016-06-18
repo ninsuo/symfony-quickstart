@@ -20,15 +20,15 @@ class CaptchaListener implements EventSubscriberInterface
     protected $captcha;
     protected $controller;
     protected $config;
-    protected $context  = array('attributes', 'request', 'query', 'server', 'cookies', 'headers');
+    protected $context = array('attributes', 'request', 'query', 'server', 'cookies', 'headers');
     protected $redirect = null;
 
     public function __construct(Router $router, Captcha $captcha, Controller $controller, $config)
     {
-        $this->router     = $router;
-        $this->captcha    = $captcha;
+        $this->router = $router;
+        $this->captcha = $captcha;
         $this->controller = $controller;
-        $this->config     = $config;
+        $this->config = $config;
     }
 
     public function onRequest(GetResponseEvent $event)
@@ -39,11 +39,11 @@ class CaptchaListener implements EventSubscriberInterface
 
         $request = $event->getRequest();
         $session = $request->getSession();
-        $route   = $session->get('current_route');
+        $route = $session->get('current_route');
 
         if ('captcha_validate' === $route['name'] && isset($route['params']['key'])) {
             $cache = $session->get('noCaptcha');
-            $key   = $route['params']['key'];
+            $key = $route['params']['key'];
             if (array_key_exists($key, $cache)) {
                 $strategy = $cache[$key]['route']['name'];
                 if (true === $this->captcha->check($request, $strategy)) {
@@ -64,8 +64,8 @@ class CaptchaListener implements EventSubscriberInterface
     {
         $request = $event->getRequest();
         $session = $request->getSession();
-        $cache   = $session->get('noCaptcha');
-        $key     = Math::rand();
+        $cache = $session->get('noCaptcha');
+        $key = Math::rand();
 
         $cache[$key]['route'] = $route;
         foreach ($this->context as $attribute) {
@@ -78,7 +78,7 @@ class CaptchaListener implements EventSubscriberInterface
 
         $session->set('noCaptcha', $cache);
 
-        $url      = $this->router->generate('captcha', array('key' => $key));
+        $url = $this->router->generate('captcha', array('key' => $key));
         $response = new RedirectResponse($url);
         $event->setResponse($response);
     }
@@ -87,10 +87,10 @@ class CaptchaListener implements EventSubscriberInterface
     {
         $request = $event->getRequest();
         $session = $request->getSession();
-        $cache   = $session->get('noCaptcha');
+        $cache = $session->get('noCaptcha');
 
         if (!$cache || !array_key_exists($key, $cache)) {
-            $url      = $this->router->generate('home');
+            $url = $this->router->generate('home');
             $response = new RedirectResponse($url);
             $event->setResponse($response);
 
@@ -124,7 +124,7 @@ class CaptchaListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::REQUEST    => array(array('onRequest', 10)),
+            KernelEvents::REQUEST => array(array('onRequest', 10)),
             KernelEvents::CONTROLLER => array(array('onController', 10)),
         );
     }

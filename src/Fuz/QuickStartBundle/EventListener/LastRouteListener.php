@@ -33,7 +33,7 @@ class LastRouteListener implements EventSubscriberInterface
             return;
         }
 
-        $session       = $request->getSession();
+        $session = $request->getSession();
         $previousRoute = $session->get('current_route', array());
         if ($currentRoute == $previousRoute) {
             return;

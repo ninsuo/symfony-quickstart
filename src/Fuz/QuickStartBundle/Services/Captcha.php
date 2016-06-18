@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class Captcha
 {
-    const CHECK_URL  = 'https://www.google.com/recaptcha/api/siteverify';
+    const CHECK_URL = 'https://www.google.com/recaptcha/api/siteverify';
     const POST_PARAM = 'g-recaptcha-response';
 
     protected $logger;
@@ -24,12 +24,12 @@ class Captcha
 
     public function __construct(LoggerInterface $logger, Session $session, EntityManager $em, $noCaptcha)
     {
-        $this->logger         = $logger;
-        $this->session        = $session;
-        $this->sessionIpRepo  = $em->getRepository('FuzQuickStartBundle:CaptchaSessionIp');
+        $this->logger = $logger;
+        $this->session = $session;
+        $this->sessionIpRepo = $em->getRepository('FuzQuickStartBundle:CaptchaSessionIp');
         $this->sessionHitRepo = $em->getRepository('FuzQuickStartBundle:CaptchaSessionHit');
-        $this->ipLimitRepo    = $em->getRepository('FuzQuickStartBundle:CaptchaIpLimit');
-        $this->config         = $noCaptcha;
+        $this->ipLimitRepo = $em->getRepository('FuzQuickStartBundle:CaptchaIpLimit');
+        $this->config = $noCaptcha;
     }
 
     public function check(Request $request, $strategy)
@@ -40,7 +40,7 @@ class Captcha
 
         $this->clearExpiredInformation($strategy);
 
-        $ip        = ip2long($request->getClientIp()) ?: ip2long('127.0.0.1');
+        $ip = ip2long($request->getClientIp()) ?: ip2long('127.0.0.1');
         $sessionId = $this->session->getId();
 
         if ($this->validateCaptcha($request)) {
@@ -71,13 +71,13 @@ class Captcha
             $ip = ip2long($request->getClientIp()) ? $request->getClientIp() : '127.0.0.1';
 
             $parameters = array(
-                'secret'   => $this->config['secret_key'],
+                'secret' => $this->config['secret_key'],
                 'response' => $response,
                 'remoteip' => $ip,
             );
 
             $query = self::CHECK_URL.'?'.http_build_query($parameters);
-            $json  = json_decode(file_get_contents($query));
+            $json = json_decode(file_get_contents($query));
 
             return $json->success;
         }
@@ -88,14 +88,14 @@ class Captcha
     protected function clearExpiredInformation($strategy)
     {
         $dateIntervalIp = \DateInterval::createFromDateString("{$this->config['sessions_per_ip']['delay']} seconds");
-        $expiryDateIp   = new \DateTime();
+        $expiryDateIp = new \DateTime();
         $expiryDateIp->sub($dateIntervalIp);
 
         $this->sessionIpRepo->deleteExpired($expiryDateIp);
         $this->ipLimitRepo->deleteExpired($expiryDateIp);
 
         $dateIntervalStrategy = \DateInterval::createFromDateString("{$this->config['strategies'][$strategy]['delay']} seconds");
-        $expiryDateStrategy   = new \DateTime();
+        $expiryDateStrategy = new \DateTime();
         $expiryDateStrategy->sub($dateIntervalStrategy);
 
         $this->sessionHitRepo->deleteExpired($strategy, $expiryDateStrategy);
