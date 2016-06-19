@@ -35,7 +35,7 @@ class BaseMenu implements ContainerAwareInterface
 
     protected function addUri(ItemInterface $menu, $name, $uri, array $childParams = array(), $divider = false)
     {
-        $currentUri = $this->container->get('request')->getRequestUri();
+        $currentUri = $this->container->get('request_stack')->getCurrentRequest()->getRequestUri();
 
         $key = sha1($name);
 
