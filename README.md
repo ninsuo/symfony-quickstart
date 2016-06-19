@@ -1,9 +1,9 @@
-Symfony2 Quick Start
+Symfony Quick Start
 ========================
 
 ## What is it?
 
-This is the [Symfony2 Standard Edition](https://github.com/symfony/symfony-standard) with some ready-to-use tools to get started quickly.
+This is the [Symfony3 Standard Edition](https://github.com/symfony/symfony-standard) with some ready-to-use tools to get started quickly.
 
 Most common stuff, such as login, translations or menus are built-in: no need to configure or code anything. Just overwrite and copy/paste to customize.
 
@@ -44,9 +44,6 @@ php app/console doctrine:schema:create
 
 Most of the features can be configured or disabled inside the `parameters.yml` configuration file.
 
-
-(to be continued)
-
 # External services
 
 If you don't want to use one of the following services, don't forget to disable it on `parameters.yml`.
@@ -65,5 +62,5 @@ To use noCaptcha, you should get your site & secret keys:
 
 - This project is released under the MIT license
 
-- Fuz logo is © 2013-2015 Alain Tiemblo
+- Fuz logo is © 2013-2016 Alain Tiemblo
 
