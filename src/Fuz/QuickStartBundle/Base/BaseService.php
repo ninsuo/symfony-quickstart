@@ -2,15 +2,20 @@
 
 namespace Fuz\QuickStartBundle\Base;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-abstract class BaseService extends ContainerAware
+abstract class BaseService implements ContainerAwareInterface
 {
-    public function get($service) {
+    use ContainerAwareTrait;
+
+    public function get($service)
+    {
         return $this->container->get($service);
     }
 
-    public function getParameter($parameter) {
+    public function getParameter($parameter)
+    {
         return $this->container->getParameter($parameter);
     }
 }
