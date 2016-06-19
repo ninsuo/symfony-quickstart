@@ -220,7 +220,7 @@
       </trans-unit>
       <trans-unit id="55">
         <source>quickstart.email.seeyou</source>
-        <target><![CDATA[See you soon!]]></target>
+        <target><![CDATA[Thank you,]]></target>
       </trans-unit>
       <trans-unit id="56">
         <source>quickstart.register.email.2</source>
