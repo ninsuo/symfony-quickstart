@@ -12,25 +12,6 @@ class Builder extends BaseMenu
         $menu = $this->createMenu($factory, parent::POSITION_LEFT);
         $this->addRoute($menu, 'quickstart.menu.home', 'home');
 
-        /*
-          $this->addSubMenu($menu, 'test');
-          $this->addRoute($menu['test'], 'testA', 'testa');
-          $this->addRoute($menu['test'], 'testB', 'testb', array(), array(), true);
-          $this->addRoute($menu['test'], 'testC', 'testc');
-
-          $this->addSubMenu($menu['test'], 'xxx');
-          $this->addRoute($menu['test']['xxx'], 'testE', 'teste');
-          $this->addRoute($menu['test']['xxx'], 'testF', 'testf');
-          $this->addRoute($menu['test']['xxx'], 'testG', 'testg');
-
-          $this->addRoute($menu['test'], 'testD', 'testd');
-
-          $this->addSubMenu($menu, 'test2');
-          $this->addRoute($menu['test2'], 'testH', 'testh');
-          $this->addRoute($menu['test2'], 'testI', 'testi');
-          $this->addRoute($menu['test2'], 'testJ', 'testj');
-         */
-
         return $menu;
     }
 

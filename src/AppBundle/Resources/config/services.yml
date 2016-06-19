@@ -1,5 +1,4 @@
 imports:
-    - { resource: "menus.yml" }
 
 parameters:
 

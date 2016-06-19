@@ -5,8 +5,9 @@ namespace Fuz\QuickStartBundle\Base;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-class BaseMenu
+class BaseMenu implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
