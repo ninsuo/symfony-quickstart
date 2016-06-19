@@ -164,4 +164,9 @@ class BaseController extends Controller
     {
         return $this->container->get('translator')->trans($property, $parameters);
     }
+
+    public function fwd($controller, array $path = array(), array $query = array())
+    {
+        return $this->forward($controller, $path, $query);
+    }
 }

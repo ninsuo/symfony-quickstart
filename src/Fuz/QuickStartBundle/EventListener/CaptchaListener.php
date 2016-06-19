@@ -2,9 +2,9 @@
 
 namespace Fuz\QuickStartBundle\EventListener;
 
+use Fuz\QuickStartBundle\Base\BaseController as Controller;
 use Fuz\QuickStartBundle\Services\Captcha;
 use Fuz\QuickStartBundle\Tools\Math;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -49,6 +49,8 @@ class CaptchaListener implements EventSubscriberInterface
                 if (true === $this->captcha->check($request, $strategy)) {
                     $this->redirectToOriginalController($event, $key);
                 }
+            } else {
+                $this->redirectToOriginalController($event, $key);
             }
         } elseif ('captcha' !== $route['name'] && array_key_exists($route['name'], $this->config['strategies'])) {
             $strategy = $this->config['strategies'][$route['name']];
@@ -116,7 +118,7 @@ class CaptchaListener implements EventSubscriberInterface
         if (!is_null($this->redirect)) {
             $controller = $this->redirect['params'];
             $event->setController(function () use ($controller) {
-                return $this->controller->forward($controller['_controller'], $controller);
+                return $this->controller->fwd($controller['_controller'], $controller);
             });
         }
     }

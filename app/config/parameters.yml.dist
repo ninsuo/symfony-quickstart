@@ -39,7 +39,7 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     # On-site registration (standard login form)
-    login_form: false
+    login_form: true
 
     # Google Login: https://console.developers.google.com/project
     google_enabled:   true

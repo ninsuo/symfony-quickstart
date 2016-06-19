@@ -1,6 +1,6 @@
 {% block subject %}
 {% autoescape false %}
-{{ 'quickstart.reset.email.subject'|trans({'%brand%': brand}) }}
+{{ 'quickstart.reset.email.subject'|trans({'%brand%': fuz.site_brand}) }}
 {% endautoescape %}
 {% endblock %}
 {% block body_text %}
@@ -18,7 +18,7 @@
 
 {{ 'quickstart.email.seeyou'|trans }}
 
-{{ brand }} (c) {{ "now"|date('Y') }}
+{{ fuz.site_brand }} (c) {{ "now"|date('Y') }}
 {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}
