@@ -4,10 +4,12 @@ namespace Fuz\QuickStartBundle\Base;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class BaseMenu extends ContainerAware
+class BaseMenu
 {
+    use ContainerAwareTrait;
+
     const POSITION_LEFT = 'left';
     const POSITION_RIGHT = 'right';
 

@@ -14,14 +14,14 @@ security:
     firewalls:
         dev:
             pattern: "^/(_(profiler|wdt|error)|css|images|js)/"
-            security: "false"
+            security: false
 
         main:
             pattern: "^/"
             anonymous: true
             form_login:
                 provider: "fos_userbundle"
-                csrf_provider: "security.csrf.token_manager"
+                csrf_token_generator: "security.csrf.token_manager"
                 login_path: "/login"
                 check_path: "/login_check"
             oauth:

@@ -14,7 +14,8 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        assets_version: 1.0.0
+    assets:
+        version: 1.0.0
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -27,9 +28,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form:
-        resources:
-            - "BraincraftedBootstrapBundle:Form:bootstrap.html.twig"
+    form_themes:
+        - "BraincraftedBootstrapBundle:Form:bootstrap.html.twig"
     globals:
         fuz:
             site_brand: "%site_brand%"
@@ -97,7 +97,7 @@ accelerator_cache:
 
 # HWIOAuthBundle Configuration
 hwi_oauth:
-    firewall_name: "main"
+    firewall_names: ["main"]
     connect:
         confirmation: false
     resource_owners:

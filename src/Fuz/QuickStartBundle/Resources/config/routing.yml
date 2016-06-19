@@ -15,10 +15,10 @@ hwi_oauth_connect:
     prefix: /connect
 
 google_login:
-    pattern: /login/check-google
+    path: /login/check-google
 
 facebook_login:
-    pattern: /login/check-facebook
+    path: /login/check-facebook
 
 twitter_login:
-    pattern: /login/check-twitter
+    path: /login/check-twitter

@@ -1,2 +1,6 @@
-parameters: null
-services: null
+imports:
+    - { resource: "menus.yml" }
+
+parameters:
+
+services:
