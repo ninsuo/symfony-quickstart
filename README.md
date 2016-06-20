@@ -31,6 +31,8 @@ You'll find here 2 bundles:
 
 - noCaptcha is implemented to protect your registration form, and can be used as a service for your other needs.
 
+- CKeditor and HTMLPurifier are preinstalled to manage rich-text editors (WYSIWYG), just use CKEditorType in your form and |purify filter in your view.
+
 ## Installation
 
 ```sh

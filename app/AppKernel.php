@@ -25,6 +25,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Fuz\QuickStartBundle\FuzQuickStartBundle(),
             new EasyCorp\Bundle\EasySecurityBundle\EasySecurityBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new AppBundle\AppBundle(),
         );
 

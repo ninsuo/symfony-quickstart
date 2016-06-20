@@ -35,7 +35,9 @@
       "knplabs/knp-menu-bundle": "^2.0",
       "smart-core/accelerator-cache-bundle": "~1",
       "friendsofsymfony/user-bundle": "~2.0@dev",
-      "easycorp/easy-security-bundle": "^1.0"
+      "easycorp/easy-security-bundle": "^1.0",
+      "egeloen/ckeditor-bundle": "^4.0",
+      "exercise/htmlpurifier-bundle": "^0.2.3"
    },
    "require-dev": {
       "sensio/generator-bundle": "^3.0",
