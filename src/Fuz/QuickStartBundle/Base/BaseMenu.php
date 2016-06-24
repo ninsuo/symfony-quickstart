@@ -7,7 +7,7 @@ use Knp\Menu\ItemInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-class BaseMenu implements ContainerAwareInterface
+abstract class BaseMenu implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 

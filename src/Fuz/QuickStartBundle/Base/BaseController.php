@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\VarDumper\VarDumper;
 
-class BaseController extends Controller
+abstract class BaseController extends Controller
 {
     /**
      * Symfony's var_dump.
