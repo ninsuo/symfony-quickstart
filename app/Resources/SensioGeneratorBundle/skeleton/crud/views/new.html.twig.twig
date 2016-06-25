@@ -1,14 +1,17 @@
 {% block extends %}
-{{ "{% extends 'FuzQuickStartBundle::layout.html.twig' %}" }}
+{{ "{% extends 'AppBundle::layout.html.twig' %}" }}
 {% endblock extends %}
 
 {% block body %}
-{{ "{% block body -%}" }}
+{{ "{% block body %}" }}
     <h1>{{ "{{ 'quickstart.crud.new.title' | trans({'%entity%': '" ~ entity ~ "'}) }}" }}</h1>
 
-    {{ '{{ form(form) }}' }}
+    {{ '{{ form_start(form) }}' }}
+        {{ '{{ form_widget(form) }}' }}
+        <input type="submit" value="{{ "{{ 'quickstart.crud.button.create' | trans }}" }}" class="btn btn-primary"/>
+    {{ '{{ form_end(form) }}' }}
 
-    {% set hide_edit, hide_delete = true, true %}
-    {% include 'crud/views/others/record_actions.html.twig.twig' %}
+{% set hide_edit, hide_delete = true, true %}
+{{ include('crud/views/others/record_actions.html.twig.twig') -}}
 {{ "{% endblock %}" }}
 {% endblock body %}

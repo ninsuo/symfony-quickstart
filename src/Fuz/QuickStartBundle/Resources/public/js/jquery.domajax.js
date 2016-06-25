@@ -1,8 +1,8 @@
 /*
  * jquery.domajax.js v2.0.3
- * http://www.domajax.com
+ * http://domajax.fuz.org
  *
- * Copyright (c) 2012-2014 alain tiemblo <ninsuo at gmail dot com>
+ * Copyright (c) 2012-2015 alain tiemblo <ninsuo at gmail dot com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
@@ -98,14 +98,14 @@
             'domajax-failure': null,
             'domajax-empty': null,
             'domajax-not-empty': null,
-            'poll': null,
+            'poll': null
         };
 
         if (overwriteSettings === undefined) {
             overwriteSettings = {};
         }
 
-        var events = ['before', 'complete', 'success', 'failure', 'empty', 'not-empty', ];
+        var events = ['before', 'complete', 'success', 'failure', 'empty', 'not-empty'];
 
         /*
          * ------------------------------------------
@@ -131,23 +131,33 @@
             var settings = {};
 
             var elem = $(this);
+            var prefix = '';
+
+            // --- data-domajax-prefix
+            if (elem.data('domajax-prefix') !== undefined) {
+                prefix = elem.data('domajax-prefix');
+            }
 
             // --- data-alias
             var aliases_seen = [];
-            while ((elem.data('alias') !== undefined) && (elem.data('alias') !== null)) {
-                var aliases = $(elem.data('alias'));
-                elem.data('alias', null);
+            while ((elem.data(prefix + 'alias') !== undefined) && (elem.data(prefix + 'alias') !== null)) {
+                var aliases = $(elem.data(prefix + 'alias'));
+                elem.data(prefix + 'alias', null);
                 if (aliases.length > 0) {
                     $(aliases).each(function () {
                         var alias = $(this);
+                        var alias_prefix = '';
+                        if (alias.data('domajax-prefix') !== undefined) {
+                            alias_prefix = alias.data('domajax-prefix');
+                        }
                         var alias_id = tools.getOrCreateId(alias);
                         if ($.inArray(alias_id, aliases_seen) >= 0) {
                             return true;
                         }
                         aliases_seen.push(alias_id);
                         $.each(defaults, function (key) {
-                            if (((elem.data(key) === undefined) || (elem.data(key) === null)) && (alias.data(key) !== undefined)) {
-                                elem.data(key, alias.data(key));
+                            if (((elem.data(prefix + key) === undefined) || (elem.data(prefix + key) === null)) && (alias.data(alias_prefix + key) !== undefined)) {
+                                elem.data(prefix + key, alias.data(alias_prefix + key));
                             }
                         });
                     });
@@ -157,8 +167,8 @@
             // --- settings
             settings = $.extend(true, {}, defaults);
             $.each(settings, function (key) {
-                if (elem.data(key) !== undefined) {
-                    settings[key] = elem.data(key);
+                if (elem.data(prefix + key) !== undefined) {
+                    settings[key] = elem.data(prefix + key);
                 }
             });
             settings = $.extend(true, settings, overwriteSettings);
@@ -482,7 +492,6 @@
             return true;
 
         }); // $(elems).each
-        return elems;
 
     }; // $.fn.domAjax
     /*
@@ -510,7 +519,7 @@
        // --- data-callback-event
         var option = 'callback-' + event;
         if (settings[option] !== null) {
-            var callbacks = settings[option].split(' ');
+          var callbacks = settings[option].split(' ');
           $.each(callbacks, function(index, callback) {
                 var closure = tools.getClosureFronString(callback, windowObj);
                 if ($.isFunction(closure)) {
@@ -659,7 +668,7 @@
         randomNumber: function () {
             var rand = '' + Math.random() * 1000 * new Date().getTime();
             return rand.replace('.', '').split('').sort(function () {
-                return 0.5 - Math.random()
+                return 0.5 - Math.random();
             }).join('');
         },
 
@@ -828,6 +837,9 @@ $(document).ready(function () {
         .off('click', 'input[type="submit"].domajax, button[type="submit"].domajax')
         .on('click', 'input[type="submit"].domajax, button[type="submit"].domajax', function (e) {
             var jqSubmit = $(this);
+            if (jqSubmit.hasClass('click')) {
+                return ;
+            }
             var jqForms = $(this).closest('form');
             if (jqForms.length > 0) {
                 jqForms.each(function () {

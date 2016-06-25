@@ -1,4 +1,3 @@
-
 fuz_quickstart:
     resource: "@FuzQuickStartBundle/Resources/config/routing.yml"
 
