@@ -43,7 +43,6 @@ twig:
             supported_locales: "%supported_locales%"
             menu_left: "%menu_left_enabled%"
             menu_right: "%menu_right_enabled%"
-            nocaptcha_site_key: "%nocaptcha_site_key%"
 
 # Assetic Configuration
 assetic:
