@@ -107,11 +107,6 @@ class PermissionsController extends BaseController
         $action = $id ? 'update' : 'create';
 
         $form = $this
-//           ->get('form.factory')
-//           ->createNamed($id ? "edit-permission-{$id}" : 'create-permission', PermissionType::class, $entity, [
-//               'selected_id' => $selectedId,
-//               'id'          => $id,
-//           ])
            ->createNamedFormBuilder($id ? "edit-permission-{$id}" : 'create-permission', Type\FormType::class, $entity)
            ->add('role', Type\TextType::class, [
                'label'       => "admin.permissions.{$action}_label",
