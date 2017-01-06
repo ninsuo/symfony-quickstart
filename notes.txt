@@ -1,21 +1,19 @@
-User:
-OK  1) add pagination in user management
-OK  2) translate pagination (replace existing "domajax" template by "light" and implement nb per page, missing translations, ...)
-OK  3) add filtering in user management
-4) create "edit" on user (to edit nickname and contact? but will be overwritten maybe add "frozen" state..)
-5) create "Manage groups" page (list of user's group, list of available groups, both pagined/filterable)
 
 cs-fixing
 
 Group:
-6) create "Groups" page with list of groups
-7) add "Create group" and "Edit group" (edit in ajax)
-8) add "Delete", and pagination/filtering
+OK  6) create "Groups" page with list of groups
+OK  7) add "Create group" and "Edit group" (edit in ajax)
+OK  8) add "Delete", and pagination/filtering
 9) add "Manage users" page (list of group's users, list of available users, both pagined/filterable)
 
-Permission:
-10) remove the permission page
-11) clean up entities (User/Group, remove Permission)
+bug: looks like "change lang" doesn't keep filters/pages
+
+create a simple Profile page
+- nickname
+- contact
+(automatic freeze on change)
+- delete account (configurable in parameters.yml)
 
 Light:
 12) Use of pdo_sqlite by default is more relevent on quick websites

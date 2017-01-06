@@ -53,9 +53,7 @@ class UsersController extends BaseController
      */
     public function toggleAdminAction(Request $request, $token)
     {
-        if ($token !== $this->get('security.csrf.token_manager')->getToken('administration')->getValue()) {
-            throw new InvalidCsrfTokenException('Invalid CSRF token');
-        }
+        $this->checkCsrfToken('administration', $token);
 
         $this->get('admin.storage.user')->toggleAdmin(
            intval($request->request->get('id'))
@@ -70,9 +68,7 @@ class UsersController extends BaseController
      */
     public function toggleFrozenAction(Request $request, $token)
     {
-        if ($token !== $this->get('security.csrf.token_manager')->getToken('administration')->getValue()) {
-            throw new InvalidCsrfTokenException('Invalid CSRF token');
-        }
+        $this->checkCsrfToken('administration', $token);
 
         $this->get('admin.storage.user')->toggleFrozen(
            intval($request->request->get('id'))

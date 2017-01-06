@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 abstract class BaseController extends Controller
 {
@@ -105,6 +106,7 @@ abstract class BaseController extends Controller
         $pager = new Pagerfanta(
            new DoctrineORMAdapter($qb)
         );
+        $pager->setNormalizeOutOfRangePages(true);
 
         $perPage = $request->query->get($prefix . 'per_page', self::PAGER_PER_PAGE_DEFAULT);
         if (!in_array($perPage, self::PAGER_PER_PAGE_LIST)) {
@@ -115,5 +117,24 @@ abstract class BaseController extends Controller
         $pager->setCurrentPage($request->request->get($prefix . 'page') ?: $request->query->get($prefix . 'page') ?: 1);
 
         return $pager;
+    }
+
+    public function checkCsrfToken($key, $token)
+    {
+        if ($token !== $this->get('security.csrf.token_manager')->getToken($key)->getValue()) {
+            throw new InvalidCsrfTokenException('Invalid CSRF token');
+        }
+    }
+
+    public function getEntityById($manager, $id)
+    {
+        $em     = $this->getManager($manager);
+        $entity = $em->findOneById($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        return $entity;
     }
 }

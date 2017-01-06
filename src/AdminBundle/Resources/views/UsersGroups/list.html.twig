@@ -27,7 +27,16 @@
                             <td>{{ group.id }}</td>
                             <td>{{ group.name }}</td>
                             <td>
-                                &nbsp;
+                                {% set path = path('admin_users_groups_toggle', app.request.query.all|merge({userId: user.id, groupId: group.id, token: csrf_token('administration')})) %}
+                                {% if prefix == 'in' %}
+                                    <a
+                                        href="{{ path }}"
+                                        class="btn btn-danger btn-sm">{{ 'admin.users_groups.remove' | trans }}</a>
+                                {% else %}
+                                    <a
+                                        href="{{ path }}"
+                                        class="btn btn-success btn-sm">{{ 'admin.users_groups.add' | trans }}</a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

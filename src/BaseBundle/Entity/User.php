@@ -356,6 +356,14 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getRoles()

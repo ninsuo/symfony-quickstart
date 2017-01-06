@@ -52,9 +52,7 @@ class GroupsController extends BaseController
      */
     public function deleteAction(Request $request, $id, $token)
     {
-        if ($token !== $this->get('security.csrf.token_manager')->getToken('administration')->getValue()) {
-            throw new InvalidCsrfTokenException('Invalid CSRF token');
-        }
+        $this->checkCsrfToken('administration', $token);
 
         $manager = $this->getManager('BaseBundle:Group');
 

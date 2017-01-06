@@ -20,3 +20,5 @@ admin:
         title: Groupes de %name%
         in: 'Groupes dans lequel est %name% :'
         out: "Groupes dans lequel %name% n'est pas :"
+        add: Ajouter dans ce groupe
+        remove: Retirer de ce groupe
