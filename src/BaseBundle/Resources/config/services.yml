@@ -1,7 +1,8 @@
 parameters:
     base.oauth_user_provider.class: BaseBundle\Provider\OAuthUserProvider
     hwi_oauth.account.connector.class: BaseBundle\Connect\AccountConnect
-    pagerfanta.view.domajax.class: BaseBundle\Pagerfanta\View\DomajaxView
+    pagerfanta.view.light.class: BaseBundle\Pagerfanta\View\LightView
+    pagerfanta.template.light.class: BaseBundle\Pagerfanta\Template\LightTemplate
 
 services:
 
@@ -13,8 +14,14 @@ services:
     hwi_oauth.account.connector:
         class: '%hwi_oauth.account.connector.class%'
 
-    pagerfanta.view.domajax:
-        class: '%pagerfanta.view.domajax.class%'
+    pagerfanta.view.light:
+        class: '%pagerfanta.view.light.class%'
         public: false
+        arguments: ['@pagerfanta.template.light']
         tags:
-            - { name: pagerfanta.view, alias: domajax }
+            - { name: pagerfanta.view, alias: light }
+
+    pagerfanta.template.light:
+        class: '%pagerfanta.template.light.class%'
+        public: false
+        arguments: ['@translator']

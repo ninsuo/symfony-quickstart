@@ -68,7 +68,7 @@ base:
         result: '[0,1] résultat | ]1,Inf[ résultats'
         per_page: 'Résultats par page :'
         go_to: 'Aller à la page :'
-        go: 'Go'
+        go: 'Valider'
     site:
         description: 'fuz.org fournit un générateur de code en ligne simple et puissant.'
         default_title: 'fuz.org - Générez votre argent!'
