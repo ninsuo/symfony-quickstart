@@ -115,4 +115,55 @@ class UsersController extends BaseController
             'form' => $form->createView(),
         ];
     }
+
+    /**
+     * @Route("/edit/nickname/{id}", name="admin_users_edit_nickname")
+     * @Template("AdminBundle::_editOnClick.html.twig")
+     */
+    public function _editNicknameAction(Request $request, $id)
+    {
+        $manager = $this->getManager('BaseBundle:User');
+
+        $entity = $manager->findOneById($id);
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        $endpoint =  $this->generateUrl('admin_users_edit_nickname', ['id' => $id]);
+
+        $form = $this
+           ->createNamedFormBuilder("edit-nickname-{$id}", Type\FormType::class, $entity, [
+               'action' => $endpoint,
+           ])
+           ->add('nickname', Type\TextType::class, [
+               'label'       => "admin.users.edit.nickname",
+               'constraints' => [
+                   new Constraints\NotBlank(),
+               ],
+           ])
+           ->add('submit', Type\SubmitType::class, [
+               'label' => "admin.users.edit.save",
+               'attr'  => [
+                   'class' => 'domajax',
+               ],
+           ])
+           ->getForm()
+           ->handleRequest($request)
+        ;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            return [
+                'text' => $entity->getNickname(),
+                'endpoint' => $endpoint,
+            ];
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
+    }
 }

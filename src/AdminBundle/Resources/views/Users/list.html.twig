@@ -21,7 +21,14 @@
             {% for user in pager.currentPageResults %}
                 <tr>
                     <td>{{ user.id }}</td>
-                    <td>{{ macros.user(user) }}</td>
+                    <td>
+                        {{
+                            include('AdminBundle::_editOnClick.html.twig', {
+                                'text': macros.user(user),
+                                'endpoint': path('admin_users_edit_nickname', {id: user.id}),
+                            })
+                        }}
+                    </td>
                     <td>
                         {{
                             include('AdminBundle::_editOnClick.html.twig', {

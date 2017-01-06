@@ -6,6 +6,7 @@ admin:
         admin: Admin
         edit:
             contact: Email
+            nickname: Name
             save: Save
     permissions:
         id: ID
