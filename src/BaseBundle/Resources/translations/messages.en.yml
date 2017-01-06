@@ -56,6 +56,9 @@ base:
         title: Logout
     menu:
         home: Home
+        admin:
+            main: Administration
+            administrators: Administrators
     nav: 'Toggle navigation'
     site:
         description: 'fuz.org provides a simple and powerful code generator online.'

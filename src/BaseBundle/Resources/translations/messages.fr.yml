@@ -56,6 +56,9 @@ base:
         title: Déconnexion
     menu:
         home: Accueil
+        admin:
+            main: Administration
+            administrators: Administrateurs
     nav: 'Afficher/Masquer le menu'
     title: 'Mon Projet Vide'
     site:

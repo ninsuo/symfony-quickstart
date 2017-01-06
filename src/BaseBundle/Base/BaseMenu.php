@@ -6,6 +6,7 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class BaseMenu implements ContainerAwareInterface
 {
@@ -24,6 +25,18 @@ abstract class BaseMenu implements ContainerAwareInterface
         }
 
         return $menu;
+    }
+
+    protected function isGranted($role)
+    {
+        if (is_null($role)) {
+            return true;
+        }
+
+        $token = $this->container->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+
+        return ($user instanceof UserInterface && $user->hasRole($role));
     }
 
     protected function addRoute(ItemInterface $menu, $name, $route, array $routeParams = array(), array $childParams = array(), $divider = false)

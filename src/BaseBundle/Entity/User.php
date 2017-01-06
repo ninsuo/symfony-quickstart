@@ -84,6 +84,11 @@ class User implements UserInterface, EquatableInterface
     protected $isAdmin = false;
 
     /**
+     * @var array
+     */
+    protected $roles = ['ROLE_USER'];
+
+    /**
      * Get id.
      *
      * @return int
@@ -283,6 +288,50 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param array $roles
+     *
+     * @return User
+     */
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @param string $role
+     *
+     * @return User
+     */
+    public function addRole($role)
+    {
+        if (!in_array($role, $this->roles)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $role
+     *
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        return in_array($role, $this->roles);
+    }
+
+    /**
      * @ORM\PrePersist
      */
     public function onPrePersist()
@@ -296,14 +345,6 @@ class User implements UserInterface, EquatableInterface
     public function onPreUpdate()
     {
         $this->setLastSeen(new \DateTime());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER');
     }
 
     /**

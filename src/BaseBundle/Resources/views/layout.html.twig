@@ -4,21 +4,13 @@
 
 {% block left_menu %}
     {% if fuz.menu_left %}
-        {% if is_granted('ROLE_USER') %}
-            {{ knp_menu_render('AppBundle:Builder:userLeftMenu') }}
-        {% else %}
-            {{ knp_menu_render('AppBundle:Builder:mainLeftMenu') }}
-        {% endif %}
+        {{ knp_menu_render('AppBundle:Builder:mainLeftMenu') }}
     {% endif %}
 {% endblock %}
 
 {% block right_menu %}
     {% if fuz.menu_right %}
-        {% if is_granted('ROLE_USER') %}
-            {{ knp_menu_render('AppBundle:Builder:userRightMenu') }}
-        {% else %}
-            {{ knp_menu_render('AppBundle:Builder:mainRightMenu') }}
-        {% endif %}
+        {{ knp_menu_render('AppBundle:Builder:mainRightMenu') }}
     {% endif %}
 {% endblock %}
 

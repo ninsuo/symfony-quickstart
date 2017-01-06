@@ -24,10 +24,14 @@ class Builder extends BaseMenu
         return $menu;
     }
 
-    public function userLeftMenu(FactoryInterface $factory, array $options)
+    public function mainRightMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $this->createMenu($factory, parent::POSITION_LEFT);
-        $this->addRoute($menu, 'base.menu.home', 'home');
+        $menu = $this->createMenu($factory, parent::POSITION_RIGHT);
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $this->addSubMenu($menu, 'base.menu.admin.main');
+            $this->addRoute($menu['base.menu.admin.main'], 'base.menu.admin.administrators', 'admin_administrators');
+        }
 
         return $menu;
     }
