@@ -34,7 +34,8 @@ class PermissionsController extends BaseController
      */
     public function _listAction(Request $request, $selectedId)
     {
-        $form = $this->_initForm($request, $selectedId, 'create_permission');
+        $id   = $request->request->get('id');
+        $form = $this->initForm($request, $selectedId, $id);
 
         $list = $this
            ->getManager('BaseBundle:Permission')
@@ -50,27 +51,21 @@ class PermissionsController extends BaseController
 
 
     /**
-     * @Route("/edit/{token}/{selectedId}", name="admin_permissions_edit", defaults={"selectedId": null})
+     * @Route("/edit/{selectedId}", name="admin_permissions_edit", defaults={"selectedId": null})
      * @Template()
      */
-    public function _editAction(Request $request, $token, $selectedId)
+    public function _editAction(Request $request, $selectedId)
     {
-        if ($token !== $this->get('security.csrf.token_manager')->getToken('administration')->getValue()) {
-            throw new InvalselectedIdCsrfTokenException('InvalselectedId CSRF token');
-        }
-
-        $id = $request->request->get('id');
-        $this->get('admin.storage.permission')->deletePermission($id);
+        $id   = $request->request->get('id');
+        $form = $this->initForm($request, $selectedId, $id);
 
         if (intval($selectedId) == intval($id)) {
             $selectedId = null;
         }
 
-        return $this->redirect(
-            $this->generateUrl('admin_permissions_list', [
-                'selectedId' => $selectedId,
-            ])
-        );
+        return [
+            'form' => $form->createView(),
+        ];
     }
 
     /**
@@ -101,21 +96,33 @@ class PermissionsController extends BaseController
      * @param Request $request
      * @param int $selectedId
      * @param string $name
+     * @param int $id
+     *
      * @return FormInterface
      */
-    protected function _initForm(Request $request, $selectedId, $name)
+    protected function initForm(Request $request, $selectedId, $id = null)
     {
+        $manager = $this->getManager('BaseBundle:Permission');
+
+        if (is_null($id)) {
+            $entity = new Permission();
+        } else {
+
+            //@TODO manage errors
+            $entity = $manager->findOneById($id);
+        }
+
         $form = $this
            ->get('form.factory')
-           ->createNamed($name, PermissionType::class)
+           ->createNamed($id ? "edit-permission-{$id}" : 'create-permission', PermissionType::class, $entity, [
+               'selected_id' => $selectedId,
+               'id'          => $id,
+           ])
            ->handleRequest($request)
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $permission = new Permission();
-            $permission->setRole($form->getData()['role']);
-
-            $this->get('base.doctrine.helper')->persistHandleDuplicates($form, $permission, $this->trans('admin.permissions.entity'));
+            $this->get('base.doctrine.helper')->persistHandleDuplicates($form, $entity, $this->trans('admin.permissions.entity'));
         }
 
         return $form;

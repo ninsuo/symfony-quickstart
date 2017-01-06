@@ -11,5 +11,7 @@ admin:
         confirm_delete: 'Voulez-vous vraiment supprimer la permissions "%permission%" ?'
         create_label: 'Ajouter une permission'
         create_submit: 'Ajouter'
+        edit_label: 'Modifier cette permission'
+        edit_submit: 'Modifier'
         entity: permission
 

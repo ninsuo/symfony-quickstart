@@ -3,6 +3,7 @@
 namespace AdminBundle\Form\Type;
 
 use BaseBundle\Base\BaseType;
+use BaseBundle\Entity\Permission;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type;
@@ -12,21 +13,25 @@ class PermissionType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $action = $options['id'] ? 'update' : 'create';
+
         $builder
            ->add('role', Type\TextType::class, [
-               'label'       => 'admin.permissions.create_label',
+               'label'       => "admin.permissions.{$action}_label",
                'constraints' => [
                    new Constraints\NotBlank(),
                ],
            ])
            ->add('submit', Type\SubmitType::class, [
-               'label' => 'admin.permissions.create_submit',
+               'label' => "admin.permissions.{$action}_submit",
                'attr'  => [
-                   'class'         => 'domajax',
-                   'data-endpoint' => $this->get('router')->generate('admin_permissions_list', [
+                   'class'           => 'domajax',
+                   'data-endpoint'   => $this->get('router')->generate('admin_permissions_list', [
                        'selectedId' => $options['selected_id'],
                    ]),
-                   'data-output'   => '#permissions',
+                   'data-input-attr' => 'id',
+                   'data-id'         => $options['id'],
+                   'data-output'     => '#permissions',
                ],
            ])
         ;
@@ -35,7 +40,9 @@ class PermissionType extends BaseType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'selected_id' => null,
+            'data_class'    => Permission::class,
+            'selected_id'   => null,
+            'id'            => null,
         ]);
     }
 }

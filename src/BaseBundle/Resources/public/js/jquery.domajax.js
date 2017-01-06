@@ -845,7 +845,7 @@ $(document).ready(function () {
                 jqForms.each(function () {
                     var jqForm = $(this);
                     var formId = body.domAjax.tools.getOrCreateId(jqForm);
-                    jqSubmit.data('endpoint', jqForm.attr('action') || jqForm.data('endpoint') || jqSubmit.data('endpoint'));
+                    jqSubmit.data('endpoint', jqSubmit.data('endpoint') || jqForm.attr('action') || jqForm.data('endpoint'));
                     jqSubmit.data('method', jqForm.attr('method') || 'GET');
                     jqSubmit.data('input', '#' + formId);
                     jqSubmit.data('alias', '#' + formId);

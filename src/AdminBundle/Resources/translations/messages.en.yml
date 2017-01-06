@@ -11,4 +11,6 @@ admin:
         confirm_delete: Do you really want to delete the "%permission%" permission?
         create_label: 'Add permission'
         create_submit: 'Add'
+        update_label: 'Update permission'
+        update_submit: 'Update'
         entity: permission

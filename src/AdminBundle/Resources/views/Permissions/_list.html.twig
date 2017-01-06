@@ -11,7 +11,15 @@
     <tbody>
         {% for resource in list %}
             <tr>
-                <td>{{ resource.role }}</td>
+                <td id="edit-{{ resource.id }}">
+                    <div
+                        class="domajax click"
+                        data-endpoint="{{ path('admin_permissions_edit', {selectedId: selectedId}) }}"
+                        data-output="#edit-{{ resource.id }}"
+                        data-input-attr="id"
+                        data-id="{{ resource.id }}"
+                    >{{ resource.role }}</div>
+                </td>
                 <td>
                     <input
                         type="button"
