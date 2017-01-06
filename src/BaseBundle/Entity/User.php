@@ -45,11 +45,6 @@ class User implements UserInterface, EquatableInterface
 
     /**
      * @var string
-     */
-    protected $username;
-
-    /**
-     * @var string
      *
      * @ORM\Column(name="nickname", type="string", length=255)
      */
@@ -147,25 +142,11 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Set username.
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getUsername()
     {
-        return $this->username;
+        return json_encode([$this->resourceOwner, $this->resourceOwnerId]);;
     }
 
     /**

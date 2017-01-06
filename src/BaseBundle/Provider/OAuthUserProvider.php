@@ -44,7 +44,6 @@ class OAuthUserProvider extends BaseUserProvider
             $user = new User();
             $user->setResourceOwner($resourceOwner);
             $user->setResourceOwnerId($resourceOwnerId);
-            $user->setUsername($json);
             $user->setNickname($name);
             $user->setContact($response->getEmail());
             $user->setSigninCount(1);
@@ -53,7 +52,6 @@ class OAuthUserProvider extends BaseUserProvider
             $this->em->flush($user);
             $reload = true;
         } else {
-            $user->setUsername($json);
             $user->setNickname($name);
             $user->setContact($response->getEmail());
             $user->setSigninCount($user->getSigninCount() + 1);

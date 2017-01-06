@@ -24,7 +24,7 @@ class AdministratorsController extends BaseController
     {
         return [
             'list' => $this->get('admin.storage.user')->getUsers(),
-            'me' => $this->getUser() && $this->getUser()->getId(),
+            'me' => $this->getUser()->getId(),
         ];
     }
 
