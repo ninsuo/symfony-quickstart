@@ -1,0 +1,17 @@
+
+User:
+1) add pagination in user management
+2) translate pagination (replace existing "domajax" template by Bootstrap3Translated and implement missing translations)
+3) add filtering in user management
+4) create "edit" on user (to edit nickname and contact? but will be overwritten maybe add "frozen" state..)
+5) create "Manage groups" page (list of user's group, list of available groups, both pagined/filterable)
+
+Group:
+6) create "Groups" page with list of groups
+7) add "Create group" and "Edit group" (edit in ajax)
+8) add "Delete", and pagination/filtering
+9) add "Manage users" page (list of group's users, list of available users, both pagined/filterable)
+10) remove the permission page
+11) clean up entities (User/Group, remove Permission)
+
+
