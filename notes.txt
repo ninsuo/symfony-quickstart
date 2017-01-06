@@ -7,6 +7,8 @@ OK  7) add "Create group" and "Edit group" (edit in ajax)
 OK  8) add "Delete", and pagination/filtering
 9) add "Manage users" page (list of group's users, list of available users, both pagined/filterable)
 
+- apply groups as roles (ROLE_GROUP_<group name>) in provider
+
 bug: looks like "change lang" doesn't keep filters/pages
 
 create a simple Profile page

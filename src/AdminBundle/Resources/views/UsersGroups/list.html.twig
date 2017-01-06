@@ -53,4 +53,8 @@
     {{ me.display(user, pagerIn, 'in') }}
     {{ me.display(user, pagerOut, 'out') }}
 
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ path('admin_users') }}">{{ 'base.button.back' | trans }}</a>
+    </div>
+
 {% endblock %}

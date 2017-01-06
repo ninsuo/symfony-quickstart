@@ -32,7 +32,7 @@
                         </td>
                         <td>
                             <a
-                                href="{{ path('admin_groups_delete', {id: group.id, token: csrf_token('administration')}) }}"
+                                href="{{ path('admin_groups_users', {groupId: group.id}) }}"
                                 class="btn btn-warning btn-sm">{{ 'admin.groups.manage' | trans }}</a>
                             &nbsp;&nbsp;&nbsp;
                             <a

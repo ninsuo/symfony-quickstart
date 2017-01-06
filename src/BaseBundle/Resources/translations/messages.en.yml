@@ -1,5 +1,6 @@
 base:
     button:
+        back: 'Go back'
         home: 'Go back to the homepage'
     changepassword:
         title: 'Change password'

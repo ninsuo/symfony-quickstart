@@ -5,7 +5,6 @@ namespace AdminBundle\Controller;
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\Group;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,15 +19,10 @@ class UsersGroupsController extends BaseController
      */
     public function listAction(Request $request, $userId)
     {
-        $manager = $this->getManager('BaseBundle:User');
-
-        $entity = $manager->findOneById($userId);
-        if (!$entity) {
-            throw $this->createNotFoundException();
-        }
+        $user = $this->getEntityById('BaseBundle:User', $userId);
 
         return $this->render('AdminBundle:UsersGroups:list.html.twig', [
-            'user'     => $entity,
+            'user'     => $user,
             'pagerIn'  => $this->_getUserGroups($request, $userId, 'in'),
             'pagerOut' => $this->_getUserGroups($request, $userId, 'out'),
         ]);
@@ -43,18 +37,13 @@ class UsersGroupsController extends BaseController
            ->createQueryBuilder()
            ->select('g')
            ->from(Group::class, 'g')
-           ->leftJoin('g.users', 'u')
+           ->setParameter('userId', $userId)
         ;
 
         if ('in' == $prefix) {
-            $qb
-               ->where("u.id = :userId")
-               ->setParameter('userId', $userId)
-            ;
+           $qb->where(":userId MEMBER OF g.users");
         } else {
-            $qb
-               ->where("u.id IS NULL")
-            ;
+           $qb->where(":userId NOT MEMBER OF g.users");
         }
 
         if ($filter) {

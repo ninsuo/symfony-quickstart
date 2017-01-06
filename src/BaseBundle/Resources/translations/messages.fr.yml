@@ -1,5 +1,6 @@
 base:
     button:
+        back: 'Retour'
         home: 'Retour à l''accueil'
     changepassword:
         title: 'Changer de mot de passe'
