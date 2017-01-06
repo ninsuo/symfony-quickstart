@@ -1,0 +1,42 @@
+parameters:
+    base.service.class: BaseBundle\Base\BaseService
+    base.oauth_user_provider.class: BaseBundle\Provider\OAuthUserProvider
+    base.locale.listener.class: BaseBundle\EventListener\LocaleListener
+    base.last_route.listener.class: BaseBundle\EventListener\LastRouteListener
+    base.routing.class: BaseBundle\Services\Routing
+    hwi_oauth.account.connector.class: BaseBundle\Connect\AccountConnect
+
+services:
+
+    base.service:
+        class: '%base.service.class%'
+        abstract: true
+        calls:
+          - [setContainer, ["@service_container"]]
+
+    base.oauth_user_provider:
+        class: '%base.oauth_user_provider.class%'
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    base.locale.listener:
+        class: '%base.locale.listener.class%'
+        arguments:
+            - '%kernel.default_locale%'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    base.last_route.listener:
+        class: '%base.last_route.listener.class%'
+        arguments:
+            - '@base.routing'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    base.routing:
+        class: '%base.routing.class%'
+        arguments:
+            - '@router'
+
+    hwi_oauth.account.connector:
+        class: '%hwi_oauth.account.connector.class%'

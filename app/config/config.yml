@@ -1,0 +1,134 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    translator:      { fallback: '%locale%' }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    assets:
+        version: 1.0.0
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes:
+        - "BraincraftedBootstrapBundle:Form:bootstrap.html.twig"
+    globals:
+        fuz:
+            site_brand: "%site_brand%"
+            site_description: "%site_description%"
+            site_default_title: "%site_default_title%"
+            supported_locales: "%supported_locales%"
+            menu_left: "%menu_left_enabled%"
+            menu_right: "%menu_right_enabled%"
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [ ]
+    filters:
+       lessphp:
+            file: "%kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php"
+            apply_to: '.less$'
+       cssrewrite: ~
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport:  "%mailer_transport%"
+    encryption: "%mailer_encryption%"
+    host:       "%mailer_host%"
+    port:       "%mailer_port%"
+    username:   "%mailer_user%"
+    password:   "%mailer_password%"
+    spool:      { type: memory }
+    auth_mode:  "login"
+
+# BootstrapBundle Configuration
+braincrafted_bootstrap:
+    jquery_path: "%kernel.root_dir%/../src/BaseBundle/Resources/public/js/jquery-2.1.1.min.js"
+    css_preprocessor: "lessphp"
+    auto_configure:
+      knp_menu: false
+
+# cache cleaning
+accelerator_cache:
+    host: "%site_url%"
+    web_dir: "%kernel.root_dir%/../web"
+    mode: "curl"
+
+# HWIOAuthBundle Configuration
+hwi_oauth:
+    firewall_names: ["main"]
+    resource_owners:
+        github:
+            type: github
+            client_id: '%github_client_id%'
+            client_secret: '%github_secret%'
+        stack:
+            type: stack_exchange
+            client_id: '%stack_client_id%'
+            client_secret: '%stack_secret%'
+            options:
+                key: '%stack_key%'
+        google:
+            type: "google"
+            client_id: "%google_client_id%"
+            client_secret: "%google_secret%"
+            scope: "email"
+            options:
+                display: "page"
+                access_type: "online"
+        twitter:
+            type: "twitter"
+            client_id: "%twitter_client_id%"
+            client_secret: "%twitter_secret%"
+        facebook:
+            type: "facebook"
+            client_id: "%facebook_client_id%"
+            client_secret: "%facebook_secret%"
+            scope: "email"
+            options:
+                display: "page"
+
+# Supported Website Languages
+jms_i18n_routing:
+    default_locale: "en"
+    locales: ["en", "fr"]
+    strategy: "prefix_except_default"
+
+# KnpMenu template configuration
+knp_menu:
+    twig:
+        template: "BaseBundle::knp_menu.html.twig"

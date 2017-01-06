@@ -1,0 +1,69 @@
+{# BaseBundle::layout.html.twig #}
+
+{% extends 'BaseBundle::base.html.twig' %}
+
+{% block left_menu %}
+    {% if fuz.menu_left %}
+        {% if is_granted('ROLE_USER') %}
+            {{ knp_menu_render('AppBundle:Builder:userLeftMenu') }}
+        {% else %}
+            {{ knp_menu_render('AppBundle:Builder:mainLeftMenu') }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block right_menu %}
+    {% if fuz.menu_right %}
+        {% if is_granted('ROLE_USER') %}
+            {{ knp_menu_render('AppBundle:Builder:userRightMenu') }}
+        {% else %}
+            {{ knp_menu_render('AppBundle:Builder:mainRightMenu') }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block login %}
+    <ul class="nav navbar-nav navbar-right">
+        {% if is_granted('ROLE_USER') %}
+            {% block logged_in %}
+               <p class="navbar-text">{{ 'base.login.as' | trans }} {{ macros.me() }}</p>
+               <li><a href="{{ path('logout') }}">{{ 'base.logout.title' | trans }}</a></li>
+            {% endblock %}
+        {% else %}
+           {% block logged_out %}
+               <li class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'base.login.title' | trans }} <span class="caret"></span></a>
+                   <ul class="dropdown-menu" role="menu">
+                       <li><a href="{{ hwi_oauth_login_url('github') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/github-small.png') }}" alt=""/> GitHub</a></li>
+                       <li><a href="{{ hwi_oauth_login_url('stack') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/stack-small.png') }}" alt=""/> Stack Exchange</a></li>
+                       <li><a href="{{ hwi_oauth_login_url('google') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/google-small.png') }}" alt=""/> Google</a></li>
+                       <li><a href="{{ hwi_oauth_login_url('twitter') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/twitter-small.png') }}" alt=""/> Twitter</a></li>
+                       <li><a href="{{ hwi_oauth_login_url('facebook') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/facebook-small.png') }}" alt=""/> Facebook</a></li>
+                   </ul>
+               </li>
+            {% endblock %}
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block translations %}
+    {% if fuz.supported_locales|length %}
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'base.locale.title' | trans }} <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    {% block supported_locales %}
+                        {% for locale, data in fuz.supported_locales %}
+                        <li>
+                            <a href="{{ path('reload', {'_locale': locale}) }}">
+                                <img class="lang-image" src="{{ asset('bundles/base/img/countries/' ~ data.flag ~ '.png') }}" alt=""/>
+                                {{ data.menu }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    {% endblock %}
+                </ul>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}

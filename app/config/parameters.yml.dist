@@ -1,0 +1,65 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+
+    # General
+    site_url: 'http://127.0.0.1:8000'
+    site_brand: fuz.org
+    site_description: 'fuz.org provides a simple and powerful code generator online.'
+    site_default_title: 'fuz.org - Generate your money!'
+
+    # Database
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     fuz
+    database_user:     root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    # Emails
+    mailer_transport:    smtp
+    mailer_encryption:   ssl
+    mailer_host:         127.0.0.1
+    mailer_port:         465
+    mailer_user:         ~
+    mailer_password:     ~
+    mailer_sender_email: auto@fuz.org
+    mailer_sender_name:  fuz.org
+
+    # Choose flag names in: src/BaseBundle/Resources/public/img/countries
+    # Implement translations in: src/AppBundle/translations/messages.XX.xlf
+    # /!\ Do not forget to add your new locales in config.yml, below jms_i18n_routing
+    locale: en
+    supported_locales:
+        en: {flag: United-Kingdom, menu: English}
+        fr: {flag: France, menu: Français}
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    # GitHub Login: https://github.com/settings/developers
+    github_client_id: <your client id>
+    github_secret:    <your secret>
+
+    # StackExchange Login: https://stackapps.com/apps/oauth/
+    stack_client_id: <your client id>
+    stack_secret:    <your secret>
+    stack_key:       <your key>
+
+    # Google Login: https://console.developers.google.com/project
+    google_client_id: <your client id>
+    google_secret:    <your secret>
+
+    # Twitter Login: https://apps.twitter.com/
+    twitter_enabled:   true
+    twitter_client_id: <your client id>
+    twitter_secret:    <your secret>
+
+    # Facebook Login: https://developers.facebook.com/apps/
+    facebook_client_id: <your client id>
+    facebook_secret:    <your secret>
+
+    # Website menus at the top
+    menu_left_enabled: true
+    menu_right_enabled: true

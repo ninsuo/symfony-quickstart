@@ -1,0 +1,41 @@
+security:
+
+    providers:
+        oauth_provider:
+             id: base.oauth_user_provider
+
+    role_hierarchy:
+        ROLE_ADMIN:       "ROLE_USER"
+        ROLE_SUPER_ADMIN: ["ROLE_ADMIN", "ROLE_ALLOWED_TO_SWITCH"]
+
+    firewalls:
+        dev:
+            pattern: "^/(_(profiler|wdt|error)|css|images|js)/"
+            security: false
+
+        main:
+            pattern: "^/"
+            anonymous: ~
+            oauth:
+                resource_owners:
+                    github: "/login/check-github"
+                    stack: "/login/check-stack"
+                    google: "/login/check-google"
+                    twitter: "/login/check-twitter"
+                    facebook: "/login/check-facebook"
+                login_path: "/login"
+                failure_path: "/login"
+                default_target_path: "/welcome"
+                oauth_user_provider:
+                    service: "base.oauth_user_provider"
+
+        default:
+            anonymous: ~
+
+    access_control:
+        - { path: "^/login", role: "IS_AUTHENTICATED_ANONYMOUSLY" }
+        - { path: "^/connect", role: "IS_AUTHENTICATED_ANONYMOUSLY" }
+        - { path: "^/user", role: "ROLE_USER" }
+        - { path: "^/logout", role: "ROLE_USER" }
+        - { path: "^/admin", role: "ROLE_ADMIN" }
+

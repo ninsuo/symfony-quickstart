@@ -1,0 +1,30 @@
+{% extends 'BaseBundle::layout.html.twig' %}
+
+{% block menu %}{% endblock %}
+{% block login %}{% endblock %}
+
+{% block title %}{{ 'base.error.404.title' | trans | title }}{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>404 - {{ 'base.error.404.title' | trans | title }}</h3>
+
+        <div class="text-center">{{ 'base.error.404.explain' | trans }}</div>
+
+        <div>&nbsp;</div>
+
+        <div class="text-center">{{ 'base.error.back_sentence' | trans }}</div>
+
+        <div>&nbsp;</div>
+
+        <div class="text-center">
+            <a href="{{ path('home') }}" class="btn btn-default btn-sm">{{ 'base.button.home' | trans }}</a>
+        </div>
+
+    </div>
+    <div class="clear">&nbsp;</div>
+</div>
+
+{% endblock %}

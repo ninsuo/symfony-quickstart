@@ -1,0 +1,69 @@
+base:
+    button:
+        home: 'Retour à l''accueil'
+    changepassword:
+        title: 'Changer de mot de passe'
+    crud:
+        action:
+            edit: Editer
+            show: Afficher
+        back: 'Retourner à la liste'
+        button:
+            create: Créer
+            delete: Supprimer
+            update: Modifier
+        create:
+            success: 'L''entrée a correctement été ajoutée.'
+        delete:
+            success: 'L''entrée a correctement été supprimée.'
+        edit:
+            button: Editer
+            title: 'Modifier une entrée %entity%'
+        index:
+            actions: Actions
+            title: 'Liste des %entity%'
+        new:
+            button: 'Créer une nouvelle entrée'
+            title: 'Nouvelle entrée %entity%'
+        update:
+            success: 'Entrée modifiée avec succès.'
+    description: 'Un projet Symfony contenant des outils indispensables pour un développement rapide et efficace.'
+    error:
+        back_sentence: 'Utilisez le bouton Page précédente, le menu de navigation ou cliquez sur le bouton Accueil pour continuer.'
+        403:
+            explain: 'Vous devez être connecté(e) ou/et n''avez pas les privilèges requis pour accéder à cette ressource.'
+            title: 'Permission non accordée'
+        404:
+            explain: 'La page que vous recherchez a peut-être été supprimée, déplacée, ou est temporairement indisponible.'
+            title: 'Page introuvable'
+        500:
+            explain: 'Si vous êtes arrivé(e) sur cette page, c''est que quelque chose a planté chez nous.'
+            title: 'Une erreur s''est produite.'
+    locale:
+        title: Langue
+    login:
+        as: 'Connecté en tant que'
+        email: 'E-Mail :'
+        form:
+            example: email@exemple.com
+        resource_owners: 'Connexion à l''aide de votre compte...'
+        title: Connexion
+        user:
+            login: 'Connexion à votre compte %brand%'
+            register: 'Enregistrement à %brand%'
+        using: 'Se connecter en utilisant %provider%'
+    logout:
+        title: Déconnexion
+    menu:
+        home: Accueil
+    nav: 'Afficher/Masquer le menu'
+    title: 'Mon Projet Vide'
+    site:
+        description: 'fuz.org fournit un générateur de code en ligne simple et puissant.'
+        default_title: 'fuz.org - Générez votre argent!'
+    unsuscribe:
+        confirm: Confirmer
+        explain: 'Toutes les données associées à votre compte vont être'
+        removed: supprimées
+        title: 'Vous supprimez votre compte.'
+    wait: 'Veuillez patienter...'

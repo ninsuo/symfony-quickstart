@@ -1,0 +1,30 @@
+<hr/>
+
+{% set show_edit = ('edit' in actions) and (not hide_edit) %}
+{% set show_delete = ('delete' in actions) and (not hide_delete) %}
+{% set nb_buttons = show_edit + show_delete %}
+
+{% if nb_buttons %}
+
+    <div class="row">
+        {% if show_edit %}
+            <div class="col-md-{{ (12 / nb_buttons) }} text-center">
+                <a href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}" class="btn btn-primary">{{ "{{ 'base.crud.button.update' | trans }}" }}</a>
+            </div>
+        {% endif %}
+        {% if show_delete %}
+            <div class="col-md-{{ (12 / nb_buttons) }} text-center">
+                {{ '{{ form_start(delete_form) }}' }}
+                <input type="submit" value="{{ "{{ 'base.crud.button.delete' | trans }}" }}" class="btn btn-danger">
+                {{ '{{ form_end(delete_form) }}' }}
+            </div>
+        {% endif %}
+    </div>
+
+{% endif %}
+
+<br/><br/>
+
+<div class="text-center">
+    <a href="{{ "{{ path('" ~ route_name_prefix ~ "_index') }}" }}" class="btn btn-default">{{ "{{ 'base.crud.back' | trans }}" }}</a>
+</div>
