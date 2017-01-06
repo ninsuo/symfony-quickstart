@@ -4,6 +4,7 @@ admin:
         name: Name
         email: Email
         admin: Admin
+        frozen: Frozen
         edit:
             contact: Email
             nickname: Name

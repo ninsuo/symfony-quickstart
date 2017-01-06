@@ -15,6 +15,7 @@
                 <th>{{ 'admin.users.name' | trans }}</th>
                 <th>{{ 'admin.users.email' | trans }}</th>
                 <th>{{ 'admin.users.admin' | trans }}</th>
+                <th>{{ 'admin.users.frozen' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -44,12 +45,22 @@
                             <input
                                 type="checkbox"
                                 class="domajax change"
-                                data-endpoint="{{ path('admin_users_toggle', {token: csrf_token('administration')}) }}"
+                                data-endpoint="{{ path('admin_users_toggle_admin', {token: csrf_token('administration')}) }}"
                                 data-input-attr="id"
                                 data-id="{{ user.id }}"
                                 {% if user.isAdmin %}checked{% endif %}
                             />
                         {% endif %}
+                    </td>
+                    <td>
+                        <input
+                            type="checkbox"
+                            class="domajax change"
+                            data-endpoint="{{ path('admin_users_toggle_frozen', {token: csrf_token('administration')}) }}"
+                            data-input-attr="id"
+                            data-id="{{ user.id }}"
+                            {% if user.isFrozen %}checked{% endif %}
+                        />
                     </td>
                 </tr>
             {% endfor %}

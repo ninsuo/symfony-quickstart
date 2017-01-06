@@ -48,16 +48,33 @@ class UsersController extends BaseController
     }
 
     /**
-     * @Route("/toggle/{token}", name="admin_users_toggle")
+     * @Route("/toggle/admin/{token}", name="admin_users_toggle_admin")
      * @Template()
      */
-    public function toggleAction(Request $request, $token)
+    public function toggleAdminAction(Request $request, $token)
     {
         if ($token !== $this->get('security.csrf.token_manager')->getToken('administration')->getValue()) {
             throw new InvalidCsrfTokenException('Invalid CSRF token');
         }
 
         $this->get('admin.storage.user')->toggleAdmin(
+           intval($request->request->get('id'))
+        );
+
+        return new Response();
+    }
+
+    /**
+     * @Route("/toggle/frozen/{token}", name="admin_users_toggle_frozen")
+     * @Template()
+     */
+    public function toggleFrozenAction(Request $request, $token)
+    {
+        if ($token !== $this->get('security.csrf.token_manager')->getToken('administration')->getValue()) {
+            throw new InvalidCsrfTokenException('Invalid CSRF token');
+        }
+
+        $this->get('admin.storage.user')->toggleFrozen(
            intval($request->request->get('id'))
         );
 
