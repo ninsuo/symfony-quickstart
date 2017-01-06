@@ -52,7 +52,6 @@ parameters:
     google_secret:    <your secret>
 
     # Twitter Login: https://apps.twitter.com/
-    twitter_enabled:   true
     twitter_client_id: <your client id>
     twitter_secret:    <your secret>
 
