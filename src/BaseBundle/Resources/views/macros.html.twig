@@ -164,14 +164,14 @@
     </div>
 {% endmacro %}
 
-{% macro search() %}
+{% macro search(prefix = '') %}
     <div class="pull-right" style="width: 300px;">
-        <form name="search_filter" method="get" action="" class="form-inline" role="form">
+        <form method="get" action="" class="form-inline" role="form">
             <div class="input-group stylish-input-group" style="border:none;">
                 <div class="input-group stylish-input-group" style="border:none;">
                     <span class="form-control" style="border-right:none;">
-                        <input name="filter" placeholder="{{ 'base.search'|trans|e('html_attr') }}" style="border:none;" class="form-control" value="{{ app.request.get('filter')|e('html_attr') }}" type="search">
-                        {% for key, value in app.request.query.all if key != 'filter' %}
+                        <input name="{{ prefix }}filter" placeholder="{{ 'base.search'|trans|e('html_attr') }}" style="border:none;" class="form-control" value="{{ app.request.get('filter')|e('html_attr') }}" type="search">
+                        {% for key, value in app.request.query.all if key != prefix ~ 'filter' %}
                             {{ array_to_query_inputs(key, value) }}
                         {% endfor %}
                     </span>
