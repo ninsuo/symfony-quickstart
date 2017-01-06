@@ -3,9 +3,9 @@ parameters:
 
     # General
     site_url: http://127.0.0.1:8000
-    site_brand: fuz.org
-    site_description: 'fuz.org provides a simple and powerful code generator online.'
-    site_default_title: 'fuz.org - Generate your money!'
+    site_brand: Light
+    site_description: base.site.description
+    site_default_title: base.site.default_title
 
     # Database
     database_driver:   pdo_mysql

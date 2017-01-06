@@ -29,7 +29,7 @@ base:
             title: '%entity% creation'
         update:
             success: 'Entry updated successfully.'
-    description: 'An empty Symfony project that provides lots of ready-to-use tools for quick and not-so-dirty development'
+    description: ''
     error:
         back_sentence: 'Use the Back button, the navigation menu or click on the Home button to continue.'
         403:
@@ -70,9 +70,8 @@ base:
         go: 'Go'
     search: Search...
     site:
-        description: 'fuz.org provides a simple and powerful code generator online.'
-        default_title: 'fuz.org - Generate your money!'
-    title: 'My Empty Project'
+        description: 'An empty Symfony project that provides lots of ready-to-use tools for quick and not-so-dirty development'
+        default_title: 'Light, write down your mind'
     unsuscribe:
         confirm: Confirm
         explain: 'All data associated with your account will be'

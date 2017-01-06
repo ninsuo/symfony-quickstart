@@ -1,7 +1,5 @@
 
 
-bug: looks like "change lang" doesn't keep filters/pages
-
 create a simple Profile page
 - nickname
 - contact
