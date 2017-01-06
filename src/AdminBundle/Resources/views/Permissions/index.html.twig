@@ -8,14 +8,14 @@
 
     <div id="main">
         <div class="row">
-            <div id="permissions" class="col-md-6">
+            <div id="permissions" class="col-md-4">
                 {{ render(controller('AdminBundle:Permissions:_list', {selectedId: selectedId})) }}
             </div>
-            <div id="users" class="col-md-3">
-
+            <div id="users" class="col-md-4">
+                {{ render(controller('AdminBundle:Permissions:_userList', {selectedId: selectedId})) }}
             </div>
-            <div id="groups" class="col-md-3">
-
+            <div id="groups" class="col-md-4">
+                {{ render(controller('AdminBundle:Permissions:_groupList', {selectedId: selectedId})) }}
             </div>
         </div>
     </div>

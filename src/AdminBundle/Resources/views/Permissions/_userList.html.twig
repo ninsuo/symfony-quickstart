@@ -1,0 +1,17 @@
+<h3>Users having {{ entity.role }}:</h3>
+
+<div class="text-center">
+
+    {{
+        pagerfanta(pager, 'domajax', {
+            routeName: 'admin_permissions_users',
+            routeParmas: {selectedId: selectedId},
+            domajax: {
+                output: '#users',
+            }
+        })
+    }}
+
+    <p>{{ pager.nbResults }} results.</p>
+
+</div>

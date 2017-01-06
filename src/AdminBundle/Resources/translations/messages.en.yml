@@ -7,7 +7,9 @@ admin:
     permissions:
         id: ID
         name: Name
+        actions: Actions
         delete: Delete
+        manage: Manage
         confirm_delete: Do you really want to delete the "%permission%" permission?
         create_label: 'Add permission'
         create_submit: 'Add'

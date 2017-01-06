@@ -4,14 +4,18 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\Permission;
+use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\InvalselectedIdCsrfTokenException;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Validator\Constraints;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * @Route("/permissions")
@@ -20,7 +24,7 @@ use Symfony\Component\Validator\Constraints;
 class PermissionsController extends BaseController
 {
     /**
-     * @Route("/", name="admin_permissions", defaults={"selectedId":null})
+     * @Route("/{selectedId}", name="admin_permissions", requirements={"selectedId"="^\d+$"}, defaults={"selectedId":null})
      * @Template()
      */
     public function indexAction($selectedId)
@@ -40,13 +44,15 @@ class PermissionsController extends BaseController
 
         $form = $this->treatForm($request, $selectedId);
 
-        $list = $this
-           ->getManager('BaseBundle:Permission')
-           ->findAll(['role' => 'ASC'])
-        ;
+        $adapter = new DoctrineORMAdapter($this
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('p')
+           ->from(Permission::class, 'p')
+        );
 
         return [
-            'list'       => $list,
+            'pager'      => (new Pagerfanta($adapter))->setCurrentPage($request->query->get('page', 1)),
             'selectedId' => $selectedId,
             'create'     => $form->createView(),
         ];
@@ -86,6 +92,55 @@ class PermissionsController extends BaseController
         return $this->redirectToRoute('admin_permissions_list', [
                'selectedId' => $selectedId,
         ]);
+    }
+
+    /**
+     * @Route("/user-list/{selectedId}", name="admin_permissions_users", defaults={"selectedId": null})
+     * @Template()
+     */
+    public function _userListAction(Request $request, $selectedId)
+    {
+        if (is_null($selectedId)) {
+            return new Response();
+        }
+
+        $entity = $this
+           ->getManager('BaseBundle:Permission')
+           ->findOneById($selectedId)
+        ;
+        if (is_null($entity)) {
+            return new Response();
+        }
+
+        $adapter = new DoctrineORMAdapter($this
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('u')
+           ->from(User::class, 'u')
+           ->innerJoin('u.permissions', 'p')
+           ->where('p.id = :selectedId')
+           ->setParameter('selectedId', $selectedId)
+        );
+
+        return [
+            'entity' => $entity,
+            'pager' => (new Pagerfanta($adapter))->setCurrentPage($request->query->get('page', 1)),
+            'selectedId' => $selectedId,
+        ];
+    }
+
+    /**
+     * @Route("/group-list/{selectedId}", name="admin_permissions_groups", defaults={"selectedId": null})
+     * @Template()
+     */
+    public function _groupListAction(Request $request, $selectedId)
+    {
+        if (is_null($selectedId)) {
+            return new Response();
+        }
+
+
+        return new Response();
     }
 
     /**

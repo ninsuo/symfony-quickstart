@@ -7,7 +7,9 @@ admin:
     permissions:
         id: ID
         name: Nom
-        delete: Delete
+        actions: Actions
+        delete: Supprimer
+        manage: Gérer
         confirm_delete: 'Voulez-vous vraiment supprimer la permissions "%permission%" ?'
         create_label: 'Ajouter une permission'
         create_submit: 'Ajouter'

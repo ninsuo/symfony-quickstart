@@ -36,7 +36,9 @@
       "smart-core/accelerator-cache-bundle": "~1",
       "easycorp/easy-security-bundle": "^1.0",
       "egeloen/ckeditor-bundle": "^4.0",
-      "exercise/htmlpurifier-bundle": "^0.2.3"
+      "exercise/htmlpurifier-bundle": "^0.2.3",
+      "pagerfanta/pagerfanta": "^1.0",
+      "white-october/pagerfanta-bundle": "^1.0"
    },
    "require-dev": {
       "sensio/generator-bundle": "^3.0",

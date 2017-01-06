@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new EasyCorp\Bundle\EasySecurityBundle\EasySecurityBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new BaseBundle\BaseBundle(),
             new AppBundle\AppBundle(),
             new AdminBundle\AdminBundle(),

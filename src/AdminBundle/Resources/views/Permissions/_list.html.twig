@@ -5,11 +5,11 @@
     <thead>
         <tr>
             <th>{{ 'admin.permissions.name' | trans }}</th>
-            <th class="width-25">{{ 'admin.permissions.delete' | trans }}</th>
+            <th style="width: 30%;">{{ 'admin.permissions.actions' | trans }}</th>
         </tr>
     </thead>
     <tbody>
-        {% for resource in list %}
+        {% for resource in pager.currentPageResults %}
             <tr>
                 <td id="edit-{{ resource.id }}">
                     <div
@@ -18,25 +18,45 @@
                         data-output="#edit-{{ resource.id }}"
                         data-input-attr="id"
                         data-id="{{ resource.id }}"
-                    >{{ resource.role }}</div>
+                        >{{ resource.role }}</div>
                 </td>
                 <td>
                     <input
                         type="button"
-                        class="btn btn-danger domajax click"
+                        class="btn btn-xs btn-danger domajax click"
                         data-endpoint="{{ path('admin_permissions_delete', {token: csrf_token('administration'), selectedId: selectedId}) }}"
                         data-confirm="{{ 'admin.permissions.confirm_delete' | trans({'%permission%': resource.role }) | e('html_attr') }}"
                         data-input-attr="id"
                         data-id="{{ resource.id }}"
                         data-output="#permissions"
                         value="{{ 'admin.permissions.delete' | trans }}"
-                    />
+                        />
                     &nbsp;
+                    <a
+                        href="{{ path('admin_permissions', {selectedId: resource.id}) }}"
+                        class="btn btn-xs btn-warning"
+                    >{{ 'admin.permissions.manage' | trans }}</a>
                 </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div class="text-center">
+
+    {{
+        pagerfanta(pager, 'domajax', {
+            routeName: 'admin_permissions_list',
+            routeParmas: {selectedId: selectedId},
+            domajax: {
+                output: '#permissions',
+            }
+        })
+    }}
+
+    <p>{{ pager.nbResults }} results.</p>
+
+</div>
 
 {{ form(create) }}
 

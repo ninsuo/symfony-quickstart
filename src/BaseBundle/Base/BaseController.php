@@ -79,12 +79,17 @@ abstract class BaseController extends Controller
         return $this->container->get('form.factory')->createNamedBuilder($name, $type, $data, $options);
     }
 
-    public function getManager($manager)
+    public function getManager($manager = null)
     {
-        return $this
+        $em = $this
            ->get('doctrine')
            ->getManager()
-           ->getRepository($manager)
         ;
+
+        if (!is_null($manager)) {
+           return $em->getRepository($manager);
+        }
+
+        return $em;
     }
 }

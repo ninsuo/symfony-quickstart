@@ -1,6 +1,7 @@
 parameters:
     base.oauth_user_provider.class: BaseBundle\Provider\OAuthUserProvider
     hwi_oauth.account.connector.class: BaseBundle\Connect\AccountConnect
+    pagerfanta.view.domajax.class: BaseBundle\Pagerfanta\View\DomajaxView
 
 services:
 
@@ -11,3 +12,9 @@ services:
 
     hwi_oauth.account.connector:
         class: '%hwi_oauth.account.connector.class%'
+
+    pagerfanta.view.domajax:
+        class: %pagerfanta.view.domajax.class%
+        public: false
+        tags:
+            - { name: pagerfanta.view, alias: domajax }
