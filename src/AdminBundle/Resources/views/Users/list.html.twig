@@ -6,6 +6,16 @@
 
 {% block body %}
 
+
+    {# TODO icon, translation and put this in a macro #}
+    <div class="text-right">
+        {{ form_start(search, { 'attr': {'class': 'form-inline'} }) }}
+        <div class="form-group">
+            {{ form_widget(search.criteria) }}
+        </div>
+        {{ form_end(search) }}
+    </div>
+
     <table class="table">
         <thead>
             <tr>

@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Form\Type\SearchType;
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,16 +24,29 @@ class UsersController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $qb = $this
-          ->getManager()
-          ->createQueryBuilder()
-          ->select('u')
-          ->from(User::class, 'u')
+        $search = $this
+           ->createForm(SearchType::class)
+           ->handleRequest($request)
         ;
 
+        $qb = $this
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('u')
+           ->from(User::class, 'u')
+        ;
+
+        if ($criteria = $search->getData()['criteria']) {
+            $qb
+               ->where('u.nickname LIKE :criteria OR u.contact LIKE :criteria')
+               ->addParameter('criteria', $criteria)
+            ;
+        }
+
         return [
-            'pager' => $this->getPager($request, $qb),
-            'me'    => $this->getUser()->getId(),
+            'search' => $search->createView(),
+            'pager'  => $this->getPager($request, $qb),
+            'me'     => $this->getUser()->getId(),
         ];
     }
 
