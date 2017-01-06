@@ -1,5 +1,7 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
+{% import 'BaseBundle::macros.html.twig' as macros %}
+
 {% block body %}
 
     <table class="table">
@@ -15,7 +17,7 @@
             {% for user in list %}
                 <tr>
                     <td>{{ user.id }}</td>
-                    <td>{{ user.nickname }}</td>
+                    <td>{{ macros.user(user) }}</td>
                     <td>{{ user.contact }}</td>
                     <td>
                         {% if me == user.id %}
@@ -27,12 +29,11 @@
                                 data-endpoint="{{ path('admin_administrators_list', {token: csrf_token('admin-administrators-toggle')}) }}"
                                 data-input-attr="id"
                                 data-id="{{ user.id }}"
-                                {% if user.is_admin %}checked{% endif %}
+                                {% if user.isAdmin %}checked{% endif %}
                             />
                         {% endif %}
                     </td>
                 </tr>
-
             {% endfor %}
         </tbody>
     </table>

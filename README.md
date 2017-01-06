@@ -5,13 +5,13 @@ Symfony Quick Start
 
 This is the [Symfony3 Standard Edition](https://github.com/symfony/symfony-standard) with some ready-to-use tools to get started quickly.
 
-Most common stuff, such as login, translations or menus are built-in: no need to configure or code anything. Just overwrite and copy/paste to customize.
-
-You'll find here 2 bundles:
+You'll find here 3 bundles:
 
 - BaseBundle contains well-known bundles implementations, you'll probably not need to modify those files.
 
 - AppBundle is a skeleton, it will contain your app implementation.
+
+- AdminBundle contains tools to manage the application (administrators, roles, groups, etc).
 
 ## Ready-to-use bundles
 

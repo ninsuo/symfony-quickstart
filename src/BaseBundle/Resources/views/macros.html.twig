@@ -102,17 +102,16 @@
     {% spaceless %}
         {% import _self as macros %}
         {% if is_granted('ROLE_USER') %}
-            {{ macros.user('', app.user) }}
+            {{ macros.user(app.user) }}
         {% else %}
             Guest
         {% endif %}
     {% endspaceless %}
 {% endmacro %}
 
-{% macro user(prefix, user) %}
+{% macro user(user) %}
     {%- spaceless %}
         {% if user != null %}
-            {{ prefix }}
             <img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/>
             {{ user.nickname }}
         {% endif %}

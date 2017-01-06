@@ -5,18 +5,20 @@ namespace BaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User.
  *
  * @ORM\Table(
- *      name="user",
- *      uniqueConstraints={
- *          @ORM\UniqueConstraint(name="resource_owner_idx", columns={"resource_owner", "resource_owner_id"})
- *      }
+ *     name="user",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="resource_owner_idx", columns={"resource_owner", "resource_owner_id"})
+ *     }
  * )
  * @ORM\Entity(repositoryClass="BaseBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
 class User implements UserInterface, EquatableInterface
 {
@@ -84,6 +86,45 @@ class User implements UserInterface, EquatableInterface
     protected $roles = ['ROLE_USER'];
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Permission")
+     * @ORM\JoinTable(name="user_permission",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="permission_id", referencedColumnName="id")
+     *     }
+     * )
+     */
+    protected $permissions;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Group")
+     * @ORM\JoinTable(name="user_group",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     *     }
+     * )
+     */
+    protected $groups;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->permissions = new ArrayCollection();
+        $this->groups      = new ArrayCollection();
+    }
+
+    /**
      * Get id.
      *
      * @return int
@@ -146,7 +187,8 @@ class User implements UserInterface, EquatableInterface
      */
     public function getUsername()
     {
-        return json_encode([$this->resourceOwner, $this->resourceOwnerId]);;
+        return json_encode([$this->resourceOwner, $this->resourceOwnerId]);
+        ;
     }
 
     /**
@@ -194,7 +236,7 @@ class User implements UserInterface, EquatableInterface
      */
     public function getContact()
     {
-        return $this->username;
+        return $this->contact;
     }
 
     /**
@@ -246,7 +288,7 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Set isAdmin
+     * Set isAdmin.
      *
      * @param bool $isAdmin
      * @return User
@@ -259,7 +301,7 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get isAdmin
+     * Get isAdmin.
      *
      * @return bool
      */
@@ -310,6 +352,26 @@ class User implements UserInterface, EquatableInterface
     public function hasRole($role)
     {
         return in_array($role, $this->roles);
+    }
+
+    /**
+     * Get permissions.
+     *
+     * @return ArrayCollection
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * Get groups.
+     *
+     * @return ArrayCollection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 
     /**

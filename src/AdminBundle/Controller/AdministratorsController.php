@@ -22,8 +22,15 @@ class AdministratorsController extends BaseController
      */
     public function listAction()
     {
+        $list = $this
+            ->get('doctrine')
+            ->getManager()
+            ->getRepository('BaseBundle:User')
+            ->findAll()
+        ;
+
         return [
-            'list' => $this->get('admin.storage.user')->getUsers(),
+            'list' => $list,
             'me' => $this->getUser()->getId(),
         ];
     }
