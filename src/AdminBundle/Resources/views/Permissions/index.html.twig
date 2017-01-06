@@ -7,7 +7,17 @@
 {% block body %}
 
     <div id="main">
-        {{ render(controller('AdminBundle:Permissions:_list', {selectedId: selectedId})) }}
+        <div class="row">
+            <div id="permissions" class="col-md-6">
+                {{ render(controller('AdminBundle:Permissions:_list', {selectedId: selectedId})) }}
+            </div>
+            <div id="users" class="col-md-3">
+
+            </div>
+            <div id="groups" class="col-md-3">
+
+            </div>
+        </div>
     </div>
 
 {% endblock %}

@@ -8,7 +8,7 @@ admin:
         id: ID
         name: Name
         delete: Delete
-        confirm_delete: Do you really want to delete the %permission% permission?
+        confirm_delete: Do you really want to delete the "%permission%" permission?
         create_label: 'Add permission'
         create_submit: 'Add'
         entity: permission

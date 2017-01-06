@@ -1,0 +1,16 @@
+parameters:
+    base.routing.helper.class: BaseBundle\Services\RoutingHelper
+    base.doctrine.helper.class: BaseBundle\Services\DoctrineHelper
+
+services:
+
+    base.routing.helper:
+        class: '%base.routing.helper.class%'
+        arguments:
+            - '@router'
+
+    base.doctrine.helper:
+        class: '%base.doctrine.helper.class%'
+        parent: base.service
+
+ 

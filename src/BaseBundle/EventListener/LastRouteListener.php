@@ -2,7 +2,7 @@
 
 namespace BaseBundle\EventListener;
 
-use BaseBundle\Services\Routing;
+use BaseBundle\Services\RoutingHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -10,11 +10,11 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class LastRouteListener implements EventSubscriberInterface
 {
-    protected $routing;
+    protected $routingHelper;
 
-    public function __construct(Routing $routing)
+    public function __construct(RoutingHelper $routingHelper)
     {
-        $this->routing = $routing;
+        $this->routingHelper = $routingHelper;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -25,7 +25,7 @@ class LastRouteListener implements EventSubscriberInterface
         }
 
         try {
-            $currentRoute = $this->routing->getCurrentRoute($request);
+            $currentRoute = $this->routingHelper->getCurrentRoute($request);
         } catch (ResourceNotFoundException $ex) {
             return;
         }

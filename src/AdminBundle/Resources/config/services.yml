@@ -1,8 +1,12 @@
 parameters:
     admin.storage.user.class: AdminBundle\Storage\UserStorage
+    admin.storage.permission.class: AdminBundle\Storage\PermissionStorage
 
 services:
     admin.storage.user:
         class: '%admin.storage.user.class%'
         parent: base.storage
 
+    admin.storage.permission:
+        class: '%admin.storage.permission.class%'
+        parent: base.storage

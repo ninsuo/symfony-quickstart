@@ -2,11 +2,8 @@
 
 namespace BaseBundle\Base;
 
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\VarDumper\VarDumper;
@@ -80,25 +77,6 @@ abstract class BaseController extends Controller
     public function createNamedFormBuilder($name, $type = Type\FormType::class, $data = null, array $options = array())
     {
         return $this->container->get('form.factory')->createNamedBuilder($name, $type, $data, $options);
-    }
-
-    public function persistHandleDuplicates(FormInterface $form, $entity, $entry)
-    {
-        $em = $this
-           ->get('doctrine')
-           ->getManager()
-        ;
-
-        try {
-            $em->persist($entity);
-            $em->flush();
-        } catch (UniqueConstraintViolationException $ex) {
-            $form->addError(new FormError(
-               $this->get('translator')->trans('base.form.duplicate_error', [
-                   '%entry%' => $entry,
-               ])
-            ));
-        }
     }
 
     public function getManager($manager)
