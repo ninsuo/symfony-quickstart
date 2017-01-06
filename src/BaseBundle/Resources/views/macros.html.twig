@@ -100,8 +100,9 @@
 
 {% macro me() %}
     {% spaceless %}
+        {% import _self as macros %}
         {% if is_granted('ROLE_USER') %}
-            {{ _self.user('', app.user) }}
+            {{ macros.user('', app.user) }}
         {% else %}
             Guest
         {% endif %}
