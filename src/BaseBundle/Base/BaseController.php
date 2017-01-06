@@ -100,19 +100,19 @@ abstract class BaseController extends Controller
         return $em;
     }
 
-    public function getPager(Request $request, QueryBuilder $qb)
+    public function getPager(Request $request, QueryBuilder $qb, $prefix = '')
     {
         $pager = new Pagerfanta(
            new DoctrineORMAdapter($qb)
         );
 
-        $perPage = $request->query->get('per_page', self::PAGER_PER_PAGE_DEFAULT);
+        $perPage = $request->query->get($prefix . 'per_page', self::PAGER_PER_PAGE_DEFAULT);
         if (!in_array($perPage, self::PAGER_PER_PAGE_LIST)) {
             throw new NotValidMaxPerPageException();
         }
 
         $pager->setMaxPerPage($perPage);
-        $pager->setCurrentPage($request->request->get('page') ?: $request->query->get('page') ?: 1);
+        $pager->setCurrentPage($request->request->get($prefix . 'page') ?: $request->query->get($prefix . 'page') ?: 1);
 
         return $pager;
     }

@@ -122,10 +122,14 @@
     {% endspaceless -%}
 {% endmacro %}
 
-{% macro pager(pager) %}
+{% macro pager(pager, prefix = '') %}
     <div class="row">
         <div class="text-center col-md-12">
-            {{ pagerfanta(pager, 'light') }}
+            {{
+                pagerfanta(pager, 'light', {
+                    'pageParameter': '[' ~ prefix ~ 'page]',
+                })
+            }}
         </div>
         <div class="text-left col-md-4">
 
@@ -134,7 +138,7 @@
                 {% for perPage in constant('BaseBundle\\Base\\BaseController::PAGER_PER_PAGE_LIST') %}
                     {% set isCurrent = perPage == pager.maxPerPage %}
                     <li {% if isCurrent %}class="active"{% endif %}>
-                        {% if isCurrent %}<span>{% else %}<a href="?per_page={{ perPage }}">{% endif %}
+                        {% if isCurrent %}<span>{% else %}<a href="?{{ prefix }}per_page={{ perPage }}">{% endif %}
                             {{ perPage }}
                         {% if isCurrent %}</span>{% else %}</a>{% endif %}
                     </li>
@@ -149,8 +153,8 @@
             <div>{{ 'base.pager.go_to'|trans }}</div>
             <form class="form-inline" action="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}" method="get">
                 <div class="form-group">
-                    <input class="form-control" name="page" style="width: 100px;" type="text"/>
-                    {% for key, value in app.request.query.all if key != 'page' %}
+                    <input class="form-control" name="{{ prefix }}page" style="width: 100px;" type="text"/>
+                    {% for key, value in app.request.query.all if key != prefix ~ 'page' %}
                         {{ array_to_query_inputs(key, value) }}
                     {% endfor %}
                     <input class="btn btn-primary" value="{{ 'base.pager.go'|trans }}" type="submit"/>

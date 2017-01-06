@@ -4,7 +4,10 @@ admin:
         name: Nom
         create: Créer un nouveau groupe
         group: groupe
+        actions: Actions
         delete: Supprimer
+        delete_confirm: Voulez-vous vraiment supprimer le groupe "%group%" ?
+        manage: Gérer les membres du groupe
     users:
         id: ID
         nickname: Nom
