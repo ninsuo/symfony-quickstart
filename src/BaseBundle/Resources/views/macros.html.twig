@@ -156,3 +156,10 @@
     </div>
 
 {% endmacro %}
+
+{% macro search(search) %}
+    <div class="text-right">
+        {% form_theme search 'BaseBundle::theme.html.twig' %}
+        {{ form(search) }}
+    </div>
+{% endmacro %}
