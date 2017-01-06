@@ -6,6 +6,7 @@ use AppBundle\Base\BaseController;
 use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,16 +17,17 @@ class GroupsUsersController extends BaseController
 {
     /**
      * @Route("/{groupId}", name="admin_groups_users", requirements={"groupId" = "^\d+$"})
+     * @Template()
      */
     public function listAction(Request $request, $groupId)
     {
         $group = $this->getEntityById('BaseBundle:Group', $groupId);
 
-        return $this->render('AdminBundle:GroupsUsers:list.html.twig', [
-            'group'    => $group,
-            'pagerIn'  => $this->_getGroupUsers($request, $groupId, 'in'),
+        return [
+            'group' => $group,
+            'pagerIn' => $this->_getGroupUsers($request, $groupId, 'in'),
             'pagerOut' => $this->_getGroupUsers($request, $groupId, 'out'),
-        ]);
+        ];
     }
 
     protected function _getGroupUsers(Request $request, $groupId, $prefix)
@@ -41,9 +43,9 @@ class GroupsUsersController extends BaseController
         ;
 
         if ('in' == $prefix) {
-           $qb->where(":groupId MEMBER OF u.groups");
+            $qb->where(':groupId MEMBER OF u.groups');
         } else {
-           $qb->where(":groupId NOT MEMBER OF u.groups");
+            $qb->where(':groupId NOT MEMBER OF u.groups');
         }
 
         if ($filter) {
@@ -67,18 +69,20 @@ class GroupsUsersController extends BaseController
     {
         $this->checkCsrfToken('administration', $token);
         $group = $this->getEntityById('BaseBundle:Group', $groupId);
-        $user  = $this->getEntityById('BaseBundle:User', $userId);
+        $user = $this->getEntityById('BaseBundle:User', $userId);
 
         if ($group->getUsers()->contains($user)) {
-            $group->getUsers()->removeElement($user);
+            $user->getGroups()->removeElement($group);
         } else {
-            $group->getUsers()->add($user);
+            $user->getGroups()->add($group);
         }
 
         $em = $this->get('doctrine')->getManager();
-        $em->persist($group);
+        $em->persist($user);
         $em->flush();
 
-        return $this->listAction($request, $groupId);
+        return $this->redirect(
+            $this->generateUrl('admin_groups_users', array_merge($request->query->all(), ['groupId' => $groupId]))
+        );
     }
 }

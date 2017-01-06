@@ -33,11 +33,11 @@ class OAuthUserProvider extends BaseUserProvider
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $resourceOwner   = $response->getResourceOwner()->getName();
+        $resourceOwner = $response->getResourceOwner()->getName();
         $resourceOwnerId = $response->getUsername();
-        $name            = $response->getRealName();
-        $json            = json_encode([$resourceOwner, $resourceOwnerId]);
-        $user            = $this->loadUserByUsername($json);
+        $name = $response->getRealName();
+        $json = json_encode([$resourceOwner, $resourceOwnerId]);
+        $user = $this->loadUserByUsername($json);
 
         $reload = false;
         if (is_null($user)) {
@@ -66,6 +66,10 @@ class OAuthUserProvider extends BaseUserProvider
 
         if ($reload) {
             return $this->loadUserByUsername($json);
+        }
+
+        foreach ($user->getGroups()->toArray() as $group) {
+            $user->addRole('GROUP_'.$group->getName());
         }
 
         return $user;

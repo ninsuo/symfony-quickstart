@@ -14,7 +14,7 @@ class LightExtension extends \Twig_Extension
 
     public function arrayToQueryFields($key, $value, $keyPrefix = null)
     {
-        $currentKey = $keyPrefix ? $keyPrefix . '[' . $key . ']' : $key;
+        $currentKey = $keyPrefix ? $keyPrefix.'['.$key.']' : $key;
 
         if (is_string($value)) {
             return '<input type="hidden" name="'.htmlentities($currentKey).'" value="'.htmlentities($value).'"/>';

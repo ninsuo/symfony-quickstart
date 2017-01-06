@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormError;
 
 /**
- * base.doctrine.helper
+ * base.doctrine.helper.
  */
 class DoctrineHelper extends BaseService
 {

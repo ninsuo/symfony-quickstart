@@ -1,7 +1,4 @@
 
-cs-fixing
-
-- apply groups as roles (ROLE_GROUP_<group name>) in provider
 
 bug: looks like "change lang" doesn't keep filters/pages
 

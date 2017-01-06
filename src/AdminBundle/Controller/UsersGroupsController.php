@@ -6,6 +6,7 @@ use AppBundle\Base\BaseController;
 use BaseBundle\Entity\Group;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,16 +17,17 @@ class UsersGroupsController extends BaseController
 {
     /**
      * @Route("/{userId}", name="admin_users_groups", requirements={"userId" = "^\d+$"})
+     * @Template()
      */
     public function listAction(Request $request, $userId)
     {
         $user = $this->getEntityById('BaseBundle:User', $userId);
 
-        return $this->render('AdminBundle:UsersGroups:list.html.twig', [
-            'user'     => $user,
-            'pagerIn'  => $this->_getUserGroups($request, $userId, 'in'),
+        return [
+            'user' => $user,
+            'pagerIn' => $this->_getUserGroups($request, $userId, 'in'),
             'pagerOut' => $this->_getUserGroups($request, $userId, 'out'),
-        ]);
+        ];
     }
 
     protected function _getUserGroups(Request $request, $userId, $prefix)
@@ -41,9 +43,9 @@ class UsersGroupsController extends BaseController
         ;
 
         if ('in' == $prefix) {
-           $qb->where(":userId MEMBER OF g.users");
+            $qb->where(':userId MEMBER OF g.users');
         } else {
-           $qb->where(":userId NOT MEMBER OF g.users");
+            $qb->where(':userId NOT MEMBER OF g.users');
         }
 
         if ($filter) {
@@ -66,7 +68,7 @@ class UsersGroupsController extends BaseController
     public function toggleAction(Request $request, $userId, $groupId, $token)
     {
         $this->checkCsrfToken('administration', $token);
-        $user  = $this->getEntityById('BaseBundle:User', $userId);
+        $user = $this->getEntityById('BaseBundle:User', $userId);
         $group = $this->getEntityById('BaseBundle:Group', $groupId);
 
         if ($user->getGroups()->contains($group)) {
@@ -79,6 +81,8 @@ class UsersGroupsController extends BaseController
         $em->persist($user);
         $em->flush();
 
-        return $this->listAction($request, $userId);
+        return $this->redirect(
+            $this->generateUrl('admin_users_groups', array_merge($request->query->all(), ['userId' => $userId]))
+        );
     }
 }

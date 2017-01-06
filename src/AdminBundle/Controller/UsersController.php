@@ -7,7 +7,6 @@ use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type;
@@ -42,8 +41,8 @@ class UsersController extends BaseController
         }
 
         return [
-            'pager'  => $this->getPager($request, $qb),
-            'me'     => $this->getUser()->getId(),
+            'pager' => $this->getPager($request, $qb),
+            'me' => $this->getUser()->getId(),
         ];
     }
 
@@ -90,22 +89,22 @@ class UsersController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $endpoint =  $this->generateUrl('admin_users_edit_contact', ['id' => $id]);
+        $endpoint = $this->generateUrl('admin_users_edit_contact', ['id' => $id]);
 
         $form = $this
            ->createNamedFormBuilder("edit-contact-{$id}", Type\FormType::class, $entity, [
                'action' => $endpoint,
            ])
            ->add('contact', Type\EmailType::class, [
-               'label'       => "admin.users.contact",
+               'label' => 'admin.users.contact',
                'constraints' => [
                    new Constraints\NotBlank(),
                    new Constraints\Email(),
                ],
            ])
            ->add('submit', Type\SubmitType::class, [
-               'label' => "base.crud.action.save",
-               'attr'  => [
+               'label' => 'base.crud.action.save',
+               'attr' => [
                    'class' => 'domajax',
                ],
            ])
@@ -142,21 +141,21 @@ class UsersController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $endpoint =  $this->generateUrl('admin_users_edit_nickname', ['id' => $id]);
+        $endpoint = $this->generateUrl('admin_users_edit_nickname', ['id' => $id]);
 
         $form = $this
            ->createNamedFormBuilder("edit-nickname-{$id}", Type\FormType::class, $entity, [
                'action' => $endpoint,
            ])
            ->add('nickname', Type\TextType::class, [
-               'label'       => "admin.users.nickname",
+               'label' => 'admin.users.nickname',
                'constraints' => [
                    new Constraints\NotBlank(),
                ],
            ])
            ->add('submit', Type\SubmitType::class, [
-               'label' => "base.crud.action.save",
-               'attr'  => [
+               'label' => 'base.crud.action.save',
+               'attr' => [
                    'class' => 'domajax',
                ],
            ])

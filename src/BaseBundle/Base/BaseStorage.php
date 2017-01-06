@@ -2,7 +2,6 @@
 
 namespace BaseBundle\Base;
 
-use BaseBundle\Base\BaseService;
 use Doctrine\DBAL\Connection;
 
 class BaseStorage extends BaseService

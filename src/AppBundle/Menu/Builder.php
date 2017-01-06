@@ -7,7 +7,7 @@ use Knp\Menu\FactoryInterface;
 
 class Builder extends BaseMenu
 {
-   public function mainLeftMenu(FactoryInterface $factory, array $options)
+    public function mainLeftMenu(FactoryInterface $factory, array $options)
     {
         $menu = $this->createMenu($factory, parent::POSITION_LEFT);
         $this->addRoute($menu, 'base.menu.home', 'home');

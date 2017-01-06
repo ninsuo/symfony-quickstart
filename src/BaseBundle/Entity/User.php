@@ -186,7 +186,6 @@ class User implements UserInterface, EquatableInterface
     public function getUsername()
     {
         return json_encode([$this->resourceOwner, $this->resourceOwnerId]);
-        ;
     }
 
     /**
@@ -313,6 +312,7 @@ class User implements UserInterface, EquatableInterface
      * Set isAdmin.
      *
      * @param bool $isAdmin
+     *
      * @return User
      */
     public function setIsAdmin($isAdmin)
@@ -336,6 +336,7 @@ class User implements UserInterface, EquatableInterface
      * Set isFrozen.
      *
      * @param bool $isFrozen
+     *
      * @return User
      */
     public function setIsFrozen($isFrozen)

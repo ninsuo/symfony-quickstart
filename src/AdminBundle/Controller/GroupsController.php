@@ -3,14 +3,12 @@
 namespace AdminBundle\Controller;
 
 use AppBundle\Base\BaseController;
-use BaseBundle\Entity\User;
 use BaseBundle\Entity\Group;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type;
-use Symfony\Component\Validator\Constraints;
 
 /**
  * @Route("/groups")
@@ -88,10 +86,10 @@ class GroupsController extends BaseController
                 'action' => $endpoint,
             ])
             ->add('name', Type\TextType::class, [
-                'label' => "admin.groups.name",
+                'label' => 'admin.groups.name',
             ])
             ->add('submit', Type\SubmitType::class, [
-                'label' => "base.crud.action.save",
+                'label' => 'base.crud.action.save',
                 'attr' => [
                     'class' => 'domajax',
                 ],
@@ -121,12 +119,12 @@ class GroupsController extends BaseController
         $entity = new Group();
 
         $form = $this
-            ->createNamedFormBuilder("create", Type\FormType::class, $entity)
+            ->createNamedFormBuilder('create', Type\FormType::class, $entity)
             ->add('name', Type\TextType::class, [
-                'label' => "admin.groups.name",
+                'label' => 'admin.groups.name',
             ])
             ->add('submit', Type\SubmitType::class, [
-                'label' => "base.crud.action.save",
+                'label' => 'base.crud.action.save',
             ])
             ->getForm()
             ->handleRequest($request)

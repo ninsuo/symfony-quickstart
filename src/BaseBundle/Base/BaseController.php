@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 abstract class BaseController extends Controller
 {
-    const PAGER_PER_PAGE_LIST    = [10, 25, 50, 100, 250];
+    const PAGER_PER_PAGE_LIST = [10, 25, 50, 100, 250];
     const PAGER_PER_PAGE_DEFAULT = 25;
 
     /**
@@ -95,7 +95,7 @@ abstract class BaseController extends Controller
         ;
 
         if (!is_null($manager)) {
-           return $em->getRepository($manager);
+            return $em->getRepository($manager);
         }
 
         return $em;
@@ -108,13 +108,13 @@ abstract class BaseController extends Controller
         );
         $pager->setNormalizeOutOfRangePages(true);
 
-        $perPage = $request->query->get($prefix . 'per_page', self::PAGER_PER_PAGE_DEFAULT);
+        $perPage = $request->query->get($prefix.'per_page', self::PAGER_PER_PAGE_DEFAULT);
         if (!in_array($perPage, self::PAGER_PER_PAGE_LIST)) {
             throw new NotValidMaxPerPageException();
         }
 
         $pager->setMaxPerPage($perPage);
-        $pager->setCurrentPage($request->request->get($prefix . 'page') ?: $request->query->get($prefix . 'page') ?: 1);
+        $pager->setCurrentPage($request->request->get($prefix.'page') ?: $request->query->get($prefix.'page') ?: 1);
 
         return $pager;
     }
@@ -128,7 +128,7 @@ abstract class BaseController extends Controller
 
     public function getEntityById($manager, $id)
     {
-        $em     = $this->getManager($manager);
+        $em = $this->getManager($manager);
         $entity = $em->findOneById($id);
 
         if (!$entity) {

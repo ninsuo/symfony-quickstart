@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
 
 /**
- * base.routing.helper
+ * base.routing.helper.
  */
 class RoutingHelper
 {
