@@ -4,7 +4,9 @@ admin:
         name: Nom
         email: Email
         admin: Admin
-        edit: Editer
+        edit:
+            contact: Email
+            save: Sauvegarder
     permissions:
         id: ID
         name: Nom

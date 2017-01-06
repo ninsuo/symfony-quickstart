@@ -77,8 +77,12 @@ class UsersController extends BaseController
             throw $this->createNotFoundException();
         }
 
+        $endpoint =  $this->generateUrl('admin_users_edit_contact', ['id' => $id]);
+
         $form = $this
-           ->createNamedFormBuilder("edit-contact-{$id}", Type\FormType::class, $entity)
+           ->createNamedFormBuilder("edit-contact-{$id}", Type\FormType::class, $entity, [
+               'action' => $endpoint,
+           ])
            ->add('contact', Type\EmailType::class, [
                'label'       => "admin.users.edit.contact",
                'constraints' => [
@@ -87,22 +91,23 @@ class UsersController extends BaseController
                ],
            ])
            ->add('submit', Type\SubmitType::class, [
-               'label' => "admin.users.",
+               'label' => "admin.users.edit.save",
+               'attr'  => [
+                   'class' => 'domajax',
+               ],
            ])
            ->getForm()
            ->handleRequest($request)
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this
-                ->get('doctrine')
-                ->getManager()
-                ->persist($entity)
-                ->flush()
-            ;
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($entity);
+            $em->flush();
 
             return [
                 'text' => $entity->getContact(),
+                'endpoint' => $endpoint,
             ];
         }
 

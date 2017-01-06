@@ -4,6 +4,9 @@ admin:
         name: Name
         email: Email
         admin: Admin
+        edit:
+            contact: Email
+            save: Save
     permissions:
         id: ID
         name: Name

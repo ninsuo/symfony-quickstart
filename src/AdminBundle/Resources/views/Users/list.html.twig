@@ -26,6 +26,7 @@
                         {{
                             include('AdminBundle::_editOnClick.html.twig', {
                                 'text': user.contact,
+                                'endpoint': path('admin_users_edit_contact', {id: user.id}),
                             })
                         }}
                     </td>
