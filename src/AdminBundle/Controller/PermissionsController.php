@@ -118,7 +118,7 @@ class PermissionsController extends BaseController
                'label' => "admin.permissions.{$action}_submit",
                'attr'  => [
                    'class'           => 'domajax',
-                   'data-endpoint'   => $this->generate('admin_permissions_list', [
+                   'data-endpoint'   => $this->generateUrl('admin_permissions_list', [
                        'selectedId' => $selectedId,
                    ]),
                    'data-input-attr' => 'id',
