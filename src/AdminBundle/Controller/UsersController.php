@@ -24,10 +24,7 @@ class UsersController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $search = $this
-           ->createForm(SearchType::class)
-           ->handleRequest($request)
-        ;
+        $filter = $request->query->get('filter');
 
         $qb = $this
            ->getManager()
@@ -36,15 +33,14 @@ class UsersController extends BaseController
            ->from(User::class, 'u')
         ;
 
-        if ($criteria = $search->getData()['filter']) {
+        if ($filter) {
             $qb
                ->where('u.nickname LIKE :criteria OR u.contact LIKE :criteria')
-               ->setParameter('criteria', '%'.$criteria.'%')
+               ->setParameter('criteria', '%'.$filter.'%')
             ;
         }
 
         return [
-            'search' => $search->createView(),
             'pager'  => $this->getPager($request, $qb),
             'me'     => $this->getUser()->getId(),
         ];

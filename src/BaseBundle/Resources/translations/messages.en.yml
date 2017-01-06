@@ -67,6 +67,7 @@ base:
         per_page: 'Results per page:'
         go_to: 'Go to page:'
         go: 'Go'
+    search: Search...
     site:
         description: 'fuz.org provides a simple and powerful code generator online.'
         default_title: 'fuz.org - Generate your money!'

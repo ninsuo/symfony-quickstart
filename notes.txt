@@ -1,7 +1,7 @@
 User:
 OK  1) add pagination in user management
 OK  2) translate pagination (replace existing "domajax" template by "light" and implement nb per page, missing translations, ...)
-3) add filtering in user management
+OK  3) add filtering in user management
 4) create "edit" on user (to edit nickname and contact? but will be overwritten maybe add "frozen" state..)
 5) create "Manage groups" page (list of user's group, list of available groups, both pagined/filterable)
 
@@ -20,4 +20,3 @@ Permission:
 Light:
 12) Use of pdo_sqlite by default is more relevent on quick websites
 
-Deadline: 20/12/16

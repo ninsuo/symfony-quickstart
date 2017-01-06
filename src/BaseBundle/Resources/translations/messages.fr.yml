@@ -69,6 +69,7 @@ base:
         per_page: 'Résultats par page :'
         go_to: 'Aller à la page :'
         go: 'Valider'
+    search: Rechercher...
     site:
         description: 'fuz.org fournit un générateur de code en ligne simple et puissant.'
         default_title: 'fuz.org - Générez votre argent!'

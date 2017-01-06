@@ -119,12 +119,12 @@
 {% endmacro %}
 
 {% macro pager(pager) %}
-
     <div class="row">
         <div class="text-center col-md-12">
             {{ pagerfanta(pager, 'light') }}
         </div>
         <div class="text-left col-md-4">
+
             <div>{{ 'base.pager.per_page'|trans }}</div>
             <ul class="pagination">
                 {% for perPage in constant('BaseBundle\\Base\\BaseController::PAGER_PER_PAGE_LIST') %}
@@ -147,19 +147,33 @@
                 <div class="form-group">
                     <input class="form-control" name="page" style="width: 100px;" type="text"/>
                     {% for key, value in app.request.query.all if key != 'page' %}
-                        <input type="hidden" name="{{ key|e('html_attr') }}" value="{{ value|e('html_attr') }}"/>
+                        {{ array_to_query_inputs(key, value) }}
                     {% endfor %}
                     <input class="btn btn-primary" value="{{ 'base.pager.go'|trans }}" type="submit"/>
                 </div>
             </form>
         </div>
     </div>
-
 {% endmacro %}
 
-{% macro search(search) %}
-    <div class="text-right">
-        {% form_theme search 'BaseBundle::theme.html.twig' %}
-        {{ form(search) }}
+{% macro search() %}
+    <div class="pull-right" style="width: 300px;">
+        <form name="search_filter" method="get" action="" class="form-inline" role="form">
+            <div class="input-group stylish-input-group" style="border:none;">
+                <div class="input-group stylish-input-group" style="border:none;">
+                    <span class="form-control" style="border-right:none;">
+                        <input name="filter" placeholder="{{ 'base.search'|e('html_attr') }}" style="border:none;" class="form-control" value="{{ app.request.get('filter')|e('html_attr') }}" type="search">
+                        {% for key, value in app.request.query.all if key != 'filter' %}
+                            {{ array_to_query_inputs(key, value) }}
+                        {% endfor %}
+                    </span>
+                    <span class="form-control" style="border-left:none;">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </form>
     </div>
 {% endmacro %}
