@@ -40,6 +40,13 @@ class Group
     protected $name;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="groups")
+     */
+    private $users;
+
+    /**
      * Get id.
      *
      * @return int
@@ -71,5 +78,13 @@ class Group
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

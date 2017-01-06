@@ -16,8 +16,9 @@
                     <th>{{ 'admin.users.id' | trans }}</th>
                     <th>{{ 'admin.users.nickname' | trans }}</th>
                     <th>{{ 'admin.users.contact' | trans }}</th>
-                    <th>{{ 'admin.users.admin' | trans }}</th>
+                    <th>{{ 'admin.users.actions' | trans }}</th>
                     <th>{{ 'admin.users.frozen' | trans }}</th>
+                    <th>{{ 'admin.users.admin' | trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,22 @@
                                 })
                             }}
                         </td>
+
+                        <td>
+                            <a
+                                href="{{ path('admin_users_groups', {userId: user.id}) }}"
+                                class="btn btn-warning btn-sm">{{ 'admin.users.manage' | trans }}</a>
+                        </td>
+                        <td>
+                            <input
+                                type="checkbox"
+                                class="domajax change"
+                                data-endpoint="{{ path('admin_users_toggle_frozen', {token: csrf_token('administration')}) }}"
+                                data-input-attr="id"
+                                data-id="{{ user.id }}"
+                                {% if user.isFrozen %}checked{% endif %}
+                            />
+                        </td>
                         <td>
                             {% if me == user.id %}
                                 &nbsp;
@@ -53,16 +70,6 @@
                                     {% if user.isAdmin %}checked{% endif %}
                                 />
                             {% endif %}
-                        </td>
-                        <td>
-                            <input
-                                type="checkbox"
-                                class="domajax change"
-                                data-endpoint="{{ path('admin_users_toggle_frozen', {token: csrf_token('administration')}) }}"
-                                data-input-attr="id"
-                                data-id="{{ user.id }}"
-                                {% if user.isFrozen %}checked{% endif %}
-                            />
                         </td>
                     </tr>
                 {% endfor %}

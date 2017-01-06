@@ -102,7 +102,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Group", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Group", cascade={"persist", "remove"}, inversedBy="users")
      * @ORM\JoinTable(name="users_groups",
      *     joinColumns={
      *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
@@ -119,7 +119,7 @@ class User implements UserInterface, EquatableInterface
      */
     public function __construct()
     {
-        $this->groups      = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     /**

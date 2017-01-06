@@ -31,7 +31,7 @@ class GroupsController extends BaseController
             ->createQueryBuilder()
             ->select('g')
             ->from(Group::class, 'g')
-        ;
+         ;
 
         if ($filter) {
             $qb

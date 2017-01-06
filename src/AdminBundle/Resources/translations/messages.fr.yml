@@ -14,3 +14,9 @@ admin:
         email: Email
         admin: Admin
         frozen: Gelé
+        actions: Actions
+        manage: Gérer les groupes de ce membre
+    users_groups:
+        title: Groupes de %name%
+        in: 'Groupes dans lequel est %name% :'
+        out: "Groupes dans lequel %name% n'est pas :"

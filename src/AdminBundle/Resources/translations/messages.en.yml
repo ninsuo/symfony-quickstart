@@ -14,3 +14,9 @@ admin:
         contact: Email
         admin: Admin
         frozen: Frozen
+        actions: Actions
+        manage: Manage member groups
+    users_groups:
+        title: %name%'s groups
+        in: 'Groups where %name% is:'
+        out: "Groups where %name% isn't:"
