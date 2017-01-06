@@ -60,6 +60,13 @@ class User implements UserInterface, EquatableInterface
     protected $contact;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     */
+    protected $picture;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="last_seen", type="datetime")
@@ -96,7 +103,7 @@ class User implements UserInterface, EquatableInterface
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Group", cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="user_group",
+     * @ORM\JoinTable(name="users_groups",
      *     joinColumns={
      *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *     },
@@ -228,6 +235,30 @@ class User implements UserInterface, EquatableInterface
     public function getContact()
     {
         return $this->contact;
+    }
+
+    /**
+     * Set picture.
+     *
+     * @param string $picture
+     *
+     * @return User
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture.
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 
     /**

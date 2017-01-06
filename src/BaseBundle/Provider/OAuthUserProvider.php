@@ -46,8 +46,10 @@ class OAuthUserProvider extends BaseUserProvider
             $user->setResourceOwnerId($resourceOwnerId);
             $user->setNickname($name);
             $user->setContact($response->getEmail());
+            $user->setPicture($response->getProfilePicture());
             $user->setSigninCount(1);
             $user->setIsAdmin(false);
+            $user->setIsFrozen(false);
             $this->em->persist($user);
             $this->em->flush($user);
             $reload = true;
@@ -55,6 +57,7 @@ class OAuthUserProvider extends BaseUserProvider
             if (!$user->isFrozen()) {
                 $user->setNickname($name);
                 $user->setContact($response->getEmail());
+                $user->setPicture($response->getProfilePicture());
             }
             $user->setSigninCount($user->getSigninCount() + 1);
             $this->em->persist($user);

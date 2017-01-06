@@ -112,8 +112,12 @@
 {% macro user(user) %}
     {%- spaceless %}
         {% if user != null %}
-            <img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/>
-            {{ user.nickname }}
+            {% if user.picture %}
+                <img class="user-image" src="{{ user.picture }}" alt=""/>
+            {% else %}
+                <img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/>
+            {% endif %}
+                {{ user.nickname }}
         {% endif %}
     {% endspaceless -%}
 {% endmacro %}
