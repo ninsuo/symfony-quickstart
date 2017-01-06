@@ -63,3 +63,6 @@ parameters:
     # Website menus at the top
     menu_left_enabled: true
     menu_right_enabled: true
+
+    # Members can remove their account
+    accounts_removable: true

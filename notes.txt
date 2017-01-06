@@ -1,11 +1,15 @@
 
+maybe to do someday
+
+---
 
 create a simple Profile page
 - nickname
 - contact
-(automatic freeze on change)
+(automatic freeze=1 on change to avoid that resource owners overwrite it)
 - delete account (configurable in parameters.yml)
 
-Light:
-12) Use of pdo_sqlite by default is more relevent on quick websites
+---
+
+Use of pdo_sqlite by default is more relevent on quick websites (no need to set up a mysql db)
 

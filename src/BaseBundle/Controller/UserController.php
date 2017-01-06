@@ -78,8 +78,8 @@ class UserController extends BaseController
      */
     public function unsuscribeAction(Request $request)
     {
-        if (is_null($this->getUser())) {
-            return $this->redirect($this->generateUrl('home'));
+        if (!$this->getParameter('accounts_removable') || !$this->getUser()) {
+            throw $this->createNotFoundException();
         }
 
         // CRSF
