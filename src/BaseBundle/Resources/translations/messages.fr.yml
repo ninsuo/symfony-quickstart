@@ -40,6 +40,8 @@ base:
         500:
             explain: 'Si vous êtes arrivé(e) sur cette page, c''est que quelque chose a planté chez nous.'
             title: 'Une erreur s''est produite.'
+    form:
+        duplicate_error: 'Cette %entity% existe déjà.'
     locale:
         title: Langue
     login:
@@ -62,17 +64,6 @@ base:
             users: Gestion des utilisateurs
             groups: Gestion des groupes
             permissions: Gestion des permissions
-    admin:
-        users:
-            id: ID
-            name: Nom
-            email: Email
-            admin: Admin
-        permissions:
-            id: ID
-            name: Nom
-            delete: Delete
-            confirm_delete: 'Voulez-vous vraiment supprimer la permissions %permission% ?'
     nav: 'Afficher/Masquer le menu'
     title: 'Mon Projet Vide'
     site:

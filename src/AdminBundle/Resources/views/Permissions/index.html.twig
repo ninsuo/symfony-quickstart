@@ -1,0 +1,13 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% import 'BaseBundle::macros.html.twig' as macros %}
+
+{% block title %}{{ 'base.menu.admin.permissions' | trans }}{% endblock %}
+
+{% block body %}
+
+    <div id="main">
+        {{ render(controller('AdminBundle:Permissions:_list', {selectedId: selectedId})) }}
+    </div>
+
+{% endblock %}

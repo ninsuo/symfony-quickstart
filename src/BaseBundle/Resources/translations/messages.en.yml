@@ -39,6 +39,8 @@ base:
         500:
             explain: 'If you got to that page, this is because something crashed somewhere.'
             title: 'It looks like something went wrong.'
+    form:
+        duplicate_error: 'This %entry% already exist.'
     locale:
         title: Language
     login:
@@ -61,17 +63,6 @@ base:
             users: Manage users
             groups: Manage groups
             permissions: Manage permissions
-    admin:
-        users:
-            id: ID
-            name: Name
-            email: Email
-            admin: Admin
-        permissions:
-            id: ID
-            name: Name
-            delete: Delete
-            confirm_delete: Do you really want to delete the %permission% permission?
     nav: 'Toggle navigation'
     site:
         description: 'fuz.org provides a simple and powerful code generator online.'

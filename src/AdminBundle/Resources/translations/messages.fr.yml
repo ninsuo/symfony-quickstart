@@ -1,0 +1,15 @@
+admin:
+    users:
+        id: ID
+        name: Nom
+        email: Email
+        admin: Admin
+    permissions:
+        id: ID
+        name: Nom
+        delete: Delete
+        confirm_delete: 'Voulez-vous vraiment supprimer la permissions %permission% ?'
+        create_label: 'Ajouter une permission'
+        create_submit: 'Ajouter'
+        entity: permission
+

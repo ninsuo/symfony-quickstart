@@ -16,7 +16,7 @@ services:
           - [setContainer, ["@service_container"]]
 
     base.storage:
-        class: %base.storage.class%
+        class: '%base.storage.class%'
         abstract: true
         calls:
           - [setConnection, ["@doctrine.dbal.default_connection"]]
