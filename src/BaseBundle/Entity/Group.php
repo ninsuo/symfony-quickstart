@@ -38,13 +38,13 @@ class Group
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Permission")
+     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="group_permission",
      *     joinColumns={
-     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *     },
      *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     *         @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
      *     }
      * )
      */

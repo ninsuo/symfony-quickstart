@@ -30,7 +30,8 @@ class Builder extends BaseMenu
 
         if ($this->isGranted('ROLE_ADMIN')) {
             $this->addSubMenu($menu, 'base.menu.admin.main');
-            $this->addRoute($menu['base.menu.admin.main'], 'base.menu.admin.administrators', 'admin_administrators');
+            $this->addRoute($menu['base.menu.admin.main'], 'base.menu.admin.users', 'admin_users');
+            $this->addRoute($menu['base.menu.admin.main'], 'base.menu.admin.permissions', 'admin_permissions');
         }
 
         return $menu;

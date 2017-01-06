@@ -88,13 +88,13 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Permission")
+     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="user_permission",
      *     joinColumns={
-     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *     },
      *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="permission_id", referencedColumnName="id")
+     *         @ORM\JoinColumn(name="permission_id", referencedColumnName="id", onDelete="CASCADE")
      *     }
      * )
      */
@@ -103,13 +103,13 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Group")
+     * @ORM\ManyToMany(targetEntity="Group", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="user_group",
      *     joinColumns={
-     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *     },
      *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     *         @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
      *     }
      * )
      */

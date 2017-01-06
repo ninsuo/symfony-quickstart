@@ -58,7 +58,20 @@ base:
         home: Home
         admin:
             main: Administration
-            administrators: Administrators
+            users: Manage users
+            groups: Manage groups
+            permissions: Manage permissions
+    admin:
+        users:
+            id: ID
+            name: Name
+            email: Email
+            admin: Admin
+        permissions:
+            id: ID
+            name: Name
+            delete: Delete
+            confirm_delete: Do you really want to delete the %permission% permission?
     nav: 'Toggle navigation'
     site:
         description: 'fuz.org provides a simple and powerful code generator online.'

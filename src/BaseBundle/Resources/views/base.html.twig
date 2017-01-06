@@ -54,6 +54,9 @@
 
            <div id="body">
               {% block flash %}{{ include('BraincraftedBootstrapBundle::flash.html.twig', {'close': true}) }}{% endblock %}
+              {% if block('title') != '' %}
+                 <h1>{{ block('title') }}</h1>
+              {% endif %}
               {% block body %}{% endblock %}
            </div>
 

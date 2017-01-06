@@ -1,0 +1,23 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% import 'BaseBundle::macros.html.twig' as macros %}
+
+{% block title %}{{ 'base.menu.admin.permissions' | trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div id="permissions" class="col-md-6">
+            {{ include('AdminBundle:Permissions:_permissions.html.twig') }}
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
