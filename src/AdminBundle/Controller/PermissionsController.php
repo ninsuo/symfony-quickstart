@@ -2,7 +2,6 @@
 
 namespace AdminBundle\Controller;
 
-use AdminBundle\Form\Type\PermissionType;
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\Permission;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -10,8 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\InvalselectedIdCsrfTokenException;
+use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Validator\Constraints;
 
 /**
  * @Route("/permissions")
@@ -34,8 +34,11 @@ class PermissionsController extends BaseController
      */
     public function _listAction(Request $request, $selectedId)
     {
-        $id   = $request->request->get('id');
-        $form = $this->initForm($request, $selectedId, $id);
+        if ($id = $request->request->get('id')) {
+            $this->treatForm($request, $selectedId, $id);
+        }
+
+        $form = $this->treatForm($request, $selectedId);
 
         $list = $this
            ->getManager('BaseBundle:Permission')
@@ -49,7 +52,6 @@ class PermissionsController extends BaseController
         ];
     }
 
-
     /**
      * @Route("/edit/{selectedId}", name="admin_permissions_edit", defaults={"selectedId": null})
      * @Template()
@@ -57,11 +59,7 @@ class PermissionsController extends BaseController
     public function _editAction(Request $request, $selectedId)
     {
         $id   = $request->request->get('id');
-        $form = $this->initForm($request, $selectedId, $id);
-
-        if (intval($selectedId) == intval($id)) {
-            $selectedId = null;
-        }
+        $form = $this->treatForm($request, $selectedId, $id);
 
         return [
             'form' => $form->createView(),
@@ -85,39 +83,55 @@ class PermissionsController extends BaseController
             $selectedId = null;
         }
 
-        return $this->redirect(
-            $this->generateUrl('admin_permissions_list', [
-                'selectedId' => $selectedId,
-            ])
-        );
+        return $this->redirectToRoute('admin_permissions_list', [
+               'selectedId' => $selectedId,
+        ]);
     }
 
     /**
      * @param Request $request
      * @param int $selectedId
-     * @param string $name
      * @param int $id
      *
      * @return FormInterface
      */
-    protected function initForm(Request $request, $selectedId, $id = null)
+    protected function treatForm(Request $request, $selectedId, $id = null)
     {
         $manager = $this->getManager('BaseBundle:Permission');
 
-        if (is_null($id)) {
-            $entity = new Permission();
-        } else {
-
-            //@TODO manage errors
-            $entity = $manager->findOneById($id);
+        $entity = new Permission();
+        if (!is_null($id)) {
+            $entity = $manager->findOneById($id) ? : $entity;
         }
 
+        $action = $id ? 'update' : 'create';
+
         $form = $this
-           ->get('form.factory')
-           ->createNamed($id ? "edit-permission-{$id}" : 'create-permission', PermissionType::class, $entity, [
-               'selected_id' => $selectedId,
-               'id'          => $id,
+//           ->get('form.factory')
+//           ->createNamed($id ? "edit-permission-{$id}" : 'create-permission', PermissionType::class, $entity, [
+//               'selected_id' => $selectedId,
+//               'id'          => $id,
+//           ])
+           ->createNamedFormBuilder($id ? "edit-permission-{$id}" : 'create-permission', Type\FormType::class, $entity)
+           ->add('role', Type\TextType::class, [
+               'label'       => "admin.permissions.{$action}_label",
+               'constraints' => [
+                   new Constraints\NotBlank(),
+               ],
            ])
+           ->add('submit', Type\SubmitType::class, [
+               'label' => "admin.permissions.{$action}_submit",
+               'attr'  => [
+                   'class'           => 'domajax',
+                   'data-endpoint'   => $this->generate('admin_permissions_list', [
+                       'selectedId' => $selectedId,
+                   ]),
+                   'data-input-attr' => 'id',
+                   'data-id'         => $id,
+                   'data-output'     => '#permissions',
+               ],
+           ])
+           ->getForm()
            ->handleRequest($request)
         ;
 
