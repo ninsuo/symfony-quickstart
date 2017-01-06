@@ -1,4 +1,3 @@
-
 User:
 1) add pagination in user management
 2) translate pagination (replace existing "domajax" template by Bootstrap3Translated and implement missing translations)
@@ -11,7 +10,13 @@ Group:
 7) add "Create group" and "Edit group" (edit in ajax)
 8) add "Delete", and pagination/filtering
 9) add "Manage users" page (list of group's users, list of available users, both pagined/filterable)
+
+Permission:
 10) remove the permission page
 11) clean up entities (User/Group, remove Permission)
 
+Light:
+12) Use of pdo_sqlite by default is more relevent on quick websites
+
+Deadline: 20/12/16
 
