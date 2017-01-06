@@ -47,13 +47,8 @@ base:
     login:
         as: 'Connecté en tant que'
         email: 'E-Mail :'
-        form:
-            example: email@exemple.com
         resource_owners: 'Connexion à l''aide de votre compte...'
         title: Connexion
-        user:
-            login: 'Connexion à votre compte %brand%'
-            register: 'Enregistrement à %brand%'
         using: 'Se connecter en utilisant %provider%'
     logout:
         title: Déconnexion
@@ -66,6 +61,14 @@ base:
             permissions: Gestion des permissions
     nav: 'Afficher/Masquer le menu'
     title: 'Mon Projet Vide'
+    pager:
+        prev: '← Précédent'
+        current: 'actuelle'
+        next: 'Suivant →'
+        result: '[0,1] résultat | ]1,Inf[ résultats'
+        per_page: 'Résultats par page :'
+        go_to: 'Aller à la page :'
+        go: 'Go'
     site:
         description: 'fuz.org fournit un générateur de code en ligne simple et puissant.'
         default_title: 'fuz.org - Générez votre argent!'

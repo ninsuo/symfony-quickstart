@@ -3,6 +3,7 @@
 namespace AdminBundle\Controller;
 
 use AppBundle\Base\BaseController;
+use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -20,18 +21,18 @@ class UsersController extends BaseController
      * @Route("/", name="admin_users")
      * @Template()
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $list = $this
-            ->get('doctrine')
-            ->getManager()
-            ->getRepository('BaseBundle:User')
-            ->findAll()
+        $qb = $this
+          ->getManager()
+          ->createQueryBuilder()
+          ->select('u')
+          ->from(User::class, 'u')
         ;
 
         return [
-            'list' => $list,
-            'me' => $this->getUser()->getId(),
+            'pager' => $this->getPager($request, $qb),
+            'me'    => $this->getUser()->getId(),
         ];
     }
 
@@ -41,12 +42,12 @@ class UsersController extends BaseController
      */
     public function toggleAction(Request $request, $token)
     {
-       if ($token !== $this->get('security.csrf.token_manager')->getToken('administration')->getValue()) {
+        if ($token !== $this->get('security.csrf.token_manager')->getToken('administration')->getValue()) {
             throw new InvalidCsrfTokenException('Invalid CSRF token');
         }
 
         $this->get('admin.storage.user')->toggleAdmin(
-            intval($request->request->get('id'))
+           intval($request->request->get('id'))
         );
 
         return new Response();

@@ -14,7 +14,7 @@ services:
         class: '%hwi_oauth.account.connector.class%'
 
     pagerfanta.view.domajax:
-        class: %pagerfanta.view.domajax.class%
+        class: '%pagerfanta.view.domajax.class%'
         public: false
         tags:
             - { name: pagerfanta.view, alias: domajax }

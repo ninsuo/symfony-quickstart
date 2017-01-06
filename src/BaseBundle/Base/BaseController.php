@@ -2,6 +2,10 @@
 
 namespace BaseBundle\Base;
 
+use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\NotValidMaxPerPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -10,6 +14,9 @@ use Symfony\Component\VarDumper\VarDumper;
 
 abstract class BaseController extends Controller
 {
+    const PAGER_PER_PAGE_LIST    = [10, 25, 50, 100, 250];
+    const PAGER_PER_PAGE_DEFAULT = 25;
+
     /**
      * Symfony's var_dump.
      *
@@ -91,5 +98,22 @@ abstract class BaseController extends Controller
         }
 
         return $em;
+    }
+
+    public function getPager(Request $request, QueryBuilder $qb)
+    {
+        $pager = new Pagerfanta(
+           new DoctrineORMAdapter($qb)
+        );
+
+        $perPage = $request->query->get('per_page', self::PAGER_PER_PAGE_DEFAULT);
+        if (!in_array($perPage, self::PAGER_PER_PAGE_LIST)) {
+            throw new NotValidMaxPerPageException();
+        }
+
+        $pager->setMaxPerPage($perPage);
+        $pager->setCurrentPage($request->request->get('page') ?: $request->query->get('page') ?: 1);
+
+        return $pager;
     }
 }

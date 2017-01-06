@@ -46,13 +46,8 @@ base:
     login:
         as: 'Connected as'
         email: 'E-Mail:'
-        form:
-            example: me@example.com
         resource_owners: 'Connect using...'
         title: Connect
-        user:
-            login: 'Connect using %brand%'
-            register: 'Register to %brand%'
         using: 'Connect using %provider%'
     logout:
         title: Logout
@@ -64,6 +59,14 @@ base:
             groups: Manage groups
             permissions: Manage permissions
     nav: 'Toggle navigation'
+    pager:
+        prev: '← Previous'
+        current: 'current'
+        next: 'Next →'
+        result: '{0} results | {1} result | ]1,Inf[ results'
+        per_page: 'Results per page:'
+        go_to: 'Go to page:'
+        go: 'Go'
     site:
         description: 'fuz.org provides a simple and powerful code generator online.'
         default_title: 'fuz.org - Generate your money!'

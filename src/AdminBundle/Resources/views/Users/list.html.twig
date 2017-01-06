@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for user in list %}
+            {% for user in pager.currentPageResults %}
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>{{ macros.user(user) }}</td>
@@ -39,5 +39,7 @@
             {% endfor %}
         </tbody>
     </table>
+
+    {{ macros.pager(pager) }}
 
 {% endblock %}
