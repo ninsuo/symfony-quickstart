@@ -35,14 +35,14 @@ class UsersGroupsController extends BaseController
 
         return [
             'user'     => $entity,
-            'pagerIn'  => $this->_getUserGroups($request, $userId, 'filter-in'),
-            'pagerOut' => $this->_getUserGroups($request, $userId, 'filter-out'),
+            'pagerIn'  => $this->_getUserGroups($request, $userId, 'in'),
+            'pagerOut' => $this->_getUserGroups($request, $userId, 'out'),
         ];
     }
 
-    protected function _getUserGroups(Request $request, $userId, $filterName)
+    protected function _getUserGroups(Request $request, $userId, $prefix)
     {
-        $filter = $request->query->get($filterName);
+        $filter = $request->query->get("filter-{$prefix}");
 
         $qb = $this
            ->getManager()
@@ -52,7 +52,7 @@ class UsersGroupsController extends BaseController
            ->leftJoin('g.users', 'u')
          ;
 
-        if ('filter-in' == $filterName) {
+        if ('in' == $prefix) {
             $qb
                ->where("u.id = :userId")
                ->setParameter('userId', $userId)
@@ -70,7 +70,7 @@ class UsersGroupsController extends BaseController
             ;
         }
 
-        return $this->getPager($request, $qb);
+        return $this->getPager($request, $qb, $prefix);
     }
 
     /**

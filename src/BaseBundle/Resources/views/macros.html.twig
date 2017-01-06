@@ -138,7 +138,7 @@
                 {% for perPage in constant('BaseBundle\\Base\\BaseController::PAGER_PER_PAGE_LIST') %}
                     {% set isCurrent = perPage == pager.maxPerPage %}
                     <li {% if isCurrent %}class="active"{% endif %}>
-                        {% if isCurrent %}<span>{% else %}<a href="?{{ prefix }}per_page={{ perPage }}">{% endif %}
+                        {% if isCurrent %}<span>{% else %}<a href="?{{ http_build_query(app.request.query.all|merge({(prefix ~ 'per_page'): perPage})) }}">{% endif %}
                             {{ perPage }}
                         {% if isCurrent %}</span>{% else %}</a>{% endif %}
                     </li>
@@ -155,7 +155,7 @@
                 <div class="form-group">
                     <input class="form-control" name="{{ prefix }}page" style="width: 100px;" type="text"/>
                     {% for key, value in app.request.query.all if key != prefix ~ 'page' %}
-                        {{ array_to_query_inputs(key, value) }}
+                        {{ array_to_query_fields(key, value) }}
                     {% endfor %}
                     <input class="btn btn-primary" value="{{ 'base.pager.go'|trans }}" type="submit"/>
                 </div>
@@ -172,7 +172,7 @@
                     <span class="form-control" style="border-right:none;">
                         <input name="{{ name }}" placeholder="{{ 'base.search'|trans|e('html_attr') }}" style="border:none;" class="form-control" value="{{ app.request.get(name)|e('html_attr') }}" type="search">
                         {% for key, value in app.request.query.all if key != name %}
-                            {{ array_to_query_inputs(key, value) }}
+                            {{ array_to_query_fields(key, value) }}
                         {% endfor %}
                     </span>
                     <span class="form-control" style="border-left:none;">

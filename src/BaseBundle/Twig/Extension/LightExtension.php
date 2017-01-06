@@ -7,11 +7,12 @@ class LightExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('array_to_query_inputs', [$this, 'arrayToQueryInputs'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('http_build_query', 'http_build_query', ['is_safe' => ['html', 'html_attr']]),
+            new \Twig_SimpleFunction('array_to_query_fields', [$this, 'arrayToQueryFields'], ['is_safe' => ['html']]),
         ];
     }
 
-    public function arrayToQueryInputs($key, $value, $keyPrefix = null)
+    public function arrayToQueryFields($key, $value, $keyPrefix = null)
     {
         $currentKey = $keyPrefix ? $keyPrefix . '[' . $key . ']' : $key;
 
