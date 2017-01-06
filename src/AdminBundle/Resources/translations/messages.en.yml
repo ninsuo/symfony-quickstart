@@ -1,23 +1,13 @@
 admin:
+    groups:
+        id: ID
+        name: Name
+        create: Create a new group
+        group: group
+        delete: Delete
     users:
         id: ID
-        name: Name
-        email: Email
+        nickname: Name
+        contact: Email
         admin: Admin
         frozen: Frozen
-        edit:
-            contact: Email
-            nickname: Name
-            save: Save
-    permissions:
-        id: ID
-        name: Name
-        actions: Actions
-        delete: Delete
-        manage: Manage
-        confirm_delete: Do you really want to delete the "%permission%" permission?
-        create_label: 'Add permission'
-        create_submit: 'Add'
-        update_label: 'Update permission'
-        update_submit: 'Update'
-        entity: permission

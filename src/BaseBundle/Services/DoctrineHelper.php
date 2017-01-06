@@ -28,6 +28,10 @@ class DoctrineHelper extends BaseService
                    '%entry%' => $entry,
                ])
             ));
+
+            return false;
         }
+
+        return true;
     }
 }

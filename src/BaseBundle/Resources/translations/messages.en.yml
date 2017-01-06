@@ -7,6 +7,7 @@ base:
         action:
             edit: Edit
             show: Show
+            save: Save
         back: 'Back to the list'
         button:
             create: Create
@@ -57,7 +58,6 @@ base:
             main: Administration
             users: Manage users
             groups: Manage groups
-            permissions: Manage permissions
     nav: 'Toggle navigation'
     pager:
         prev: '← Previous'

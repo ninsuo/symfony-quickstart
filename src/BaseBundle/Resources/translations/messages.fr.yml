@@ -7,6 +7,7 @@ base:
         action:
             edit: Editer
             show: Afficher
+            save: Sauvegarder
         back: 'Retourner à la liste'
         button:
             create: Créer
@@ -58,7 +59,6 @@ base:
             main: Administration
             users: Gestion des utilisateurs
             groups: Gestion des groupes
-            permissions: Gestion des permissions
     nav: 'Afficher/Masquer le menu'
     title: 'Mon Projet Vide'
     pager:

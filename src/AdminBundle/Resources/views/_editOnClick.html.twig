@@ -1,8 +1,12 @@
+
+{% import 'BaseBundle::macros.html.twig' as macros %}
+
 {% set random = random() %}
+
 <div id="i{{ random }}">
     {% if form is defined %}
         {{
-            form(form, {
+            macros.form(form, {
                 'attr': {
                     'data-output': '#i' ~ random,
                 },

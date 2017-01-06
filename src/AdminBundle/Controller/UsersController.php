@@ -101,14 +101,14 @@ class UsersController extends BaseController
                'action' => $endpoint,
            ])
            ->add('contact', Type\EmailType::class, [
-               'label'       => "admin.users.edit.contact",
+               'label'       => "admin.users.contact",
                'constraints' => [
                    new Constraints\NotBlank(),
                    new Constraints\Email(),
                ],
            ])
            ->add('submit', Type\SubmitType::class, [
-               'label' => "admin.users.edit.save",
+               'label' => "base.crud.action.save",
                'attr'  => [
                    'class' => 'domajax',
                ],
@@ -153,13 +153,13 @@ class UsersController extends BaseController
                'action' => $endpoint,
            ])
            ->add('nickname', Type\TextType::class, [
-               'label'       => "admin.users.edit.nickname",
+               'label'       => "admin.users.nickname",
                'constraints' => [
                    new Constraints\NotBlank(),
                ],
            ])
            ->add('submit', Type\SubmitType::class, [
-               'label' => "admin.users.edit.save",
+               'label' => "base.crud.action.save",
                'attr'  => [
                    'class' => 'domajax',
                ],

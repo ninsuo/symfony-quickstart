@@ -162,7 +162,7 @@
             <div class="input-group stylish-input-group" style="border:none;">
                 <div class="input-group stylish-input-group" style="border:none;">
                     <span class="form-control" style="border-right:none;">
-                        <input name="filter" placeholder="{{ 'base.search'|e('html_attr') }}" style="border:none;" class="form-control" value="{{ app.request.get('filter')|e('html_attr') }}" type="search">
+                        <input name="filter" placeholder="{{ 'base.search'|trans|e('html_attr') }}" style="border:none;" class="form-control" value="{{ app.request.get('filter')|e('html_attr') }}" type="search">
                         {% for key, value in app.request.query.all if key != 'filter' %}
                             {{ array_to_query_inputs(key, value) }}
                         {% endfor %}
@@ -176,4 +176,13 @@
             </div>
         </form>
     </div>
+{% endmacro %}
+
+{% macro form(form, options = [], title = null) %}
+    <fieldset class="well">
+        {% if title %}
+            <label class="lead">{{ title }}</label>
+        {% endif %}
+        {{ form(form, options) }}
+    </fieldset>
 {% endmacro %}

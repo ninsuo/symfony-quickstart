@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * User.
  *
  * @ORM\Table(
- *     name="user",
+ *     name="users",
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(name="resource_owner_idx", columns={"resource_owner", "resource_owner_id"})
  *     }
@@ -95,21 +95,6 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="user_permission",
-     *     joinColumns={
-     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
-     *     },
-     *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="permission_id", referencedColumnName="id", onDelete="CASCADE")
-     *     }
-     * )
-     */
-    protected $permissions;
-
-    /**
-     * @var ArrayCollection
-     *
      * @ORM\ManyToMany(targetEntity="Group", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="user_group",
      *     joinColumns={
@@ -127,7 +112,6 @@ class User implements UserInterface, EquatableInterface
      */
     public function __construct()
     {
-        $this->permissions = new ArrayCollection();
         $this->groups      = new ArrayCollection();
     }
 
@@ -382,26 +366,6 @@ class User implements UserInterface, EquatableInterface
     public function hasRole($role)
     {
         return in_array($role, $this->roles);
-    }
-
-    /**
-     * Get permissions.
-     *
-     * @return ArrayCollection
-     */
-    public function getPermissions()
-    {
-        return $this->permissions;
-    }
-
-    /**
-     * Get groups.
-     *
-     * @return ArrayCollection
-     */
-    public function getGroups()
-    {
-        return $this->groups;
     }
 
     /**
