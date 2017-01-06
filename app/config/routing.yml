@@ -27,6 +27,11 @@ base:
     type:     "annotation"
     prefix:   /
 
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:     "annotation"
+    prefix:   /admin
+
 app:
     resource: "@AppBundle/Controller/"
     type:     "annotation"

@@ -23,7 +23,9 @@ class OAuthUserProvider extends BaseUserProvider
            ->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
 
         if ($user) {
-            $user->setUsername($username);
+            if ($user->isAdmin()) {
+                $user->addRole('ROLE_ADMIN');
+            }
         }
 
         return $user;
@@ -46,6 +48,7 @@ class OAuthUserProvider extends BaseUserProvider
             $user->setNickname($name);
             $user->setContact($response->getEmail());
             $user->setSigninCount(1);
+            $user->setIsAdmin(false);
             $this->em->persist($user);
             $this->em->flush($user);
             $reload = true;

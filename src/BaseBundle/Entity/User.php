@@ -77,6 +77,13 @@ class User implements UserInterface, EquatableInterface
     protected $signinCount = 0;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_admin", type="boolean")
+     */
+    protected $isAdmin = false;
+
+    /**
      * Get id.
      *
      * @return int
@@ -250,6 +257,29 @@ class User implements UserInterface, EquatableInterface
     public function getSigninCount()
     {
         return $this->signinCount;
+    }
+
+    /**
+     * Set isAdmin
+     *
+     * @param bool $isAdmin
+     * @return User
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get isAdmin
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->isAdmin;
     }
 
     /**

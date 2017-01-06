@@ -1,5 +1,6 @@
 parameters:
     base.service.class: BaseBundle\Base\BaseService
+    base.storage.class: Fuz\QuickStartBundle\Base\BaseStorage
     base.oauth_user_provider.class: BaseBundle\Provider\OAuthUserProvider
     base.locale.listener.class: BaseBundle\EventListener\LocaleListener
     base.last_route.listener.class: BaseBundle\EventListener\LastRouteListener
@@ -13,6 +14,12 @@ services:
         abstract: true
         calls:
           - [setContainer, ["@service_container"]]
+
+    base.storage:
+        class: %base.storage.class%
+        abstract: true
+        calls:
+          - [setConnection, ["@doctrine.dbal.default_connection"]]
 
     base.oauth_user_provider:
         class: '%base.oauth_user_provider.class%'

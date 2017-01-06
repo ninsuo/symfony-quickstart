@@ -2,7 +2,7 @@
 parameters:
 
     # General
-    site_url: 'http://127.0.0.1:8000'
+    site_url: http://127.0.0.1:8000
     site_brand: fuz.org
     site_description: 'fuz.org provides a simple and powerful code generator online.'
     site_default_title: 'fuz.org - Generate your money!'

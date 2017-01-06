@@ -101,7 +101,7 @@ hwi_oauth:
             client_id: '%stack_client_id%'
             client_secret: '%stack_secret%'
             options:
-                key: '%stack_key%'
+#                key: '%stack_key%'
         google:
             type: "google"
             client_id: "%google_client_id%"
