@@ -39,7 +39,7 @@ class UsersController extends BaseController
         if ($criteria = $search->getData()['filter']) {
             $qb
                ->where('u.nickname LIKE :criteria OR u.contact LIKE :criteria')
-               ->setParameter('criteria', $criteria)
+               ->setParameter('criteria', '%'.$criteria.'%')
             ;
         }
 

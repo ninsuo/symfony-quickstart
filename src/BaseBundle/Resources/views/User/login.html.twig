@@ -1,6 +1,7 @@
 {# BaseBundle:Login:login.html.twig #}
 
 {# HWIOAuthBundle integration #}
+{% import _self as macros %}
 
 {% macro displayProvider(name, nb_oauth, internal_name = null) %}
 
@@ -29,15 +30,19 @@
             &nbsp;
         </div>
 
-        <div class="col-md-10">
-            <div class="row" id="login">
+        <div class="col-md-10" id="login">
 
-                {% set nb_oauth = 3 %}
-                {{ _self.displayProvider('GitHub', nb_oauth) }}
-                {{ _self.displayProvider('Stack Exchange', nb_oauth, 'Stack') }}
-                {{ _self.displayProvider('Google', nb_oauth) }}
-                {{ _self.displayProvider('Twitter', nb_oauth) }}
-                {{ _self.displayProvider('Facebook', nb_oauth) }}
+            {% set nb_oauth = 3 %}
+
+            <div class="row">
+
+                {{ macros.displayProvider('GitHub', nb_oauth) }}
+                {{ macros.displayProvider('Stack Exchange', nb_oauth, 'Stack') }}
+                {{ macros.displayProvider('Google', nb_oauth) }}
+            </div>
+            <div class="row">
+                {{ macros.displayProvider('Twitter', nb_oauth) }}
+                {{ macros.displayProvider('Facebook', nb_oauth) }}
 
             </div>
         </div>
