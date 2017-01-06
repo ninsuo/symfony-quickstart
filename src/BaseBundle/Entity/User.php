@@ -81,6 +81,13 @@ class User implements UserInterface, EquatableInterface
     protected $isAdmin = false;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_frozen", type="boolean")
+     */
+    protected $isFrozen = false;
+
+    /**
      * @var array
      */
     protected $roles = ['ROLE_USER'];
@@ -308,6 +315,29 @@ class User implements UserInterface, EquatableInterface
     public function isAdmin()
     {
         return $this->isAdmin;
+    }
+
+    /**
+     * Set isFrozen.
+     *
+     * @param bool $isFrozen
+     * @return User
+     */
+    public function setIsFrozen($isFrozen)
+    {
+        $this->isFrozen = $isFrozen;
+
+        return $this;
+    }
+
+    /**
+     * Get isFrozen.
+     *
+     * @return bool
+     */
+    public function isFrozen()
+    {
+        return $this->isFrozen;
     }
 
     /**

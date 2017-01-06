@@ -2,7 +2,6 @@
 
 namespace AdminBundle\Controller;
 
-use AdminBundle\Form\Type\SearchType;
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Validator\Constraints;
 
 /**
  * @Route("/users")
@@ -61,5 +62,52 @@ class UsersController extends BaseController
         );
 
         return new Response();
+    }
+
+    /**
+     * @Route("/edit/contact/{id}", name="admin_users_edit_contact")
+     * @Template("AdminBundle::_editOnClick.html.twig")
+     */
+    public function _editContactAction(Request $request, $id)
+    {
+        $manager = $this->getManager('BaseBundle:User');
+
+        $entity = $manager->findOneById($id);
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this
+           ->createNamedFormBuilder("edit-contact-{$id}", Type\FormType::class, $entity)
+           ->add('contact', Type\EmailType::class, [
+               'label'       => "admin.users.edit.contact",
+               'constraints' => [
+                   new Constraints\NotBlank(),
+                   new Constraints\Email(),
+               ],
+           ])
+           ->add('submit', Type\SubmitType::class, [
+               'label' => "admin.users.",
+           ])
+           ->getForm()
+           ->handleRequest($request)
+        ;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this
+                ->get('doctrine')
+                ->getManager()
+                ->persist($entity)
+                ->flush()
+            ;
+
+            return [
+                'text' => $entity->getContact(),
+            ];
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
     }
 }

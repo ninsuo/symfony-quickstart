@@ -4,6 +4,7 @@ admin:
         name: Nom
         email: Email
         admin: Admin
+        edit: Editer
     permissions:
         id: ID
         name: Nom

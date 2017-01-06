@@ -22,7 +22,13 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>{{ macros.user(user) }}</td>
-                    <td>{{ user.contact }}</td>
+                    <td>
+                        {{
+                            include('AdminBundle::_editOnClick.html.twig', {
+                                'text': user.contact,
+                            })
+                        }}
+                    </td>
                     <td>
                         {% if me == user.id %}
                             &nbsp;

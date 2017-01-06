@@ -1,0 +1,15 @@
+{% set random = random() %}
+<div id="i{{ random }}">
+    {% if form is defined %}
+        {{ form(form) }}
+    {% else %}
+        <div
+            class="domajax click"
+            style="width: 100%;"
+            data-endpoint="{{ path('admin_users_edit_contact', {id: user.id}) }}"
+            data-output="#i{{ random }}"
+        >
+            {{ text }}
+        </div>
+    {% endif %}
+</div>

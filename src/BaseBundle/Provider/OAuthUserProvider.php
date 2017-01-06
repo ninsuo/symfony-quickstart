@@ -52,8 +52,10 @@ class OAuthUserProvider extends BaseUserProvider
             $this->em->flush($user);
             $reload = true;
         } else {
-            $user->setNickname($name);
-            $user->setContact($response->getEmail());
+            if (!$user->isFrozen()) {
+                $user->setNickname($name);
+                $user->setContact($response->getEmail());
+            }
             $user->setSigninCount($user->getSigninCount() + 1);
             $this->em->persist($user);
             $this->em->flush($user);
