@@ -1,0 +1,34 @@
+{% block search_filter_widget %}
+
+    <div class="pull-right" style="width: 300px;">
+
+    {{
+        form_start(form, {
+            'attr': {
+                'class': 'form-inline'
+            },
+            'method': 'GET'
+        })
+    }}
+
+   <div class="input-group stylish-input-group" style="border:none;">
+        <span class="form-control" style="border-right:none;">
+            {{
+                form_widget(form.filter, {
+                    'attr': {
+                        'style': 'border:none;'
+                    }
+                })
+            }}
+        </span>
+        <span class="form-control" style="border-left:none;">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+   </div>
+
+    {{ form_end(form) }}
+
+    </div>
+{% endblock %}
