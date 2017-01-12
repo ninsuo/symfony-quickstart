@@ -9,7 +9,8 @@
         <meta name="description" content="{% block description %}{{ fuz.site_description | trans }}{% endblock %}">
         <meta name="author" content="{% block author %}{% endblock %}">
         <title>{% block title %}{{ fuz.site_default_title | trans }}{% endblock %}</title>
-        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}"/>
         {{ include('BraincraftedBootstrapBundle::ie8-support.html.twig') }}
 
          {# CSS #}

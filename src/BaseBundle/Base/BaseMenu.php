@@ -19,9 +19,9 @@ abstract class BaseMenu implements ContainerAwareInterface
     {
         $menu = $factory->createItem('root');
         if (self::POSITION_LEFT === $position) {
-            $menu->setChildrenAttribute('class', 'nav navbar-nav');
+            $menu->setChildrenAttribute('class', $menu->getChildrenAttribute('class') . ' nav navbar-nav');
         } else {
-            $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
+            $menu->setChildrenAttribute('class', $menu->getChildrenAttribute('class') . ' nav navbar-nav navbar-right');
         }
 
         return $menu;
@@ -74,7 +74,7 @@ abstract class BaseMenu implements ContainerAwareInterface
 
         if (!is_null($first)) {
             if ($isCurrent) {
-                $first->setAttribute('class', 'active');
+                $first->setAttribute('class', $first->getAttribute('class') . ' active');
             }
             $first->setCurrent($isCurrent);
         }
