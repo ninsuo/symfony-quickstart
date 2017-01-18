@@ -3,8 +3,9 @@
 {% endblock extends %}
 
 {% block body %}
+{{ "{% block title %}" ~ "{{ 'base.crud.index.title' | trans({'%entity%': '" ~ entity ~ "'}) }}" ~ "{% endblock %}" }}
+
 {{ "{% block body %}" }}
-    <h1>{{ "{{ 'base.crud.index.title' | trans({'%entity%': '" ~ entity ~ "'}) }}" }}</h1>
 
     <table class="table table-striped">
         <thead>

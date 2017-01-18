@@ -3,11 +3,9 @@
 {% endblock extends %}
 
 {% block body %}
+{{ "{% block title %}" ~ entity ~ "{% endblock %}" }}
+
 {{ "{% block body %}" }}
-    <h1>{{ entity }}</h1>
-
-    <hr/>
-
     <table>
         <tbody>
         {%- for field, metadata in fields %}

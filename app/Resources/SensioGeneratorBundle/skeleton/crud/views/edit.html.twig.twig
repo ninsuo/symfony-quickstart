@@ -3,8 +3,9 @@
 {% endblock extends %}
 
 {% block body %}
+{{ "{% block title %}" ~ "{{ 'base.crud.edit.title' | trans({'%entity%': '" ~ entity ~ "'}) }}" ~ "{% endblock %}" }}
+
 {{ "{% block body %}" }}
-    <h1>{{ "{{ 'base.crud.edit.title' | trans({'%entity%': '" ~ entity ~ "'}) }}" }}</h1>
 
     {{ '{{ form_start(edit_form) }}' }}
         {{ '{{ form_widget(edit_form) }}' }}
