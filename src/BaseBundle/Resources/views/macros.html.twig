@@ -138,7 +138,7 @@
                 {% for perPage in constant('BaseBundle\\Base\\BaseController::PAGER_PER_PAGE_LIST') %}
                     {% set isCurrent = perPage == pager.maxPerPage %}
                     <li {% if isCurrent %}class="active"{% endif %}>
-                        {% if isCurrent %}<span>{% else %}<a href="?{{ http_build_query(app.request.query.all|merge({(prefix ~ 'per_page'): perPage})) }}">{% endif %}
+                        {% if isCurrent %}<span>{% else %}<a href="?{{ http_build_query(app.request.query.all|merge({(prefix ~ 'per-page'): perPage})) }}">{% endif %}
                             {{ perPage }}
                         {% if isCurrent %}</span>{% else %}</a>{% endif %}
                     </li>

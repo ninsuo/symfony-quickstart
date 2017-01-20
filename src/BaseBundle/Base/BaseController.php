@@ -108,7 +108,7 @@ abstract class BaseController extends Controller
         );
         $pager->setNormalizeOutOfRangePages(true);
 
-        $perPage = $request->query->get($prefix.'per_page', self::PAGER_PER_PAGE_DEFAULT);
+        $perPage = $request->query->get($prefix.'per-page', self::PAGER_PER_PAGE_DEFAULT);
         if (!in_array($perPage, self::PAGER_PER_PAGE_LIST)) {
             throw new NotValidMaxPerPageException();
         }
