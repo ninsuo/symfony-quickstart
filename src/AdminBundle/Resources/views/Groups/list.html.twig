@@ -24,7 +24,7 @@
                         <td>{{ group.id }}</td>
                         <td>
                             {{
-                                include('AdminBundle::_editOnClick.html.twig', {
+                                include('BaseBundle::editOnClick.html.twig', {
                                     'text': group.name,
                                     'endpoint': path('admin_groups_edit_name', {id: group.id}),
                                 })

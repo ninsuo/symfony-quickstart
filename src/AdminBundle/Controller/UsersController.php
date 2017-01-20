@@ -78,7 +78,7 @@ class UsersController extends BaseController
 
     /**
      * @Route("/edit/contact/{id}", name="admin_users_edit_contact")
-     * @Template("AdminBundle::_editOnClick.html.twig")
+     * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _editContactAction(Request $request, $id)
     {
@@ -130,7 +130,7 @@ class UsersController extends BaseController
 
     /**
      * @Route("/edit/nickname/{id}", name="admin_users_edit_nickname")
-     * @Template("AdminBundle::_editOnClick.html.twig")
+     * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _editNicknameAction(Request $request, $id)
     {

@@ -27,7 +27,7 @@
                         <td>{{ user.id }}</td>
                         <td>
                             {{
-                                include('AdminBundle::_editOnClick.html.twig', {
+                                include('BaseBundle::editOnClick.html.twig', {
                                     'text': macros.user(user),
                                     'endpoint': path('admin_users_edit_nickname', {id: user.id}),
                                 })
@@ -35,7 +35,7 @@
                         </td>
                         <td>
                             {{
-                                include('AdminBundle::_editOnClick.html.twig', {
+                                include('BaseBundle::editOnClick.html.twig', {
                                     'text': user.contact,
                                     'endpoint': path('admin_users_edit_contact', {id: user.id}),
                                 })

@@ -68,7 +68,7 @@ class GroupsController extends BaseController
 
     /**
      * @Route("/edit/name/{id}", name="admin_groups_edit_name")
-     * @Template("AdminBundle::_editOnClick.html.twig")
+     * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _editNameAction(Request $request, $id)
     {
