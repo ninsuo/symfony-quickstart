@@ -33,7 +33,10 @@ class {{ entityName|pascalcase }}Controller extends BaseController
 
         if ($filter) {
             $qb
-                ->where('{{ entityPrefix }}.name LIKE :criteria')
+{% set i = 0 %}{% for name, column in columns if name != 'id' %}
+                ->{% if i == 0 %}w{% else %}orW{% endif %}here('{{ entityPrefix }}.{{ name }} LIKE :criteria')
+{% set i = i + 1 %}
+{% endfor %}
                 ->setParameter('criteria', '%'.$filter.'%')
             ;
         }
@@ -144,4 +147,3 @@ class {{ entityName|pascalcase }}Controller extends BaseController
         return $form->createView();
     }
 }
-
