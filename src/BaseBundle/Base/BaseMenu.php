@@ -2,15 +2,15 @@
 
 namespace BaseBundle\Base;
 
+use BaseBundle\Traits\ServiceTrait;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class BaseMenu implements ContainerAwareInterface
 {
-    use ContainerAwareTrait;
+    use ServiceTrait;
 
     const POSITION_LEFT = 'left';
     const POSITION_RIGHT = 'right';
@@ -25,18 +25,6 @@ abstract class BaseMenu implements ContainerAwareInterface
         }
 
         return $menu;
-    }
-
-    protected function isGranted($role)
-    {
-        if (is_null($role)) {
-            return true;
-        }
-
-        $token = $this->container->get('security.token_storage')->getToken();
-        $user = $token->getUser();
-
-        return ($user instanceof UserInterface && $user->hasRole($role));
     }
 
     protected function addRoute(ItemInterface $menu, $name, $route, array $routeParams = array(), array $childParams = array(), $divider = false)
@@ -98,19 +86,7 @@ abstract class BaseMenu implements ContainerAwareInterface
         $menu[$label]->setLinkAttribute('aria-expanded', 'false');
     }
 
-    protected function trans($property, array $parameters = array())
-    {
-        return $this->container->get('translator')->trans($property, $parameters);
-    }
-
     public function mainLeftMenu(FactoryInterface $factory, array $options)
-    {
-        $menu = $this->createMenu($factory, self::POSITION_LEFT);
-
-        return $menu;
-    }
-
-    public function userLeftMenu(FactoryInterface $factory, array $options)
     {
         $menu = $this->createMenu($factory, self::POSITION_LEFT);
 
@@ -124,10 +100,30 @@ abstract class BaseMenu implements ContainerAwareInterface
         return $menu;
     }
 
-    public function userRightMenu(FactoryInterface $factory, array $options)
+    protected function slugify($text)
     {
-        $menu = $this->createMenu($factory, self::POSITION_RIGHT);
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
-        return $menu;
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // remove duplicate -
+        $text = preg_replace('~-+~', '-', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }

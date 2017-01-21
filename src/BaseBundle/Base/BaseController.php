@@ -2,6 +2,7 @@
 
 namespace BaseBundle\Base;
 
+use BaseBundle\Traits\ServiceTrait;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\NotValidMaxPerPageException;
@@ -10,23 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 abstract class BaseController extends Controller
 {
+    use ServiceTrait;
+
     const PAGER_PER_PAGE_LIST = [10, 25, 50, 100, 250];
     const PAGER_PER_PAGE_DEFAULT = 25;
-
-    /**
-     * Symfony's var_dump.
-     *
-     * @param mixed $var
-     */
-    protected function dump($var)
-    {
-        VarDumper::dump($var);
-    }
 
     /**
      * This method sends user back to the last url he comes from.
@@ -72,11 +64,6 @@ abstract class BaseController extends Controller
         $this->addFlash('success', $this->trans($message, $parameters));
     }
 
-    public function trans($property, array $parameters = array())
-    {
-        return $this->container->get('translator')->trans($property, $parameters);
-    }
-
     public function fwd($controller, array $path = array(), array $query = array())
     {
         return $this->forward($controller, $path, $query);
@@ -85,20 +72,6 @@ abstract class BaseController extends Controller
     public function createNamedFormBuilder($name, $type = Type\FormType::class, $data = null, array $options = array())
     {
         return $this->container->get('form.factory')->createNamedBuilder($name, $type, $data, $options);
-    }
-
-    public function getManager($manager = null)
-    {
-        $em = $this
-           ->get('doctrine')
-           ->getManager()
-        ;
-
-        if (!is_null($manager)) {
-            return $em->getRepository($manager);
-        }
-
-        return $em;
     }
 
     public function getPager(Request $request, QueryBuilder $qb, $prefix = '')
@@ -124,17 +97,5 @@ abstract class BaseController extends Controller
         if ($token !== $this->get('security.csrf.token_manager')->getToken($key)->getValue()) {
             throw new InvalidCsrfTokenException('Invalid CSRF token');
         }
-    }
-
-    public function getEntityById($manager, $id)
-    {
-        $em = $this->getManager($manager);
-        $entity = $em->findOneById($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException();
-        }
-
-        return $entity;
     }
 }
