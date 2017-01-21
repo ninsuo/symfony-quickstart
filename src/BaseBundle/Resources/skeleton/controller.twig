@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -22,6 +23,11 @@ class {{ entityName|pascalcase }}Controller extends BaseController
      */
     public function listAction(Request $request)
     {
+        $form = $this->getCreateForm($request);
+        if (is_null($form)) {
+            return new RedirectResponse($this->generateUrl('{{ routePrefix }}'));
+        }
+
         $filter = $request->query->get('{{ entityName|kebabcase }}-filter');
 
         $qb = $this
@@ -43,8 +49,39 @@ class {{ entityName|pascalcase }}Controller extends BaseController
 
         return [
             'pager' => $this->getPager($request, $qb, '{{ entityName|kebabcase }}-'),
-            'create' => $this->getCreateForm($request),
+            'create' => $form,
         ];
+    }
+
+    protected function getCreateForm(Request $request)
+    {
+        $entity = new {{ entityName }}();
+
+        $form = $this
+            ->createNamedFormBuilder('create-{{ entityName|kebabcase }}', Type\FormType::class, $entity)
+{% for name, column in columns if name != 'id' %}
+            ->add('{{ name }}', Type\TextType::class, [
+                'label' => '{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.{{ name|snakecase|lower }}',
+                'constraints' => [],
+            ])
+{% endfor %}            ->add('submit', Type\SubmitType::class, [
+                'label' => 'base.crud.action.save',
+            ])
+            ->getForm()
+            ->handleRequest($request)
+        ;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            $this->success("{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.created");
+
+            return null;
+        }
+
+        return $form->createView();
     }
 
     /**
@@ -61,6 +98,8 @@ class {{ entityName|pascalcase }}Controller extends BaseController
         if (!$entity) {
             throw $this->createNotFoundException();
         }
+
+        $this->success("{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.deleted", ['%id%' => $entity->getId()]);
 
         $em = $this->get('doctrine')->getManager();
         $em->remove($entity);
@@ -120,30 +159,4 @@ class {{ entityName|pascalcase }}Controller extends BaseController
     }
 
 {% endfor %}
-    protected function getCreateForm(Request $request)
-    {
-        $entity = new {{ entityName }}();
-
-        $form = $this
-            ->createNamedFormBuilder('create-{{ entityName|kebabcase }}', Type\FormType::class, $entity)
-{% for name, column in columns if name != 'id' %}
-            ->add('{{ name }}', Type\TextType::class, [
-                'label' => '{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.{{ name|snakecase|lower }}',
-                'constraints' => [],
-            ])
-{% endfor %}            ->add('submit', Type\SubmitType::class, [
-                'label' => 'base.crud.action.save',
-            ])
-            ->getForm()
-            ->handleRequest($request)
-        ;
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($entity);
-            $em->flush();
-        }
-
-        return $form->createView();
-    }
 }

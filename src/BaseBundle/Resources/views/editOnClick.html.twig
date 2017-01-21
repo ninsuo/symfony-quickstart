@@ -20,7 +20,7 @@
             data-output="#i{{ random }}"
         >
             {% if text %}
-                {{ text }}
+                {{ text|nl2br }}
             {% else %}
                 <em class="help-block" style="margin:0">{{ 'base.undefined' }}</em>
             {% endif %}
