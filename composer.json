@@ -13,7 +13,7 @@
         ]
     },
     "require": {
-        "php": ">=5.9.0",
+        "php": ">=6.0.0",
         "symfony/symfony": "^3.0",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
@@ -71,11 +71,6 @@
             "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache",
             "php app/console assetic:dump web/"
         ]
-    },
-    "config": {
-        "platform": {
-            "php": "5.5.9"
-        }
     },
     "extra": {
         "symfony-app-dir": "app",

@@ -13,4 +13,5 @@ build/
 vendor/
 bin/
 composer.phar
+.DS_Store
 TODO
