@@ -19,7 +19,11 @@
             data-endpoint="{{ endpoint }}"
             data-output="#i{{ random }}"
         >
-            {{ text }}
+            {% if text %}
+                {{ text }}
+            {% else %}
+                <em class="help-block" style="margin:0">{{ 'base.undefined' }}</em>
+            {% endif %}
         </div>
     {% endif %}
 </div>

@@ -72,6 +72,7 @@ base:
     site:
         description: 'An empty Symfony project that provides lots of ready-to-use tools for quick and not-so-dirty development'
         default_title: 'Light, write down your mind'
+    undefined: Undefined
     unsuscribe:
         confirm: Confirm
         explain: 'All data associated with your account will be'

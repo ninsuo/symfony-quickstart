@@ -74,6 +74,7 @@ base:
     site:
         description: 'fuz.org fournit un générateur de code en ligne simple et puissant.'
         default_title: 'fuz.org - Générez votre argent!'
+    undefined: Valeur non définie
     unsuscribe:
         confirm: Confirmer
         explain: 'Toutes les données associées à votre compte vont être'
