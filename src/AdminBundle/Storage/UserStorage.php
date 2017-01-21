@@ -9,7 +9,7 @@ class UserStorage extends BaseStorage
     public function toggleAdmin($id)
     {
         $this->connection->executeQuery('
-            UPDATE user
+            UPDATE users
             SET is_admin = 1 - is_admin
             WHERE id = :user_id
         ', [
@@ -20,7 +20,7 @@ class UserStorage extends BaseStorage
     public function toggleFrozen($id)
     {
         $this->connection->executeQuery('
-            UPDATE user
+            UPDATE users
             SET is_frozen = 1 - is_frozen
             WHERE id = :user_id
         ', [

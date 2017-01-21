@@ -3,7 +3,6 @@ parameters:
     hwi_oauth.account.connector.class: BaseBundle\Connect\AccountConnect
     pagerfanta.view.light.class: BaseBundle\Pagerfanta\View\LightView
     pagerfanta.template.light.class: BaseBundle\Pagerfanta\Template\LightTemplate
-    base.light.twig_extension.class: BaseBundle\Twig\Extension\LightExtension
 
 services:
 
@@ -27,7 +26,3 @@ services:
         public: false
         arguments: ['@translator']
 
-    base.light.twig_extension:
-        class: %base.light.twig_extension.class%
-        tags:
-            - { name: twig.extension }

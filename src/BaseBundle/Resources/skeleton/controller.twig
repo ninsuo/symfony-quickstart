@@ -1,0 +1,147 @@
+<?php
+
+namespace {{ bundle|pascalcase }}\Controller;
+
+use AppBundle\Base\BaseController;
+use {{ bundle }}\Entity\{{ entityName }};
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints;
+
+/**
+* @Route("/{{ bundleName|kebabcase }}/{{ entityName|kebabcase }}")
+ */
+class {{ entityName|pascalcase }}Controller extends BaseController
+{
+    /**
+     * @Route("/", name="{{ routePrefix }}")
+     * @Template()
+     */
+    public function listAction(Request $request)
+    {
+        $filter = $request->query->get('{{ entityName|kebabcase }}-filter');
+
+        $qb = $this
+            ->getManager()
+            ->createQueryBuilder()
+            ->select('{{ entityPrefix }}')
+            ->from({{ entityName }}::class, '{{ entityPrefix }}')
+         ;
+
+        if ($filter) {
+            $qb
+                ->where('{{ entityPrefix }}.name LIKE :criteria')
+                ->setParameter('criteria', '%'.$filter.'%')
+            ;
+        }
+
+        return [
+            'pager' => $this->getPager($request, $qb, '{{ entityName|kebabcase }}-'),
+            'create' => $this->getCreateForm($request),
+        ];
+    }
+
+    /**
+     * @Route("/delete/{id}/{token}", name="{{ routePrefix }}_delete")
+     * @Template()
+     */
+    public function deleteAction(Request $request, $id, $token)
+    {
+        $this->checkCsrfToken('{{ routePrefix }}', $token);
+
+        $manager = $this->getManager('{{ entity }}');
+
+        $entity = $manager->findOneById($id);
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        $em = $this->get('doctrine')->getManager();
+        $em->remove($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('{{ routePrefix }}'));
+    }
+
+{% for name, column in columns if name != 'id' %}
+    /**
+     * @Route("/edit/{{ name|kebabcase }}/{id}", name="{{ routePrefix }}_edit_{{ name|snakecase|lower }}")
+     * @Template("BaseBundle::editOnClick.html.twig")
+     */
+    public function _edit{{ name|title }}Action(Request $request, $id)
+    {
+        $manager = $this->getManager('{{ entity }}');
+
+        $entity = $manager->findOneById($id);
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        $endpoint = $this->generateUrl('{{ routePrefix }}_edit_{{ name|snakecase|lower }}', ['id' => $id]);
+
+        $form = $this
+            ->createNamedFormBuilder("edit-{{ entityName|kebabcase }}-{{ name|kebabcase }}-{$id}", Type\FormType::class, $entity, [
+                'action' => $endpoint,
+            ])
+            ->add('{{ name|kebabcase }}', Type\TextType::class, [
+                'label' => '{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.{{ name|snakecase|lower }}',
+                'constraints' => [],
+            ])
+            ->add('submit', Type\SubmitType::class, [
+                'label' => 'base.crud.action.save',
+                'attr' => [
+                    'class' => 'domajax',
+                ],
+            ])
+            ->getForm()
+            ->handleRequest($request)
+        ;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            return [
+                'text' => $entity->get{{ name|pascalcase }}(),
+                'endpoint' => $endpoint,
+            ];
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
+    }
+
+{% endfor %}
+    protected function getCreateForm(Request $request)
+    {
+        $entity = new {{ entityName }}();
+
+        $form = $this
+            ->createNamedFormBuilder('create-{{ entityName|kebabcase }}', Type\FormType::class, $entity)
+{% for name, column in columns if name != 'id' %}
+            ->add('{{ name }}', Type\TextType::class, [
+                'label' => '{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.{{ name|snakecase|lower }}',
+                'constraints' => [],
+            ])
+{% endfor %}            ->add('submit', Type\SubmitType::class, [
+                'label' => 'base.crud.action.save',
+            ])
+            ->getForm()
+            ->handleRequest($request)
+        ;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($entity);
+            $em->flush();
+        }
+
+        return $form->createView();
+    }
+}
+

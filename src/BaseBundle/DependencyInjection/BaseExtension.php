@@ -31,5 +31,6 @@ class BaseExtension extends Extension
         $loader->load('helpers.yml');
         $loader->load('listeners.yml');
         $loader->load('services.yml');
+        $loader->load('twig.yml');
     }
 }
