@@ -74,10 +74,10 @@ abstract class BaseController extends Controller
         return $this->container->get('form.factory')->createNamedBuilder($name, $type, $data, $options);
     }
 
-    public function getPager(Request $request, QueryBuilder $qb, $prefix = '')
+    public function getPager(Request $request, QueryBuilder $qb, $prefix = '', $hasJoins = false)
     {
         $pager = new Pagerfanta(
-           new DoctrineORMAdapter($qb)
+           new DoctrineORMAdapter($qb, $hasJoins)
         );
         $pager->setNormalizeOutOfRangePages(true);
 

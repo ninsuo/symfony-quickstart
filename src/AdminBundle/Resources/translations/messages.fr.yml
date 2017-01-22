@@ -11,7 +11,7 @@ admin:
     users:
         id: ID
         nickname: Nom
-        email: Email
+        contact: Email
         admin: Admin
         frozen: Gelé
         actions: Actions
