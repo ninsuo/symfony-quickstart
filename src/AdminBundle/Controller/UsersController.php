@@ -54,9 +54,13 @@ class UsersController extends BaseController
     {
         $this->checkCsrfToken('administration', $token);
 
-        $this->get('admin.storage.user')->toggleAdmin(
-           intval($request->request->get('id'))
-        );
+        $em   = $this->getManager();
+        $user = $this->getEntityById('BaseBundle:User', $request->request->get('id'));
+
+        $user->setIsAdmin(1 - intval($user->isAdmin()));
+
+        $em->persist($user);
+        $em->flush();
 
         return new Response();
     }
@@ -69,9 +73,13 @@ class UsersController extends BaseController
     {
         $this->checkCsrfToken('administration', $token);
 
-        $this->get('admin.storage.user')->toggleFrozen(
-           intval($request->request->get('id'))
-        );
+        $em   = $this->getManager();
+        $user = $this->getEntityById('BaseBundle:User', $request->request->get('id'));
+
+        $user->setIsFrozen(1 - intval($user->isFrozen()));
+
+        $em->persist($user);
+        $em->flush();
 
         return new Response();
     }
