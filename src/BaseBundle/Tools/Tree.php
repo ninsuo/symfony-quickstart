@@ -31,11 +31,13 @@ class Tree
      * @param TreeInterface[] $nodes
      * @param string $separator
      * @param bool $strictMode
+     * @param string $trim
+     *
      * @return array
      * @throws \LogicException
      * @throws \RuntimeException
      */
-    static public function createTree($nodes, $separator = "\n", $strictMode = true)
+    static public function createTree($nodes, $separator = "\n", $strictMode = true, $trim = null)
     {
         $tree = [];
 
@@ -46,6 +48,11 @@ class Tree
             $ref = &$tree;
             $path = [];
             foreach ($arr = explode($separator, $node->getPath()) as $key => $elem) {
+                if (!is_null($trim)) {
+                    $key = trim($key, $trim);
+                    $elem = trim($elem, $trim);
+                }
+
                 if (empty($elem)) {
                     continue;
                 }

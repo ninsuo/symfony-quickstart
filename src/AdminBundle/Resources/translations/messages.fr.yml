@@ -10,6 +10,7 @@ admin:
         manage: Gérer les membres du groupe
     users:
         id: ID
+        network: Réseau
         nickname: Nom
         contact: Email
         admin: Admin
