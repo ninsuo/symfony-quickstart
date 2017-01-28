@@ -1,12 +1,7 @@
 parameters:
     admin.storage.user.class: AdminBundle\Storage\UserStorage
-    admin.storage.group.class: AdminBundle\Storage\GroupStorage
 
 services:
     admin.storage.user:
         class: '%admin.storage.user.class%'
-        parent: base.storage
-
-    admin.storage.group:
-        class: '%admin.storage.group.class%'
         parent: base.storage

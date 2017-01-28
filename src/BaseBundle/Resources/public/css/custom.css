@@ -67,6 +67,11 @@
     margin: 0px !important;
 }
 
+/*
+ * Nested menus
+ * http://bootsnipp.com/snippets/featured/multi-level-dropdown-menu-bs3
+ */
+
 .dropdown-submenu {
     position: relative;
 }
