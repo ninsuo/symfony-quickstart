@@ -1,0 +1,11 @@
+parameters:
+    base.ckeditor.type.class: BaseBundle\Form\Type\CKEditorType
+
+services:
+
+    base.ckeditor.type:
+        class: '%base.ckeditor.type.class%'
+        parent: base.type
+        tags:
+            - { name: form.type }
+

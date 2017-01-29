@@ -28,6 +28,7 @@ class BaseExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('bases.yml');
+        $loader->load('forms.yml');
         $loader->load('helpers.yml');
         $loader->load('listeners.yml');
         $loader->load('services.yml');
