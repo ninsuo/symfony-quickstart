@@ -5,10 +5,10 @@ namespace AdminBundle\Controller;
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\Group;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/groups")
@@ -39,7 +39,7 @@ class GroupsController extends BaseController
         }
 
         return [
-            'pager' => $this->getPager($request, $qb),
+            'pager'  => $this->getPager($request, $qb),
             'create' => $this->getCreateForm($request),
         ];
     }
@@ -90,7 +90,7 @@ class GroupsController extends BaseController
             ])
             ->add('submit', Type\SubmitType::class, [
                 'label' => 'base.crud.action.save',
-                'attr' => [
+                'attr'  => [
                     'class' => 'domajax',
                 ],
             ])
@@ -104,7 +104,7 @@ class GroupsController extends BaseController
             $em->flush();
 
             return [
-                'text' => $entity->getName(),
+                'text'     => $entity->getName(),
                 'endpoint' => $endpoint,
             ];
         }

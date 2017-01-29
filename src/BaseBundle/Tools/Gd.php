@@ -7,7 +7,7 @@ class Gd
     public static function load($file)
     {
         $content = file_get_contents($file);
-        $img = @imagecreatefromstring($content);
+        $img     = @imagecreatefromstring($content);
 
         return $img;
     }
@@ -17,7 +17,7 @@ class Gd
         if (!is_null($file)) {
             imagepng($img, $file);
 
-            return ;
+            return;
         }
 
         ob_start();
@@ -36,7 +36,7 @@ class Gd
         if (($srcWidth <= $targetWidth) && ($srcHeight <= $targetHeight)) {
             $imgTargetWidth  = $srcWidth;
             $imgTargetHeight = $srcHeight;
-        } else if ($targetRatio > $srcRatio) {
+        } elseif ($targetRatio > $srcRatio) {
             $imgTargetWidth  = (int) ($targetHeight * $srcRatio);
             $imgTargetHeight = $targetHeight;
         } else {

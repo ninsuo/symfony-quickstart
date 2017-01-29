@@ -21,7 +21,7 @@ class SettingExtension extends BaseTwigExtension
             return $this->settings[$property];
         }
 
-        $value = $this->getManager('BaseBundle:Setting')->get($property, $default);
+        $value                     = $this->getManager('BaseBundle:Setting')->get($property, $default);
         $this->settings[$property] = $value;
 
         return $value;

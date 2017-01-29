@@ -4,11 +4,11 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Base\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 /**
  * @Route("/administrators")
@@ -31,7 +31,7 @@ class AdministratorsController extends BaseController
 
         return [
             'list' => $list,
-            'me' => $this->getUser()->getId(),
+            'me'   => $this->getUser()->getId(),
         ];
     }
 
@@ -41,7 +41,7 @@ class AdministratorsController extends BaseController
      */
     public function toggleAction(Request $request, $token)
     {
-       if ($token !== $this->get('security.csrf.token_manager')->getToken('admin-administrators-toggle')->getValue()) {
+        if ($token !== $this->get('security.csrf.token_manager')->getToken('admin-administrators-toggle')->getValue()) {
             throw new InvalidCsrfTokenException('Invalid CSRF token');
         }
 

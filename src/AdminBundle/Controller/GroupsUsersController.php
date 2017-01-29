@@ -24,10 +24,38 @@ class GroupsUsersController extends BaseController
         $group = $this->getEntityById('BaseBundle:Group', $groupId);
 
         return [
-            'group' => $group,
-            'pagerIn' => $this->_getGroupUsers($request, $groupId, 'in'),
+            'group'    => $group,
+            'pagerIn'  => $this->_getGroupUsers($request, $groupId, 'in'),
             'pagerOut' => $this->_getGroupUsers($request, $groupId, 'out'),
         ];
+    }
+
+    /**
+     * @Route(
+     *     "/toggle/{groupId}/{userId}/{token}",
+     *     name = "admin_groups_users_toggle",
+     *     requirements = {"groupId" = "^\d+$", "userId" = "^\d+$"}
+     * )
+     */
+    public function toggleAction(Request $request, $groupId, $userId, $token)
+    {
+        $this->checkCsrfToken('administration', $token);
+        $group = $this->getEntityById('BaseBundle:Group', $groupId);
+        $user  = $this->getEntityById('BaseBundle:User', $userId);
+
+        if ($group->getUsers()->contains($user)) {
+            $user->getGroups()->removeElement($group);
+        } else {
+            $user->getGroups()->add($group);
+        }
+
+        $em = $this->get('doctrine')->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect(
+            $this->generateUrl('admin_groups_users', array_merge($request->query->all(), ['groupId' => $groupId]))
+        );
     }
 
     protected function _getGroupUsers(Request $request, $groupId, $prefix)
@@ -56,33 +84,5 @@ class GroupsUsersController extends BaseController
         }
 
         return $this->getPager($request, $qb, $prefix);
-    }
-
-    /**
-     * @Route(
-     *     "/toggle/{groupId}/{userId}/{token}",
-     *     name = "admin_groups_users_toggle",
-     *     requirements = {"groupId" = "^\d+$", "userId" = "^\d+$"}
-     * )
-     */
-    public function toggleAction(Request $request, $groupId, $userId, $token)
-    {
-        $this->checkCsrfToken('administration', $token);
-        $group = $this->getEntityById('BaseBundle:Group', $groupId);
-        $user = $this->getEntityById('BaseBundle:User', $userId);
-
-        if ($group->getUsers()->contains($user)) {
-            $user->getGroups()->removeElement($group);
-        } else {
-            $user->getGroups()->add($group);
-        }
-
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($user);
-        $em->flush();
-
-        return $this->redirect(
-            $this->generateUrl('admin_groups_users', array_merge($request->query->all(), ['groupId' => $groupId]))
-        );
     }
 }

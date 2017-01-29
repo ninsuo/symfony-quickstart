@@ -36,8 +36,8 @@ class LastRouteListener implements EventSubscriberInterface
         // Keep query string
         $currentRoute['params'] = array_merge($request->query->all(), $currentRoute['params']);
 
-        $session = $request->getSession();
-        $previousRoute = $session->get('current_route', array());
+        $session       = $request->getSession();
+        $previousRoute = $session->get('current_route', []);
         if ($currentRoute == $previousRoute) {
             return;
         }
@@ -48,8 +48,8 @@ class LastRouteListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
-            KernelEvents::REQUEST => array(array('onKernelRequest', 15)),
-        );
+        return [
+            KernelEvents::REQUEST => [['onKernelRequest', 15]],
+        ];
     }
 }

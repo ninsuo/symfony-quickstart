@@ -5,7 +5,7 @@ namespace AdminBundle\Repository;
 use BaseBundle\Entity\Setting;
 
 /**
- * SettingRepository
+ * SettingRepository.
  *
  * Scalability: you may need to wrap this in a redis decorator.
  */

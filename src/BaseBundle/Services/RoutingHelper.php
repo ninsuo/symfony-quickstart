@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Router;
 class RoutingHelper
 {
     protected $router;
-    protected $cache = array();
+    protected $cache = [];
 
     public function __construct(Router $router)
     {
@@ -21,22 +21,22 @@ class RoutingHelper
     public function getCurrentRoute(Request $request)
     {
         $pathInfo = $request->getPathInfo();
-        $hash = sha1(var_export($pathInfo, true));
+        $hash     = sha1(var_export($pathInfo, true));
         if (in_array($hash, $this->cache)) {
             return $this->cache[$hash];
         }
 
         $routeParams = $this->router->match($pathInfo);
-        $routeName = $routeParams['_route'];
+        $routeName   = $routeParams['_route'];
         if (substr($routeName, 0, 1) === '_') {
             return;
         }
         unset($routeParams['_route']);
 
-        $data = array(
-            'name' => $routeName,
+        $data = [
+            'name'   => $routeName,
             'params' => $routeParams,
-        );
+        ];
 
         $this->cache[$hash] = $data;
 

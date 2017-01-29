@@ -7,7 +7,7 @@ class Richtext
     public static function getCKEditorConfig()
     {
         return [
-            'toolbar'  => [
+            'toolbar' => [
                 ['name' => 'clipboard', 'items' => ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']],
                 ['name' => 'links', 'items' => ['Link', 'Unlink', 'Anchor']],
                 ['name' => 'insert', 'items' => ['Image', 'Table', 'HorizontalRule', 'SpecialChar']],

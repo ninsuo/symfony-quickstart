@@ -7,13 +7,13 @@ use Pagerfanta\View\TwitterBootstrap3View;
 
 class DomajaxView extends TwitterBootstrap3View
 {
-    protected function createDefaultTemplate()
-    {
-        return new DomajaxTemplate();
-    }
-
     public function getName()
     {
         return 'domajax';
+    }
+
+    protected function createDefaultTemplate()
+    {
+        return new DomajaxTemplate();
     }
 }

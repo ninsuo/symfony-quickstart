@@ -29,27 +29,28 @@ class Tree
      *        |-- config_dev.yml => $objectC
      *
      * @param TreeInterface[] $nodes
-     * @param string $separator
-     * @param bool $strictMode
-     * @param string $trim
+     * @param string          $separator
+     * @param bool            $strictMode
+     * @param string          $trim
      *
      * @return array
+     *
      * @throws \LogicException
      * @throws \RuntimeException
      */
-    static public function createTree($nodes, $separator = "\n", $strictMode = true, $trim = null)
+    public static function createTree($nodes, $separator = "\n", $strictMode = true, $trim = null)
     {
         $tree = [];
 
         foreach ($nodes as $node) {
             if (!($node instanceof TreeInterface)) {
-                throw new \LogicException("Tree nodes should implement TreeInterface class.");
+                throw new \LogicException('Tree nodes should implement TreeInterface class.');
             }
-            $ref = &$tree;
+            $ref  = &$tree;
             $path = [];
             foreach ($arr = explode($separator, $node->getPath()) as $key => $elem) {
                 if (!is_null($trim)) {
-                    $key = trim($key, $trim);
+                    $key  = trim($key, $trim);
                     $elem = trim($elem, $trim);
                 }
 
@@ -58,11 +59,11 @@ class Tree
                 }
                 $path[] = $key;
                 if ($strictMode && isset($ref[$elem]) && (count($arr) == $key + 1 || is_object($ref[$elem]))) {
-                    throw new \RuntimeException("Node is overwriting another one at ".implode($separator, $path));
+                    throw new \RuntimeException('Node is overwriting another one at '.implode($separator, $path));
                 }
                 if (count($arr) == $key + 1) {
                     $ref[$elem] = $node;
-                } else if (!array_key_exists($elem, $ref)) {
+                } elseif (!array_key_exists($elem, $ref)) {
                     $ref[$elem] = [];
                 }
                 $ref = &$ref[$elem];

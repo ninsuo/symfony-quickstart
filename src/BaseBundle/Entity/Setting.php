@@ -5,7 +5,7 @@ namespace BaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Setting
+ * Setting.
  *
  * @ORM\Table(name="setting")
  * @ORM\Entity(repositoryClass="BaseBundle\Repository\SettingRepository")
@@ -35,9 +35,8 @@ class Setting
      */
     private $value;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -47,7 +46,7 @@ class Setting
     }
 
     /**
-     * Set property
+     * Set property.
      *
      * @param string $property
      *
@@ -61,7 +60,7 @@ class Setting
     }
 
     /**
-     * Get property
+     * Get property.
      *
      * @return string
      */
@@ -71,7 +70,7 @@ class Setting
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param string $value
      *
@@ -85,7 +84,7 @@ class Setting
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
@@ -94,4 +93,3 @@ class Setting
         return $this->value;
     }
 }
-

@@ -5,11 +5,11 @@ namespace AdminBundle\Controller;
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -42,7 +42,7 @@ class UsersController extends BaseController
 
         return [
             'pager' => $this->getPager($request, $qb),
-            'me' => $this->getUser()->getId(),
+            'me'    => $this->getUser()->getId(),
         ];
     }
 
@@ -104,7 +104,7 @@ class UsersController extends BaseController
                'action' => $endpoint,
            ])
            ->add('contact', Type\EmailType::class, [
-               'label' => 'admin.users.contact',
+               'label'       => 'admin.users.contact',
                'constraints' => [
                    new Constraints\NotBlank(),
                    new Constraints\Email(),
@@ -112,7 +112,7 @@ class UsersController extends BaseController
            ])
            ->add('submit', Type\SubmitType::class, [
                'label' => 'base.crud.action.save',
-               'attr' => [
+               'attr'  => [
                    'class' => 'domajax',
                ],
            ])
@@ -126,7 +126,7 @@ class UsersController extends BaseController
             $em->flush();
 
             return [
-                'text' => $entity->getContact(),
+                'text'     => $entity->getContact(),
                 'endpoint' => $endpoint,
             ];
         }
@@ -156,14 +156,14 @@ class UsersController extends BaseController
                'action' => $endpoint,
            ])
            ->add('nickname', Type\TextType::class, [
-               'label' => 'admin.users.nickname',
+               'label'       => 'admin.users.nickname',
                'constraints' => [
                    new Constraints\NotBlank(),
                ],
            ])
            ->add('submit', Type\SubmitType::class, [
                'label' => 'base.crud.action.save',
-               'attr' => [
+               'attr'  => [
                    'class' => 'domajax',
                ],
            ])
@@ -177,7 +177,7 @@ class UsersController extends BaseController
             $em->flush();
 
             return [
-                'text' => $entity->getNickname(),
+                'text'     => $entity->getNickname(),
                 'endpoint' => $endpoint,
             ];
         }

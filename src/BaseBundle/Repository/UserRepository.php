@@ -18,10 +18,10 @@ class UserRepository extends EntityRepository
             AND u.resourceOwnerId = :resourceOwnerId
         ");
 
-        $params = array(
-            'resourceOwner' => $resourceOwner,
+        $params = [
+            'resourceOwner'   => $resourceOwner,
             'resourceOwnerId' => $resourceOwnerId,
-        );
+        ];
 
         $user = $query
            ->setMaxResults(1)

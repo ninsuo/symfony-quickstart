@@ -3,14 +3,14 @@
 namespace BaseBundle\Controller;
 
 use BaseBundle\Base\BaseController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use BaseBundle\Tools\Gd;
 use BaseBundle\Tools\Math;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 class CKEditorController extends BaseController
 {
@@ -46,6 +46,7 @@ class CKEditorController extends BaseController
 
     /**
      * Uploads through CKEditor.
+     *
      * @see http://stackoverflow.com/a/25181208/731138
      *
      * @Route("/ckeditor/upload", name="ckeditor_upload")
@@ -72,7 +73,7 @@ class CKEditorController extends BaseController
         }
 
         $source = $upload->getPathName();
-        $target = $this->getParameter('kernel.root_dir').'/../web/upload/ckeditor/'.date('YmdHis').Math::rand(8).'.png';
+        $target = $this->getParameter('kernel.root_dir').'/../web/upload/ckeditor/'.date('Ymd-His-').Math::rand(8).'.png';
         $error  = null;
         $img    = Gd::load($source);
         if (!$img) {

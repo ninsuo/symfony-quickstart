@@ -4,8 +4,8 @@ namespace BaseBundle\Services;
 
 use BaseBundle\Base\BaseService;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * base.doctrine.helper.

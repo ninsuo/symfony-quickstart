@@ -2,8 +2,8 @@
 
 namespace BaseBundle\Traits;
 
-use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\VarDumper\VarDumper;
 
 trait ServiceTrait
 {
@@ -24,7 +24,7 @@ trait ServiceTrait
         VarDumper::dump($var);
     }
 
-    protected function trans($property, array $parameters = array())
+    protected function trans($property, array $parameters = [])
     {
         return $this->container->get('translator')->trans($property, $parameters);
     }
@@ -50,7 +50,7 @@ trait ServiceTrait
 
     protected function getEntityById($manager, $id)
     {
-        $em = $this->getManager($manager);
+        $em     = $this->getManager($manager);
         $entity = $em->findOneById($id);
 
         if (!$entity) {

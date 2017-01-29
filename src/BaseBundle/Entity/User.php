@@ -2,10 +2,10 @@
 
 namespace BaseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User.
@@ -429,7 +429,6 @@ class User implements UserInterface, EquatableInterface
      */
     public function getPassword()
     {
-        return;
     }
 
     /**
@@ -437,7 +436,6 @@ class User implements UserInterface, EquatableInterface
      */
     public function getSalt()
     {
-        return;
     }
 
     /**

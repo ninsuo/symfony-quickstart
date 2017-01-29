@@ -28,22 +28,22 @@ class GenerateDoctrineLightCrudCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
+        $this->input  = $input;
         $this->output = $output;
 
         $o = CaseHelperFactory::make(CaseHelperFactory::INPUT_TYPE_PASCAL_CASE);
 
-        $entity = $input->getArgument('entity');
+        $entity  = $input->getArgument('entity');
         $factory = new DisconnectedMetadataFactory($this->getContainer()->get('doctrine'));
-        $meta = $factory->getClassMetadata($entity)->getMetadata()[0];
+        $meta    = $factory->getClassMetadata($entity)->getMetadata()[0];
 
-        $columns = $meta->fieldMappings;
-        $bundle = substr($meta->getName(), 0, strpos($meta->getName(), '\\'));
-        $bundleName = substr($bundle, 0, -6);
-        $bundleDir = realpath(__DIR__.'/../../'.$bundle);
-        $entityName = substr($meta->rootEntityName, strrpos($meta->rootEntityName, '\\') + 1);
+        $columns      = $meta->fieldMappings;
+        $bundle       = substr($meta->getName(), 0, strpos($meta->getName(), '\\'));
+        $bundleName   = substr($bundle, 0, -6);
+        $bundleDir    = realpath(__DIR__.'/../../'.$bundle);
+        $entityName   = substr($meta->rootEntityName, strrpos($meta->rootEntityName, '\\') + 1);
         $entityPrefix = strtolower(substr($entityName, 0, 1));
-        $routePrefix = strtolower($o->toSnakeCase($bundleName) . '_' . $o->toSnakeCase($entityName));
+        $routePrefix  = strtolower($o->toSnakeCase($bundleName).'_'.$o->toSnakeCase($entityName));
 
         $context = [
             'columns' => $columns,
@@ -100,10 +100,10 @@ class GenerateDoctrineLightCrudCommand extends BaseCommand
     protected function _getTwigEnvironment()
     {
         $twig = new \Twig_Environment(new \Twig_Loader_Filesystem([__DIR__.'/../Resources/skeleton']), [
-            'debug' => true,
-            'cache' => false,
+            'debug'            => true,
+            'cache'            => false,
             'strict_variables' => true,
-            'autoescape' => false,
+            'autoescape'       => false,
         ]);
 
         $twig->addExtension(new CaseExtension());

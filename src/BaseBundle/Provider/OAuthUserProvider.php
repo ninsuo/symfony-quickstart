@@ -2,9 +2,9 @@
 
 namespace BaseBundle\Provider;
 
+use BaseBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseUserProvider;
-use BaseBundle\Entity\User;
 
 class OAuthUserProvider extends BaseUserProvider
 {
@@ -33,11 +33,11 @@ class OAuthUserProvider extends BaseUserProvider
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $resourceOwner = $response->getResourceOwner()->getName();
+        $resourceOwner   = $response->getResourceOwner()->getName();
         $resourceOwnerId = $response->getUsername();
-        $name = $response->getRealName();
-        $json = json_encode([$resourceOwner, $resourceOwnerId]);
-        $user = $this->loadUserByUsername($json);
+        $name            = $response->getRealName();
+        $json            = json_encode([$resourceOwner, $resourceOwnerId]);
+        $user            = $this->loadUserByUsername($json);
 
         $reload = false;
         if (is_null($user)) {

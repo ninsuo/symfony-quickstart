@@ -6,7 +6,7 @@ use Pagerfanta\View\Template\Template;
 
 class DomajaxTemplate extends Template
 {
-    static protected $defaultOptions = array(
+    protected static $defaultOptions = [
         'prev_message'        => '&larr; Previous',
         'next_message'        => 'Next &rarr;',
         'dots_message'        => '&hellip;',
@@ -18,8 +18,8 @@ class DomajaxTemplate extends Template
         'css_dots_class'      => 'disabled',
         'css_active_class'    => 'active',
         'rel_previous'        => 'prev',
-        'rel_next'            => 'next'
-    );
+        'rel_next'            => 'next',
+    ];
 
     public function container()
     {
@@ -42,31 +42,19 @@ class DomajaxTemplate extends Template
         return $this->pageWithTextAndClass($page, $text, $class);
     }
 
-    private function pageWithTextAndClass($page, $text, $class, $rel = null)
-    {
-        $href = $this->generateRoute($page);
-
-        return $this->linkLi($class, $href, $text, $rel);
-    }
-
     public function previousDisabled()
     {
         $class = $this->previousDisabledClass();
-        $text = $this->option('prev_message');
+        $text  = $this->option('prev_message');
 
         return $this->spanLi($class, $text);
     }
 
-    private function previousDisabledClass()
-    {
-        return $this->option('css_prev_class').' '.$this->option('css_disabled_class');
-    }
-
     public function previousEnabled($page)
     {
-        $text = $this->option('prev_message');
+        $text  = $this->option('prev_message');
         $class = $this->option('css_prev_class');
-        $rel = $this->option('rel_previous');
+        $rel   = $this->option('rel_previous');
 
         return $this->pageWithTextAndClass($page, $text, $class, $rel);
     }
@@ -74,7 +62,7 @@ class DomajaxTemplate extends Template
     public function nextDisabled()
     {
         $class = $this->nextDisabledClass();
-        $text = $this->option('next_message');
+        $text  = $this->option('next_message');
 
         return $this->spanLi($class, $text);
     }
@@ -86,9 +74,9 @@ class DomajaxTemplate extends Template
 
     public function nextEnabled($page)
     {
-        $text = $this->option('next_message');
+        $text  = $this->option('next_message');
         $class = $this->option('css_next_class');
-        $rel = $this->option('rel_next');
+        $rel   = $this->option('rel_next');
 
         return $this->pageWithTextAndClass($page, $text, $class, $rel);
     }
@@ -105,7 +93,7 @@ class DomajaxTemplate extends Template
 
     public function current($page)
     {
-        $text = trim($page.' '.$this->option('active_suffix'));
+        $text  = trim($page.' '.$this->option('active_suffix'));
         $class = $this->option('css_active_class');
 
         return $this->spanLi($class, $text);
@@ -114,7 +102,7 @@ class DomajaxTemplate extends Template
     public function separator()
     {
         $class = $this->option('css_dots_class');
-        $text = $this->option('dots_message');
+        $text  = $this->option('dots_message');
 
         return $this->spanLi($class, $text);
     }
@@ -122,7 +110,7 @@ class DomajaxTemplate extends Template
     public function linkLi($class, $href, $text, $rel = null)
     {
         $liClass = $class ? sprintf(' class="%s"', $class) : '';
-        $rel = $rel ? sprintf(' rel="%s"', $rel) : '';
+        $rel     = $rel ? sprintf(' rel="%s"', $rel) : '';
 
         $options = sprintf(' data-endpoint="%s" ', $href);
         foreach ($this->option('domajax') as $option => $value) {
@@ -137,5 +125,17 @@ class DomajaxTemplate extends Template
         $liClass = $class ? sprintf(' class="%s"', $class) : '';
 
         return sprintf('<li%s><span>%s</span></li>', $liClass, $text);
+    }
+
+    private function pageWithTextAndClass($page, $text, $class, $rel = null)
+    {
+        $href = $this->generateRoute($page);
+
+        return $this->linkLi($class, $href, $text, $rel);
+    }
+
+    private function previousDisabledClass()
+    {
+        return $this->option('css_prev_class').' '.$this->option('css_disabled_class');
     }
 }
