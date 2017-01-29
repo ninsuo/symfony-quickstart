@@ -1,5 +1,13 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
-Hello!
+
+    <h3>Form</h3>
+
+    {{ form(form) }}
+
+    <h3>Data</h3>
+
+    {{ data.test|default(false)|purify }}
+
 {% endblock %}

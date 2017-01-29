@@ -137,3 +137,10 @@ knp_menu:
 ewz_recaptcha:
     public_key:  %recaptcha_public%
     private_key: %recaptcha_private%
+
+ivory_ck_editor:
+    default_config: default
+    configs:
+        default:
+            filebrowserBrowseRoute: "ckeditor_browse"
+            filebrowserUploadRoute: "ckeditor_upload"

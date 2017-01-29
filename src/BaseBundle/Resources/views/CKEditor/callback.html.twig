@@ -1,0 +1,9 @@
+<script type="text/javascript">
+
+    window.parent.CKEDITOR.tools.callFunction(
+        '{{ funcNum|e('js') }}',
+        {% if error %}null{% else %}'{{ absolute_url(asset('upload/ckeditor/' ~ target)) }}'{% endif %},
+        {% if error %}'{{ error|e('js') }}'{% else %}null{% endif %}
+    );
+
+</script>

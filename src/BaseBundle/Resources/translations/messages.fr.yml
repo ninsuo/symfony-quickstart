@@ -4,6 +4,11 @@ base:
         home: 'Retour à l''accueil'
     changepassword:
         title: 'Changer de mot de passe'
+    ckeditor:
+        confirm_remove: "Voulez-vous vraiment supprimer l'image %name% ?"
+        file_removed: "Le fichier a été supprimé avec succès."
+        invalid_file: "Ce fichier n'a pas pu être chargé."
+        title: "Gallerie"
     crud:
         action:
             edit: Editer

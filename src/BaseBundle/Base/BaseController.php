@@ -5,6 +5,7 @@ namespace BaseBundle\Base;
 use BaseBundle\Traits\ServiceTrait;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\NotValidMaxPerPageException;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -74,11 +75,18 @@ abstract class BaseController extends Controller
         return $this->container->get('form.factory')->createNamedBuilder($name, $type, $data, $options);
     }
 
-    public function getPager(Request $request, QueryBuilder $qb, $prefix = '', $hasJoins = false)
+    public function getPager(Request $request, $data, $prefix = '', $hasJoins = false)
     {
-        $pager = new Pagerfanta(
-           new DoctrineORMAdapter($qb, $hasJoins)
-        );
+        $adapter = null;
+        if ($data instanceof QueryBuilder) {
+            $adapter = new DoctrineORMAdapter($data, $hasJoins);
+        } else if (is_array($data)) {
+            $adapter = new ArrayAdapter($data);
+        } else {
+            throw new \RuntimeException("This data type has no Pagerfanta adapter yet.");
+        }
+
+        $pager = new Pagerfanta($adapter);
         $pager->setNormalizeOutOfRangePages(true);
 
         $perPage = $request->query->get($prefix.'per-page', self::PAGER_PER_PAGE_DEFAULT);

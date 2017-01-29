@@ -118,3 +118,12 @@
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
+
+img.gallery {
+   width: 100%;
+   height: 200px;
+}
+
+.thumbnail:hover {
+    background-color: #fdf5ce;
+}

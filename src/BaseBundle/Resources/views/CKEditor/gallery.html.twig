@@ -1,0 +1,56 @@
+{% extends 'BaseBundle::minimal.html.twig' %}
+
+{% import 'BaseBundle::macros.html.twig' as macros %}
+
+{% block body %}
+
+    <div id="ckeditor-gallery" class="container-fluid" data-func-num="{{ funcNum|e('html_attr') }}">
+
+        <h3 class="text-center">{{ 'base.ckeditor.title'|trans }}</h3>
+
+        <div class="row">
+
+            {% for image in pager %}
+                {% set url = absolute_url(asset('upload/ckeditor/' ~ image)) %}
+
+                <div class="col-md-3 thumbnail">
+                    <div class="select-image" data-url="{{ url }}">
+                        <img class="gallery" src="{{ url }}" />
+                        {{ image }}
+                        <div class="pull-right action">
+                            <a
+                                href="{{ path('ckeditor_remove', {token: csrf_token('gallery'), name: image}|merge(app.request.query.all)) }}"
+                                onclick="return confirm('{{ 'base.ckeditor.confirm_remove'|trans({'%name%': image})|e('js') }}');"
+                                class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        {{ macros.pager(pager) }}
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('div.select-image').click(function(e) {
+                if ($(e.target).closest('.action').length) {
+                    return;
+                }
+                e.preventDefault();
+                var funcNum = $('#ckeditor-gallery').data('func-num');
+                var url = $(this).data('url');
+                window.opener.CKEDITOR.tools.callFunction(funcNum, url, null);
+                window.close();
+            });
+        });
+    </script>
+
+{% endblock %}
