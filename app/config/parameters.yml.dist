@@ -65,3 +65,7 @@ parameters:
 
     # Members can remove their account
     accounts_removable: true
+
+    # Recaptcha
+    recaptcha_public: <your recaptcha site key>
+    recaptcha_private: <your recaptcha secret>

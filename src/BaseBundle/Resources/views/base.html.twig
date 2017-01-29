@@ -3,14 +3,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>{% block meta_title %}{% block title %}{{ fuz.site_default_title | trans }}{% endblock %}{% endblock %}</title>
+        <meta name="description" content="{% block meta_description %}{% block description %}{{ fuz.site_description | trans }}{% endblock %}{% endblock %}">
+        <meta name="keywords" content="{% block meta_keywords %}{% block keywords %}{% endblock %}{% endblock %}">
+        <meta name="author" content="{% block meta_author %}{% block author %}{% endblock %}{% endblock %}">
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}"/>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="{% block description %}{{ fuz.site_description | trans }}{% endblock %}">
-        <meta name="author" content="{% block author %}{% endblock %}">
-        <title>{% block title %}{{ fuz.site_default_title | trans }}{% endblock %}</title>
-        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
-        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}"/>
         {{ include('BraincraftedBootstrapBundle::ie8-support.html.twig') }}
 
          {# CSS #}
@@ -77,6 +78,7 @@
             <script src="{{ asset('bundles/base/bootstrap-submenu/js/bootstrap-submenu.min.js') }}"></script>
             <script src="{{ asset('bundles/base/jquery-ui-1.11.2/jquery-ui.min.js') }}"></script>
             <script src="{{ asset('bundles/base/js/jquery.domajax.js') }}"></script>
+            <script src="{{ asset('bundles/base/js/jquery.collection.js') }}"></script>
             <script src="{{ asset('bundles/base/js/common.js') }}"></script>
         {% endblock %}
 

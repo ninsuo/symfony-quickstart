@@ -1,9 +1,4 @@
 parameters:
-    admin.type.permission.class: AdminBundle\Form\Type\PermissionType
 
 services:
-    admin.type.permission:
-        class: '%admin.type.permission.class%'
-        parent: base.type
-        tags:
-         - { name: form.type }
+

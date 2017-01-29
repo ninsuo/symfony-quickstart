@@ -132,3 +132,8 @@ jms_i18n_routing:
 knp_menu:
     twig:
         template: "BaseBundle::knp_menu.html.twig"
+
+# Recaptcha
+ewz_recaptcha:
+    public_key:  %recaptcha_public%
+    private_key: %recaptcha_private%

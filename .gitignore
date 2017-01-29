@@ -15,3 +15,8 @@ bin/
 composer.phar
 .DS_Store
 TODO
+/web/upload/*
+/web/upload/ckeditor/*
+!/web/upload/index.html
+!/web/upload/ckeditor
+!/web/upload/ckeditor/index.html
