@@ -2,13 +2,10 @@
 
 namespace BaseBundle\Traits;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\VarDumper\VarDumper;
 
 trait ServiceTrait
 {
-    use ContainerAwareTrait;
-
     protected function get($service)
     {
         return $this->container->get($service);

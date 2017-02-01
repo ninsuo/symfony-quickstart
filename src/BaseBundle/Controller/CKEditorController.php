@@ -12,10 +12,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
+/**
+ * @Route("/ckeditor")
+ */
 class CKEditorController extends BaseController
 {
     /**
-     * @Route("/ckeditor/browse", name="ckeditor_browse")
+     * @Route("/browse", name="ckeditor_browse")
      * @Method({"GET"})
      * @Template("BaseBundle:CKEditor:gallery.html.twig")
      */
@@ -49,7 +52,7 @@ class CKEditorController extends BaseController
      *
      * @see http://stackoverflow.com/a/25181208/731138
      *
-     * @Route("/ckeditor/upload", name="ckeditor_upload")
+     * @Route("/upload", name="ckeditor_upload")
      * @Method({"POST"})
      * @Template("BaseBundle:CKEditor:callback.html.twig")
      */
@@ -91,7 +94,7 @@ class CKEditorController extends BaseController
     }
 
     /**
-     * @Route("/ckeditor/remove/{token}/{name}", name="ckeditor_remove")
+     * @Route("/remove/{token}/{name}", name="ckeditor_remove")
      * @Method({"GET"})
      * @Template("BaseBundle:CKEditor:gallery.html.twig")
      */
