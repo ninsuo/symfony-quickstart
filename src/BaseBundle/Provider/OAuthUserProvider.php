@@ -26,6 +26,9 @@ class OAuthUserProvider extends BaseUserProvider
             if ($user->isAdmin()) {
                 $user->addRole('ROLE_ADMIN');
             }
+            foreach ($user->getGroups()->toArray() as $group) {
+                $user->addRole('ROLE_GROUP_'.$group->getName());
+            }
         }
 
         return $user;
@@ -66,10 +69,6 @@ class OAuthUserProvider extends BaseUserProvider
 
         if ($reload) {
             return $this->loadUserByUsername($json);
-        }
-
-        foreach ($user->getGroups()->toArray() as $group) {
-            $user->addRole('GROUP_'.$group->getName());
         }
 
         return $user;

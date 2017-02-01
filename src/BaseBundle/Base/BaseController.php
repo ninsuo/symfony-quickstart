@@ -71,7 +71,7 @@ abstract class BaseController extends Controller
         }
 
         $pager->setMaxPerPage($perPage);
-        $pager->setCurrentPage($request->request->get($prefix.'page') ?: $request->query->get($prefix.'page') ?: 1);
+        $pager->setCurrentPage($request->request->get($prefix.'page') ?: $request->query->get($prefix.'page', 1));
 
         return $pager;
     }

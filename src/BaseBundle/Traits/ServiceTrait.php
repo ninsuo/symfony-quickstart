@@ -56,4 +56,11 @@ trait ServiceTrait
 
         return $entity;
     }
+
+    protected function saveEntity($entity)
+    {
+        $em = $this->getManager();
+        $em->persist($entity);
+        $em->flush($entity);
+    }
 }

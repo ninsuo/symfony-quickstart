@@ -45,8 +45,16 @@ class GroupsUsersController extends BaseController
 
         if ($group->getUsers()->contains($user)) {
             $user->getGroups()->removeElement($group);
+            if ($this->getUser()->isEqualTo($user)) {
+                $this->getUser()->removeRole('ROLE_GROUP_'.$group->getName());
+                $this->get('security')->login($this->getUser());
+            }
         } else {
             $user->getGroups()->add($group);
+            if ($this->getUser()->isEqualTo($user)) {
+                $this->getUser()->addRole('ROLE_GROUP_'.$group->getName());
+                $this->get('security')->login($this->getUser());
+             }
         }
 
         $em = $this->get('doctrine')->getManager();

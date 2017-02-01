@@ -59,6 +59,9 @@ class GroupsController extends BaseController
             throw $this->createNotFoundException();
         }
 
+        $this->getUser()->removeRole('ROLE_GROUP_'.$entity->getName());
+        $this->get('security')->login($this->getUser());
+
         $em = $this->get('doctrine')->getManager();
         $em->remove($entity);
         $em->flush();

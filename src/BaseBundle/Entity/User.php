@@ -401,6 +401,20 @@ class User implements UserInterface, EquatableInterface
     /**
      * @param string $role
      *
+     * @return User
+     */
+    public function removeRole($role)
+    {
+        if (in_array($role, $this->roles)) {
+            unset($this->roles[array_search($role, $this->roles)]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $role
+     *
      * @return bool
      */
     public function hasRole($role)

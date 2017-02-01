@@ -1,5 +1,20 @@
 
+todo: add description to group (will help)
+
+types
+- checkbox as a nice toggle
+- image and files with good support : https://github.com/punkave/symfony2-file-uploader-bundle
+maybe https://github.com/genemu/GenemuFormBundle
+- implement any file stuff (like ckeditor actually) using a good file library ( flysystem https://github.com/1up-lab/OneupFlysystemBundle )
+
+create BaseRepository
+See: http://stackoverflow.com/a/30636804/731138
+
+check if jquery.submenu is still relevent
+
 maybe to do someday
+
+create demo of each available components
 
 ---
 

@@ -3,6 +3,7 @@ parameters:
     hwi_oauth.account.connector.class: BaseBundle\Connect\AccountConnect
     pagerfanta.view.light.class: BaseBundle\Pagerfanta\View\LightView
     pagerfanta.template.light.class: BaseBundle\Pagerfanta\Template\LightTemplate
+    security.class: BaseBundle\Services\Security
 
 services:
 
@@ -26,3 +27,14 @@ services:
         public: false
         arguments: ['@translator']
 
+    security:
+        class: '%security.class%'
+        arguments:
+          - '@security.token_storage'
+          - '@security.authorization_checker'
+          - '@security.password_encoder'
+          - '@security.authentication_utils'
+          - '@session'
+          - '@security.role_hierarchy'
+        calls:
+          - [setContainer, ["@service_container"]]

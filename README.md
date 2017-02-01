@@ -27,17 +27,15 @@ You'll find here 3 bundles:
 
 - CRUD generator generates bootstrap-ready and translated views, because if you need this app, you're not against generating most of the application. You may also want to try the Ajax-CRUD generator.
 
-- CKeditor and HTMLPurifier are preinstalled to manage rich-text editors (WYSIWYG), just use CKEditorType in your form and |purify filter in your view.
+- CKeditor (with image browsing and upload integrated) and HTMLPurifier are preinstalled to manage rich-text editors (WYSIWYG), just use CKEditorType in your form and |purify filter in your view.
 
 - EWZRecaptchaBundle gives a nice ReCaptcha type and validator for sensible parts (registration or contact forms)
 
 ## Ready-to-use tools
 
-- Admin tools: interfaces to manage users and groups (roles GROUP_<group name> automatically set). You need to manually set your own user to is_admin = 1 on the database.
+- Admin tools: interfaces to manage users and groups (roles `ROLE_GROUP_<group name>` automatically set). You'll need to manually set is_admin = 1 on database for your first admin.
 
 - Settings on the fly: if your app requires settings set/stored by arbitrary people, use the Setting entity/repository/twig function to quickly get the job done.
-
-- CKEditor plugins integrated (with immediate image browsing and upload support)
 
 ## Installation
 
