@@ -14,7 +14,7 @@ class Math
             $chars = fread($handle, 1024);
             for ($i = 0; $i < 1024; $i++) {
                 $char = ord($chars[$i]);
-                if (strpos($allowed, $char)) {
+                if (false !== strpos($allowed, $char)) {
                     $result .= $char;
                     $current++;
                 }
