@@ -35,9 +35,7 @@ base:
             velle entrée %entity%'
         update:
             success: 'Entrée modifiée avec succès.'
-    description: 'Un projet Symfony contenant des outils indispensables pour un développement rapide et efficace.'
     error:
-        back_sentence: 'Utilisez le bouton Page précédente, le menu de navigation ou cliquez sur le bouton Accueil pour continuer.'
         403:
             explain: 'Vous devez être connecté(e) ou/et n''avez pas les privilèges requis pour accéder à cette ressource.'
             title: 'Permission non accordée'
@@ -47,6 +45,8 @@ base:
         500:
             explain: 'Si vous êtes arrivé(e) sur cette page, c''est que quelque chose a planté chez nous.'
             title: 'Une erreur s''est produite.'
+        back_sentence: 'Utilisez le bouton Page précédente, le menu de navigation ou cliquez sur le bouton Accueil pour continuer.'
+        registration_restriction: 'Votre email %email% ne correspond pas aux restrictions définies sur la plateforme.'
     form:
         duplicate_error: 'Cette %entity% existe déjà.'
     locale:
@@ -66,7 +66,6 @@ base:
             users: Gestion des utilisateurs
             groups: Gestion des groupes
     nav: 'Afficher/Masquer le menu'
-    title: 'Mon Projet Vide'
     pager:
         prev: '← Précédent'
         current: 'actuelle'
@@ -77,8 +76,8 @@ base:
         go: 'Valider'
     search: Rechercher...
     site:
-        description: 'fuz.org fournit un générateur de code en ligne simple et puissant.'
-        default_title: 'fuz.org - Générez votre argent!'
+        description: 'Un projet Symfony contenant des outils indispensables pour un développement rapide et efficace.'
+        default_title: 'Light, vos idées vite faites bien faites'
     undefined: Valeur non définie
     unsuscribe:
         confirm: Confirmer

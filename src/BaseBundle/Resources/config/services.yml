@@ -11,6 +11,8 @@ services:
         class: '%base.oauth_user_provider.class%'
         arguments:
             - '@doctrine.orm.entity_manager'
+            - '@translator'
+            - '%registration_restriction%'
 
     hwi_oauth.account.connector:
         class: '%hwi_oauth.account.connector.class%'

@@ -1,4 +1,6 @@
 
+visibility of resource owners
+
 todo: add description to group (will help)
 
 types

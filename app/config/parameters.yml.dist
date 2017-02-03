@@ -59,6 +59,9 @@ parameters:
     facebook_client_id: <your client id>
     facebook_secret:    <your secret>
 
+    # User can only join if he has an email that matches the following regex (ex: '!@example\.org$!')
+    registration_restriction: ~
+
     # Website menus at the top
     menu_left_enabled: true
     menu_right_enabled: true

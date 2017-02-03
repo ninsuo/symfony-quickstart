@@ -34,9 +34,7 @@ base:
             title: '%entity% creation'
         update:
             success: 'Entry updated successfully.'
-    description: ''
     error:
-        back_sentence: 'Use the Back button, the navigation menu or click on the Home button to continue.'
         403:
             explain: 'You need to be logged-on or/and do not have the required privileges to access this resource.'
             title: 'Permission denied'
@@ -46,6 +44,8 @@ base:
         500:
             explain: 'If you got to that page, this is because something crashed somewhere.'
             title: 'It looks like something went wrong.'
+        back_sentence: 'Use the Back button, the navigation menu or click on the Home button to continue.'
+        registration_restriction: 'Your email %email% doesn''t match with the website restrictions.'
     form:
         duplicate_error: 'This %entry% already exist.'
     locale:

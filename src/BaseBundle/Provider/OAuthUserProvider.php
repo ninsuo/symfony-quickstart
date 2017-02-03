@@ -3,16 +3,23 @@
 namespace BaseBundle\Provider;
 
 use BaseBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseUserProvider;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class OAuthUserProvider extends BaseUserProvider
 {
     protected $em;
+    protected $translator;
+    protected $registrationRestriction;
 
-    public function __construct($em)
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, $registrationRestriction)
     {
         $this->em = $em;
+        $this->translator = $translator;
+        $this->registrationRestriction = $registrationRestriction;
     }
 
     public function loadUserByUsername($username)
@@ -41,6 +48,14 @@ class OAuthUserProvider extends BaseUserProvider
         $name            = $response->getRealName();
         $json            = json_encode([$resourceOwner, $resourceOwnerId]);
         $user            = $this->loadUserByUsername($json);
+
+        if ($this->registrationRestriction && !preg_match($this->registrationRestriction, $response->getEmail())) {
+            throw new AuthenticationException(
+               $this->translator->trans('base.error.registration_restriction', [
+                   '%email%' => $response->getEmail()
+               ])
+            );
+        }
 
         $reload = false;
         if (is_null($user)) {
