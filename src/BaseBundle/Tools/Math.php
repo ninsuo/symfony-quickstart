@@ -13,7 +13,7 @@ class Math
         while ($current < $expected) {
             $chars = fread($handle, 1024);
             for ($i = 0; $i < 1024; $i++) {
-                $char = ord($chars[$i]);
+                $char = $chars[$i];
                 if (false !== strpos($allowed, $char)) {
                     $result .= $char;
                     $current++;
