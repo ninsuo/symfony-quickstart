@@ -6,7 +6,6 @@ use BaseBundle\Services\RoutingHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class LastRouteListener implements EventSubscriberInterface
 {
@@ -24,16 +23,12 @@ class LastRouteListener implements EventSubscriberInterface
             return;
         }
 
-        try {
-            $currentRoute = $this->routingHelper->getCurrentRoute($request);
-        } catch (ResourceNotFoundException $ex) {
-            return;
-        }
-        if (is_null($currentRoute)) {
-            return;
+        $currentRoute = $this->routingHelper->getCurrentRoute($request);
+        if (!$currentRoute) {
+            return ;
         }
 
-        $session       = $request->getSession();
+        $session = $request->getSession();
         $previousRoute = $session->get('current_route', []);
         if ($currentRoute == $previousRoute) {
             return;
@@ -45,8 +40,8 @@ class LastRouteListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return [
+        return array(
             KernelEvents::REQUEST => [['onKernelRequest', 15]],
-        ];
+        );
     }
 }

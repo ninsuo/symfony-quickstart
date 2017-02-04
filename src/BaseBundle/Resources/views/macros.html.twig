@@ -146,7 +146,8 @@
         </div>
         <div class="text-right col-md-4">
             <div>{{ 'base.pager.go_to'|trans }}</div>
-            <form class="form-inline" action="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}" method="get">
+            {% set currentRoute = current_route() %}
+            <form class="form-inline" action="{{ path(currentRoute.name, currentRoute.params) }}" method="get">
                 <div class="form-group">
                     <input class="form-control" name="{{ prefix }}page" style="width: 100px;" type="text"/>
                     {% for key, value in app.request.query.all if key != prefix ~ 'page' %}

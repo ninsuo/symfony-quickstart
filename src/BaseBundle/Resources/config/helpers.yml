@@ -6,11 +6,10 @@ services:
 
     base.routing.helper:
         class: '%base.routing.helper.class%'
-        arguments:
-            - '@router'
+        parent: base.service
 
     base.doctrine.helper:
         class: '%base.doctrine.helper.class%'
         parent: base.service
 
- 
+

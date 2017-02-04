@@ -2,44 +2,24 @@
 
 namespace BaseBundle\Services;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Router;
+use BaseBundle\Base\BaseService;
 
 /**
  * base.routing.helper.
  */
-class RoutingHelper
+class RoutingHelper extends BaseService
 {
-    protected $router;
-    protected $cache = [];
-
-    public function __construct(Router $router)
+    public function getCurrentRoute()
     {
-        $this->router = $router;
-    }
+        $request = $this->get('request_stack')->getMasterRequest();
 
-    public function getCurrentRoute(Request $request)
-    {
-        $pathInfo = $request->getPathInfo();
-        $hash     = sha1(var_export($pathInfo, true));
-        if (in_array($hash, $this->cache)) {
-            return $this->cache[$hash];
+        if ($request->get('_route')[0] == '_') {
+            return ;
         }
 
-        $routeParams = $this->router->match($pathInfo);
-        $routeName   = $routeParams['_route'];
-        if (substr($routeName, 0, 1) === '_') {
-            return;
-        }
-        unset($routeParams['_route']);
-
-        $data = [
-            'name'   => $routeName,
-            'params' => array_merge($request->query->all(), $routeParams),
+        return [
+            'name'   => $request->get('_route'),
+            'params' => array_merge($request->get('_route_params'), $request->query->all()),
         ];
-
-        $this->cache[$hash] = $data;
-
-        return $data;
     }
 }

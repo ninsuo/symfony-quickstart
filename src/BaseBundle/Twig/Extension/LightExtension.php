@@ -12,6 +12,7 @@ class LightExtension extends BaseTwigExtension
             new \Twig_SimpleFunction('http_build_query', 'http_build_query', ['is_safe' => ['html', 'html_attr']]),
             new \Twig_SimpleFunction('array_to_query_fields', [$this, 'arrayToQueryFields'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('absolute_url', [$this, 'absoluteUrl']),
+            new \Twig_SimpleFunction('current_route', [$this, 'currentRoute']),
         ];
     }
 
@@ -37,6 +38,11 @@ class LightExtension extends BaseTwigExtension
         $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
 
         return $baseurl . $asset;
+    }
+
+    public function currentRoute()
+    {
+        return $this->get('base.routing.helper')->getCurrentRoute();
     }
 
     public function getName()
