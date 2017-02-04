@@ -12,8 +12,8 @@ class DefaultController extends BaseController
      * @Route("/", name="home")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(\Symfony\Component\HttpFoundation\Request $request)
     {
-        return [];
+
     }
 }

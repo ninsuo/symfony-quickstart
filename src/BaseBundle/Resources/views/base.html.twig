@@ -23,6 +23,7 @@
             <link href="{{ asset('bundles/base/jquery-ui-1.11.2/jquery-ui.min.css') }}" rel="stylesheet" media="screen">
             <link rel="stylesheet" href="{{ asset('bundles/base/css/base.css') }}">
             <link rel="stylesheet" href="{{ asset('bundles/app/css/app.css') }}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css"/>
     {% endblock %}
 </head>
 <body>
@@ -82,13 +83,13 @@
     <script src="{{ asset('bundles/base/js/jquery.domajax.js') }}"></script>
     <script src="{{ asset('bundles/base/js/jquery.collection.js') }}"></script>
     <script src="{{ asset('bundles/base/js/base.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/emojione/2.2.7/lib/js/emojione.min.js"></script>
     <script src="{{ asset('bundles/app/js/app.js') }}"></script>
 {% endblock %}
 
 <script type="text/javascript">
     $('.dropdown-submenu > a').submenupicker();
 </script>
-
 {% block script %}{% endblock %}
 
 </body>

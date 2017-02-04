@@ -143,3 +143,4 @@ knp_menu:
 ewz_recaptcha:
     public_key:  %recaptcha_public%
     private_key: %recaptcha_private%
+
