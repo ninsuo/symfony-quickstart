@@ -35,7 +35,7 @@ class RoutingHelper
 
         $data = [
             'name'   => $routeName,
-            'params' => $routeParams,
+            'params' => array_merge($request->query->all(), $routeParams),
         ];
 
         $this->cache[$hash] = $data;

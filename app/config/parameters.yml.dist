@@ -39,23 +39,28 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     # GitHub Login: https://github.com/settings/developers
+    github_enabled: true
     github_client_id: <your client id>
     github_secret:    <your secret>
 
     # StackExchange Login: https://stackapps.com/apps/oauth/
+    stack_enabled: true
     stack_client_id: <your client id>
     stack_secret:    <your secret>
     stack_key:       <your key>
 
     # Google Login: https://console.developers.google.com/project
+    google_enabled: true
     google_client_id: <your client id>
     google_secret:    <your secret>
 
     # Twitter Login: https://apps.twitter.com/
+    twitter_enabled: true
     twitter_client_id: <your client id>
     twitter_secret:    <your secret>
 
     # Facebook Login: https://developers.facebook.com/apps/
+    facebook_enabled: true
     facebook_client_id: <your client id>
     facebook_secret:    <your secret>
 

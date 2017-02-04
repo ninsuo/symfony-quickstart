@@ -45,7 +45,7 @@
 }
 
 #login div.oauth:hover {
-    border: 1px solid #333366;
+    background-color: #EEEEFF;
 }
 
 .oauth-image, .lang-image {

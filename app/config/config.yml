@@ -31,12 +31,18 @@ twig:
         - "BraincraftedBootstrapBundle:Form:bootstrap.html.twig"
     globals:
         fuz:
-            site_brand: "%site_brand%"
-            site_description: "%site_description%"
-            site_default_title: "%site_default_title%"
-            supported_locales: "%supported_locales%"
             menu_left: "%menu_left_enabled%"
             menu_right: "%menu_right_enabled%"
+            services:
+                GitHub: "%github_enabled%"
+                Stack Exchange: "%stack_enabled%"
+                Google: "%google_enabled%"
+                Twitter: "%twitter_enabled%"
+                Facebook: "%facebook_enabled%"
+            site_brand: "%site_brand%"
+            site_default_title: "%site_default_title%"
+            site_description: "%site_description%"
+            supported_locales: "%supported_locales%"
 
 # Assetic Configuration
 assetic:

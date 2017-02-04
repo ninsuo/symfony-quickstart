@@ -1,6 +1,7 @@
 parameters:
     base.locale.listener.class: BaseBundle\EventListener\LocaleListener
     base.last_route.listener.class: BaseBundle\EventListener\LastRouteListener
+    base.toggle.listener.class: BaseBundle\EventListener\ToggleListener
 
 services:
 
@@ -15,5 +16,11 @@ services:
         class: '%base.last_route.listener.class%'
         arguments:
             - '@base.routing.helper'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    base.toggle.listener:
+        class: '%base.toggle.listener.class%'
+        parent: base.service
         tags:
             - { name: kernel.event_subscriber }

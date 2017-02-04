@@ -1,26 +1,5 @@
 {# BaseBundle:Login:login.html.twig #}
 
-{# HWIOAuthBundle integration #}
-{% import _self as macros %}
-
-{% macro displayProvider(name, nb_oauth, internal_name = null) %}
-
-    {% if internal_name == null %}
-        {% set internal_name = name|lower %}
-    {% endif %}
-
-    <a
-        title="{{ 'base.login.using'|trans({'%provider%': name|title}) }}"
-        href="{{ hwi_oauth_login_url(internal_name|lower) }}"
-        class="black">
-        <div class="oauth col-md-{{ 12 / nb_oauth }}">
-            <img src="{{ asset('bundles/base/img/oauth/' ~ internal_name|lower ~ '.png') }}" alt="{{ name|title }}"/>
-            <p>{{ 'base.login.using'|trans({'%provider%': name|title}) }}</p>
-        </div>
-    </a>
-
-{% endmacro %}
-
 <fieldset>
     <legend>{{ 'base.login.resource_owners'|trans }}</legend>
 
@@ -31,19 +10,21 @@
         </div>
 
         <div class="col-md-10" id="login">
-
-            {% set nb_oauth = 3 %}
-
             <div class="row">
-
-                {{ macros.displayProvider('GitHub', nb_oauth) }}
-                {{ macros.displayProvider('Stack Exchange', nb_oauth, 'Stack') }}
-                {{ macros.displayProvider('Google', nb_oauth) }}
-            </div>
-            <div class="row">
-                {{ macros.displayProvider('Twitter', nb_oauth) }}
-                {{ macros.displayProvider('Facebook', nb_oauth) }}
-
+               {% for service, enabled in fuz.services if enabled %}
+                   {% set serviceId = (service|split(' '))[0]|lower %}
+                    <a
+                        title="{{ 'base.login.using'|trans({'%provider%': service}) }}"
+                        href="{{ hwi_oauth_login_url(serviceId|lower) }}"
+                        class="black">
+                        <div class="col-md-4">
+                            <div class="oauth">
+                                <img src="{{ asset('bundles/base/img/oauth/' ~ serviceId|lower ~ '.png') }}" alt="{{ service|title }}"/>
+                                <p>{{ 'base.login.using'|trans({'%provider%': service|title}) }}</p>
+                            </div>
+                        </div>
+                    </a>
+               {% endfor %}
             </div>
         </div>
 

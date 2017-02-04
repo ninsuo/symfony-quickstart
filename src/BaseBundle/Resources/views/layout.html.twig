@@ -27,11 +27,10 @@
                <li class="dropdown">
                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'base.login.title' | trans }} <span class="caret"></span></a>
                    <ul class="dropdown-menu" role="menu">
-                       <li><a href="{{ hwi_oauth_login_url('github') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/github-small.png') }}" alt=""/> GitHub</a></li>
-                       <li><a href="{{ hwi_oauth_login_url('stack') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/stack-small.png') }}" alt=""/> Stack Exchange</a></li>
-                       <li><a href="{{ hwi_oauth_login_url('google') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/google-small.png') }}" alt=""/> Google</a></li>
-                       <li><a href="{{ hwi_oauth_login_url('twitter') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/twitter-small.png') }}" alt=""/> Twitter</a></li>
-                       <li><a href="{{ hwi_oauth_login_url('facebook') }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/facebook-small.png') }}" alt=""/> Facebook</a></li>
+                       {% for service, enabled in fuz.services if enabled %}
+                           {% set serviceId = (service|split(' '))[0]|lower %}
+                           <li><a href="{{ hwi_oauth_login_url(serviceId) }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ serviceId ~ '-small.png') }}" alt=""/> {{ service }}</a></li>
+                       {% endfor %}
                    </ul>
                </li>
             {% endblock %}
