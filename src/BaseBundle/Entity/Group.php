@@ -22,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Group
 {
+
     /**
      * @var int
      *
@@ -38,6 +39,13 @@ class Group
      * @Assert\NotBlank
      */
     protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="notes", type="text", nullable=true)
+     */
+    protected $notes;
 
     /**
      * @var ArrayCollection
@@ -81,10 +89,35 @@ class Group
     }
 
     /**
+     * Set notes.
+     *
+     * @param string $notes
+     *
+     * @return User
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes.
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getUsers()
     {
         return $this->users;
     }
+
 }

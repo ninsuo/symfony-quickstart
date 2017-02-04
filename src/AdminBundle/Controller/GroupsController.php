@@ -33,7 +33,7 @@ class GroupsController extends BaseController
 
         if ($filter) {
             $qb
-                ->where('g.name LIKE :criteria')
+                ->where('g.name LIKE :criteria OR g.notes LIKE :criteria')
                 ->setParameter('criteria', '%'.$filter.'%')
             ;
         }
@@ -117,6 +117,54 @@ class GroupsController extends BaseController
         ];
     }
 
+    /**
+     * @Route("/edit/notes/{id}", name="admin_groups_edit_notes")
+     * @Template("BaseBundle::editOnClick.html.twig")
+     */
+    public function _editNotesAction(Request $request, $id)
+    {
+        $manager = $this->getManager('BaseBundle:Group');
+
+        $entity = $manager->findOneById($id);
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        $endpoint = $this->generateUrl('admin_groups_edit_notes', ['id' => $id]);
+
+        $form = $this
+            ->createNamedFormBuilder("edit-notes-{$id}", Type\FormType::class, $entity, [
+                'action' => $endpoint,
+            ])
+            ->add('notes', Type\TextareaType::class, [
+                'label' => 'admin.groups.notes',
+            ])
+            ->add('submit', Type\SubmitType::class, [
+                'label' => 'base.crud.action.save',
+                'attr'  => [
+                    'class' => 'domajax',
+                ],
+            ])
+            ->getForm()
+            ->handleRequest($request)
+        ;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            return [
+                'text'     => $entity->getNotes(),
+                'endpoint' => $endpoint,
+            ];
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
+    }
+
     protected function getCreateForm(Request $request)
     {
         $entity = new Group();
@@ -125,6 +173,9 @@ class GroupsController extends BaseController
             ->createNamedFormBuilder('create', Type\FormType::class, $entity)
             ->add('name', Type\TextType::class, [
                 'label' => 'admin.groups.name',
+            ])
+            ->add('notes', Type\TextareaType::class, [
+                'label' => 'admin.groups.notes',
             ])
             ->add('submit', Type\SubmitType::class, [
                 'label' => 'base.crud.action.save',

@@ -2,6 +2,7 @@ admin:
     groups:
         id: ID
         name: Nom
+        notes: Notes
         create: Créer un nouveau groupe
         group: groupe
         actions: Actions
