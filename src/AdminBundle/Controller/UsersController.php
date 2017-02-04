@@ -41,7 +41,7 @@ class UsersController extends BaseController
         }
 
         return [
-            'pager' => $this->getPager($request, $qb),
+            'pager' => $this->getPager($qb),
             'me'    => $this->getUser()->getId(),
         ];
     }

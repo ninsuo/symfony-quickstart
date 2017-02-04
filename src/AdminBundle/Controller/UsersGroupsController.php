@@ -91,6 +91,6 @@ class UsersGroupsController extends BaseController
             ;
         }
 
-        return $this->getPager($request, $qb, $prefix);
+        return $this->getPager($qb, $prefix);
     }
 }

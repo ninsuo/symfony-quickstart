@@ -51,8 +51,10 @@ abstract class BaseController extends Controller
         return $this->container->get('form.factory')->createNamedBuilder($name, $type, $data, $options);
     }
 
-    public function getPager(Request $request, $data, $prefix = '', $hasJoins = false)
+    public function getPager($data, $prefix = '', $hasJoins = false)
     {
+        $request = $this->get('request_stack')->getMasterRequest();
+
         $adapter = null;
         if ($data instanceof QueryBuilder) {
             $adapter = new DoctrineORMAdapter($data, $hasJoins);

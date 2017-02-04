@@ -38,7 +38,7 @@ class CKEditorController extends BaseController
 
         $dir    = $this->getParameter('kernel.root_dir').'/../web/upload/ckeditor/';
         $images = array_map('basename', glob("{$dir}/*.png"));
-        $pager  = $this->getPager($request, $images);
+        $pager  = $this->getPager($images);
 
         return [
             'CKEditor' => $CKEditor,

@@ -39,7 +39,7 @@ class GroupsController extends BaseController
         }
 
         return [
-            'pager'  => $this->getPager($request, $qb),
+            'pager'  => $this->getPager($qb),
             'create' => $this->getCreateForm($request),
         ];
     }
