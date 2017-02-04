@@ -75,6 +75,7 @@ base:
         go_to: 'Aller à la page :'
         go: 'Valider'
     search: Rechercher...
+    share: 'Partager :'
     site:
         description: 'Un projet Symfony contenant des outils indispensables pour un développement rapide et efficace.'
         default_title: 'Light, vos idées vite faites bien faites'

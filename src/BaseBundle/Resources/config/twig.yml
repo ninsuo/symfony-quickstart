@@ -12,6 +12,7 @@ services:
 
     base.light.twig_extension:
         class: %base.light.twig_extension.class%
+        parent: base.twig_extension
         tags:
             - { name: twig.extension }
 

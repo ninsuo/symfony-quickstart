@@ -1,0 +1,23 @@
+{#
+  To include in the meta block.
+
+  {% block meta %}
+    {{ parent() }}
+    {{ include('BaseBundle:Social:meta.html.twig', ...) }}
+  {% endblock %}
+
+  URLs should be absolute
+  No escaping/encoding required on those variables
+#}
+
+<meta property="og:url" content="{{ url|e('html_attr') }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="{{ title|e('html_attr') }}"/>
+<meta property="og:description" content="{{ summary|e('html_attr') }}"/>
+<meta property="og:image" content="{{ picture|e('html_attr') }}"/>
+<meta name="twitter:title" content="{{ title|e('html_attr') }}">
+<meta name="twitter:description" content="{{ summary|e('html_attr') }}">
+<meta name="twitter:image:src" content="{{ picture|e('html_attr') }}">
+<meta itemprop="name" content="{{ title|e('html_attr') }}">
+<meta itemprop="description" content="{{ summary|e('html_attr') }}">
+<meta itemprop="image" content="{{ picture|e('html_attr') }}">

@@ -2,13 +2,16 @@
 
 namespace BaseBundle\Twig\Extension;
 
-class LightExtension extends \Twig_Extension
+use BaseBundle\Base\BaseTwigExtension;
+
+class LightExtension extends BaseTwigExtension
 {
     public function getFunctions()
     {
         return [
             new \Twig_SimpleFunction('http_build_query', 'http_build_query', ['is_safe' => ['html', 'html_attr']]),
             new \Twig_SimpleFunction('array_to_query_fields', [$this, 'arrayToQueryFields'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('absolute_url', [$this, 'absoluteUrl']),
         ];
     }
 
@@ -26,6 +29,14 @@ class LightExtension extends \Twig_Extension
         }
 
         return $inputs;
+    }
+
+    public function absoluteUrl($asset)
+    {
+        $request = $this->get('request_stack')->getMasterRequest();
+        $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
+
+        return $baseurl . $asset;
     }
 
     public function getName()

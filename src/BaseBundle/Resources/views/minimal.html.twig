@@ -10,38 +10,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {{ include('BraincraftedBootstrapBundle::ie8-support.html.twig') }}
 
-        <title>{% block meta_title %}{% block title %}{{ fuz.site_default_title | trans }}{% endblock %}{% endblock %}</title>
-        <meta name="description" content="{% block meta_description %}{% block description %}{{ fuz.site_description | trans }}{% endblock %}{% endblock %}">
-        <meta name="keywords" content="{% block meta_keywords %}{% block keywords %}{% endblock %}{% endblock %}">
-        <meta name="author" content="{% block meta_author %}{% block author %}{% endblock %}{% endblock %}">
-        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
-        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}"/>
+        {% block meta %}
+            <title>{% block meta_title %}{% block title %}{{ fuz.site_default_title | trans }}{% endblock %}{% endblock %}</title>
+            <meta name="description" content="{% block meta_description %}{% block description %}{{ fuz.site_description | trans }}{% endblock %}{% endblock %}">
+            <meta name="keywords" content="{% block meta_keywords %}{% block keywords %}{% endblock %}{% endblock %}">
+            <meta name="author" content="{% block meta_author %}{% block author %}{% endblock %}{% endblock %}">
+            <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+            <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}"/>
+        {% endblock %}
 
         {% block css %}
             <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
             <link href="{{ asset('bundles/base/bootstrap-submenu/css/bootstrap-submenu.min.css') }}" rel="stylesheet" media="screen">
             <link href="{{ asset('bundles/base/jquery-ui-1.11.2/jquery-ui.min.css') }}" rel="stylesheet" media="screen">
             <link rel="stylesheet" href="{{ asset('bundles/base/css/base.css') }}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css"/>
             <link rel="stylesheet" href="{{ asset('bundles/app/css/app.css') }}">
         {% endblock %}
-</head>
-<body>
-    <div class="container">
-        {% block flash %}{{ include('BraincraftedBootstrapBundle::flash.html.twig', {'close': true}) }}{% endblock %}
-        {% block body %}{% endblock %}
-    </div>
+    </head>
+    <body>
+        <div class="container">
+            {% block flash %}{{ include('BraincraftedBootstrapBundle::flash.html.twig', {'close': true}) }}{% endblock %}
+            {% block body %}{% endblock %}
+        </div>
 
-    {% block js %}
-        <script src="{{ asset('js/jquery.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.js') }}"></script>
-        <script src="{{ asset('bundles/base/bootstrap-submenu/js/bootstrap-submenu.min.js') }}"></script>
-        <script src="{{ asset('bundles/base/jquery-ui-1.11.2/jquery-ui.min.js') }}"></script>
-        <script src="{{ asset('bundles/base/js/jquery.domajax.js') }}"></script>
-        <script src="{{ asset('bundles/base/js/jquery.collection.js') }}"></script>
-        <script src="{{ asset('bundles/base/js/base.js') }}"></script>
-        <script src="{{ asset('bundles/app/js/app.js') }}"></script>
-    {% endblock %}
+        {% block js %}
+            <script src="{{ asset('js/jquery.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
+            <script src="{{ asset('bundles/base/bootstrap-submenu/js/bootstrap-submenu.min.js') }}"></script>
+            <script src="{{ asset('bundles/base/jquery-ui-1.11.2/jquery-ui.min.js') }}"></script>
+            <script src="{{ asset('bundles/base/js/jquery.domajax.js') }}"></script>
+            <script src="{{ asset('bundles/base/js/jquery.collection.js') }}"></script>
+            <script src="{{ asset('bundles/base/js/base.js') }}"></script>
+            <script src="https://cdn.jsdelivr.net/emojione/2.2.7/lib/js/emojione.min.js"></script>
+            <script src="{{ asset('bundles/app/js/app.js') }}"></script>
+        {% endblock %}
 
-    {% block script %}{% endblock %}
-</body>
+        {% block script %}{% endblock %}
+    </body>
 </html>
