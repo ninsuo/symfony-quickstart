@@ -13,9 +13,9 @@ You'll find here 3 bundles:
 
 - AdminBundle contains tools to manage the application (administrators, roles, groups, etc).
 
-## Ready-to-use bundles
+## Ready-to-use bundles and tools
 
-- BootstrapBundle is preinstalled with a base layout seo and social friendly, and will automatically render your forms the right way, and display flash messages the right way.
+- BootstrapBundle is preinstalled with a base layout seo and social friendly, and will automatically render your forms and display your flash messages, paginations and filters the right way.
 
 - HWIOAuthBundle is ready to let your users log-in using their GitHub, Stack Exchange, Google, Facebook or Twitter accounts, each one enabled or not in configuration.
 
@@ -31,11 +31,13 @@ You'll find here 3 bundles:
 
 - EWZRecaptchaBundle gives a nice ReCaptcha type and validator for sensible parts (registration or contact forms)
 
-## Ready-to-use tools
-
-- Admin tools: interfaces to manage users and groups (roles `ROLE_GROUP_<group name>` automatically set for users of a group). You'll need to manually set is_admin = 1 on database for your first admin.
+- Administration: interfaces to manage users and groups (roles `ROLE_GROUP_<group name>` automatically set for users of a group). You'll need to manually set is_admin = 1 on database for your first admin.
 
 - Settings on the fly: if your app requires global settings set/stored by arbitrary people, use the Setting entity/repository/twig function to quickly get the job done.
+
+- A bunch of utilities to render filters, paginations, absolute urls, get real random numbers, manipulate images...
+
+- Integrated layouts are so simple that you can get all functionalities working in a totally different bootstrap template in a matter of minutes.
 
 ## Installation
 
@@ -45,6 +47,8 @@ php composer.phar update
 php app/console assets:install web --symlink
 php app/console doctrine:schema:create
 ```
+
+Go to the web/ directory and replace icon, logo and image by yours.
 
 ## Usage
 
@@ -60,9 +64,9 @@ To use OAuth login, you need to get your client ID and token on each provider:
 - Twitter Login: https://apps.twitter.com/
 - Facebook Login: https://developers.facebook.com/apps/
 
-To use noCaptcha, you should get your site & secret keys:
+To use reCaptcha, you should get your site & secret keys:
 
-- noCaptcha: https://www.google.com/recaptcha/admin
+- reCaptcha: https://www.google.com/recaptcha/admin
 
 ## License
 
@@ -70,3 +74,4 @@ To use noCaptcha, you should get your site & secret keys:
 
 - Fuz logo is © 2013-2016 Alain Tiemblo
 
+- Default image used on social meta tags is CC0

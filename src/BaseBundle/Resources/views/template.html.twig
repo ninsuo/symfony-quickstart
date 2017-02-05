@@ -1,0 +1,36 @@
+{# BaseBundle::layout.html.twig #}
+
+{% extends 'BaseBundle::base.html.twig' %}
+{% import "BaseBundle::macros.html.twig" as macros %}
+
+{% block body_head %}
+    <nav class="navbar navbar-default row">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">{{ 'base.nav'|trans }}</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('home') }}">
+                    <div class="navbar-logo">
+                        <img src="{{ block('logo') }}">
+                    </div>
+                    <div class="pull-left">
+                        {% block brand %}{{ brand }}{% endblock %}
+                    </div>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                {% block translations %}{% endblock %}
+                {% block login %}{% endblock %}
+                {% block left_menu %}{% endblock %}
+                {% block right_menu %}{% endblock %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body_bottom %}
+{% endblock %}

@@ -56,12 +56,13 @@
     </head>
     <body>
         <div class="container">
-            {% block head %}{% endblock %}
+            {% block body_head %}{% endblock %}
             <div id="body">
                 {% block flash %}{{ include('BraincraftedBootstrapBundle::flash.html.twig', {'close': true}) }}{% endblock %}
                 {% block body_title %}{% endblock %}
                 {% block body %}{% endblock %}
             </div>
+            {% block body_bottom %}{% endblock %}
         </div>
 
         {# Ajax-loader gif #}

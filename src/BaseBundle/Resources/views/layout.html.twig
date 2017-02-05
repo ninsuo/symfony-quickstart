@@ -1,92 +1,69 @@
-{# BaseBundle::layout.html.twig #}
-
-{% extends 'BaseBundle::base.html.twig' %}
+{% extends 'BaseBundle::template.html.twig' %}
 {% import "BaseBundle::macros.html.twig" as macros %}
 
-{% block head %}
-    <nav class="navbar navbar-default row">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">{{ 'base.nav'|trans }}</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ path('home') }}">
-                    <div class="navbar-logo">
-                        <img src="{{ block('logo') }}">
-                    </div>
-                    <div class="pull-left">
-                        {% block brand %}{{ brand }}{% endblock %}
-                    </div>
-                </a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                {% block translations %}
-                    {% if fuz.supported_locales|length %}
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {% set current_locale = fuz.supported_locales[app.request.locale]|default(false) %}
-                                    {% if current_locale %}
-                                        <img class="lang-image" src="{{ asset('bundles/base/img/countries/' ~ current_locale.flag ~ '.png') }}" alt=""/>
-                                        {{ current_locale.menu }}
-                                    {% else %}
-                                        {{ 'base.locale.title' | trans }}
-                                    {% endif %}
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    {% block supported_locales %}
-                                        {% for locale, data in fuz.supported_locales %}
-                                        <li>
-                                            <a href="{{ path('reload', {'_locale': locale}) }}">
-                                                <img class="lang-image" src="{{ asset('bundles/base/img/countries/' ~ data.flag ~ '.png') }}" alt=""/>
-                                                {{ data.menu }}
-                                            </a>
-                                        </li>
-                                        {% endfor %}
-                                    {% endblock %}
-                                </ul>
-                            </li>
-                        </ul>
+{% block translations %}
+    {% if fuz.supported_locales|length %}
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    {% set current_locale = fuz.supported_locales[app.request.locale]|default(false) %}
+                    {% if current_locale %}
+                        <img class="lang-image" src="{{ asset('bundles/base/img/countries/' ~ current_locale.flag ~ '.png') }}" alt=""/>
+                        {{ current_locale.menu }}
+                    {% else %}
+                        {{ 'base.locale.title' | trans }}
                     {% endif %}
-                {% endblock %}
-                {% block login %}
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if is_granted('ROLE_USER') %}
-                            {% block logged_in %}
-                               <p class="navbar-text">{{ 'base.login.as' | trans }} {{ macros.me() }}</p>
-                               <li><a href="{{ path('logout') }}">{{ 'base.logout.title' | trans }}</a></li>
-                            {% endblock %}
-                        {% else %}
-                           {% block logged_out %}
-                               <li class="dropdown">
-                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'base.login.title' | trans }} <span class="caret"></span></a>
-                                   <ul class="dropdown-menu" role="menu">
-                                       {% for service, enabled in fuz.services if enabled %}
-                                           {% set serviceId = (service|split(' '))[0]|lower %}
-                                           <li><a href="{{ hwi_oauth_login_url(serviceId) }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ serviceId ~ '-small.png') }}" alt=""/> {{ service }}</a></li>
-                                       {% endfor %}
-                                   </ul>
-                               </li>
-                            {% endblock %}
-                        {% endif %}
-                    </ul>
-                {% endblock %}
-                {% block left_menu %}
-                    {% if fuz.menu_left %}
-                        {{ knp_menu_render('AppBundle:Builder:mainLeftMenu') }}
-                    {% endif %}
-                {% endblock %}
-                {% block right_menu %}
-                    {% if fuz.menu_right %}
-                        {{ knp_menu_render('AppBundle:Builder:mainRightMenu') }}
-                    {% endif %}
-                {% endblock %}
-            </div>
-        </div>
-    </nav>
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    {% block supported_locales %}
+                        {% for locale, data in fuz.supported_locales %}
+                        <li>
+                            <a href="{{ path('reload', {'_locale': locale}) }}">
+                                <img class="lang-image" src="{{ asset('bundles/base/img/countries/' ~ data.flag ~ '.png') }}" alt=""/>
+                                {{ data.menu }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    {% endblock %}
+                </ul>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block login %}
+    <ul class="nav navbar-nav navbar-right">
+        {% if is_granted('ROLE_USER') %}
+            {% block logged_in %}
+               <p class="navbar-text">{{ 'base.login.as' | trans }} {{ macros.me() }}</p>
+               <li><a href="{{ path('logout') }}">{{ 'base.logout.title' | trans }}</a></li>
+            {% endblock %}
+        {% else %}
+           {% block logged_out %}
+               <li class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'base.login.title' | trans }} <span class="caret"></span></a>
+                   <ul class="dropdown-menu" role="menu">
+                       {% for service, enabled in fuz.services if enabled %}
+                           {% set serviceId = (service|split(' '))[0]|lower %}
+                           <li><a href="{{ hwi_oauth_login_url(serviceId) }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ serviceId ~ '-small.png') }}" alt=""/> {{ service }}</a></li>
+                       {% endfor %}
+                   </ul>
+               </li>
+            {% endblock %}
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block left_menu %}
+    {% if fuz.menu_left %}
+        {{ knp_menu_render('AppBundle:Builder:mainLeftMenu') }}
+    {% endif %}
+{% endblock %}
+
+{% block right_menu %}
+    {% if fuz.menu_right %}
+        {{ knp_menu_render('AppBundle:Builder:mainRightMenu') }}
+    {% endif %}
 {% endblock %}
 
 {% block body_title %}
