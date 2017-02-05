@@ -5,7 +5,9 @@ parameters:
     site_url: http://127.0.0.1:8000
     site_brand: Light
     site_description: base.site.description
-    site_default_title: base.site.default_title
+    site_title: base.site.title
+    site_keywords: base.site.keywords
+    site_author: Alain Tiemblo
 
     # Database
     database_driver:   pdo_mysql

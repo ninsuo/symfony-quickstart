@@ -13,6 +13,8 @@ class LightExtension extends BaseTwigExtension
             new \Twig_SimpleFunction('array_to_query_fields', [$this, 'arrayToQueryFields'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('absolute_url', [$this, 'absoluteUrl']),
             new \Twig_SimpleFunction('current_route', [$this, 'currentRoute']),
+            new \Twig_SimpleFunction('current_locale', [$this, 'currentLocale']),
+            new \Twig_SimpleFunction('current_uri', [$this, 'currentUri']),
         ];
     }
 
@@ -43,6 +45,16 @@ class LightExtension extends BaseTwigExtension
     public function currentRoute()
     {
         return $this->get('base.routing.helper')->getCurrentRoute();
+    }
+
+    public function currentLocale()
+    {
+        return $this->get('request_stack')->getMasterRequest()->getLocale();
+    }
+
+    public function currentUri()
+    {
+        return $this->get('request_stack')->getMasterRequest()->getUri();
     }
 
     public function getName()

@@ -77,7 +77,8 @@ base:
     share: 'Share:'
     site:
         description: 'An empty Symfony project that provides lots of ready-to-use tools for quick and not-so-dirty development'
-        default_title: 'Light, write down your mind'
+        keywords: 'symfony,framework,development,fast,tool,efficien,quick'
+        title: 'Write down your mind'
     undefined: Undefined
     unsuscribe:
         confirm: Confirm

@@ -39,9 +39,12 @@ twig:
                 Google: "%google_enabled%"
                 Twitter: "%twitter_enabled%"
                 Facebook: "%facebook_enabled%"
-            site_brand: "%site_brand%"
-            site_default_title: "%site_default_title%"
-            site_description: "%site_description%"
+            site:
+                brand: "%site_brand%"
+                title: "%site_title%"
+                description: "site_description"
+                keywords: "%site_keywords"
+                author: "%site_author%"
             supported_locales: "%supported_locales%"
 
 # Assetic Configuration

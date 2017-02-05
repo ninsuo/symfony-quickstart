@@ -78,7 +78,8 @@ base:
     share: 'Partager :'
     site:
         description: 'Un projet Symfony contenant des outils indispensables pour un développement rapide et efficace.'
-        default_title: 'Light, vos idées vite faites bien faites'
+        keywords: 'symfony,framework,développement,rapide,outil,indispensable,efficace'
+        title: 'Vos idées vite faites bien faites'
     undefined: Valeur non définie
     unsuscribe:
         confirm: Confirmer

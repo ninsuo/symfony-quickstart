@@ -1,7 +1,7 @@
-{# BaseBundle::base.html.twig #}
+{# BaseBundle::minimal.html.twig #}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_locale() }}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,73 +9,70 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {{ include('BraincraftedBootstrapBundle::ie8-support.html.twig') }}
 
-        {% block meta %}
-            <title>{% block meta_title %}{% block title %}{{ fuz.site_default_title | trans }}{% endblock %}{% endblock %}</title>
-            <meta name="description" content="{% block meta_description %}{% block description %}{{ fuz.site_description | trans }}{% endblock %}{% endblock %}">
-            <meta name="keywords" content="{% block meta_keywords %}{% block keywords %}{% endblock %}{% endblock %}">
-            <meta name="author" content="{% block meta_author %}{% block author %}{% endblock %}{% endblock %}">
-            <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
-            <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}"/>
+        {% set brand = fuz.site.brand %}
+        {% set title = brand ~ ' - ' ~ fuz.site.title|trans %}
+        {% set description = fuz.site.description|trans %}
+        {% set keywords = fuz.site.keywords|trans %}
+        {% set author = fuz.site.author %}
+        {% set url = current_uri() %}
+        {% set picture = absolute_url(asset('image.jpeg')) %}
+        {% set icon = absolute_url(asset('favicon.ico')) %}
+        {% set logo = absolute_url(asset('apple-touch-icon.png')) %}
+
+        {% block seo %}
+            <title>{% block meta_title %}{% block title %}{{ title }}{% endblock %}{% endblock %}</title>
+            <meta name="description" content="{% block meta_description %}{% block description %}{{ description }}{% endblock %}{% endblock %}">
+            <meta name="keywords" content="{% block meta_keywords %}{% block keywords %}{{ keywords }}{% endblock %}{% endblock %}">
+            <meta name="author" content="{% block meta_author %}{% block author %}{{ author }}{% endblock %}{% endblock %}">
+            <link rel="icon" href="{% block icon %}{{ icon }}{% endblock %}" type="image/x-icon"/>
+            <link rel="aimage_src" href="{% block picture %}{{ picture }}{% endblock %}"/>
+            <link rel="apple-touch-icon" href="{% block logo %}{{ logo }}{% endblock %}"/>
+
+            <meta property="og:site_name" content="{{ block('title') }}"/>
+            <meta property="og:url" content="{% block url %}{{ url }}{% endblock %}"/>
+            <meta property="og:type" content="{% block type %}website{% endblock %}"/>
+            <meta property="og:title" content="{{ block('title') }}"/>
+            <meta property="og:description" content="{{ block('description') }}"/>
+            <meta property="og:image" content="{{ block('picture') }}"/>
+
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:title" content="{{ block('title') }}">
+            <meta name="twitter:description" content="{{ block('description') }}">
+            <meta name="twitter:image:src" content="{{ block('picture') }}">
+
+            <meta itemprop="name" content="{{ block('title') }}">
+            <meta itemprop="description" content="{{ block('description') }}">
+            <meta itemprop="image" content="{{ block('picture') }}">
         {% endblock %}
 
-        {# CSS #}
         {% block css %}
             <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
             <link href="{{ asset('bundles/base/bootstrap-submenu/css/bootstrap-submenu.min.css') }}" rel="stylesheet" media="screen">
             <link href="{{ asset('bundles/base/jquery-ui-1.11.2/jquery-ui.min.css') }}" rel="stylesheet" media="screen">
             <link rel="stylesheet" href="{{ asset('bundles/base/css/base.css') }}">
-            <link rel="stylesheet" href="{{ asset('bundles/app/css/app.css') }}">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css"/>
-    {% endblock %}
+            <link rel="stylesheet" href="{{ asset('bundles/app/css/app.css') }}">
+        {% endblock %}
     </head>
     <body>
         <div class="container">
-            {% block head %}
-                <nav class="navbar navbar-default row">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                <span class="sr-only">{{ 'base.nav' | trans }}</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="{{ path('home') }}">
-                                <div class="navbar-logo">
-                                    {% block logo %} <img src="{{ asset('apple-touch-icon.png') }}">{% endblock %}
-                                </div>
-                                <div class="pull-left">
-                                    {% block brand %}{{ fuz.site_brand }}{% endblock %}
-                                </div>
-                            </a>
-                        </div>
-                        <div id="navbar" class="navbar-collapse collapse">
-                            {% block translations %}{% endblock %}
-                            {% block login %}{% endblock %}
-                            {% block left_menu %}{% endblock %}
-                            {% block right_menu %}{% endblock %}
-                        </div>
-                    </div>
-                </nav>
-            {% endblock %}
-
+            {% block head %}{% endblock %}
             <div id="body">
                 {% block flash %}{{ include('BraincraftedBootstrapBundle::flash.html.twig', {'close': true}) }}{% endblock %}
-                {% if block('title') != '' %}
-                    <h1>{{ block('title') }}</h1>
-                {% endif %}
+                {% block body_title %}{% endblock %}
                 {% block body %}{% endblock %}
             </div>
         </div>
 
         {# Ajax-loader gif #}
         <div id="wait" class="hide" aria-hidden="true">
-            <div class="text-center">
-                <img src="{{ asset('bundles/base/img/wait.gif') }}" alt="{{ 'base.wait' | trans }}"/>
-            </div>
+            {% block wait %}
+                <div class="text-center">
+                    <img src="{{ asset('bundles/base/img/wait.gif') }}" alt="{{ 'base.wait'|trans }}"/>
+                </div>
+            {% endblock %}
         </div>
 
-        {# JS #}
         {% block js %}
             <script src="{{ asset('js/jquery.js') }}"></script>
             <script src="{{ asset('js/bootstrap.js') }}"></script>
@@ -91,7 +88,7 @@
         <script type="text/javascript">
             $('.dropdown-submenu > a').submenupicker();
         </script>
-        {% block script %}{% endblock %}
 
+        {% block script %}{% endblock %}
     </body>
 </html>
