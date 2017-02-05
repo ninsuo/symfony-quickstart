@@ -6,17 +6,17 @@ parameters:
 services:
 
     base.case.twig_extension:
-        class: %base.case.twig_extension.class%
+        class: '%base.case.twig_extension.class%'
         tags:
             - { name: twig.extension }
 
     base.light.twig_extension:
-        class: %base.light.twig_extension.class%
+        class: '%base.light.twig_extension.class%'
         parent: base.twig_extension
         tags:
             - { name: twig.extension }
 
     base.setting.twig_extension:
-        class: %base.setting.twig_extension.class%
+        class: '%base.setting.twig_extension.class%'
         tags:
             - { name: twig.extension }

@@ -42,8 +42,8 @@ twig:
             site:
                 brand: "%site_brand%"
                 title: "%site_title%"
-                description: "site_description"
-                keywords: "%site_keywords"
+                description: "%site_description%"
+                keywords: "%site_keywords%"
                 author: "%site_author%"
             supported_locales: "%supported_locales%"
 
@@ -144,6 +144,6 @@ knp_menu:
 
 # Recaptcha
 ewz_recaptcha:
-    public_key:  %recaptcha_public%
-    private_key: %recaptcha_private%
+    public_key:  "%recaptcha_public%"
+    private_key: "%recaptcha_private%"
 
