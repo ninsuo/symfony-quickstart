@@ -15,17 +15,17 @@ You'll find here 3 bundles:
 
 ## Ready-to-use bundles
 
-- BootstrapBundle is preinstalled with a base layout, and will automatically render your forms the right way, and display flash messages using the right color.
+- BootstrapBundle is preinstalled with a base layout seo and social friendly, and will automatically render your forms the right way, and display flash messages the right way.
 
-- HWIOAuthBundle is ready to let your users log-in using their Google, Facebook or Twitter accounts.
+- HWIOAuthBundle is ready to let your users log-in using their GitHub, Stack Exchange, Google, Facebook or Twitter accounts, each one enabled or not in configuration.
 
-- i18n support with language switcher and specific routes for each supported locales.
+- i18n support with language switcher and specific routes for each supported locales and the whole interfaces already translated in French and English.
 
-- KnpMenu awaits your routes and labels as an associative array for logged and non-logged users in a single class; it is already implemented at the top of the base layout.
+- KnpMenu awaits your routes and labels with the right helpers to make menus as simple as possible to manage; it is already implemented at the top of the main layout.
 
 - Project already implements 403, 404, 500 and generic error pages, no need to worry about the common pitfalls on the subject.
 
-- CRUD generator generates bootstrap-ready and translated views, because if you need this app, you're not against generating most of the application. You may also want to try the Ajax-CRUD generator.
+- CRUD generator generates bootstrap-ready and translated views, because if you need this app, you're not against generating most of the application. It also integrates an ajax-CRUD generator.
 
 - CKeditor (with image browsing and upload integrated) and HTMLPurifier are preinstalled to manage rich-text editors (WYSIWYG), just use CKEditorType in your form and |purify filter in your view.
 
@@ -33,9 +33,9 @@ You'll find here 3 bundles:
 
 ## Ready-to-use tools
 
-- Admin tools: interfaces to manage users and groups (roles `ROLE_GROUP_<group name>` automatically set). You'll need to manually set is_admin = 1 on database for your first admin.
+- Admin tools: interfaces to manage users and groups (roles `ROLE_GROUP_<group name>` automatically set for users of a group). You'll need to manually set is_admin = 1 on database for your first admin.
 
-- Settings on the fly: if your app requires settings set/stored by arbitrary people, use the Setting entity/repository/twig function to quickly get the job done.
+- Settings on the fly: if your app requires global settings set/stored by arbitrary people, use the Setting entity/repository/twig function to quickly get the job done.
 
 ## Installation
 

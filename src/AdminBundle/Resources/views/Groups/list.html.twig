@@ -27,7 +27,7 @@
                             {{
                                 include('BaseBundle::editOnClick.html.twig', {
                                     'text': group.name,
-                                    'endpoint': path('admin_groups_edit_name', {id: group.id}),
+                                    'endpoint': path('_admin_groups_edit_name', {id: group.id}),
                                 })
                             }}
                         </td>
@@ -35,7 +35,7 @@
                             {{
                                 include('BaseBundle::editOnClick.html.twig', {
                                     'text': group.notes,
-                                    'endpoint': path('admin_groups_edit_notes', {id: group.id}),
+                                    'endpoint': path('_admin_groups_edit_notes', {id: group.id}),
                                 })
                             }}
                         </td>

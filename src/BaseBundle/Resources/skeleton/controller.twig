@@ -110,7 +110,7 @@ class {{ entityName|pascalcase }}Controller extends BaseController
 
 {% for name, column in columns if name != 'id' %}
     /**
-     * @Route("/edit/{{ name|kebabcase }}/{id}", name="{{ routePrefix }}_edit_{{ name|snakecase|lower }}")
+     * @Route("/edit/{{ name|kebabcase }}/{id}", name="_{{ routePrefix }}_edit_{{ name|snakecase|lower }}")
      * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _edit{{ name|title }}Action(Request $request, $id)
@@ -122,7 +122,7 @@ class {{ entityName|pascalcase }}Controller extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $endpoint = $this->generateUrl('{{ routePrefix }}_edit_{{ name|snakecase|lower }}', ['id' => $id]);
+        $endpoint = $this->generateUrl('_{{ routePrefix }}_edit_{{ name|snakecase|lower }}', ['id' => $id]);
 
         $form = $this
             ->createNamedFormBuilder("edit-{{ entityName|kebabcase }}-{{ name|kebabcase }}-{$id}", Type\FormType::class, $entity, [

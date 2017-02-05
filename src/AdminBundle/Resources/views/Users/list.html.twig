@@ -33,7 +33,7 @@
                             {{
                                 include('BaseBundle::editOnClick.html.twig', {
                                     'text': macros.user(user),
-                                    'endpoint': path('admin_users_edit_nickname', {id: user.id}),
+                                    'endpoint': path('_admin_users_edit_nickname', {id: user.id}),
                                 })
                             }}
                         </td>
@@ -41,7 +41,7 @@
                             {{
                                 include('BaseBundle::editOnClick.html.twig', {
                                     'text': user.contact,
-                                    'endpoint': path('admin_users_edit_contact', {id: user.id}),
+                                    'endpoint': path('_admin_users_edit_contact', {id: user.id}),
                                 })
                             }}
                         </td>
@@ -55,7 +55,7 @@
                             <input
                                 type="checkbox"
                                 class="domajax change"
-                                data-endpoint="{{ path('admin_users_toggle_frozen', {token: csrf_token('administration')}) }}"
+                                data-endpoint="{{ path('_admin_users_toggle_frozen', {token: csrf_token('administration')}) }}"
                                 data-input-attr="id"
                                 data-id="{{ user.id }}"
                                 {% if user.isFrozen %}checked{% endif %}
@@ -68,7 +68,7 @@
                                 <input
                                     type="checkbox"
                                     class="domajax change"
-                                    data-endpoint="{{ path('admin_users_toggle_admin', {token: csrf_token('administration')}) }}"
+                                    data-endpoint="{{ path('_admin_users_toggle_admin', {token: csrf_token('administration')}) }}"
                                     data-input-attr="id"
                                     data-id="{{ user.id }}"
                                     {% if user.isAdmin %}checked{% endif %}

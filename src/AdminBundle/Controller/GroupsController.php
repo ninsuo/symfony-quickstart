@@ -70,7 +70,7 @@ class GroupsController extends BaseController
     }
 
     /**
-     * @Route("/edit/name/{id}", name="admin_groups_edit_name")
+     * @Route("/edit/name/{id}", name="_admin_groups_edit_name")
      * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _editNameAction(Request $request, $id)
@@ -82,7 +82,7 @@ class GroupsController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $endpoint = $this->generateUrl('admin_groups_edit_name', ['id' => $id]);
+        $endpoint = $this->generateUrl('_admin_groups_edit_name', ['id' => $id]);
 
         $form = $this
             ->createNamedFormBuilder("edit-name-{$id}", Type\FormType::class, $entity, [
@@ -118,7 +118,7 @@ class GroupsController extends BaseController
     }
 
     /**
-     * @Route("/edit/notes/{id}", name="admin_groups_edit_notes")
+     * @Route("/edit/notes/{id}", name="_admin_groups_edit_notes")
      * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _editNotesAction(Request $request, $id)
@@ -130,7 +130,7 @@ class GroupsController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $endpoint = $this->generateUrl('admin_groups_edit_notes', ['id' => $id]);
+        $endpoint = $this->generateUrl('_admin_groups_edit_notes', ['id' => $id]);
 
         $form = $this
             ->createNamedFormBuilder("edit-notes-{$id}", Type\FormType::class, $entity, [

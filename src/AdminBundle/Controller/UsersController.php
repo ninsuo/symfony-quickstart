@@ -47,7 +47,7 @@ class UsersController extends BaseController
     }
 
     /**
-     * @Route("/toggle/admin/{token}", name="admin_users_toggle_admin")
+     * @Route("/toggle/admin/{token}", name="_admin_users_toggle_admin")
      * @Template()
      */
     public function toggleAdminAction(Request $request, $token)
@@ -66,7 +66,7 @@ class UsersController extends BaseController
     }
 
     /**
-     * @Route("/toggle/frozen/{token}", name="admin_users_toggle_frozen")
+     * @Route("/toggle/frozen/{token}", name="_admin_users_toggle_frozen")
      * @Template()
      */
     public function toggleFrozenAction(Request $request, $token)
@@ -85,7 +85,7 @@ class UsersController extends BaseController
     }
 
     /**
-     * @Route("/edit/contact/{id}", name="admin_users_edit_contact")
+     * @Route("/edit/contact/{id}", name="_admin_users_edit_contact")
      * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _editContactAction(Request $request, $id)
@@ -97,7 +97,7 @@ class UsersController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $endpoint = $this->generateUrl('admin_users_edit_contact', ['id' => $id]);
+        $endpoint = $this->generateUrl('_admin_users_edit_contact', ['id' => $id]);
 
         $form = $this
            ->createNamedFormBuilder("edit-contact-{$id}", Type\FormType::class, $entity, [
@@ -137,7 +137,7 @@ class UsersController extends BaseController
     }
 
     /**
-     * @Route("/edit/nickname/{id}", name="admin_users_edit_nickname")
+     * @Route("/edit/nickname/{id}", name="_admin_users_edit_nickname")
      * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _editNicknameAction(Request $request, $id)
@@ -149,7 +149,7 @@ class UsersController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $endpoint = $this->generateUrl('admin_users_edit_nickname', ['id' => $id]);
+        $endpoint = $this->generateUrl('_admin_users_edit_nickname', ['id' => $id]);
 
         $form = $this
            ->createNamedFormBuilder("edit-nickname-{$id}", Type\FormType::class, $entity, [

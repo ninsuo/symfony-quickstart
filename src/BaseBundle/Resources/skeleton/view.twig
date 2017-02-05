@@ -28,7 +28,7 @@
                             {{
                                 include('BaseBundle::editOnClick.html.twig', {
                                     'text': {% endverbatim %}{{ entityName|snakecase|lower }}.{{ name }}{% verbatim %},
-                                    'endpoint': path('{% endverbatim %}{{ routePrefix }}_edit_{{ name|snakecase|lower }}{% verbatim %}', {id: {% endverbatim %}{{ entityName|snakecase|lower }}{% verbatim %}.id}),
+                                    'endpoint': path('_{% endverbatim %}{{ routePrefix }}_edit_{{ name|snakecase|lower }}{% verbatim %}', {id: {% endverbatim %}{{ entityName|snakecase|lower }}{% verbatim %}.id}),
                                 })
                             }}
                         </td>{% endverbatim %}{% endfor %}{% verbatim %}
