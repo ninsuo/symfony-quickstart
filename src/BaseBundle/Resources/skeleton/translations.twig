@@ -1,13 +1,12 @@
 {{ file }}
     {{ entityName|snakecase|lower }}:
-        manage: Manage {{ entityName|pascalcase }}s
-{% for name, column in columns %}
-        {{ name|snakecase|lower }}: {{ name|pascalcase }}
-{% endfor %}
         actions: Actions
-        delete: Remove
-        delete_confirm: 'Are you sure you want to remove {{ entityName|pascalcase }} #%id%?'
-        deleted: '{{ entityName|lower }} #%id% removed successfully.'
         create: Create new {{ entityName|lower }}
         created: New {{ entityName|lower }} created successfully.
-
+        delete: Remove
+        delete_confirm: 'Are you sure you want to remove {{ entityName|pascalcase }} #%id%?'
+        deleted: '{{ entityName|lower|title }} #%id% removed successfully.'
+        manage: Manage {{ entityName|pascalcase }}s
+{% for name, column in columns %}
+        {{ name|snakecase|lower }}: {{ name[:1]|upper ~ name[1:]|pascalcase }}
+{% endfor %}

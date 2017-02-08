@@ -4,10 +4,12 @@ admin:
         name: Nom
         notes: Notes
         create: Créer un nouveau groupe
+        created: Groupe créé avec succès
         group: groupe
         actions: Actions
         delete: Supprimer
         delete_confirm: Voulez-vous vraiment supprimer le groupe "%group%" ?
+        deleted: 'Groupe #%id% supprimé avec succès.'
         manage: Gérer les membres du groupe
     users:
         id: ID
@@ -40,4 +42,3 @@ admin:
         id: Id
         manage: Gestion des groupes
         name: Nom
-

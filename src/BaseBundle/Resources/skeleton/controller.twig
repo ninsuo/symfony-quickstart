@@ -100,11 +100,11 @@ class {{ entityName|pascalcase }}Controller extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $this->success("{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.deleted", ['%id%' => $entity->getId()]);
-
         $em = $this->get('doctrine')->getManager();
         $em->remove($entity);
         $em->flush();
+
+        $this->success("{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.deleted", ['%id%' => $entity->getId()]);
 
         return $this->redirect($this->generateUrl('{{ routePrefix }}'));
     }

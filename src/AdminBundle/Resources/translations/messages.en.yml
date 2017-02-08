@@ -4,10 +4,12 @@ admin:
         name: Name
         notes: Notes
         create: Create a new group
+        created: New group created successfully.
         group: group
         actions: Actions
         delete: Delete
         delete_confirm: Are you sure that you want to remouve group "%group%"?
+        deleted: 'Group #%id% removed successfully.'
         manage: Manage group members
     users:
         id: ID

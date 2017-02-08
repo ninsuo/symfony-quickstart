@@ -67,6 +67,8 @@ class GroupsController extends BaseController
         $em->remove($entity);
         $em->flush();
 
+        $this->success("admin.groups.deleted", ['%id%' => $entity->getId()]);
+
         return $this->redirect($this->generateUrl('admin_groups'));
     }
 
@@ -189,6 +191,10 @@ class GroupsController extends BaseController
             $em = $this->get('doctrine')->getManager();
             $em->persist($entity);
             $em->flush();
+
+            $this->success("admin.groups.created");
+
+            $this->redirect('admin_groups');
         }
 
         return $form->createView();

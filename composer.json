@@ -13,7 +13,7 @@
         ]
     },
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=5.5.9",
         "twig/twig": "^1.0",
         "symfony/symfony": "^3.0",
         "doctrine/orm": "^2.5",
