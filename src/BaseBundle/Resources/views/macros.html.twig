@@ -127,7 +127,6 @@
             }}
         </div>
         <div class="text-left col-md-4">
-
             <div>{{ 'base.pager.per_page'|trans }}</div>
             <ul class="pagination">
                 {% for perPage in constant('BaseBundle\\Base\\BaseController::PAGER_PER_PAGE_LIST') %}
@@ -158,6 +157,25 @@
             </form>
         </div>
     </div>
+{% endmacro %}
+
+{% macro orderBy(order, column, label) %}
+    {% set isCurrent = order.column == column %}
+    {% if isCurrent %}
+        <a style="color:black;" href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): order.direction == 'ASC' ? 'desc' : 'asc'})) }}">{{ label|trans }}</a>
+    {% else %}
+        <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column})) }}">{{ label|trans }}</a>
+    {% endif %}
+    {% if not isCurrent or order.direction != 'ASC' %}
+        <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): 'asc'})) }}">▲</a>
+    {% else %}
+        ▲
+    {% endif %}
+    {% if not isCurrent or order.direction != 'DESC' %}
+        <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): 'desc'})) }}">▼</a>
+    {% else %}
+        ▼
+    {% endif %}
 {% endmacro %}
 
 {% macro search(name = 'filter') %}

@@ -41,8 +41,9 @@ class UsersController extends BaseController
         }
 
         return [
-            'pager' => $this->getPager($qb),
-            'me'    => $this->getUser()->getId(),
+            'orderBy' => $this->orderBy($qb, User::class, 'u.nickname', 'ASC', 'test'),
+            'pager'   => $this->getPager($qb),
+            'me'      => $this->getUser()->getId(),
         ];
     }
 

@@ -18,7 +18,7 @@ abstract class BaseController extends Controller
 {
     use ServiceTrait;
 
-    const PAGER_PER_PAGE_LIST    = [10, 25, 50, 100, 250];
+    const PAGER_PER_PAGE_LIST    = [25, 50, 100];
     const PAGER_PER_PAGE_DEFAULT = 25;
 
     public function info($message, array $parameters = [])
@@ -49,6 +49,36 @@ abstract class BaseController extends Controller
     public function createNamedFormBuilder($name, $type = Type\FormType::class, $data = null, array $options = [])
     {
         return $this->container->get('form.factory')->createNamedBuilder($name, $type, $data, $options);
+    }
+
+    public function orderBy(QueryBuilder $qb, $class, $prefixedDefaultColumn, $defaultDirection = 'ASC', $prefix = '')
+    {
+        $request = $this->get('request_stack')->getMasterRequest();
+
+        $qbPrefix = substr($prefixedDefaultColumn, 0, strpos($prefixedDefaultColumn, '.'));
+        $defaultColumn = substr($prefixedDefaultColumn, strpos($prefixedDefaultColumn, '.') + 1);
+
+        if (!class_exists($class)) {
+            throw new \LogicException("Class '$class' not found.");
+        }
+
+        $column = $request->get($prefix.'order-by', $defaultColumn);
+        if (!property_exists($class, $column)) {
+            $column = $defaultColumn;
+        }
+
+        $direction = strtoupper($request->get($prefix.'order-by-direction', $defaultDirection));
+        if ($direction !== 'ASC' && $direction !== 'DESC') {
+            $direction = $defaultDirection;
+        }
+
+        $qb->orderBy($qbPrefix.'.'.$column, $direction);
+
+        return [
+            'prefix' => $prefix,
+            'column' => $column,
+            'direction' => $direction,
+        ];
     }
 
     public function getPager($data, $prefix = '', $hasJoins = false)

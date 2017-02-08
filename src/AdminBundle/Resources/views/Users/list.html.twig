@@ -13,13 +13,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>{{ 'admin.users.id' | trans }}</th>
-                    <th>{{ 'admin.users.network' | trans }}</th>
-                    <th>{{ 'admin.users.nickname' | trans }}</th>
-                    <th>{{ 'admin.users.contact' | trans }}</th>
+                    <th>{{ macros.orderBy(orderBy, 'id', 'admin.users.id') }}</th>
+                    <th>{{ macros.orderBy(orderBy, 'resourceOwner', 'admin.users.network') }}</th>
+                    <th>{{ macros.orderBy(orderBy, 'nickname', 'admin.users.nickname') }}</th>
+                    <th>{{ macros.orderBy(orderBy, 'contact', 'admin.users.contact') }}</th>
                     <th>{{ 'admin.users.actions' | trans }}</th>
-                    <th>{{ 'admin.users.frozen' | trans }}</th>
-                    <th>{{ 'admin.users.admin' | trans }}</th>
+                    <th>{{ macros.orderBy(orderBy, 'isFrozen', 'admin.users.frozen') }}</th>
+                    <th>{{ macros.orderBy(orderBy, 'isAdmin', 'admin.users.admin') }}</th>
                 </tr>
             </thead>
             <tbody>

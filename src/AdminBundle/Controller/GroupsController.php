@@ -39,6 +39,7 @@ class GroupsController extends BaseController
         }
 
         return [
+            'orderBy' => $this->orderBy($qb, Group::class, 'g.name'),
             'pager'  => $this->getPager($qb),
             'create' => $this->getCreateForm($request),
         ];
