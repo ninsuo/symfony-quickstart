@@ -52,8 +52,14 @@
     {% endmacro %}
 
     {% import _self as me %}
-    {{ me.display(group, pagerIn, 'in') }}
-    {{ me.display(group, pagerOut, 'out') }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ me.display(group, pagerIn, 'in') }}
+        </div>
+        <div class="col-md-6">
+            {{ me.display(group, pagerOut, 'out') }}
+        </div>
+    </div>
 
     <div class="text-center">
         <a class="btn btn-primary" href="{{ path('admin_groups') }}">{{ 'base.button.back' | trans }}</a>

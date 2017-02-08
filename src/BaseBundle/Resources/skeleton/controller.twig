@@ -48,6 +48,7 @@ class {{ entityName|pascalcase }}Controller extends BaseController
         }
 
         return [
+            'orderBy' => $this->orderBy($qb, {{ entityName }}::class, '{{ entityPrefix }}.id'),
             'pager' => $this->getPager($qb, '{{ entityName|kebabcase }}-'),
             'create' => $form,
         ];
