@@ -30,3 +30,14 @@ admin:
         out: "Members not in %name%:"
         add: Add in group
         remove: Remove from group
+    role:
+        actions: Actions
+        create: Create new role
+        created: New role created successfully.
+        delete: Remove
+        delete_confirm: 'Are you sure you want to remove Role #%id%?'
+        deleted: 'Role #%id% removed successfully.'
+        id: Id
+        manage: Manage Roles
+        name: Name
+

@@ -30,3 +30,14 @@ admin:
         out: "Non membres de %name% :"
         add: Ajouter dans ce groupe
         remove: Retirer de ce groupe
+    role:
+        actions: Actions
+        create: Créer un nouveau rôle
+        created: Rôle créé avec succès
+        delete: Supprimer
+        delete_confirm: 'Voulez-vous vraiment supprimer le role #%id%?'
+        deleted: 'Role #%id% supprimé avec succès.'
+        id: Id
+        manage: Gestion des groupes
+        name: Nom
+

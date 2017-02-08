@@ -1,0 +1,53 @@
+
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% import 'BaseBundle::macros.html.twig' as macros %}
+
+{% block title %}{{ 'admin.role.manage' | trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="well">
+
+        {{ macros.search('role-filter') }}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 35%;">{{ macros.orderBy(orderBy, 'id', 'admin.role.id') }}</th>
+                    <th style="width: 35%;">{{ macros.orderBy(orderBy, 'name', 'admin.role.name') }}</th>
+                    <th style="width: 30%;">{{ 'admin.role.actions' | trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for role in pager.currentPageResults %}
+                    <tr>
+                        <td>
+                            {{ role.id }}
+                        </td>
+                        <td>
+                            {{
+                                include('BaseBundle::editOnClick.html.twig', {
+                                    'text': role.name,
+                                    'endpoint': path('_admin_role_edit_name', {id: role.id}),
+                                })
+                            }}
+                        </td>
+                        <td>
+                            <a
+                                href="{{ path('admin_role_delete', {id: role.id, token: csrf_token('admin_role')}) }}"
+                                data-message="{{ 'admin.role.delete_confirm' | trans({'%id%': role.id}) | e('html_attr') }}"
+                                class="requires-confirmation btn btn-danger btn-sm">{{ 'admin.role.delete' | trans }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {{ macros.pager(pager, 'role-') }}
+
+    </div>
+
+    {{ macros.form(create, [], 'admin.role.create' | trans) }}
+
+{% endblock %}

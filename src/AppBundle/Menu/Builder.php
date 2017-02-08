@@ -32,6 +32,7 @@ class Builder extends BaseMenu
             $this->addSubMenu($menu, 'base.menu.admin.main');
             $this->addRoute($menu['base.menu.admin.main'], 'base.menu.admin.users', 'admin_users');
             $this->addRoute($menu['base.menu.admin.main'], 'base.menu.admin.groups', 'admin_groups');
+            $this->addRoute($menu['base.menu.admin.main'], 'base.menu.admin.roles', 'admin_roles');
         }
 
         return $menu;
