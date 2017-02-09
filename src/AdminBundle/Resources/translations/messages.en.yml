@@ -19,20 +19,26 @@ admin:
         admin: Admin
         frozen: Frozen
         actions: Actions
-        manage: Manage member groups
-    users_groups:
-        title: %name%'s groups
-        in: 'Groups where %name% is:'
-        out: "Groups where %name% isn't:"
-        add: Add in group
-        remove: Remove from group
+        manage: Groups & Roles
+    users_manage:
+        groups: Groups
+        roles: Roles
+        title: %name%'s groups and roles
+        groups_in: "%name%'s groups:"
+        groups_out: "Other groups:"
+        groups_add: Add in group
+        groups_remove: Remove from group
+        roles_in: "%name%'s roles:"
+        roles_out: "Other roles:"
+        roles_add: Add this role
+        roles_remove: Remove this role
     groups_users:
         title: Members in group %name%
         in: 'Members in %name%:'
         out: "Members not in %name%:"
         add: Add in group
         remove: Remove from group
-    role:
+    roles:
         actions: Actions
         create: Create new role
         created: New role created successfully.

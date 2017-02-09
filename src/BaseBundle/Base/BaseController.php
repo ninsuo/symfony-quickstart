@@ -55,6 +55,10 @@ abstract class BaseController extends Controller
     {
         $request = $this->get('request_stack')->getMasterRequest();
 
+        if (strpos($prefixedDefaultColumn, '.') === false) {
+            throw new \LogicException("Invalid format of the given doctrine default column: {$prefixedDefaultColumn}.");
+        }
+
         $qbPrefix = substr($prefixedDefaultColumn, 0, strpos($prefixedDefaultColumn, '.'));
         $defaultColumn = substr($prefixedDefaultColumn, strpos($prefixedDefaultColumn, '.') + 1);
 

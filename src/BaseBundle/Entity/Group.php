@@ -17,12 +17,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @ORM\Entity(repositoryClass="BaseBundle\Repository\GroupRepository")
- * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  * @UniqueEntity("name")
  */
 class Group
 {
-
     /**
      * @var int
      *
@@ -52,7 +50,31 @@ class Group
      *
      * @ORM\ManyToMany(targetEntity="User", mappedBy="groups")
      */
-    private $users;
+    protected $users;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Role", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="groups_roles",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="role_id", referencedColumnName="id", onDelete="CASCADE")
+     *     }
+     * )
+     */
+    protected $permissions;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -113,6 +135,8 @@ class Group
     }
 
     /**
+     * Get users.
+     *
      * @return ArrayCollection
      */
     public function getUsers()
@@ -120,4 +144,13 @@ class Group
         return $this->users;
     }
 
+    /**
+     * Get permissions.
+     *
+     * @return ArrayCollection
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
 }

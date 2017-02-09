@@ -18,7 +18,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * )
  * @ORM\Entity(repositoryClass="BaseBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
 class User implements UserInterface, EquatableInterface
 {
@@ -102,6 +101,21 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
+     * @ORM\ManyToMany(targetEntity="Role", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="users_roles",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="role_id", referencedColumnName="id", onDelete="CASCADE")
+     *     }
+     * )
+     */
+    protected $permissions;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="Group", cascade={"persist", "remove"}, inversedBy="users")
      * @ORM\JoinTable(name="users_groups",
      *     joinColumns={
@@ -120,6 +134,7 @@ class User implements UserInterface, EquatableInterface
     public function __construct()
     {
         $this->groups = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     /**
@@ -357,11 +372,23 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
+     * Get groups.
+     *
      * @return ArrayCollection
      */
     public function getGroups()
     {
         return $this->groups;
+    }
+
+    /**
+     * Get permissions.
+     *
+     * @return ArrayCollection
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
     }
 
     /**

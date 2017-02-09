@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints;
  * @Route("/roles")
  * @Security("has_role('ROLE_ADMIN')")
  */
-class RoleController extends BaseController
+class RolesController extends BaseController
 {
     /**
      * @Route("/", name="admin_roles")
@@ -59,7 +59,7 @@ class RoleController extends BaseController
         $form = $this
            ->createNamedFormBuilder('create-role', Type\FormType::class, $entity)
            ->add('name', Type\TextType::class, [
-               'label'       => 'admin.role.name',
+               'label'       => 'admin.roles.name',
                'constraints' => [],
            ])
            ->add('submit', Type\SubmitType::class, [
@@ -74,7 +74,7 @@ class RoleController extends BaseController
             $em->persist($entity);
             $em->flush();
 
-            $this->success("admin.role.created");
+            $this->success("admin.roles.created");
 
             return null;
         }
@@ -83,12 +83,12 @@ class RoleController extends BaseController
     }
 
     /**
-     * @Route("/delete/{id}/{token}", name="admin_role_delete")
+     * @Route("/delete/{id}/{token}", name="admin_roles_delete")
      * @Template()
      */
     public function deleteAction($id, $token)
     {
-        $this->checkCsrfToken('admin_role', $token);
+        $this->checkCsrfToken('admin_roles', $token);
 
         $manager = $this->getManager('BaseBundle:Role');
 
@@ -97,7 +97,7 @@ class RoleController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $this->success("admin.role.deleted", ['%id%' => $entity->getId()]);
+        $this->success("admin.roles.deleted", ['%id%' => $entity->getId()]);
 
         $em = $this->get('doctrine')->getManager();
         $em->remove($entity);
@@ -107,7 +107,7 @@ class RoleController extends BaseController
     }
 
     /**
-     * @Route("/edit/name/{id}", name="_admin_role_edit_name")
+     * @Route("/edit/name/{id}", name="_admin_roles_edit_name")
      * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _editNameAction(Request $request, $id)
@@ -119,14 +119,14 @@ class RoleController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $endpoint = $this->generateUrl('_admin_role_edit_name', ['id' => $id]);
+        $endpoint = $this->generateUrl('_admin_roles_edit_name', ['id' => $id]);
 
         $form = $this
            ->createNamedFormBuilder("edit-role-name-{$id}", Type\FormType::class, $entity, [
                'action' => $endpoint,
            ])
            ->add('name', Type\TextType::class, [
-               'label'       => 'admin.role.name',
+               'label'       => 'admin.roles.name',
                'constraints' => [],
            ])
            ->add('submit', Type\SubmitType::class, [

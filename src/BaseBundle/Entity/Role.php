@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="role")
  * @ORM\Entity(repositoryClass="BaseBundle\Repository\RoleRepository")
- * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  * @UniqueEntity("name")
  */
 class Role
@@ -23,7 +22,7 @@ class Role
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -31,7 +30,7 @@ class Role
      * @ORM\Column(name="name", type="string", length=64, unique=true)
      * @Assert\NotBlank
      */
-    private $name;
+    protected $name;
 
     /**
      * Get id

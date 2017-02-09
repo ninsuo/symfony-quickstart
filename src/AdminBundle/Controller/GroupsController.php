@@ -4,6 +4,8 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\Group;
+use BaseBundle\Entity\Role;
+use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -173,7 +175,7 @@ class GroupsController extends BaseController
         $entity = new Group();
 
         $form = $this
-            ->createNamedFormBuilder('create', Type\FormType::class, $entity)
+            ->createNamedFormBuilder('create-group', Type\FormType::class, $entity)
             ->add('name', Type\TextType::class, [
                 'label' => 'admin.groups.name',
             ])
