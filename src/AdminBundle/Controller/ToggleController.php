@@ -67,7 +67,7 @@ class ToggleController extends BaseController
         }
 
         return $this->redirect(
-           $this->generateUrl("admin_{$fromType}_manage", array_merge($request->query->all(), ['id' => $fromId]))
+           $this->generateUrl("admin_{$fromType}_manage", array_merge($request->query->all(), ['id' => $fromId])).'#manage-'.$toType
         );
     }
 }
