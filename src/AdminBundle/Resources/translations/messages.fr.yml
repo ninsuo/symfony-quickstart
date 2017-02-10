@@ -10,6 +10,7 @@ admin:
         delete: Supprimer
         delete_confirm: Voulez-vous vraiment supprimer le groupe "%group%" ?
         deleted: 'Groupe #%id% supprimé avec succès.'
+        create_permission: 'Créer et associer la permission |placeholder| automatiquement'
         manage: Utilisateurs & Permissions
     groups_manage:
         users: Utilisateurs

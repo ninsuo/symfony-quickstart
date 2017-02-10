@@ -10,6 +10,7 @@ admin:
         delete: Delete
         delete_confirm: Are you sure that you want to remouve group "%group%"?
         deleted: 'Group #%id% removed successfully.'
+        create_permission: 'Create and associate |placeholder| permission automatically.'
         manage: Users & Permissions
     groups_manage:
         users: Users

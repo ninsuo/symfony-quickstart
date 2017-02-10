@@ -44,6 +44,15 @@ class Permission
     protected $groups;
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->groups = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return int

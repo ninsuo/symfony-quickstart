@@ -180,6 +180,12 @@ class GroupsController extends BaseController
             ])
             ->add('notes', Type\TextareaType::class, [
                 'label' => 'admin.groups.notes',
+                'required' => false,
+            ])
+            ->add('permission', Type\CheckboxType::class, [
+                'label' => 'admin.groups.create_permission',
+                'required' => false,
+                'mapped' => false,
             ])
             ->add('submit', Type\SubmitType::class, [
                 'label' => 'base.crud.action.save',
@@ -192,6 +198,18 @@ class GroupsController extends BaseController
             $em = $this->get('doctrine')->getManager();
             $em->persist($entity);
             $em->flush();
+
+            if ($form->get('permission')->getData()) {
+                $permission = $this->getManager('BaseBundle:Permission')->findOneByName($entity->getName());
+                if (!$permission) {
+                    $permission = new Permission();
+                    $permission->setName($entity->getName());
+                    $em->persist($permission);
+                    $entity->addPermission($permission);
+                    $em->persist($entity);
+                    $em->flush();
+                }
+            }
 
             $this->success("admin.groups.created");
 
