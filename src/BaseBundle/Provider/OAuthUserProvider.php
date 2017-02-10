@@ -30,12 +30,7 @@ class OAuthUserProvider extends BaseUserProvider
            ->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
 
         if ($user) {
-            if ($user->isAdmin()) {
-                $user->addRole('ROLE_ADMIN');
-            }
-            foreach ($user->getGroups()->toArray() as $group) {
-                $user->addRole('ROLE_GROUP_'.$group->getName());
-            }
+            $this->injectRoles($user);
         }
 
         return $user;
@@ -84,6 +79,27 @@ class OAuthUserProvider extends BaseUserProvider
 
         if ($reload) {
             return $this->loadUserByUsername($json);
+        }
+
+        return $user;
+    }
+
+    protected function injectRoles(User $user)
+    {
+        if ($user->isAdmin()) {
+            $user->addRole('ROLE_ADMIN');
+        }
+
+        // Groupes
+        foreach ($user->getGroups()->toArray() as $group) {
+            foreach ($group->getPermissions() as $permission) {
+                $user->addRole('ROLE_' . $permission->getName());
+            }
+        }
+
+        // Permissions
+        foreach ($user->getPermissions() as $permission) {
+            $user->addRole('ROLE_' . $permission->getName());
         }
 
         return $user;
