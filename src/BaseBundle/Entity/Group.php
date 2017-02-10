@@ -72,7 +72,7 @@ class Group
      */
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->users       = new ArrayCollection();
         $this->permissions = new ArrayCollection();
     }
 
@@ -148,12 +148,13 @@ class Group
      * Add user.
      *
      * @param User $user
+     *
      * @return Group
      */
     public function addUser(User $user)
     {
         if ($this->users->contains($user)) {
-            return ;
+            return;
         }
 
         $this->users->add($user);
@@ -166,12 +167,13 @@ class Group
      * Remove user.
      *
      * @param User $user
+     *
      * @return Group
      */
     public function removeUser(User $user)
     {
         if (!$this->users->contains($user)) {
-            return ;
+            return;
         }
 
         $this->users->removeElement($user);
@@ -194,12 +196,13 @@ class Group
      * Add permission.
      *
      * @param Permission $permission
+     *
      * @return Group
      */
     public function addPermission(Permission $permission)
     {
         if ($this->permissions->contains($permission)) {
-            return ;
+            return;
         }
 
         $this->permissions->add($permission);
@@ -212,12 +215,13 @@ class Group
      * Remove permission.
      *
      * @param Permission $permission
+     *
      * @return Group
      */
     public function removePermission(Permission $permission)
     {
         if (!$this->permissions->contains($permission)) {
-            return ;
+            return;
         }
 
         $this->permissions->removeElement($permission);

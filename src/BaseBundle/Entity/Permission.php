@@ -2,13 +2,13 @@
 
 namespace BaseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Permission
+ * Permission.
  *
  * @ORM\Table(name="permission")
  * @ORM\Entity(repositoryClass="BaseBundle\Repository\PermissionRepository")
@@ -50,12 +50,12 @@ class Permission
      */
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->users  = new ArrayCollection();
         $this->groups = new ArrayCollection();
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -65,7 +65,7 @@ class Permission
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -79,7 +79,7 @@ class Permission
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -106,7 +106,7 @@ class Permission
     public function addUser(User $user)
     {
         if ($this->users->contains($user)) {
-            return ;
+            return;
         }
 
         $this->users->add($user);
@@ -125,7 +125,7 @@ class Permission
     public function removeUser(User $user)
     {
         if (!$this->users->contains($user)) {
-            return ;
+            return;
         }
 
         $this->users->removeElement($user);
@@ -152,7 +152,7 @@ class Permission
     public function addGroup(Group $group)
     {
         if ($this->groups->contains($group)) {
-            return ;
+            return;
         }
 
         $this->groups->add($group);
@@ -171,7 +171,7 @@ class Permission
     public function removeGroup(Group $group)
     {
         if (!$this->groups->contains($group)) {
-            return ;
+            return;
         }
 
         $this->groups->removeElement($group);

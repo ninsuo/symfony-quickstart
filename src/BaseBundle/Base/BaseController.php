@@ -59,7 +59,7 @@ abstract class BaseController extends Controller
             throw new \LogicException("Invalid format of the given doctrine default column: {$prefixedDefaultColumn}.");
         }
 
-        $qbPrefix = substr($prefixedDefaultColumn, 0, strrpos($prefixedDefaultColumn, '.'));
+        $qbPrefix      = substr($prefixedDefaultColumn, 0, strrpos($prefixedDefaultColumn, '.'));
         $defaultColumn = substr($prefixedDefaultColumn, strrpos($prefixedDefaultColumn, '.') + 1);
 
         if (!class_exists($class)) {
@@ -79,8 +79,8 @@ abstract class BaseController extends Controller
         $qb->orderBy($qbPrefix.'.'.$column, $direction);
 
         return [
-            'prefix' => $prefix,
-            'column' => $column,
+            'prefix'    => $prefix,
+            'column'    => $column,
             'direction' => $direction,
         ];
     }

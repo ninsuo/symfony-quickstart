@@ -133,7 +133,7 @@ class User implements UserInterface, EquatableInterface
      */
     public function __construct()
     {
-        $this->groups = new ArrayCollection();
+        $this->groups      = new ArrayCollection();
         $this->permissions = new ArrayCollection();
     }
 
@@ -391,7 +391,7 @@ class User implements UserInterface, EquatableInterface
     public function addGroup(Group $group)
     {
         if ($this->groups->contains($group)) {
-            return ;
+            return;
         }
 
         $this->groups->add($group);
@@ -410,7 +410,7 @@ class User implements UserInterface, EquatableInterface
     public function removeGroup(Group $group)
     {
         if (!$this->groups->contains($group)) {
-            return ;
+            return;
         }
 
         $this->groups->removeElement($group);
@@ -439,7 +439,7 @@ class User implements UserInterface, EquatableInterface
     public function addPermission(Permission $permission)
     {
         if ($this->permissions->contains($permission)) {
-            return ;
+            return;
         }
 
         $this->permissions->add($permission);
@@ -458,7 +458,7 @@ class User implements UserInterface, EquatableInterface
     public function removePermission(Permission $permission)
     {
         if (!$this->permissions->contains($permission)) {
-            return ;
+            return;
         }
 
         $this->permissions->removeElement($permission);

@@ -37,9 +37,9 @@ class LightExtension extends BaseTwigExtension
     public function absoluteUrl($asset)
     {
         $request = $this->get('request_stack')->getMasterRequest();
-        $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
+        $baseurl = $request->getScheme().'://'.$request->getHttpHost().$request->getBasePath();
 
-        return $baseurl . $asset;
+        return $baseurl.$asset;
     }
 
     public function currentRoute()

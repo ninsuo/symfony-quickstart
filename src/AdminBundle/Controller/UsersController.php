@@ -199,9 +199,9 @@ class UsersController extends BaseController
         $user = $this->getEntityById('BaseBundle:User', $id);
 
         return [
-            'user'      => $user,
-            'groupsIn'  => $this->_getUserGroups($request, $id, 'group-in'),
-            'groupsOut' => $this->_getUserGroups($request, $id, 'group-out'),
+            'user'            => $user,
+            'groupsIn'        => $this->_getUserGroups($request, $id, 'group-in'),
+            'groupsOut'       => $this->_getUserGroups($request, $id, 'group-out'),
             'permissionsIn'   => $this->_getUserPermissions($request, $id, 'permission-in'),
             'permissionsOut'  => $this->_getUserPermissions($request, $id, 'permission-out'),
         ];

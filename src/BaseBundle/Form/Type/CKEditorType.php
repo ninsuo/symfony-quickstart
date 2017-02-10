@@ -33,8 +33,8 @@ class CKEditorType extends BaseType
 
         if ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_GROUP_EDITOR')) {
             $config = array_merge($config, [
-                'filebrowserBrowseRoute' => "ckeditor_browse",
-                'filebrowserUploadRoute' => "ckeditor_upload",
+                'filebrowserBrowseRoute' => 'ckeditor_browse',
+                'filebrowserUploadRoute' => 'ckeditor_upload',
             ]);
         }
 

@@ -7,11 +7,11 @@ use BaseBundle\Entity\Group;
 use BaseBundle\Entity\Permission;
 use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\Extension\Core\Type;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -49,39 +49,9 @@ class PermissionsController extends BaseController
 
         return [
             'orderBy' => $this->orderBy($qb, Permission::class, 'p.name'),
-            'pager' => $this->getPager($qb, 'permission-'),
-            'create' => $form,
+            'pager'   => $this->getPager($qb, 'permission-'),
+            'create'  => $form,
         ];
-    }
-
-    protected function getCreateForm(Request $request)
-    {
-        $entity = new Permission();
-
-        $form = $this
-            ->createNamedFormBuilder('create-permission', Type\FormType::class, $entity)
-            ->add('name', Type\TextType::class, [
-                'label' => 'admin.permissions.name',
-                'constraints' => [],
-            ])
-            ->add('submit', Type\SubmitType::class, [
-                'label' => 'base.crud.action.save',
-            ])
-            ->getForm()
-            ->handleRequest($request)
-        ;
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            $this->success("admin.permissions.created");
-
-            return null;
-        }
-
-        return $form->createView();
     }
 
     /**
@@ -99,7 +69,7 @@ class PermissionsController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $this->success("admin.permissions.deleted", ['%id%' => $entity->getId()]);
+        $this->success('admin.permissions.deleted', ['%id%' => $entity->getId()]);
 
         $em = $this->get('doctrine')->getManager();
         $em->remove($entity);
@@ -128,12 +98,12 @@ class PermissionsController extends BaseController
                 'action' => $endpoint,
             ])
             ->add('name', Type\TextType::class, [
-                'label' => 'admin.permissions.name',
+                'label'       => 'admin.permissions.name',
                 'constraints' => [],
             ])
             ->add('submit', Type\SubmitType::class, [
                 'label' => 'base.crud.action.save',
-                'attr' => [
+                'attr'  => [
                     'class' => 'domajax',
                 ],
             ])
@@ -147,7 +117,7 @@ class PermissionsController extends BaseController
             $em->flush();
 
             return [
-                'text' => $entity->getName(),
+                'text'     => $entity->getName(),
                 'endpoint' => $endpoint,
             ];
         }
@@ -167,11 +137,41 @@ class PermissionsController extends BaseController
 
         return [
             'permission' => $permission,
-            'usersIn' => $this->_getPermissionUsers($request, $id, 'user-in'),
-            'usersOut' => $this->_getPermissionUsers($request, $id, 'user-out'),
-            'groupsIn' => $this->_getPermissionGroups($request, $id, 'group-in'),
-            'groupsOut' => $this->_getPermissionGroups($request, $id, 'group-out'),
+            'usersIn'    => $this->_getPermissionUsers($request, $id, 'user-in'),
+            'usersOut'   => $this->_getPermissionUsers($request, $id, 'user-out'),
+            'groupsIn'   => $this->_getPermissionGroups($request, $id, 'group-in'),
+            'groupsOut'  => $this->_getPermissionGroups($request, $id, 'group-out'),
         ];
+    }
+
+    protected function getCreateForm(Request $request)
+    {
+        $entity = new Permission();
+
+        $form = $this
+            ->createNamedFormBuilder('create-permission', Type\FormType::class, $entity)
+            ->add('name', Type\TextType::class, [
+                'label'       => 'admin.permissions.name',
+                'constraints' => [],
+            ])
+            ->add('submit', Type\SubmitType::class, [
+                'label' => 'base.crud.action.save',
+            ])
+            ->getForm()
+            ->handleRequest($request)
+        ;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            $this->success('admin.permissions.created');
+
+            return null;
+        }
+
+        return $form->createView();
     }
 
     protected function _getPermissionUsers(Request $request, $permissionId, $prefix)
@@ -208,7 +208,6 @@ class PermissionsController extends BaseController
     protected function _getPermissionGroups(Request $request, $permissionId, $prefix)
     {
         $filter = $request->query->get("filter-{$prefix}");
-
 
         $qb = $this
             ->getManager()

@@ -25,10 +25,10 @@ class LastRouteListener implements EventSubscriberInterface
 
         $currentRoute = $this->routingHelper->getCurrentRoute($request);
         if (!$currentRoute) {
-            return ;
+            return;
         }
 
-        $session = $request->getSession();
+        $session       = $request->getSession();
         $previousRoute = $session->get('current_route', []);
         if ($currentRoute == $previousRoute) {
             return;
@@ -40,8 +40,8 @@ class LastRouteListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             KernelEvents::REQUEST => [['onKernelRequest', 15]],
-        );
+        ];
     }
 }

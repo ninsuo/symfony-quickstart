@@ -23,21 +23,21 @@ class ToggleController extends BaseController
         $user = $group = $permission = null;
         if ($fromType === 'groups' && $toType === 'users') {
             $group = $this->getEntityById('BaseBundle:Group', $fromId);
-            $user = $this->getEntityById('BaseBundle:User', $toId);
+            $user  = $this->getEntityById('BaseBundle:User', $toId);
         } elseif ($fromType === 'groups' && $toType === 'permissions') {
-            $group = $this->getEntityById('BaseBundle:Group', $fromId);
+            $group      = $this->getEntityById('BaseBundle:Group', $fromId);
             $permission = $this->getEntityById('BaseBundle:Permission', $toId);
         } elseif ($fromType === 'permissions' && $toType === 'groups') {
             $permission = $this->getEntityById('BaseBundle:Permission', $fromId);
-            $group = $this->getEntityById('BaseBundle:Group', $toId);
+            $group      = $this->getEntityById('BaseBundle:Group', $toId);
         } elseif ($fromType === 'permissions' && $toType === 'users') {
             $permission = $this->getEntityById('BaseBundle:Permission', $fromId);
-            $user = $this->getEntityById('BaseBundle:User', $toId);
+            $user       = $this->getEntityById('BaseBundle:User', $toId);
         } elseif ($fromType === 'users' && $toType === 'groups') {
-            $user = $this->getEntityById('BaseBundle:User', $fromId);
+            $user  = $this->getEntityById('BaseBundle:User', $fromId);
             $group = $this->getEntityById('BaseBundle:Group', $toId);
         } elseif ($fromType === 'users' && $toType === 'permissions') {
-            $user = $this->getEntityById('BaseBundle:User', $fromId);
+            $user       = $this->getEntityById('BaseBundle:User', $fromId);
             $permission = $this->getEntityById('BaseBundle:Permission', $toId);
         } else {
             throw $this->createNotFoundException();

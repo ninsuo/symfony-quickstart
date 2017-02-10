@@ -68,7 +68,7 @@ class GroupsController extends BaseController
         $em->remove($entity);
         $em->flush();
 
-        $this->success("admin.groups.deleted", ['%id%' => $entity->getId()]);
+        $this->success('admin.groups.deleted', ['%id%' => $entity->getId()]);
 
         return $this->redirect($this->generateUrl('admin_groups'));
     }
@@ -169,6 +169,23 @@ class GroupsController extends BaseController
         ];
     }
 
+    /**
+     * @Route("/manage/{id}", name="admin_groups_manage")
+     * @Template()
+     */
+    public function manageAction(Request $request, $id)
+    {
+        $group = $this->getEntityById('BaseBundle:Group', $id);
+
+        return [
+            'group'          => $group,
+            'usersIn'        => $this->_getGroupUsers($request, $id, 'user-in'),
+            'usersOut'       => $this->_getGroupUsers($request, $id, 'user-out'),
+            'permissionsIn'  => $this->_getGroupPermissions($request, $id, 'permission-in'),
+            'permissionsOut' => $this->_getGroupPermissions($request, $id, 'permission-out'),
+        ];
+    }
+
     protected function getCreateForm(Request $request)
     {
         $entity = new Group();
@@ -200,10 +217,9 @@ class GroupsController extends BaseController
             $em->persist($entity);
             $em->flush();
 
-            $this->success("admin.groups.created");
+            $this->success('admin.groups.created');
 
             if ($form->get('permission')->getData()) {
-
                 if (in_array(strtoupper($entity->getName()), ['USER', 'ADMIN'])) {
                     $this->alert('admin.groups.permission_error');
                 }
@@ -223,23 +239,6 @@ class GroupsController extends BaseController
         }
 
         return $form->createView();
-    }
-
-    /**
-     * @Route("/manage/{id}", name="admin_groups_manage")
-     * @Template()
-     */
-    public function manageAction(Request $request, $id)
-    {
-        $group = $this->getEntityById('BaseBundle:Group', $id);
-
-        return [
-            'group'          => $group,
-            'usersIn'        => $this->_getGroupUsers($request, $id, 'user-in'),
-            'usersOut'       => $this->_getGroupUsers($request, $id, 'user-out'),
-            'permissionsIn'  => $this->_getGroupPermissions($request, $id, 'permission-in'),
-            'permissionsOut' => $this->_getGroupPermissions($request, $id, 'permission-out'),
-        ];
     }
 
     protected function _getGroupUsers(Request $request, $groupId, $prefix)

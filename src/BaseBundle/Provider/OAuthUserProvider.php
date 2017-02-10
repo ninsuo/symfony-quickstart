@@ -17,8 +17,8 @@ class OAuthUserProvider extends BaseUserProvider
 
     public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, $registrationRestriction)
     {
-        $this->em = $em;
-        $this->translator = $translator;
+        $this->em                      = $em;
+        $this->translator              = $translator;
         $this->registrationRestriction = $registrationRestriction;
     }
 
@@ -47,7 +47,7 @@ class OAuthUserProvider extends BaseUserProvider
         if ($this->registrationRestriction && !preg_match($this->registrationRestriction, $response->getEmail())) {
             throw new AuthenticationException(
                $this->translator->trans('base.error.registration_restriction', [
-                   '%email%' => $response->getEmail()
+                   '%email%' => $response->getEmail(),
                ])
             );
         }
@@ -84,6 +84,11 @@ class OAuthUserProvider extends BaseUserProvider
         return $user;
     }
 
+    public function supportsClass($class)
+    {
+        return $class === 'BaseBundle\\Entity\\User';
+    }
+
     protected function injectRoles(User $user)
     {
         if ($user->isAdmin()) {
@@ -93,20 +98,15 @@ class OAuthUserProvider extends BaseUserProvider
         // Groupes
         foreach ($user->getGroups()->toArray() as $group) {
             foreach ($group->getPermissions() as $permission) {
-                $user->addRole('ROLE_' . $permission->getName());
+                $user->addRole('ROLE_'.$permission->getName());
             }
         }
 
         // Permissions
         foreach ($user->getPermissions() as $permission) {
-            $user->addRole('ROLE_' . $permission->getName());
+            $user->addRole('ROLE_'.$permission->getName());
         }
 
         return $user;
-    }
-
-    public function supportsClass($class)
-    {
-        return $class === 'BaseBundle\\Entity\\User';
     }
 }

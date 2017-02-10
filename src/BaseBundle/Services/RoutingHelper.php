@@ -14,7 +14,7 @@ class RoutingHelper extends BaseService
         $request = $this->get('request_stack')->getMasterRequest();
 
         if ($request->get('_route')[0] == '_') {
-            return ;
+            return;
         }
 
         return [

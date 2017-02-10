@@ -15,9 +15,10 @@ class Security extends BaseSecurity
     /**
      * This method is used to store a real entity and not a doctrine proxy
      * on the tokenstorage (they internally do a get_class and if the entity
-     * was lazily loaded, it will be an instance of a proxy)
+     * was lazily loaded, it will be an instance of a proxy).
      *
      * @param mixed $proxy
+     *
      * @return mixed
      */
     public function getRealEntity($proxy)
