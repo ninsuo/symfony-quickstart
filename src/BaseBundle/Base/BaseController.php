@@ -59,8 +59,8 @@ abstract class BaseController extends Controller
             throw new \LogicException("Invalid format of the given doctrine default column: {$prefixedDefaultColumn}.");
         }
 
-        $qbPrefix = substr($prefixedDefaultColumn, 0, strpos($prefixedDefaultColumn, '.'));
-        $defaultColumn = substr($prefixedDefaultColumn, strpos($prefixedDefaultColumn, '.') + 1);
+        $qbPrefix = substr($prefixedDefaultColumn, 0, strrpos($prefixedDefaultColumn, '.'));
+        $defaultColumn = substr($prefixedDefaultColumn, strrpos($prefixedDefaultColumn, '.') + 1);
 
         if (!class_exists($class)) {
             throw new \LogicException("Class '$class' not found.");

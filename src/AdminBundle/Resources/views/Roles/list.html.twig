@@ -35,6 +35,10 @@
                         </td>
                         <td>
                             <a
+                                href="{{ path('admin_roles_manage', {id: role.id}) }}"
+                                class="btn btn-warning btn-sm">{{ 'admin.roles.manage' | trans }}</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a
                                 href="{{ path('admin_roles_delete', {id: role.id, token: csrf_token('admin_roles')}) }}"
                                 data-message="{{ 'admin.roles.delete_confirm' | trans({'%id%': role.id}) | e('html_attr') }}"
                                 class="requires-confirmation btn btn-danger btn-sm">{{ 'admin.roles.delete' | trans }}</a>

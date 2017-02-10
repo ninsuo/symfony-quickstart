@@ -201,4 +201,83 @@ class GroupsController extends BaseController
 
         return $form->createView();
     }
+
+    /**
+     * @Route("/manage/{id}", name="admin_groups_manage")
+     * @Template()
+     */
+    public function manageAction(Request $request, $id)
+    {
+        $group = $this->getEntityById('BaseBundle:Group', $id);
+
+        return [
+            'group'    => $group,
+            'usersIn'  => $this->_getGroupUsers($request, $id, 'user-in'),
+            'usersOut' => $this->_getGroupUsers($request, $id, 'user-out'),
+            'rolesIn'  => $this->_getGroupRoles($request, $id, 'role-in'),
+            'rolesOut' => $this->_getGroupRoles($request, $id, 'role-out'),
+        ];
+    }
+
+    protected function _getGroupUsers(Request $request, $groupId, $prefix)
+    {
+        $filter = $request->query->get("filter-{$prefix}");
+
+        $qb = $this
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('u')
+           ->from(User::class, 'u')
+           ->setParameter('groupId', $groupId)
+        ;
+
+        if ('user-in' == $prefix) {
+            $qb->where(':groupId MEMBER OF u.groups');
+        } else {
+            $qb->where(':groupId NOT MEMBER OF u.groups');
+        }
+
+        if ($filter) {
+            $qb
+               ->andWhere('u.nickname LIKE :criteria OR u.contact LIKE :criteria')
+               ->setParameter('criteria', '%'.$filter.'%')
+            ;
+        }
+
+        return [
+            'order' => $this->orderBy($qb, User::class, 'u.nickname', 'ASC', $prefix),
+            'pager' => $this->getPager($qb, $prefix),
+        ];
+    }
+
+    protected function _getGroupRoles(Request $request, $groupId, $prefix)
+    {
+        $filter = $request->query->get("filter-{$prefix}");
+
+        $qb = $this
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('r')
+           ->from(Role::class, 'r')
+           ->setParameter('groupId', $groupId)
+        ;
+
+        if ('role-in' == $prefix) {
+            $qb->where(':groupId MEMBER OF r.groups');
+        } else {
+            $qb->where(':groupId NOT MEMBER OF r.groups');
+        }
+
+        if ($filter) {
+            $qb
+               ->andWhere('r.name LIKE :criteria')
+               ->setParameter('criteria', '%'.$filter.'%')
+            ;
+        }
+
+        return [
+            'order' => $this->orderBy($qb, Group::class, 'r.name', 'ASC', $prefix),
+            'pager' => $this->getPager($qb, $prefix),
+        ];
+    }
 }

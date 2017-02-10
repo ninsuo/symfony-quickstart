@@ -5,6 +5,7 @@ namespace BaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Role
@@ -31,6 +32,16 @@ class Role
      * @Assert\NotBlank
      */
     protected $name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="permissions")
+     */
+    protected $users;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="permissions")
+     */
+    protected $groups;
 
     /**
      * Get id
@@ -65,5 +76,20 @@ class Role
     {
         return $this->name;
     }
-}
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+}

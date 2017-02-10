@@ -55,7 +55,7 @@ class Group
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Role", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Role", cascade={"persist", "remove"}, inversedBy="groups")
      * @ORM\JoinTable(name="groups_roles",
      *     joinColumns={
      *         @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")

@@ -3,7 +3,9 @@
 namespace AdminBundle\Controller;
 
 use AppBundle\Base\BaseController;
+use BaseBundle\Entity\Group;
 use BaseBundle\Entity\Role;
+use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -152,6 +154,86 @@ class RolesController extends BaseController
 
         return [
             'form' => $form->createView(),
+        ];
+    }
+
+    /**
+     * @Route("/manage/{id}", name="admin_roles_manage")
+     * @Template()
+     */
+    public function manageAction(Request $request, $id)
+    {
+        $role = $this->getEntityById('BaseBundle:Role', $id);
+
+        return [
+            'role' => $role,
+            'usersIn' => $this->_getRoleUsers($request, $id, 'user-in'),
+            'usersOut' => $this->_getRoleUsers($request, $id, 'user-out'),
+            'groupsIn' => $this->_getRoleGroups($request, $id, 'group-in'),
+            'groupsOut' => $this->_getRoleGroups($request, $id, 'group-out'),
+        ];
+    }
+
+    protected function _getRoleUsers(Request $request, $roleId, $prefix)
+    {
+        $filter = $request->query->get("filter-{$prefix}");
+
+        $qb = $this
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('u')
+           ->from(User::class, 'u')
+           ->setParameter('roleId', $roleId)
+        ;
+
+        if ('user-in' == $prefix) {
+            $qb->where(':roleId MEMBER OF u.permissions');
+        } else {
+            $qb->where(':roleId NOT MEMBER u.permissions');
+        }
+
+        if ($filter) {
+            $qb
+               ->andWhere('u.nickname LIKE :criteria OR u.contact LIKE :criteria')
+               ->setParameter('criteria', '%'.$filter.'%')
+            ;
+        }
+
+        return [
+            'order' => $this->orderBy($qb, Role::class, 'u.nickname', 'ASC', $prefix),
+            'pager' => $this->getPager($qb, $prefix),
+        ];
+    }
+
+    protected function _getRoleGroups(Request $request, $roleId, $prefix)
+    {
+        $filter = $request->query->get("filter-{$prefix}");
+
+
+        $qb = $this
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('g')
+           ->from(Group::class, 'g')
+           ->setParameter('roleId', $roleId)
+        ;
+
+        if ('group-in' == $prefix) {
+            $qb->where(':roleId MEMBER OF g.permissions');
+        } else {
+            $qb->where(':roleId NOT MEMBER OF g.permissions');
+        }
+
+        if ($filter) {
+            $qb
+               ->andWhere('g.name LIKE :criteria')
+               ->setParameter('criteria', '%'.$filter.'%')
+            ;
+        }
+
+        return [
+            'order' => $this->orderBy($qb, Group::class, 'g.name', 'ASC', $prefix),
+            'pager' => $this->getPager($qb, $prefix),
         ];
     }
 }

@@ -1,0 +1,37 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{ 'admin.groups_manage.title' | trans({'%name%': group.name}) }}{% endblock %}
+
+{% block body %}
+
+    {% import 'AdminBundle:Users:macros.html.twig' as usersMacros %}
+    {% import 'AdminBundle:Roles:macros.html.twig' as rolesMacros %}
+
+    <h2>{{ 'admin.groups_manage.users'|trans }}</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ usersMacros.displayUsers('groups', group.id, group.name, usersIn, 'in') }}
+        </div>
+        <div class="col-md-6">
+            {{ usersMacros.displayUsers('groups', group.id, group.name, usersOut, 'out') }}
+        </div>
+    </div>
+
+    <hr/>
+
+    <h2>{{ 'admin.groups_manage.roles'|trans }}</h2>
+    <div class="row">
+        <div class="col-md-6">
+            {{ rolesMacros.displayRoles('groups', group.id, group.name, rolesIn, 'in') }}
+        </div>
+        <div class="col-md-6">
+            {{ rolesMacros.displayRoles('groups', group.id, group.name, rolesOut, 'out') }}
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ path('admin_groups') }}">{{ 'base.button.back' | trans }}</a>
+    </div>
+
+{% endblock %}

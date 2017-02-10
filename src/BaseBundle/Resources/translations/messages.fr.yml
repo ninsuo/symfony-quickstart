@@ -1,7 +1,9 @@
 base:
     button:
+        add: 'Ajouter'
         back: 'Retour'
         home: 'Retour à l''accueil'
+        remove: 'Retirer'
     changepassword:
         title: 'Changer de mot de passe'
     ckeditor:

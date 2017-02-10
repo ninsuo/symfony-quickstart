@@ -4,16 +4,16 @@
 
 {% block body %}
 
-    {% import 'AdminBundle:Groups:macros.html.twig' as groupMacros %}
+    {% import 'AdminBundle:Groups:macros.html.twig' as groupsMacros %}
     {% import 'AdminBundle:Roles:macros.html.twig' as rolesMacros %}
 
     <h2>{{ 'admin.users_manage.groups'|trans }}</h2>
     <div class="row">
         <div class="col-md-6">
-            {{ groupMacros.displayGroups('users', user.id, user.nickname, groupsIn, 'in') }}
+            {{ groupsMacros.displayGroups('users', user.id, user.nickname, groupsIn, 'in') }}
         </div>
         <div class="col-md-6">
-            {{ groupMacros.displayGroups('users', user.id, user.nickname, groupsOut, 'out') }}
+            {{ groupsMacros.displayGroups('users', user.id, user.nickname, groupsOut, 'out') }}
         </div>
     </div>
 
