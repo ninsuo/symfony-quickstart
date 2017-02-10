@@ -61,3 +61,28 @@
     {{ macros.form(create, [], 'admin.groups.create' | trans) }}
 
 {% endblock %}
+
+{% block script %}
+
+    <script type="text/javascript">
+        $(function() {
+            var checkbox = $('#{{ create.permission.vars.id }}');
+            var label = checkbox.closest('label');
+            var text = $('#{{ create.name.vars.id }}');
+            var content = label.html();
+
+            function permissionCheckbox() {
+                !text.val().length ? label.addClass('hide') : label.removeClass('hide');
+                label.html(content.replace('|placeholder|', text.val()));
+            }
+
+            permissionCheckbox();
+
+            text.on('keyup', function() {
+                permissionCheckbox();
+            });
+        });
+    </script>
+
+
+{% endblock %}
