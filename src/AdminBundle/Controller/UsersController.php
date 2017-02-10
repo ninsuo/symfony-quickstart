@@ -4,7 +4,7 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\Group;
-use BaseBundle\Entity\Role;
+use BaseBundle\Entity\Permission;
 use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -202,8 +202,8 @@ class UsersController extends BaseController
             'user'      => $user,
             'groupsIn'  => $this->_getUserGroups($request, $id, 'group-in'),
             'groupsOut' => $this->_getUserGroups($request, $id, 'group-out'),
-            'rolesIn'   => $this->_getUserRoles($request, $id, 'role-in'),
-            'rolesOut'  => $this->_getUserRoles($request, $id, 'role-out'),
+            'permissionsIn'   => $this->_getUserPermissions($request, $id, 'permission-in'),
+            'permissionsOut'  => $this->_getUserPermissions($request, $id, 'permission-out'),
         ];
     }
 
@@ -238,40 +238,33 @@ class UsersController extends BaseController
         ];
     }
 
-    protected function _getUserRoles(Request $request, $userId, $prefix)
+    protected function _getUserPermissions(Request $request, $userId, $prefix)
     {
         $filter = $request->query->get("filter-{$prefix}");
-
-        $not = null;
-        if ('role-out' == $prefix) {
-            $not = 'NOT';
-        }
 
         $qb = $this
            ->getManager()
            ->createQueryBuilder()
-           ->select('r')
-           ->from(Role::class, 'r')
-           ->where("
-               r.id {$not} IN (
-                   SELECT p.id
-                   FROM ".User::class." u
-                   JOIN u.permissions p
-                   WHERE u.id = :userId
-               )
-           ")
+           ->select('p')
+           ->from(Permission::class, 'p')
            ->setParameter('userId', $userId)
         ;
 
+        if ('permission-in' == $prefix) {
+            $qb->where(':userId MEMBER OF p.users');
+        } else {
+            $qb->where(':userId NOT MEMBER OF p.users');
+        }
+
         if ($filter) {
             $qb
-               ->andWhere('r.name LIKE :criteria')
+               ->andWhere('p.name LIKE :criteria')
                ->setParameter('criteria', '%'.$filter.'%')
             ;
         }
 
         return [
-            'order' => $this->orderBy($qb, Group::class, 'r.name', 'ASC', $prefix),
+            'order' => $this->orderBy($qb, Permission::class, 'p.name', 'ASC', $prefix),
             'pager' => $this->getPager($qb, $prefix),
         ];
     }

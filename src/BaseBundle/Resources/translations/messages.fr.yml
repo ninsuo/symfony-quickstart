@@ -67,7 +67,7 @@ base:
             main: Administration
             users: Gestion des utilisateurs
             groups: Gestion des groupes
-            roles: Gestion des rôles
+            permissions: Gestion des permissions
     nav: 'Afficher/Masquer le menu'
     pager:
         prev: '← Précédent'

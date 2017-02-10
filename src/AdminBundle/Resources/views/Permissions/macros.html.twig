@@ -1,0 +1,45 @@
+{% macro displayPermissions(type, id, name, data, prefix) %}
+
+    {% import 'BaseBundle::macros.html.twig' as macros %}
+
+    <div class="well">
+
+        <h3>{{ ('admin.' ~ type ~ '_manage.permissions_' ~ prefix)|trans({'%name%': name}) }}</h3>
+
+        {{ macros.search('filter-permission-' ~ prefix) }}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.permissions.id') }}</th>
+                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.permissions.name') }}</th>
+                    <th style="width: 30%;">{{ 'admin.permissions.actions' | trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for permission in data.pager.currentPageResults %}
+                    <tr>
+                        <td>{{ permission.id }}</td>
+                        <td>{{ permission.name }}</td>
+                        <td>
+                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'permissions', toId: permission.id, token: csrf_token('administration')})) %}
+                            {% if prefix == 'in' %}
+                                <a
+                                    href="{{ path }}"
+                                    class="btn btn-danger btn-sm">{{ 'base.button.remove'|trans }}</a>
+                            {% else %}
+                                <a
+                                    href="{{ path }}"
+                                    class="btn btn-success btn-sm">{{ 'base.button.add'|trans }}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {{ macros.pager(data.pager, 'permission-' ~ prefix) }}
+
+    </div>
+
+{% endmacro %}

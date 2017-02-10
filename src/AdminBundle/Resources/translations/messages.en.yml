@@ -10,15 +10,15 @@ admin:
         delete: Delete
         delete_confirm: Are you sure that you want to remouve group "%group%"?
         deleted: 'Group #%id% removed successfully.'
-        manage: Users & Roles
+        manage: Users & Permissions
     groups_manage:
         users: Users
-        roles: Roles
-        title: %name%'s users and roles
+        permissions: Permissions
+        title: %name%'s users and permissions
         users_in: "%name%'s users:"
         users_out: "Other users:"
-        roles_in: "%name%'s roles:"
-        roles_out: "Other roles:"
+        permissions_in: "%name%'s permissions:"
+        permissions_out: "Other permissions:"
     users:
         id: ID
         network: Network
@@ -27,36 +27,36 @@ admin:
         admin: Admin
         frozen: Frozen
         actions: Actions
-        manage: Groups & Roles
+        manage: Groups & Permissions
     users_manage:
         groups: Groups
-        roles: Roles
-        title: %name%'s groups and roles
+        permissions: Permissions
+        title: %name%'s groups and permissions
         groups_in: "%name%'s groups:"
         groups_out: "Other groups:"
-        roles_in: "%name%'s roles:"
-        roles_out: "Other roles:"
+        permissions_in: "%name%'s permissions:"
+        permissions_out: "Other permissions:"
     groups_users:
         title: Members in group %name%
         in: 'Members in %name%:'
         out: "Members not in %name%:"
         add: Add in group
         remove: Remove from group
-    roles:
+    permissions:
         actions: Actions
-        create: Create new role
-        created: New role created successfully.
+        create: Create new permission
+        created: New permission created successfully.
         delete: Remove
-        delete_confirm: 'Are you sure you want to remove Role #%id%?'
-        deleted: 'Role #%id% removed successfully.'
+        delete_confirm: 'Are you sure you want to remove Permission #%id%?'
+        deleted: 'Permission #%id% removed successfully.'
         id: Id
         name: Name
         manage: Users & Groups
-    roles_manage:
+    permissions_manage:
         users: Users
         groups: Groups
-        title: 'Users & groups having role %name%'
-        users_in: "Users having role %name%:"
+        title: 'Users & groups having permission %name%'
+        users_in: "Users having permission %name%:"
         users_out: "Other users:"
-        groups_in: "Groups having role %name%:"
+        groups_in: "Groups having permission %name%:"
         groups_out: "Other groups:"

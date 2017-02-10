@@ -4,7 +4,7 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Base\BaseController;
 use BaseBundle\Entity\Group;
-use BaseBundle\Entity\Role;
+use BaseBundle\Entity\Permission;
 use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -62,7 +62,6 @@ class GroupsController extends BaseController
             throw $this->createNotFoundException();
         }
 
-        $this->getUser()->removeRole('ROLE_GROUP_'.$entity->getName());
         $this->get('security')->login($this->getUser());
 
         $em = $this->get('doctrine')->getManager();
@@ -214,8 +213,8 @@ class GroupsController extends BaseController
             'group'    => $group,
             'usersIn'  => $this->_getGroupUsers($request, $id, 'user-in'),
             'usersOut' => $this->_getGroupUsers($request, $id, 'user-out'),
-            'rolesIn'  => $this->_getGroupRoles($request, $id, 'role-in'),
-            'rolesOut' => $this->_getGroupRoles($request, $id, 'role-out'),
+            'permissionsIn'  => $this->_getGroupPermissions($request, $id, 'permission-in'),
+            'permissionsOut' => $this->_getGroupPermissions($request, $id, 'permission-out'),
         ];
     }
 
@@ -250,33 +249,33 @@ class GroupsController extends BaseController
         ];
     }
 
-    protected function _getGroupRoles(Request $request, $groupId, $prefix)
+    protected function _getGroupPermissions(Request $request, $groupId, $prefix)
     {
         $filter = $request->query->get("filter-{$prefix}");
 
         $qb = $this
            ->getManager()
            ->createQueryBuilder()
-           ->select('r')
-           ->from(Role::class, 'r')
+           ->select('p')
+           ->from(Permission::class, 'p')
            ->setParameter('groupId', $groupId)
         ;
 
-        if ('role-in' == $prefix) {
-            $qb->where(':groupId MEMBER OF r.groups');
+        if ('permission-in' == $prefix) {
+            $qb->where(':groupId MEMBER OF p.groups');
         } else {
-            $qb->where(':groupId NOT MEMBER OF r.groups');
+            $qb->where(':groupId NOT MEMBER OF p.groups');
         }
 
         if ($filter) {
             $qb
-               ->andWhere('r.name LIKE :criteria')
+               ->andWhere('p.name LIKE :criteria')
                ->setParameter('criteria', '%'.$filter.'%')
             ;
         }
 
         return [
-            'order' => $this->orderBy($qb, Group::class, 'r.name', 'ASC', $prefix),
+            'order' => $this->orderBy($qb, Permission::class, 'p.name', 'ASC', $prefix),
             'pager' => $this->getPager($qb, $prefix),
         ];
     }

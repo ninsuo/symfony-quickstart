@@ -5,7 +5,7 @@
 {% block body %}
 
     {% import 'AdminBundle:Users:macros.html.twig' as usersMacros %}
-    {% import 'AdminBundle:Roles:macros.html.twig' as rolesMacros %}
+    {% import 'AdminBundle:Permissions:macros.html.twig' as permissionsMacros %}
 
     <h2>{{ 'admin.groups_manage.users'|trans }}</h2>
 
@@ -20,13 +20,13 @@
 
     <hr/>
 
-    <h2>{{ 'admin.groups_manage.roles'|trans }}</h2>
+    <h2>{{ 'admin.groups_manage.permissions'|trans }}</h2>
     <div class="row">
         <div class="col-md-6">
-            {{ rolesMacros.displayRoles('groups', group.id, group.name, rolesIn, 'in') }}
+            {{ permissionsMacros.displayPermissions('groups', group.id, group.name, permissionsIn, 'in') }}
         </div>
         <div class="col-md-6">
-            {{ rolesMacros.displayRoles('groups', group.id, group.name, rolesOut, 'out') }}
+            {{ permissionsMacros.displayPermissions('groups', group.id, group.name, permissionsOut, 'out') }}
         </div>
     </div>
 

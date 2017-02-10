@@ -8,13 +8,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Role
+ * Permission
  *
- * @ORM\Table(name="role")
- * @ORM\Entity(repositoryClass="BaseBundle\Repository\RoleRepository")
+ * @ORM\Table(name="permission")
+ * @ORM\Entity(repositoryClass="BaseBundle\Repository\PermissionRepository")
  * @UniqueEntity("name")
  */
-class Role
+class Permission
 {
     /**
      * @var int

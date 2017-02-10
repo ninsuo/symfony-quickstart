@@ -101,13 +101,13 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Role", cascade={"persist", "remove"}, inversedBy="users")
-     * @ORM\JoinTable(name="users_roles",
+     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="users")
+     * @ORM\JoinTable(name="users_permissions",
      *     joinColumns={
      *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *     },
      *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="role_id", referencedColumnName="id", onDelete="CASCADE")
+     *         @ORM\JoinColumn(name="permission_id", referencedColumnName="id", onDelete="CASCADE")
      *     }
      * )
      */
