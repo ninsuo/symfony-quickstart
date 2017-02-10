@@ -382,6 +382,44 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
+     * Add group.
+     *
+     * @param Group $group
+     *
+     * @return User
+     */
+    public function addGroup(Group $group)
+    {
+        if ($this->groups->contains($group)) {
+            return ;
+        }
+
+        $this->groups->add($group);
+        $group->addUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove group.
+     *
+     * @param Group $group
+     *
+     * @return User
+     */
+    public function removeGroup(Group $group)
+    {
+        if (!$this->groups->contains($group)) {
+            return ;
+        }
+
+        $this->groups->removeElement($group);
+        $group->removeUser($this);
+
+        return $this;
+    }
+
+    /**
      * Get permissions.
      *
      * @return ArrayCollection
@@ -389,6 +427,44 @@ class User implements UserInterface, EquatableInterface
     public function getPermissions()
     {
         return $this->permissions;
+    }
+
+    /**
+     * Add permission.
+     *
+     * @param Permission $permission
+     *
+     * @return User
+     */
+    public function addPermission(Permission $permission)
+    {
+        if ($this->permissions->contains($permission)) {
+            return ;
+        }
+
+        $this->permissions->add($permission);
+        $permission->addUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove permission.
+     *
+     * @param Permission $permission
+     *
+     * @return User
+     */
+    public function removePermission(Permission $permission)
+    {
+        if (!$this->permissions->contains($permission)) {
+            return ;
+        }
+
+        $this->permissions->removeElement($permission);
+        $permission->removeUser($this);
+
+        return $this;
     }
 
     /**

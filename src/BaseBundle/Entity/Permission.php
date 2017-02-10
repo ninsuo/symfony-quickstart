@@ -58,7 +58,7 @@ class Permission
      *
      * @param string $name
      *
-     * @return Role
+     * @return Permission
      */
     public function setName($name)
     {
@@ -86,10 +86,86 @@ class Permission
     }
 
     /**
+     * Add user.
+     *
+     * @param User $user
+     *
+     * @return Permission
+     */
+    public function addUser(User $user)
+    {
+        if ($this->users->contains($user)) {
+            return ;
+        }
+
+        $this->users->add($user);
+        $user->addPermission($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove user.
+     *
+     * @param User $user
+     *
+     * @return Permission
+     */
+    public function removeUser(User $user)
+    {
+        if (!$this->users->contains($user)) {
+            return ;
+        }
+
+        $this->users->removeElement($user);
+        $user->removePermission($this);
+
+        return $this;
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getGroups()
     {
         return $this->groups;
+    }
+
+    /**
+     * Add group.
+     *
+     * @param Group $group
+     *
+     * @return Permission
+     */
+    public function addGroup(Group $group)
+    {
+        if ($this->groups->contains($group)) {
+            return ;
+        }
+
+        $this->groups->add($group);
+        $group->addPermission($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove group.
+     *
+     * @param Group $group
+     *
+     * @return Permission
+     */
+    public function removeGroup(Group $group)
+    {
+        if (!$this->groups->contains($group)) {
+            return ;
+        }
+
+        $this->groups->removeElement($group);
+        $group->removePermission($this);
+
+        return $this;
     }
 }
