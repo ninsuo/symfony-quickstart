@@ -30,6 +30,8 @@ class Permission
      *
      * @ORM\Column(name="name", type="string", length=64, unique=true)
      * @Assert\NotBlank
+     * @Assert\Regex("/^USER$/i", match=false)
+     * @Assert\Regex("/^ADMIN$/i", match=false)
      */
     protected $name;
 

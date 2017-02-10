@@ -12,6 +12,7 @@ admin:
         deleted: 'Group #%id% removed successfully.'
         create_permission: 'Create and associate |placeholder| permission automatically.'
         manage: Users & Permissions
+        permission_error: "Unable to create the associated permission for this group (USER and ADMIN are reserved)."
     groups_manage:
         users: Users
         permissions: Permissions

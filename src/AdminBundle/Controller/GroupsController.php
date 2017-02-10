@@ -199,7 +199,14 @@ class GroupsController extends BaseController
             $em->persist($entity);
             $em->flush();
 
+            $this->success("admin.groups.created");
+
             if ($form->get('permission')->getData()) {
+
+                if (in_array(strtoupper($entity->getName()), ['USER', 'ADMIN'])) {
+                    $this->alert('admin.groups.permission_error');
+                }
+
                 $permission = $this->getManager('BaseBundle:Permission')->findOneByName($entity->getName());
                 if (!$permission) {
                     $permission = new Permission();
@@ -210,8 +217,6 @@ class GroupsController extends BaseController
                     $em->flush();
                 }
             }
-
-            $this->success("admin.groups.created");
 
             $this->redirect('admin_groups');
         }
