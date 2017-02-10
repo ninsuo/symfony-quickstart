@@ -27,23 +27,23 @@ class GroupsController extends BaseController
         $filter = $request->query->get('filter');
 
         $qb = $this
-            ->getManager()
-            ->createQueryBuilder()
-            ->select('g')
-            ->from(Group::class, 'g')
-         ;
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('g')
+           ->from(Group::class, 'g')
+        ;
 
         if ($filter) {
             $qb
-                ->where('g.name LIKE :criteria OR g.notes LIKE :criteria')
-                ->setParameter('criteria', '%'.$filter.'%')
+               ->where('g.name LIKE :criteria OR g.notes LIKE :criteria')
+               ->setParameter('criteria', '%'.$filter.'%')
             ;
         }
 
         return [
             'orderBy' => $this->orderBy($qb, Group::class, 'g.name'),
-            'pager'  => $this->getPager($qb),
-            'create' => $this->getCreateForm($request),
+            'pager'   => $this->getPager($qb),
+            'create'  => $this->getCreateForm($request),
         ];
     }
 
@@ -89,20 +89,20 @@ class GroupsController extends BaseController
         $endpoint = $this->generateUrl('_admin_groups_edit_name', ['id' => $id]);
 
         $form = $this
-            ->createNamedFormBuilder("edit-name-{$id}", Type\FormType::class, $entity, [
-                'action' => $endpoint,
-            ])
-            ->add('name', Type\TextType::class, [
-                'label' => 'admin.groups.name',
-            ])
-            ->add('submit', Type\SubmitType::class, [
-                'label' => 'base.crud.action.save',
-                'attr'  => [
-                    'class' => 'domajax',
-                ],
-            ])
-            ->getForm()
-            ->handleRequest($request)
+           ->createNamedFormBuilder("edit-name-{$id}", Type\FormType::class, $entity, [
+               'action' => $endpoint,
+           ])
+           ->add('name', Type\TextType::class, [
+               'label' => 'admin.groups.name',
+           ])
+           ->add('submit', Type\SubmitType::class, [
+               'label' => 'base.crud.action.save',
+               'attr'  => [
+                   'class' => 'domajax',
+               ],
+           ])
+           ->getForm()
+           ->handleRequest($request)
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -137,20 +137,20 @@ class GroupsController extends BaseController
         $endpoint = $this->generateUrl('_admin_groups_edit_notes', ['id' => $id]);
 
         $form = $this
-            ->createNamedFormBuilder("edit-notes-{$id}", Type\FormType::class, $entity, [
-                'action' => $endpoint,
-            ])
-            ->add('notes', Type\TextareaType::class, [
-                'label' => 'admin.groups.notes',
-            ])
-            ->add('submit', Type\SubmitType::class, [
-                'label' => 'base.crud.action.save',
-                'attr'  => [
-                    'class' => 'domajax',
-                ],
-            ])
-            ->getForm()
-            ->handleRequest($request)
+           ->createNamedFormBuilder("edit-notes-{$id}", Type\FormType::class, $entity, [
+               'action' => $endpoint,
+           ])
+           ->add('notes', Type\TextareaType::class, [
+               'label' => 'admin.groups.notes',
+           ])
+           ->add('submit', Type\SubmitType::class, [
+               'label' => 'base.crud.action.save',
+               'attr'  => [
+                   'class' => 'domajax',
+               ],
+           ])
+           ->getForm()
+           ->handleRequest($request)
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -174,24 +174,25 @@ class GroupsController extends BaseController
         $entity = new Group();
 
         $form = $this
-            ->createNamedFormBuilder('create-group', Type\FormType::class, $entity)
-            ->add('name', Type\TextType::class, [
-                'label' => 'admin.groups.name',
-            ])
-            ->add('notes', Type\TextareaType::class, [
-                'label' => 'admin.groups.notes',
-                'required' => false,
-            ])
-            ->add('permission', Type\CheckboxType::class, [
-                'label' => 'admin.groups.create_permission',
-                'required' => false,
-                'mapped' => false,
-            ])
-            ->add('submit', Type\SubmitType::class, [
-                'label' => 'base.crud.action.save',
-            ])
-            ->getForm()
-            ->handleRequest($request)
+           ->createNamedFormBuilder('create-group', Type\FormType::class, $entity)
+           ->add('name', Type\TextType::class, [
+               'label' => 'admin.groups.name',
+           ])
+           ->add('notes', Type\TextareaType::class, [
+               'label'    => 'admin.groups.notes',
+               'required' => false,
+           ])
+           ->add('permission', Type\CheckboxType::class, [
+               'label'    => 'admin.groups.create_permission',
+               'required' => false,
+               'mapped'   => false,
+               'data'     => true,
+           ])
+           ->add('submit', Type\SubmitType::class, [
+               'label' => 'base.crud.action.save',
+           ])
+           ->getForm()
+           ->handleRequest($request)
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -233,9 +234,9 @@ class GroupsController extends BaseController
         $group = $this->getEntityById('BaseBundle:Group', $id);
 
         return [
-            'group'    => $group,
-            'usersIn'  => $this->_getGroupUsers($request, $id, 'user-in'),
-            'usersOut' => $this->_getGroupUsers($request, $id, 'user-out'),
+            'group'          => $group,
+            'usersIn'        => $this->_getGroupUsers($request, $id, 'user-in'),
+            'usersOut'       => $this->_getGroupUsers($request, $id, 'user-out'),
             'permissionsIn'  => $this->_getGroupPermissions($request, $id, 'permission-in'),
             'permissionsOut' => $this->_getGroupPermissions($request, $id, 'permission-out'),
         ];
