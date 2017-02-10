@@ -26,11 +26,11 @@
                             {% if prefix == 'in' %}
                                 <a
                                     href="{{ path }}"
-                                    class="btn btn-danger btn-sm">{{ ('admin.' ~ type ~ '_manage.groups_remove')|trans }}</a>
+                                    class="btn btn-danger btn-sm">{{ ('admin.groups.remove_from')|trans }}</a>
                             {% else %}
                                 <a
                                     href="{{ path }}"
-                                    class="btn btn-success btn-sm">{{ ('admin.' ~ type ~ '_manage.groups_add')|trans }}</a>
+                                    class="btn btn-success btn-sm">{{ ('admin.groups.add_in')|trans }}</a>
                             {% endif %}
                         </td>
                     </tr>

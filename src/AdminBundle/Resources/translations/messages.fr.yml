@@ -11,6 +11,8 @@ admin:
         delete_confirm: Voulez-vous vraiment supprimer le groupe "%group%" ?
         deleted: 'Groupe #%id% supprimé avec succès.'
         manage: Gérer les membres du groupe
+        add_in: Ajouter dans ce groupe
+        remove_from: Retirer de ce groupe
     users:
         id: ID
         network: Réseau
@@ -24,21 +26,17 @@ admin:
         groups: Groupes
         roles: Rôles
         title: Groupes et rôles de %name%
-        groups_in: 'Groupes dans lequel est %name% :'
-        groups_out: "Groupes dans lequel %name% n'est pas :"
-        roles_in: 'Rôles que %name% possède :'
-        roles_out: "Rôles que %name% ne possède pas :"
-        groups_add: Ajouter dans ce groupe
-        groups_remove: Retirer de ce groupe
-        roles_add: Ajouter ce rôle
-        roles_remove: Retirer ce rôle
+        groups_in: 'Groupes de %name% :'
+        groups_out: "Autres groupes :"
+        roles_in: 'Rôles de %name% :'
+        roles_out: "Autres rôles :"
     groups_users:
         title: Membres dans le groupe %name%
         in: 'Membres de %name% :'
         out: "Non membres de %name% :"
         add: Ajouter dans ce groupe
         remove: Retirer de ce groupe
-    role:
+    roles:
         actions: Actions
         create: Créer un nouveau rôle
         created: Rôle créé avec succès
@@ -48,3 +46,5 @@ admin:
         id: Id
         manage: Gestion des groupes
         name: Nom
+        add_to: Ajouter ce rôle
+        remove_from: Retirer ce rôle

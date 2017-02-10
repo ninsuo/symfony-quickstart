@@ -11,6 +11,8 @@ admin:
         delete_confirm: Are you sure that you want to remouve group "%group%"?
         deleted: 'Group #%id% removed successfully.'
         manage: Manage group members
+        add_in: Add in group
+        remove_from: Remove from group
     users:
         id: ID
         network: Network
@@ -26,12 +28,8 @@ admin:
         title: %name%'s groups and roles
         groups_in: "%name%'s groups:"
         groups_out: "Other groups:"
-        groups_add: Add in group
-        groups_remove: Remove from group
         roles_in: "%name%'s roles:"
         roles_out: "Other roles:"
-        roles_add: Add this role
-        roles_remove: Remove this role
     groups_users:
         title: Members in group %name%
         in: 'Members in %name%:'
@@ -48,4 +46,5 @@ admin:
         id: Id
         manage: Manage Roles
         name: Name
-
+        add_to: Add this role
+        remove_from: Remove this role
