@@ -7,30 +7,41 @@
     {% import 'AdminBundle:Users:macros.html.twig' as usersMacros %}
     {% import 'AdminBundle:Groups:macros.html.twig' as groupsMacros %}
 
-    <h2>{{ 'admin.permissions_manage.users'|trans }}</h2>
-    <div class="row">
-        <div class="col-md-6">
-            {{ usersMacros.displayUsers('permissions', permission.id, permission.name, usersIn, 'in') }}
-        </div>
-        <div class="col-md-6">
-            {{ usersMacros.displayUsers('permissions', permission.id, permission.name, usersOut, 'out') }}
-        </div>
-    </div>
-
-    <hr/>
-
-    <h2>{{ 'admin.permissions_manage.groups'|trans }}</h2>
-    <div class="row">
-        <div class="col-md-6">
-            {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, groupsIn, 'in') }}
-        </div>
-        <div class="col-md-6">
-            {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, groupsOut, 'out') }}
+    <div id="tabs">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#manage-users" data-toggle="tab">{{ 'base.menu.admin.users'|trans }}</a></li>
+            <li><a href="#manage-groups" data-toggle="tab">{{ 'base.menu.admin.groups'|trans }}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="manage-users">
+                <h2>{{ 'admin.permissions_manage.users'|trans }}</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ usersMacros.displayUsers('permissions', permission.id, permission.name, usersIn, 'in') }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ usersMacros.displayUsers('permissions', permission.id, permission.name, usersOut, 'out') }}
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="manage-groups">
+                <h2>{{ 'admin.permissions_manage.groups'|trans }}</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, groupsIn, 'in') }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, groupsOut, 'out') }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="text-center">
         <a class="btn btn-primary" href="{{ path('admin_permissions') }}">{{ 'base.button.back' | trans }}</a>
     </div>
+
+    <div>&nbsp;</div>
 
 {% endblock %}

@@ -16,7 +16,7 @@ admin:
     groups_manage:
         users: Users
         permissions: Permissions
-        title: %name%'s users and permissions
+        title: Group %name%'s users and permissions
         users_in: "%name%'s users:"
         users_out: "Other users:"
         permissions_in: "%name%'s permissions:"
@@ -33,7 +33,7 @@ admin:
     users_manage:
         groups: Groups
         permissions: Permissions
-        title: %name%'s groups and permissions
+        title: User %name%'s groups and permissions
         groups_in: "%name%'s groups:"
         groups_out: "Other groups:"
         permissions_in: "%name%'s permissions:"
