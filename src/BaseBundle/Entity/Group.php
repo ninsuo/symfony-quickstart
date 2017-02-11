@@ -68,6 +68,21 @@ class Group
     protected $permissions;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="groups")
+     * @ORM\JoinTable(name="groups_denied_permissions",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="permission_id", referencedColumnName="id", onDelete="CASCADE")
+     *     }
+     * )
+     */
+    protected $deniedPermissions;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -226,6 +241,54 @@ class Group
 
         $this->permissions->removeElement($permission);
         $permission->removeGroup($this);
+
+        return $this;
+    }
+
+    /**
+     * Get deniedPermissions.
+     *
+     * @return ArrayCollection
+     */
+    public function getDeniedPermissions()
+    {
+        return $this->deniedPermissions;
+    }
+
+    /**
+     * Add deniedPermission.
+     *
+     * @param Permission $deniedPermission
+     *
+     * @return User
+     */
+    public function addDeniedPermission(Permission $deniedPermission)
+    {
+        if ($this->deniedPermissions->contains($deniedPermission)) {
+            return;
+        }
+
+        $this->deniedPermissions->add($deniedPermission);
+        $deniedPermission->addUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove deniedPermission.
+     *
+     * @param Permission $deniedPermission
+     *
+     * @return User
+     */
+    public function removeDeniedPermission(Permission $deniedPermission)
+    {
+        if (!$this->deniedPermissions->contains($deniedPermission)) {
+            return;
+        }
+
+        $this->deniedPermissions->removeElement($deniedPermission);
+        $deniedPermission->removeUser($this);
 
         return $this;
     }

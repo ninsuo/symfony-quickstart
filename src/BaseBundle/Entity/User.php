@@ -101,6 +101,21 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
+     * @ORM\ManyToMany(targetEntity="Group", cascade={"persist", "remove"}, inversedBy="users")
+     * @ORM\JoinTable(name="users_groups",
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
+     *     }
+     * )
+     */
+    protected $groups;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="users")
      * @ORM\JoinTable(name="users_permissions",
      *     joinColumns={
@@ -116,25 +131,26 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Group", cascade={"persist", "remove"}, inversedBy="users")
-     * @ORM\JoinTable(name="users_groups",
+     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="users")
+     * @ORM\JoinTable(name="users_denied_permissions",
      *     joinColumns={
      *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *     },
      *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
+     *         @ORM\JoinColumn(name="permission_id", referencedColumnName="id", onDelete="CASCADE")
      *     }
      * )
      */
-    protected $groups;
+    protected $deniedPermissions;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->groups      = new ArrayCollection();
-        $this->permissions = new ArrayCollection();
+        $this->groups            = new ArrayCollection();
+        $this->permissions       = new ArrayCollection();
+        $this->deniedPermissions = new ArrayCollection();
     }
 
     /**
@@ -463,6 +479,54 @@ class User implements UserInterface, EquatableInterface
 
         $this->permissions->removeElement($permission);
         $permission->removeUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Get deniedPermissions.
+     *
+     * @return ArrayCollection
+     */
+    public function getDeniedPermissions()
+    {
+        return $this->deniedPermissions;
+    }
+
+    /**
+     * Add deniedPermission.
+     *
+     * @param Permission $deniedPermission
+     *
+     * @return User
+     */
+    public function addDeniedPermission(Permission $deniedPermission)
+    {
+        if ($this->deniedPermissions->contains($deniedPermission)) {
+            return;
+        }
+
+        $this->deniedPermissions->add($deniedPermission);
+        $deniedPermission->addUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove deniedPermission.
+     *
+     * @param Permission $deniedPermission
+     *
+     * @return User
+     */
+    public function removeDeniedPermission(Permission $deniedPermission)
+    {
+        if (!$this->deniedPermissions->contains($deniedPermission)) {
+            return;
+        }
+
+        $this->deniedPermissions->removeElement($deniedPermission);
+        $deniedPermission->removeUser($this);
 
         return $this;
     }

@@ -95,16 +95,24 @@ class OAuthUserProvider extends BaseUserProvider
             $user->addRole('ROLE_ADMIN');
         }
 
-        // Groupes
+        // Granted permissions
         foreach ($user->getGroups()->toArray() as $group) {
             foreach ($group->getPermissions() as $permission) {
                 $user->addRole('ROLE_'.$permission->getName());
             }
         }
-
-        // Permissions
         foreach ($user->getPermissions() as $permission) {
             $user->addRole('ROLE_'.$permission->getName());
+        }
+
+        // Denied permissions
+        foreach ($user->getGroups()->toArray() as $group) {
+            foreach ($group->getDeniedPermissions() as $permission) {
+                $user->removeRole('ROLE_'.$permission->getName());
+            }
+        }
+        foreach ($user->getDeniedPermissions() as $permission) {
+            $user->removeRole('ROLE_'.$permission->getName());
         }
 
         return $user;
