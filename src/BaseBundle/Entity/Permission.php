@@ -38,20 +38,32 @@ class Permission
     /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="permissions")
      */
-    protected $users;
+    protected $grantedUsers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="deniedPermissions")
+     */
+    protected $deniedUsers;
 
     /**
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="permissions")
      */
-    protected $groups;
+    protected $grantedGroups;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="deniedPermissions")
+     */
+    protected $deniedGroups;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->users  = new ArrayCollection();
-        $this->groups = new ArrayCollection();
+        $this->grantedUsers  = new ArrayCollection();
+        $this->deniedUsers   = new ArrayCollection();
+        $this->grantedGroups = new ArrayCollection();
+        $this->deniedGroups  = new Arraycollection();
     }
 
     /**
@@ -91,45 +103,45 @@ class Permission
     /**
      * @return ArrayCollection
      */
-    public function getUsers()
+    public function getGrantedUsers()
     {
-        return $this->users;
+        return $this->grantedUsers;
     }
 
     /**
-     * Add user.
+     * Add grantedUser.
      *
-     * @param User $user
+     * @param User $grantedUser
      *
      * @return Permission
      */
-    public function addUser(User $user)
+    public function addGrantedUser(User $grantedUser)
     {
-        if ($this->users->contains($user)) {
+        if ($this->grantedUsers->contains($grantedUser)) {
             return;
         }
 
-        $this->users->add($user);
-        $user->addPermission($this);
+        $this->grantedUsers->add($grantedUser);
+        $grantedUser->addPermission($this);
 
         return $this;
     }
 
     /**
-     * Remove user.
+     * Remove grantedUser.
      *
-     * @param User $user
+     * @param User $grantedUser
      *
      * @return Permission
      */
-    public function removeUser(User $user)
+    public function removeGrantedUser(User $grantedUser)
     {
-        if (!$this->users->contains($user)) {
+        if (!$this->grantedUsers->contains($grantedUser)) {
             return;
         }
 
-        $this->users->removeElement($user);
-        $user->removePermission($this);
+        $this->grantedUsers->removeElement($grantedUser);
+        $grantedUser->removePermission($this);
 
         return $this;
     }
@@ -137,45 +149,137 @@ class Permission
     /**
      * @return ArrayCollection
      */
-    public function getGroups()
+    public function getDeniedUsers()
     {
-        return $this->groups;
+        return $this->deniedUsers;
     }
 
     /**
-     * Add group.
+     * Add deniedUser.
      *
-     * @param Group $group
+     * @param User $deniedUser
      *
      * @return Permission
      */
-    public function addGroup(Group $group)
+    public function addDeniedUser(User $deniedUser)
     {
-        if ($this->groups->contains($group)) {
+        if ($this->deniedUsers->contains($deniedUser)) {
             return;
         }
 
-        $this->groups->add($group);
-        $group->addPermission($this);
+        $this->deniedUsers->add($deniedUser);
+        $deniedUser->addDeniedPermission($this);
 
         return $this;
     }
 
     /**
-     * Remove group.
+     * Remove deniedUser.
      *
-     * @param Group $group
+     * @param User $deniedUser
      *
      * @return Permission
      */
-    public function removeGroup(Group $group)
+    public function removeDeniedUser(User $deniedUser)
     {
-        if (!$this->groups->contains($group)) {
+        if (!$this->deniedUsers->contains($deniedUser)) {
             return;
         }
 
-        $this->groups->removeElement($group);
-        $group->removePermission($this);
+        $this->deniedUsers->removeElement($deniedUser);
+        $deniedUser->removeDeniedPermission($this);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getGrantedGroups()
+    {
+        return $this->grantedGroups;
+    }
+
+    /**
+     * Add grantedGroup.
+     *
+     * @param Group $grantedGroup
+     *
+     * @return Permission
+     */
+    public function addGrantedGroup(Group $grantedGroup)
+    {
+        if ($this->grantedGroups->contains($grantedGroup)) {
+            return;
+        }
+
+        $this->grantedGroups->add($grantedGroup);
+        $grantedGroup->addPermission($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove grantedGroup.
+     *
+     * @param Group $grantedGroup
+     *
+     * @return Permission
+     */
+    public function removeGrantedGroup(Group $grantedGroup)
+    {
+        if (!$this->grantedGroups->contains($grantedGroup)) {
+            return;
+        }
+
+        $this->grantedGroups->removeElement($grantedGroup);
+        $grantedGroup->removePermission($this);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDeniedGroups()
+    {
+        return $this->deniedGroups;
+    }
+
+    /**
+     * Add deniedGroup.
+     *
+     * @param Group $deniedGroup
+     *
+     * @return Permission
+     */
+    public function addDeniedGroup(Group $deniedGroup)
+    {
+        if ($this->deniedGroups->contains($deniedGroup)) {
+            return;
+        }
+
+        $this->deniedGroups->add($deniedGroup);
+        $deniedGroup->addDeniedPermission($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove deniedGroup.
+     *
+     * @param Group $deniedGroup
+     *
+     * @return Permission
+     */
+    public function removeDeniedGroup(Group $deniedGroup)
+    {
+        if (!$this->deniedGroups->contains($deniedGroup)) {
+            return;
+        }
+
+        $this->deniedGroups->removeElement($deniedGroup);
+        $deniedGroup->removeDeniedPermission($this);
 
         return $this;
     }

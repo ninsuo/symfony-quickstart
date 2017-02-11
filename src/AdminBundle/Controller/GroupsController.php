@@ -181,8 +181,10 @@ class GroupsController extends BaseController
             'group'          => $group,
             'usersIn'        => $this->_getGroupUsers($request, $id, 'user-in'),
             'usersOut'       => $this->_getGroupUsers($request, $id, 'user-out'),
-            'permissionsIn'  => $this->_getGroupPermissions($request, $id, 'permission-in'),
-            'permissionsOut' => $this->_getGroupPermissions($request, $id, 'permission-out'),
+            'permissionsIn'  => $this->_getGroupPermissions($request, $id, 'permission-in', 'granted'),
+            'permissionsOut' => $this->_getGroupPermissions($request, $id, 'permission-out', 'granted'),
+            'deniedPermissionsIn'  => $this->_getGroupPermissions($request, $id, 'permission-in', 'denied'),
+            'deniedPermissionsOut' => $this->_getGroupPermissions($request, $id, 'permission-out', 'denied'),
         ];
     }
 
@@ -272,9 +274,9 @@ class GroupsController extends BaseController
         ];
     }
 
-    protected function _getGroupPermissions(Request $request, $groupId, $prefix)
+    protected function _getGroupPermissions(Request $request, $groupId, $prefix, $grant)
     {
-        $filter = $request->query->get("filter-{$prefix}");
+        $filter = $request->query->get("filter-{$grant}-{$prefix}");
 
         $qb = $this
            ->getManager()
@@ -285,9 +287,9 @@ class GroupsController extends BaseController
         ;
 
         if ('permission-in' == $prefix) {
-            $qb->where(':groupId MEMBER OF p.groups');
+            $qb->where(":groupId MEMBER OF p.{$grant}Groups");
         } else {
-            $qb->where(':groupId NOT MEMBER OF p.groups');
+            $qb->where(":groupId NOT MEMBER OF p.{$grant}Groups");
         }
 
         if ($filter) {
@@ -298,8 +300,8 @@ class GroupsController extends BaseController
         }
 
         return [
-            'order' => $this->orderBy($qb, Permission::class, 'p.name', 'ASC', $prefix),
-            'pager' => $this->getPager($qb, $prefix),
+            'order' => $this->orderBy($qb, Permission::class, 'p.name', 'ASC',  "{$grant}-{$prefix}"),
+            'pager' => $this->getPager($qb, "{$grant}-{$prefix}"),
         ];
     }
 }

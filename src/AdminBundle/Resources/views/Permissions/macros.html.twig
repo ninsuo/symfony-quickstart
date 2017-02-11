@@ -1,12 +1,12 @@
-{% macro displayPermissions(type, id, name, data, prefix) %}
+{% macro displayPermissions(type, id, name, data, prefix, grant) %}
 
     {% import 'BaseBundle::macros.html.twig' as macros %}
 
     <div class="well">
 
-        <h3>{{ ('admin.' ~ type ~ '_manage.permissions_' ~ prefix)|trans({'%name%': name}) }}</h3>
+        <h3>{{ ('admin.' ~ type ~ '_manage.permissions_' ~ grant ~ '_' ~ prefix)|trans({'%name%': name}) }}</h3>
 
-        {{ macros.search('filter-permission-' ~ prefix) }}
+        {{ macros.search('filter-permission-' ~ grant ~ '-' ~ prefix) }}
 
         <table class="table">
             <thead>
@@ -22,7 +22,7 @@
                         <td>{{ permission.id }}</td>
                         <td>{{ permission.name }}</td>
                         <td>
-                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'permissions', toId: permission.id, token: csrf_token('administration')})) %}
+                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'permissions', toId: permission.id, grant: grant, token: csrf_token('administration')})) %}
                             {% if prefix == 'in' %}
                                 <a
                                     href="{{ path }}"
@@ -38,7 +38,7 @@
             </tbody>
         </table>
 
-        {{ macros.pager(data.pager, 'permission-' ~ prefix) }}
+        {{ macros.pager(data.pager, 'permission-' ~ grant ~ '-' ~ prefix) }}
 
     </div>
 

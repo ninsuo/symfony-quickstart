@@ -16,11 +16,14 @@ admin:
     groups_manage:
         users: Utilisateurs
         permissions: Permissions
+        denied_permissions: Permissions refusées
         title: 'Utilisateurs et permissions du groupe %name%'
         users_in: "Utilisateurs de %name% :"
         users_out: "Autres utilisateurs :"
-        permissions_in: "Permissions de %name% :"
-        permissions_out: "Autres permissions :"
+        permissions_granted_in: "Permissions de %name% :"
+        permissions_granted_out: "Autres permissions :"
+        permissions_denied_in: "Permissions interdites du groupe %name% :"
+        permissions_denied_out: "Autres permissions :"
     users:
         id: ID
         network: Réseau
@@ -32,12 +35,15 @@ admin:
         manage: Groupes & Permissions
     users_manage:
         groups: Groupes
-        permissions: Permissions
+        granted_permissions: Permissions
+        denied_permissions: Permissions refusées
         title: Groupes et permissions de l'utilisateur %name%
         groups_in: 'Groupes de %name% :'
         groups_out: "Autres groupes :"
-        permissions_in: 'Permissionss de %name% :'
-        permissions_out: "Autres permissions :"
+        permissions_granted_in: 'Permissions de %name% :'
+        permissions_granted_out: "Autres permissions :"
+        permissions_denied_in: 'Permissions interdites pour %name% :'
+        permissions_denied_out: "Autres permissions :"
     permissions:
         actions: Actions
         create: Créer une nouvelle permission
@@ -48,6 +54,7 @@ admin:
         id: Id
         manage: Utilisateurs & Groupes
         name: Nom
+        manage_denied: 'Gérer les permissions refusées'
     permissions_manage:
         users: Utilisateurs
         groups: Groupes

@@ -116,7 +116,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="grantedUsers")
      * @ORM\JoinTable(name="users_permissions",
      *     joinColumns={
      *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
@@ -131,7 +131,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="deniedUsers")
      * @ORM\JoinTable(name="users_denied_permissions",
      *     joinColumns={
      *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
@@ -459,7 +459,7 @@ class User implements UserInterface, EquatableInterface
         }
 
         $this->permissions->add($permission);
-        $permission->addUser($this);
+        $permission->addGrantedUser($this);
 
         return $this;
     }
@@ -478,7 +478,7 @@ class User implements UserInterface, EquatableInterface
         }
 
         $this->permissions->removeElement($permission);
-        $permission->removeUser($this);
+        $permission->removeGrantedUser($this);
 
         return $this;
     }
@@ -507,7 +507,7 @@ class User implements UserInterface, EquatableInterface
         }
 
         $this->deniedPermissions->add($deniedPermission);
-        $deniedPermission->addUser($this);
+        $deniedPermission->addDeniedUser($this);
 
         return $this;
     }
@@ -526,7 +526,7 @@ class User implements UserInterface, EquatableInterface
         }
 
         $this->deniedPermissions->removeElement($deniedPermission);
-        $deniedPermission->removeUser($this);
+        $deniedPermission->removeDeniedUser($this);
 
         return $this;
     }

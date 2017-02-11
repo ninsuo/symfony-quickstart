@@ -19,8 +19,10 @@ admin:
         title: Group %name%'s users and permissions
         users_in: "%name%'s users:"
         users_out: "Other users:"
-        permissions_in: "%name%'s permissions:"
-        permissions_out: "Other permissions:"
+        permissions_granted_in: "Group %name%'s permissions:"
+        permissions_granted_out: "Other permissions:"
+        permissions_denied_in: "Group %name%'s denied permissions:"
+        permissions_denied_out: "Other permissions:"
     users:
         id: ID
         network: Network
@@ -33,17 +35,14 @@ admin:
     users_manage:
         groups: Groups
         permissions: Permissions
+        denied_permissions: Denied permissions
         title: User %name%'s groups and permissions
         groups_in: "%name%'s groups:"
         groups_out: "Other groups:"
-        permissions_in: "%name%'s permissions:"
-        permissions_out: "Other permissions:"
-    groups_users:
-        title: Members in group %name%
-        in: 'Members in %name%:'
-        out: "Members not in %name%:"
-        add: Add in group
-        remove: Remove from group
+        permissions_granted_in: "%name%'s permissions:"
+        permissions_granted_out: "Other permissions:"
+        permissions_denied_in: "%name%'s denied permissions:"
+        permissions_denied_out: "Other permissions:"
     permissions:
         actions: Actions
         create: Create new permission
@@ -54,6 +53,7 @@ admin:
         id: Id
         name: Name
         manage: Users & Groups
+        manage_denied: Manage denied permissions
     permissions_manage:
         users: Users
         groups: Groups

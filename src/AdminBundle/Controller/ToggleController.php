@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ToggleController extends BaseController
 {
     /**
-     * @Route("/{fromType}-{fromId}/{toType}-{toId}/{token}", name = "admin_toggle")
+     * @Route("/{fromType}-{fromId}/{toType}-{toId}/{grant}/{token}", name="admin_toggle", defaults={"grant": "default"})
      */
-    public function toggleAction(Request $request, $fromType, $fromId, $toType, $toId, $token)
+    public function toggleAction(Request $request, $fromType, $fromId, $toType, $toId, $grant, $token)
     {
         $this->checkCsrfToken('administration', $token);
 
@@ -51,19 +51,39 @@ class ToggleController extends BaseController
             }
             $this->saveEntity($user);
         } elseif (!is_null($user) && !is_null($permission)) {
-            if ($user->getPermissions()->contains($permission)) {
-                $user->removePermission($permission);
+            if ('granted' === $grant) {
+                if ($user->getPermissions()->contains($permission)) {
+                    $user->removePermission($permission);
+                } else {
+                    $user->addPermission($permission);
+                }
             } else {
-                $user->addPermission($permission);
+                if ($user->getDeniedPermissions()->contains($permission)) {
+                    $user->removeDeniedPermission($permission);
+                } else {
+                    $user->addDeniedPermission($permission);
+                }
             }
             $this->saveEntity($user);
         } else {
-            if ($group->getPermissions()->contains($permission)) {
-                $group->removePermission($permission);
+            if ('granted' === $grant) {
+                if ($group->getPermissions()->contains($permission)) {
+                    $group->removePermission($permission);
+                } else {
+                    $group->addPermission($permission);
+                }
             } else {
-                $group->addPermission($permission);
+                if ($group->getDeniedPermissions()->contains($permission)) {
+                    $group->removeDeniedPermission($permission);
+                } else {
+                    $group->addDeniedPermission($permission);
+                }
             }
             $this->saveEntity($group);
+        }
+
+        if ($grant) {
+            $toType = "{$grant}-{$toType}";
         }
 
         return $this->redirect(

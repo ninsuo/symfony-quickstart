@@ -55,7 +55,7 @@ class Group
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="groups")
+     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="grantedGroups")
      * @ORM\JoinTable(name="groups_permissions",
      *     joinColumns={
      *         @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
@@ -70,7 +70,7 @@ class Group
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="groups")
+     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="deniedGroups")
      * @ORM\JoinTable(name="groups_denied_permissions",
      *     joinColumns={
      *         @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
@@ -221,7 +221,7 @@ class Group
         }
 
         $this->permissions->add($permission);
-        $permission->addGroup($this);
+        $permission->addGrantedGroup($this);
 
         return $this;
     }
@@ -240,7 +240,7 @@ class Group
         }
 
         $this->permissions->removeElement($permission);
-        $permission->removeGroup($this);
+        $permission->removeGrantedGroup($this);
 
         return $this;
     }
@@ -269,7 +269,7 @@ class Group
         }
 
         $this->deniedPermissions->add($deniedPermission);
-        $deniedPermission->addUser($this);
+        $deniedPermission->addDeniedGroup($this);
 
         return $this;
     }
@@ -288,7 +288,7 @@ class Group
         }
 
         $this->deniedPermissions->removeElement($deniedPermission);
-        $deniedPermission->removeUser($this);
+        $deniedPermission->removeDeniedGroup($this);
 
         return $this;
     }
