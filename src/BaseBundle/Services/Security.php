@@ -54,5 +54,33 @@ class Security extends BaseSecurity
         $this->container->get('security.token_storage')->setToken($token);
         $this->container->get('session')->set("_security_{$firewallName}", serialize($token));
         $this->container->get('session')->save();
+
+        return $this;
+    }
+
+    /**
+     * This method should only be used to enforce login on development
+     * environment (when you don't have an internet connection for example)
+     * or on demo websites where visitors can try features requiring authentication.
+     *
+     * @param int $id
+     * 
+     * @return Security
+     */
+    public function loginById($id)
+    {
+        $user = $this->container
+           ->get('doctrine')
+           ->getManager()
+           ->getRepository('BaseBundle:User')
+           ->findOneById($id);
+
+        $this->login(
+            $this->container
+                ->get('base.oauth_user_provider')
+                ->loadUserByUsername($user->getUsername())
+        );
+
+        return $this;
     }
 }
