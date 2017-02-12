@@ -6,13 +6,13 @@
 
         <h3>{{ ('admin.' ~ type ~ '_manage.permissions_' ~ grant ~ '_' ~ prefix)|trans({'%name%': name}) }}</h3>
 
-        {{ macros.search('filter-permission-' ~ grant ~ '-' ~ prefix) }}
+        {{ macros.search('filter-' ~ grant ~ '-permission-' ~ prefix) }}
 
         <table class="table">
             <thead>
                 <tr>
-                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.permissions.id') }}</th>
-                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.permissions.name') }}</th>
+                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.permissions.id', 'manage-' ~ grant ~ '-permissions') }}</th>
+                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.permissions.name', 'manage-' ~ grant ~ '-permissions') }}</th>
                     <th style="width: 30%;">{{ 'admin.permissions.actions' | trans }}</th>
                 </tr>
             </thead>

@@ -11,8 +11,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.groups.id') }}</th>
-                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.groups.name') }}</th>
+                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.groups.id', 'manage-groups') }}</th>
+                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.groups.name', 'manage-groups') }}</th>
                     <th style="width: 30%;">{{ 'admin.groups.actions' | trans }}</th>
                 </tr>
             </thead>

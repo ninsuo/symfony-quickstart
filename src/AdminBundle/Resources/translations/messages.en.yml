@@ -19,6 +19,7 @@ admin:
         title: Group %name%'s users and permissions
         users_in: "%name%'s users:"
         users_out: "Other users:"
+        denied_permissions: Denied permissions
         permissions_granted_in: "Group %name%'s permissions:"
         permissions_granted_out: "Other permissions:"
         permissions_denied_in: "Group %name%'s denied permissions:"

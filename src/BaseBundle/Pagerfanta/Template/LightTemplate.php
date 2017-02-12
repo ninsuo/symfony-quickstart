@@ -20,11 +20,13 @@ class LightTemplate extends Template
         'css_active_class'    => 'active',
         'rel_previous'        => 'prev',
         'rel_next'            => 'next',
+        'hash'                => '',
     ];
     protected $translator;
 
     public function __construct(TranslatorInterface $translator)
     {
+        die('ok');
         parent::__construct();
 
         $this->translator = $translator;
@@ -137,6 +139,7 @@ class LightTemplate extends Template
 
     private function linkLi($class, $href, $text, $rel = null)
     {
+        $href = $href . ($this->option('hash') ? '#'.$this->option('hash') : '');
         $liClass = $class ? sprintf(' class="%s"', $class) : '';
         $rel     = $rel ? sprintf(' rel="%s"', $rel) : '';
 

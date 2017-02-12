@@ -51,7 +51,7 @@ abstract class BaseController extends Controller
         return $this->container->get('form.factory')->createNamedBuilder($name, $type, $data, $options);
     }
 
-    public function orderBy(QueryBuilder $qb, $class, $prefixedDefaultColumn, $defaultDirection = 'ASC', $prefix = '')
+    public function orderBy(QueryBuilder $qb, $class, $prefixedDefaultColumn, $defaultDirection = 'ASC', $prefix = '', $hash = null)
     {
         $request = $this->get('request_stack')->getMasterRequest();
 
@@ -82,6 +82,7 @@ abstract class BaseController extends Controller
             'prefix'    => $prefix,
             'column'    => $column,
             'direction' => $direction,
+            'hash'      => $hash,
         ];
     }
 
@@ -106,7 +107,7 @@ abstract class BaseController extends Controller
             throw new NotValidMaxPerPageException();
         }
 
-        $pager->setMaxPerPage($perPage);
+        $pager->setMaxPerPage(1);
         $pager->setCurrentPage($request->request->get($prefix.'page') ?: $request->query->get($prefix.'page', 1));
 
         return $pager;

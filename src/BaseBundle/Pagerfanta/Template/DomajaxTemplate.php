@@ -6,6 +6,12 @@ use Pagerfanta\View\Template\Template;
 
 class DomajaxTemplate extends Template
 {
+    public function __construct()
+    {
+                die('ok');
+
+        parent::__construct();
+    }
     protected static $defaultOptions = [
         'prev_message'        => '&larr; Previous',
         'next_message'        => 'Next &rarr;',

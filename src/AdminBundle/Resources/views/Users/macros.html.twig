@@ -11,9 +11,9 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.users.id') }}</th>
-                    <th style="width: 25%;">{{ macros.orderBy(data.order, 'nickname', 'admin.users.nickname') }}</th>
-                    <th style="width: 25%;">{{ macros.orderBy(data.order, 'contact', 'admin.users.contact') }}</th>
+                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.users.id', 'manage-users') }}</th>
+                    <th style="width: 25%;">{{ macros.orderBy(data.order, 'nickname', 'admin.users.nickname', 'manage-users') }}</th>
+                    <th style="width: 25%;">{{ macros.orderBy(data.order, 'contact', 'admin.users.contact', 'manage-users') }}</th>
                     <th style="width: 30%;">{{ 'admin.users.actions' | trans }}</th>
                 </tr>
             </thead>
