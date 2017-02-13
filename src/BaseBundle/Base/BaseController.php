@@ -107,7 +107,7 @@ abstract class BaseController extends Controller
             throw new NotValidMaxPerPageException();
         }
 
-        $pager->setMaxPerPage(1);
+        $pager->setMaxPerPage($perPage);
         $pager->setCurrentPage($request->request->get($prefix.'page') ?: $request->query->get($prefix.'page', 1));
 
         return $pager;

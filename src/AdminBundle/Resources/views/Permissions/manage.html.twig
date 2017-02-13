@@ -9,29 +9,29 @@
 
     <div id="tabs">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#manage-users" data-toggle="tab">{{ 'base.menu.admin.users'|trans }}</a></li>
-            <li><a href="#manage-groups" data-toggle="tab">{{ 'base.menu.admin.groups'|trans }}</a></li>
+            <li class="active"><a href="#manage-users" data-toggle="tab">{{ 'admin.permissions_manage.granted_users'|trans }}</a></li>
+            <li><a href="#manage-groups" data-toggle="tab">{{ 'admin.permissions_manage.granted_groups'|trans }}</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="manage-users">
-                <h2>{{ 'admin.permissions_manage.users'|trans }}</h2>
+                <h2>{{ 'admin.permissions_manage.granted_users'|trans }}</h2>
                 <div class="row">
                     <div class="col-md-6">
-                        {{ usersMacros.displayUsers('permissions', permission.id, permission.name, usersIn, 'in') }}
+                        {{ usersMacros.displayUsers('permissions', permission.id, permission.name, grantedUsersIn, 'in') }}
                     </div>
                     <div class="col-md-6">
-                        {{ usersMacros.displayUsers('permissions', permission.id, permission.name, usersOut, 'out') }}
+                        {{ usersMacros.displayUsers('permissions', permission.id, permission.name, grantedUsersOut, 'out') }}
                     </div>
                 </div>
             </div>
             <div class="tab-pane" id="manage-groups">
-                <h2>{{ 'admin.permissions_manage.groups'|trans }}</h2>
+                <h2>{{ 'admin.permissions_manage.granted_groups'|trans }}</h2>
                 <div class="row">
                     <div class="col-md-6">
-                        {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, groupsIn, 'in') }}
+                        {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, grantedGroupsIn, 'in', grant) }}
                     </div>
                     <div class="col-md-6">
-                        {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, groupsOut, 'out') }}
+                        {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, grantedGroupsOut, 'out', grant) }}
                     </div>
                 </div>
             </div>

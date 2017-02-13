@@ -56,8 +56,10 @@ admin:
         name: Nom
         manage_denied: 'Gérer les permissions refusées'
     permissions_manage:
-        users: Utilisateurs
-        groups: Groupes
+        granted_users: Utilisateurs autorisés
+        denied_users: Utilisateurs interdits
+        granted_groups: Groupes autorisés
+        denied_groups: Groupes interdits
         title: 'Utilisateurs & groupes ayant la permission %name%'
         users_in: "Utilisateurs ayant la permission %name% :"
         users_out: "Autres utilisateurs :"

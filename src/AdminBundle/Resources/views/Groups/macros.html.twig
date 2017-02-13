@@ -1,4 +1,4 @@
-{% macro displayGroups(type, id, name, data, prefix) %}
+{% macro displayGroups(type, id, name, data, prefix, grant = null) %}
 
     {% import 'BaseBundle::macros.html.twig' as macros %}
 
@@ -6,13 +6,13 @@
 
         <h3>{{ ('admin.' ~ type ~ '_manage.groups_' ~ prefix)|trans({'%name%': name}) }}</h3>
 
-        {{ macros.search('filter-group-' ~ prefix) }}
+        {{ macros.search('filter' ~ (grant ? '-' ~ grant : '') ~ '-group-' ~ prefix) }}
 
         <table class="table">
             <thead>
                 <tr>
-                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.groups.id', 'manage-groups') }}</th>
-                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.groups.name', 'manage-groups') }}</th>
+                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.groups.id', 'manage' ~ (grant ? '-' ~ grant : '') ~ '-groups') }}</th>
+                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.groups.name', 'manage' ~ (grant ? '-' ~ grant : '') ~ '-groups') }}</th>
                     <th style="width: 30%;">{{ 'admin.groups.actions' | trans }}</th>
                 </tr>
             </thead>
@@ -38,7 +38,7 @@
             </tbody>
         </table>
 
-        {{ macros.pager(data.pager, 'group-' ~ prefix) }}
+        {{ macros.pager(data.pager, (grant ? '-' ~ grant : '') ~ 'group-' ~ prefix) }}
 
     </div>
 

@@ -38,7 +38,7 @@
             </tbody>
         </table>
 
-        {{ macros.pager(data.pager, 'permission-' ~ grant ~ '-' ~ prefix) }}
+        {{ macros.pager(data.pager, grant ~ '-permission-' ~ prefix, 'manage-' ~ grant ~ '-permissions') }}
 
     </div>
 

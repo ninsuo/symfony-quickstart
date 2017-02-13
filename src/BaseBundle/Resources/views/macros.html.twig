@@ -117,7 +117,7 @@
     {% endspaceless -%}
 {% endmacro %}
 
-{% macro pager(pager, prefix = '', hash = null) %}
+{% macro pager(pager, prefix = '', hash = '') %}
     <div class="row">
         <div class="text-center col-md-12">
             {{
@@ -160,7 +160,7 @@
     </div>
 {% endmacro %}
 
-{% macro orderBy(order, column, label, hash = null) %}
+{% macro orderBy(order, column, label, hash = '') %}
     {% set isCurrent = order.column == column %}
     {% if isCurrent %}
         <a style="color:black;" href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): order.direction == 'ASC' ? 'desc' : 'asc'})) ~ (hash ? '#' ~ hash : '') }}">{{ label|trans }}</a>

@@ -26,7 +26,6 @@ class LightTemplate extends Template
 
     public function __construct(TranslatorInterface $translator)
     {
-        die('ok');
         parent::__construct();
 
         $this->translator = $translator;
@@ -34,8 +33,7 @@ class LightTemplate extends Template
 
     public function container()
     {
-        return sprintf('<ul class="%s">%%pages%%</ul>', $this->option('css_container_class')
-        );
+        return sprintf('<ul class="%s">%%pages%%</ul>', $this->option('css_container_class'));
     }
 
     public function page($page)
