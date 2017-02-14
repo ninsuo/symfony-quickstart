@@ -20,6 +20,7 @@ class LightTemplate extends Template
         'css_active_class'    => 'active',
         'rel_previous'        => 'prev',
         'rel_next'            => 'next',
+        'hash'                => '',
     ];
     protected $translator;
 
@@ -32,8 +33,7 @@ class LightTemplate extends Template
 
     public function container()
     {
-        return sprintf('<ul class="%s">%%pages%%</ul>', $this->option('css_container_class')
-        );
+        return sprintf('<ul class="%s">%%pages%%</ul>', $this->option('css_container_class'));
     }
 
     public function page($page)
@@ -137,6 +137,7 @@ class LightTemplate extends Template
 
     private function linkLi($class, $href, $text, $rel = null)
     {
+        $href = $href . ($this->option('hash') ? '#'.$this->option('hash') : '');
         $liClass = $class ? sprintf(' class="%s"', $class) : '';
         $rel     = $rel ? sprintf(' rel="%s"', $rel) : '';
 

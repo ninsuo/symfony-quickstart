@@ -42,8 +42,8 @@ class ToggleListener extends BaseService implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             KernelEvents::REQUEST => [['onKernelRequest', 15]],
-        );
+        ];
     }
 }

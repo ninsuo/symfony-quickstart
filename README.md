@@ -7,11 +7,11 @@ This is the [Symfony3 Standard Edition](https://github.com/symfony/symfony-stand
 
 You'll find here 3 bundles:
 
-- BaseBundle contains well-known bundles implementations, you'll probably not need to modify those files.
+- AdminBundle contains tools to manage the application (users, roles, groups, settings, uploaded image galleries etc).
+
+- BaseBundle contains well-known bundles implementations as well as helpers, overloads and customizations, you'll probably not need to modify these files.
 
 - AppBundle is a skeleton, it will contain your app implementation.
-
-- AdminBundle contains tools to manage the application (administrators, roles, groups, etc).
 
 ## Ready-to-use bundles and tools
 
@@ -31,9 +31,9 @@ You'll find here 3 bundles:
 
 - EWZRecaptchaBundle gives a nice ReCaptcha type and validator for sensible parts (registration or contact forms)
 
-- Administration: interfaces to manage users and groups (roles `ROLE_GROUP_<group name>` automatically set for users of a group). You'll need to manually set is_admin = 1 on database for your first admin.
+- Administration: interfaces to manage users, groups and permissions. You'll need to manually set is_admin = 1 on database for your first admin.
 
-- Settings on the fly: if your app requires global settings set/stored by arbitrary people, use the Setting entity/repository/twig function to quickly get the job done.
+- Key/value settings on the fly: if your app requires global settings set/stored by arbitrary people, use the Setting entity/repository/twig function to quickly get the job done.
 
 - A bunch of utilities to render filters, paginations, absolute urls, get real random numbers, manipulate images...
 

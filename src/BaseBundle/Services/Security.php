@@ -15,9 +15,10 @@ class Security extends BaseSecurity
     /**
      * This method is used to store a real entity and not a doctrine proxy
      * on the tokenstorage (they internally do a get_class and if the entity
-     * was lazily loaded, it will be an instance of a proxy)
+     * was lazily loaded, it will be an instance of a proxy).
      *
      * @param mixed $proxy
+     *
      * @return mixed
      */
     public function getRealEntity($proxy)
@@ -53,5 +54,33 @@ class Security extends BaseSecurity
         $this->container->get('security.token_storage')->setToken($token);
         $this->container->get('session')->set("_security_{$firewallName}", serialize($token));
         $this->container->get('session')->save();
+
+        return $this;
+    }
+
+    /**
+     * This method should only be used to enforce login on development
+     * environment (when you don't have an internet connection for example)
+     * or on demo websites where visitors can try features requiring authentication.
+     *
+     * @param int $id
+     * 
+     * @return Security
+     */
+    public function loginById($id)
+    {
+        $user = $this->container
+           ->get('doctrine')
+           ->getManager()
+           ->getRepository('BaseBundle:User')
+           ->findOneById($id);
+
+        $this->login(
+            $this->container
+                ->get('base.oauth_user_provider')
+                ->loadUserByUsername($user->getUsername())
+        );
+
+        return $this;
     }
 }

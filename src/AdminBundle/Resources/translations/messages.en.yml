@@ -10,7 +10,20 @@ admin:
         delete: Delete
         delete_confirm: Are you sure that you want to remouve group "%group%"?
         deleted: 'Group #%id% removed successfully.'
-        manage: Manage group members
+        create_permission: 'Create and associate |placeholder| permission automatically.'
+        manage: Users & Permissions
+        permission_error: "Unable to create the associated permission for this group (USER and ADMIN are reserved)."
+    groups_manage:
+        users: Users
+        permissions: Permissions
+        title: Group %name%'s users and permissions
+        users_in: "%name%'s users:"
+        users_out: "Other users:"
+        denied_permissions: Denied permissions
+        permissions_granted_in: "Group %name%'s permissions:"
+        permissions_granted_out: "Other permissions:"
+        permissions_denied_in: "Group %name%'s denied permissions:"
+        permissions_denied_out: "Other permissions:"
     users:
         id: ID
         network: Network
@@ -19,27 +32,40 @@ admin:
         admin: Admin
         frozen: Frozen
         actions: Actions
-        manage: Manage member groups
-    users_groups:
-        title: %name%'s groups
-        in: 'Groups where %name% is:'
-        out: "Groups where %name% isn't:"
-        add: Add in group
-        remove: Remove from group
-    groups_users:
-        title: Members in group %name%
-        in: 'Members in %name%:'
-        out: "Members not in %name%:"
-        add: Add in group
-        remove: Remove from group
-    role:
+        manage: Groups & Permissions
+    users_manage:
+        groups: Groups
+        permissions: Permissions
+        denied_permissions: Denied permissions
+        title: User %name%'s groups and permissions
+        groups_in: "%name%'s groups:"
+        groups_out: "Other groups:"
+        permissions_granted_in: "%name%'s permissions:"
+        permissions_granted_out: "Other permissions:"
+        permissions_denied_in: "%name%'s denied permissions:"
+        permissions_denied_out: "Other permissions:"
+    permissions:
         actions: Actions
-        create: Create new role
-        created: New role created successfully.
+        create: Create new permission
+        created: New permission created successfully.
         delete: Remove
-        delete_confirm: 'Are you sure you want to remove Role #%id%?'
-        deleted: 'Role #%id% removed successfully.'
+        delete_confirm: 'Are you sure you want to remove Permission #%id%?'
+        deleted: 'Permission #%id% removed successfully.'
         id: Id
-        manage: Manage Roles
         name: Name
-
+        manage: Users & Groups
+        manage_denied: Manage denied permissions
+    permissions_manage:
+        granted_users: Granted users
+        denied_users: Denied users
+        granted_groups: Granted groups
+        denied_groups: Denied groups
+        title: 'Users & groups having permission %name%'
+        users_granted_in: "Users having permission %name%:"
+        users_granted_out: "Other users:"
+        users_denied_in: "Users denied from permission %name%:"
+        users_denied_out: "Other users:"
+        groups_granted_in: "Groups having permission %name%:"
+        groups_granted_out: "Other groups:"
+        groups_denied_in: "Groups denied from permission %name%:"
+        groups_denied_out: "Other groups:"

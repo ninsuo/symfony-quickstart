@@ -17,8 +17,8 @@ class OAuthUserProvider extends BaseUserProvider
 
     public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, $registrationRestriction)
     {
-        $this->em = $em;
-        $this->translator = $translator;
+        $this->em                      = $em;
+        $this->translator              = $translator;
         $this->registrationRestriction = $registrationRestriction;
     }
 
@@ -30,12 +30,7 @@ class OAuthUserProvider extends BaseUserProvider
            ->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
 
         if ($user) {
-            if ($user->isAdmin()) {
-                $user->addRole('ROLE_ADMIN');
-            }
-            foreach ($user->getGroups()->toArray() as $group) {
-                $user->addRole('ROLE_GROUP_'.$group->getName());
-            }
+            $this->injectRoles($user);
         }
 
         return $user;
@@ -52,7 +47,7 @@ class OAuthUserProvider extends BaseUserProvider
         if ($this->registrationRestriction && !preg_match($this->registrationRestriction, $response->getEmail())) {
             throw new AuthenticationException(
                $this->translator->trans('base.error.registration_restriction', [
-                   '%email%' => $response->getEmail()
+                   '%email%' => $response->getEmail(),
                ])
             );
         }
@@ -92,5 +87,34 @@ class OAuthUserProvider extends BaseUserProvider
     public function supportsClass($class)
     {
         return $class === 'BaseBundle\\Entity\\User';
+    }
+
+    protected function injectRoles(User $user)
+    {
+        if ($user->isAdmin()) {
+            $user->addRole('ROLE_ADMIN');
+        }
+
+        // Granted permissions
+        foreach ($user->getGroups()->toArray() as $group) {
+            foreach ($group->getPermissions() as $permission) {
+                $user->addRole('ROLE_'.$permission->getName());
+            }
+        }
+        foreach ($user->getPermissions() as $permission) {
+            $user->addRole('ROLE_'.$permission->getName());
+        }
+
+        // Denied permissions
+        foreach ($user->getGroups()->toArray() as $group) {
+            foreach ($group->getDeniedPermissions() as $permission) {
+                $user->removeRole('ROLE_'.$permission->getName());
+            }
+        }
+        foreach ($user->getDeniedPermissions() as $permission) {
+            $user->removeRole('ROLE_'.$permission->getName());
+        }
+
+        return $user;
     }
 }

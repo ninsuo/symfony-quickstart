@@ -117,12 +117,13 @@
     {% endspaceless -%}
 {% endmacro %}
 
-{% macro pager(pager, prefix = '') %}
+{% macro pager(pager, prefix = '', hash = '') %}
     <div class="row">
         <div class="text-center col-md-12">
             {{
                 pagerfanta(pager, 'light', {
                     'pageParameter': '[' ~ prefix ~ 'page]',
+                    'hash': hash,
                 })
             }}
         </div>
@@ -132,7 +133,7 @@
                 {% for perPage in constant('BaseBundle\\Base\\BaseController::PAGER_PER_PAGE_LIST') %}
                     {% set isCurrent = perPage == pager.maxPerPage %}
                     <li {% if isCurrent %}class="active"{% endif %}>
-                        {% if isCurrent %}<span>{% else %}<a href="?{{ http_build_query(app.request.query.all|merge({(prefix ~ 'per-page'): perPage})) }}">{% endif %}
+                        {% if isCurrent %}<span>{% else %}<a href="?{{ http_build_query(app.request.query.all|merge({(prefix ~ 'per-page'): perPage})) ~ (hash ? '#' ~ hash : '') }}">{% endif %}
                             {{ perPage }}
                         {% if isCurrent %}</span>{% else %}</a>{% endif %}
                     </li>
@@ -146,7 +147,7 @@
         <div class="text-right col-md-4">
             <div>{{ 'base.pager.go_to'|trans }}</div>
             {% set currentRoute = current_route() %}
-            <form class="form-inline" action="{{ path(currentRoute.name, currentRoute.params) }}" method="get">
+            <form class="form-inline" action="{{ path(currentRoute.name, currentRoute.params) ~ (hash ? '#' ~ hash : '') }}" method="get">
                 <div class="form-group">
                     <input class="form-control" name="{{ prefix }}page" style="width: 100px;" type="text"/>
                     {% for key, value in app.request.query.all if key != prefix ~ 'page' %}
@@ -159,20 +160,20 @@
     </div>
 {% endmacro %}
 
-{% macro orderBy(order, column, label) %}
+{% macro orderBy(order, column, label, hash = '') %}
     {% set isCurrent = order.column == column %}
     {% if isCurrent %}
-        <a style="color:black;" href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): order.direction == 'ASC' ? 'desc' : 'asc'})) }}">{{ label|trans }}</a>
+        <a style="color:black;" href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): order.direction == 'ASC' ? 'desc' : 'asc'})) ~ (hash ? '#' ~ hash : '') }}">{{ label|trans }}</a>
     {% else %}
-        <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column})) }}">{{ label|trans }}</a>
+        <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column})) ~ (hash ? '#' ~ hash : '') }}">{{ label|trans }}</a>
     {% endif %}
     {% if not isCurrent or order.direction != 'ASC' %}
-        <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): 'asc'})) }}">▲</a>
+        <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): 'asc'})) ~ (hash ? '#' ~ hash : '') }}">▲</a>
     {% else %}
         ▲
     {% endif %}
     {% if not isCurrent or order.direction != 'DESC' %}
-        <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): 'desc'})) }}">▼</a>
+        <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): 'desc'})) ~ (hash ? '#' ~ hash : '') }}">▼</a>
     {% else %}
         ▼
     {% endif %}

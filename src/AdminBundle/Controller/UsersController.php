@@ -3,6 +3,8 @@
 namespace AdminBundle\Controller;
 
 use AppBundle\Base\BaseController;
+use BaseBundle\Entity\Group;
+use BaseBundle\Entity\Permission;
 use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -185,6 +187,87 @@ class UsersController extends BaseController
 
         return [
             'form' => $form->createView(),
+        ];
+    }
+
+    /**
+     * @Route("/manage/{id}", name="admin_users_manage")
+     * @Template()
+     */
+    public function manageAction(Request $request, $id)
+    {
+        $user = $this->getEntityById('BaseBundle:User', $id);
+
+        return [
+            'user'                 => $user,
+            'groupsIn'             => $this->_getUserGroups($request, $id, 'group-in'),
+            'groupsOut'            => $this->_getUserGroups($request, $id, 'group-out'),
+            'permissionsIn'        => $this->_getUserPermissions($request, $id, 'permission-in', 'granted'),
+            'permissionsOut'       => $this->_getUserPermissions($request, $id, 'permission-out', 'granted'),
+            'deniedPermissionsIn'  => $this->_getUserPermissions($request, $id, 'permission-in', 'denied'),
+            'deniedPermissionsOut' => $this->_getUserPermissions($request, $id, 'permission-out', 'denied'),
+        ];
+    }
+
+    protected function _getUserGroups(Request $request, $userId, $prefix)
+    {
+        $filter = $request->query->get("filter-{$prefix}");
+
+        $qb = $this
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('g')
+           ->from(Group::class, 'g')
+           ->setParameter('userId', $userId)
+        ;
+
+        if ('group-in' == $prefix) {
+            $qb->where(':userId MEMBER OF g.users');
+        } else {
+            $qb->where(':userId NOT MEMBER OF g.users');
+        }
+
+        if ($filter) {
+            $qb
+               ->andWhere('g.name LIKE :criteria')
+               ->setParameter('criteria', '%'.$filter.'%')
+            ;
+        }
+
+        return [
+            'order' => $this->orderBy($qb, Group::class, 'g.name', 'ASC', $prefix),
+            'pager' => $this->getPager($qb, $prefix),
+        ];
+    }
+
+    protected function _getUserPermissions(Request $request, $userId, $prefix, $grant)
+    {
+        $filter = $request->query->get("filter-{$grant}-{$prefix}");
+
+        $qb = $this
+           ->getManager()
+           ->createQueryBuilder()
+           ->select('p')
+           ->from(Permission::class, 'p')
+           ->setParameter('userId', $userId)
+        ;
+
+        if ('permission-in' == $prefix) {
+            $qb->where(":userId MEMBER OF p.{$grant}Users");
+        } else {
+            $qb->where(":userId NOT MEMBER OF p.{$grant}Users");
+        }
+
+        if ($filter) {
+            $qb
+               ->andWhere('p.name LIKE :criteria')
+               ->setParameter('criteria', '%'.$filter.'%')
+            ;
+        }
+
+        return [
+            'order' => $this->orderBy($qb, Permission::class, 'p.name', 'ASC', "{$grant}-{$prefix}"),
+            'pager' => $this->getPager($qb, "{$grant}-{$prefix}"),
         ];
     }
 }

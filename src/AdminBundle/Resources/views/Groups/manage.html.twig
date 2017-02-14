@@ -1,0 +1,65 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}{{ 'admin.groups_manage.title' | trans({'%name%': group.name}) }}{% endblock %}
+
+{% block body %}
+
+    {% import 'AdminBundle:Users:macros.html.twig' as usersMacros %}
+    {% import 'AdminBundle:Permissions:macros.html.twig' as permissionsMacros %}
+
+    <div id="tabs">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#manage-users" data-toggle="tab">{{ 'base.menu.admin.users'|trans }}</a></li>
+            <li><a href="#manage-granted-permissions" data-toggle="tab">{{ 'base.menu.admin.permissions'|trans }}</a></li>
+            <li><a href="#manage-denied-permissions" data-toggle="tab">{{ 'admin.permissions.manage_denied'|trans }}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="manage-users">
+                <h2>{{ 'admin.groups_manage.users'|trans }}</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ usersMacros.displayUsers('groups', group.id, group.name, usersIn, 'in') }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ usersMacros.displayUsers('groups', group.id, group.name, usersOut, 'out') }}
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="manage-granted-permissions">
+                <h2>{{ 'admin.groups_manage.permissions'|trans }}</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ permissionsMacros.displayPermissions('groups', group.id, group.name, permissionsIn, 'in', 'granted') }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ permissionsMacros.displayPermissions('groups', group.id, group.name, permissionsOut, 'out', 'granted') }}
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="manage-denied-permissions">
+                <h2>{{ 'admin.groups_manage.denied_permissions'|trans }}</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ permissionsMacros.displayPermissions('groups', group.id, group.name, deniedPermissionsIn, 'in', 'denied') }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ permissionsMacros.displayPermissions('groups', group.id, group.name, deniedPermissionsOut, 'out', 'denied') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ path('admin_groups') }}">{{ 'base.button.back' | trans }}</a>
+    </div>
+
+    <div>&nbsp;</div>
+
+{% endblock %}
+
+{% block script %}
+
+    {{ include('AdminBundle::keep-tabs.html.twig') }}
+
+{% endblock %}

@@ -1,7 +1,9 @@
 base:
     button:
+        add: 'Add'
         back: 'Go back'
         home: 'Go back to the homepage'
+        remove: 'Remove'
     changepassword:
         title: 'Change password'
     ckeditor:
@@ -64,7 +66,7 @@ base:
             main: Administration
             users: Manage users
             groups: Manage groups
-            roles: Manage roles
+            permissions: Manage permissions
     nav: 'Toggle navigation'
     pager:
         prev: '← Previous'

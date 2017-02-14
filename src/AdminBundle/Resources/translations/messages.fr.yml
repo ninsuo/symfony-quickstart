@@ -10,7 +10,20 @@ admin:
         delete: Supprimer
         delete_confirm: Voulez-vous vraiment supprimer le groupe "%group%" ?
         deleted: 'Groupe #%id% supprimé avec succès.'
-        manage: Gérer les membres du groupe
+        create_permission: 'Créer et associer la permission |placeholder| automatiquement'
+        manage: Utilisateurs & Permissions
+        permission_error: "Impossible de créer la permission associée à ce groupe (USER et ADMIN sont réservés)."
+    groups_manage:
+        users: Utilisateurs
+        permissions: Permissions
+        denied_permissions: Permissions refusées
+        title: 'Utilisateurs et permissions du groupe %name%'
+        users_in: "Utilisateurs de %name% :"
+        users_out: "Autres utilisateurs :"
+        permissions_granted_in: "Permissions de %name% :"
+        permissions_granted_out: "Autres permissions :"
+        permissions_denied_in: "Permissions interdites du groupe %name% :"
+        permissions_denied_out: "Autres permissions :"
     users:
         id: ID
         network: Réseau
@@ -19,26 +32,40 @@ admin:
         admin: Admin
         frozen: Gelé
         actions: Actions
-        manage: Gérer les groupes de ce membre
-    users_groups:
-        title: Groupes de %name%
-        in: 'Groupes dans lequel est %name% :'
-        out: "Groupes dans lequel %name% n'est pas :"
-        add: Ajouter dans ce groupe
-        remove: Retirer de ce groupe
-    groups_users:
-        title: Membres dans le groupe %name%
-        in: 'Membres de %name% :'
-        out: "Non membres de %name% :"
-        add: Ajouter dans ce groupe
-        remove: Retirer de ce groupe
-    role:
+        manage: Groupes & Permissions
+    users_manage:
+        groups: Groupes
+        granted_permissions: Permissions
+        denied_permissions: Permissions refusées
+        title: Groupes et permissions de l'utilisateur %name%
+        groups_in: 'Groupes de %name% :'
+        groups_out: "Autres groupes :"
+        permissions_granted_in: 'Permissions de %name% :'
+        permissions_granted_out: "Autres permissions :"
+        permissions_denied_in: 'Permissions interdites pour %name% :'
+        permissions_denied_out: "Autres permissions :"
+    permissions:
         actions: Actions
-        create: Créer un nouveau rôle
-        created: Rôle créé avec succès
+        create: Créer une nouvelle permission
+        created: Permission créée avec succès
         delete: Supprimer
-        delete_confirm: 'Voulez-vous vraiment supprimer le role #%id%?'
-        deleted: 'Role #%id% supprimé avec succès.'
+        delete_confirm: 'Voulez-vous vraiment supprimer la permission #%id%?'
+        deleted: 'Permission #%id% supprimée avec succès.'
         id: Id
-        manage: Gestion des groupes
+        manage: Utilisateurs & Groupes
         name: Nom
+        manage_denied: 'Gérer les permissions refusées'
+    permissions_manage:
+        granted_users: Utilisateurs autorisés
+        denied_users: Utilisateurs interdits
+        granted_groups: Groupes autorisés
+        denied_groups: Groupes interdits
+        title: 'Utilisateurs & groupes ayant la permission %name%'
+        users_granted_in: "Utilisateurs ayant la permission %name% :"
+        users_granted_out: "Autres utilisateurs :"
+        users_denied_in: "Utilisateurs interdits de la permission %name% :"
+        users_denied_out: "Autres utilisateurs :"
+        groups_granted_in: "Groups ayant la permission %name% :"
+        groups_granted_out: "Autres groupes:"
+        groups_denied_in: "Groups interdits de la permission %name% :"
+        groups_denied_out: "Autres groupes:"

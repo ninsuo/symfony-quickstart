@@ -1,0 +1,45 @@
+{% macro displayGroups(type, id, name, data, prefix, grant = null) %}
+
+    {% import 'BaseBundle::macros.html.twig' as macros %}
+
+    <div class="well">
+
+        <h3>{{ ('admin.' ~ type ~ '_manage.groups_' ~ (grant ? grant ~ '_') ~ prefix)|trans({'%name%': name}) }}</h3>
+
+        {{ macros.search('filter' ~ (grant ? '-' ~ grant) ~ '-group-' ~ prefix) }}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.groups.id', 'manage' ~ (grant ? '-' ~ grant) ~ '-groups') }}</th>
+                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.groups.name', 'manage' ~ (grant ? '-' ~ grant) ~ '-groups') }}</th>
+                    <th style="width: 30%;">{{ 'admin.groups.actions' | trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in data.pager.currentPageResults %}
+                    <tr>
+                        <td>{{ group.id }}</td>
+                        <td>{{ group.name }}</td>
+                        <td>
+                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'groups', toId: group.id, grant: (grant ? : 'none') , token: csrf_token('administration')})) %}
+                            {% if prefix == 'in' %}
+                                <a
+                                    href="{{ path }}"
+                                    class="btn btn-danger btn-sm">{{ 'base.button.remove'|trans }}</a>
+                            {% else %}
+                                <a
+                                    href="{{ path }}"
+                                    class="btn btn-success btn-sm">{{ 'base.button.add'|trans }}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {{ macros.pager(data.pager, (grant ? grant ~ '-') ~ 'group-' ~ prefix, 'manage-' ~ (grant ? grant ~ '-') ~ 'groups') }}
+
+    </div>
+
+{% endmacro %}
