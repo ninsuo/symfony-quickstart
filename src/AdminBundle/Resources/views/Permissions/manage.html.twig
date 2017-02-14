@@ -9,32 +9,36 @@
 
     <div id="tabs">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#manage-users" data-toggle="tab">{{ 'admin.permissions_manage.granted_users'|trans }}</a></li>
-            <li><a href="#manage-groups" data-toggle="tab">{{ 'admin.permissions_manage.granted_groups'|trans }}</a></li>
+            {% for x, grant in ['granted', 'denied'] %}
+                {% for y, type in ['users', 'groups'] %}
+                    <li {{ (x == 0 and y == 0 ? 'class="active"') }}><a href="#manage-{{ grant }}-{{ type }}" data-toggle="tab">{{ ('admin.permissions_manage.' ~ grant ~ '_' ~ type)|trans }}</a></li>
+                {% endfor %}
+            {% endfor %}
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="manage-users">
-                <h2>{{ 'admin.permissions_manage.granted_users'|trans }}</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ usersMacros.displayUsers('permissions', permission.id, permission.name, grantedUsersIn, 'in') }}
+            {% for grant in ['granted', 'denied'] %}
+                {% for type in ['users', 'groups'] %}
+                    <div class="tab-pane active" id="manage-{{ grant }}-{{ type }}">
+                        <h2>{{ ('admin.permissions_manage.' ~ grant ~ '_' ~ type)|trans }}</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% if type == 'users' %}
+                                    {{ usersMacros.displayUsers('permissions', permission.id, permission.name, _context["#{grant}UsersIn"], 'in', grant) }}
+                                {% else %}
+                                    {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, _context["#{grant}GroupsIn"], 'in', grant) }}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {% if type == 'users' %}
+                                    {{ usersMacros.displayUsers('permissions', permission.id, permission.name, _context["#{grant}UsersOut"], 'out', grant) }}
+                                {% else %}
+                                    {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, _context["#{grant}GroupsOut"], 'out', grant) }}
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        {{ usersMacros.displayUsers('permissions', permission.id, permission.name, grantedUsersOut, 'out') }}
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="manage-groups">
-                <h2>{{ 'admin.permissions_manage.granted_groups'|trans }}</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, grantedGroupsIn, 'in', grant) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ groupsMacros.displayGroups('permissions', permission.id, permission.name, grantedGroupsOut, 'out', grant) }}
-                    </div>
-                </div>
-            </div>
+                {% endfor %}
+            {% endfor %}
         </div>
     </div>
 

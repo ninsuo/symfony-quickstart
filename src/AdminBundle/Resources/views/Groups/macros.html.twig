@@ -6,13 +6,13 @@
 
         <h3>{{ ('admin.' ~ type ~ '_manage.groups_' ~ prefix)|trans({'%name%': name}) }}</h3>
 
-        {{ macros.search('filter' ~ (grant ? '-' ~ grant : '') ~ '-group-' ~ prefix) }}
+        {{ macros.search('filter' ~ (grant ? '-' ~ grant) ~ '-group-' ~ prefix) }}
 
         <table class="table">
             <thead>
                 <tr>
-                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.groups.id', 'manage' ~ (grant ? '-' ~ grant : '') ~ '-groups') }}</th>
-                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.groups.name', 'manage' ~ (grant ? '-' ~ grant : '') ~ '-groups') }}</th>
+                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.groups.id', 'manage' ~ (grant ? '-' ~ grant) ~ '-groups') }}</th>
+                    <th style="width: 50%;">{{ macros.orderBy(data.order, 'name', 'admin.groups.name', 'manage' ~ (grant ? '-' ~ grant) ~ '-groups') }}</th>
                     <th style="width: 30%;">{{ 'admin.groups.actions' | trans }}</th>
                 </tr>
             </thead>
@@ -22,7 +22,7 @@
                         <td>{{ group.id }}</td>
                         <td>{{ group.name }}</td>
                         <td>
-                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'groups', toId: group.id, token: csrf_token('administration')})) %}
+                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'groups', toId: group.id, grant: (grant ? : null) , token: csrf_token('administration')})) %}
                             {% if prefix == 'in' %}
                                 <a
                                     href="{{ path }}"
@@ -38,7 +38,7 @@
             </tbody>
         </table>
 
-        {{ macros.pager(data.pager, (grant ? '-' ~ grant : '') ~ 'group-' ~ prefix) }}
+        {{ macros.pager(data.pager, (grant ? '-' ~ grant) ~ 'group-' ~ prefix) }}
 
     </div>
 
