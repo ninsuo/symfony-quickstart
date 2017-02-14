@@ -1,19 +1,19 @@
-{% macro displayUsers(type, id, name, data, prefix) %}
+{% macro displayUsers(type, id, name, data, prefix, grant = null) %}
 
     {% import 'BaseBundle::macros.html.twig' as macros %}
 
     <div class="well">
 
-        <h3>{{ ('admin.' ~ type ~ '_manage.users_' ~ prefix)|trans({'%name%': name}) }}</h3>
+        <h3>{{ ('admin.' ~ type ~ '_manage.users_' ~ (grant ? grant) ~ '_' ~ prefix)|trans({'%name%': name}) }}</h3>
 
-        {{ macros.search('filter-user-' ~ prefix) }}
+        {{ macros.search('filter' ~ (grant ? '-' ~ grant) ~ '-user-' ~ prefix) }}
 
         <table class="table">
             <thead>
                 <tr>
-                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.users.id', 'manage-users') }}</th>
-                    <th style="width: 25%;">{{ macros.orderBy(data.order, 'nickname', 'admin.users.nickname', 'manage-users') }}</th>
-                    <th style="width: 25%;">{{ macros.orderBy(data.order, 'contact', 'admin.users.contact', 'manage-users') }}</th>
+                    <th style="width: 20%;">{{ macros.orderBy(data.order, 'id', 'admin.users.id', 'manage' ~ (grant ? '-' ~ grant) ~ '-users') }}</th>
+                    <th style="width: 25%;">{{ macros.orderBy(data.order, 'nickname', 'admin.users.nickname', 'manage' ~ (grant ? '-' ~ grant) ~ '-users') }}</th>
+                    <th style="width: 25%;">{{ macros.orderBy(data.order, 'contact', 'admin.users.contact', 'manage' ~ (grant ? '-' ~ grant) ~ '-users') }}</th>
                     <th style="width: 30%;">{{ 'admin.users.actions' | trans }}</th>
                 </tr>
             </thead>
@@ -24,7 +24,7 @@
                         <td>{{ user.nickname }}</td>
                         <td>{{ user.contact }}</td>
                         <td>
-                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'users', toId: user.id, token: csrf_token('administration')})) %}
+                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'users', toId: user.id, grant: (grant ? : null), token: csrf_token('administration')})) %}
                             {% if prefix == 'in' %}
                                 <a
                                     href="{{ path }}"
@@ -40,7 +40,7 @@
             </tbody>
         </table>
 
-        {{ macros.pager(data.pager, 'user-' ~ prefix) }}
+        {{ macros.pager(data.pager, (grant ? grant ~ '-') ~ 'user-' ~ prefix) }}
 
     </div>
 

@@ -4,7 +4,7 @@
 
     <div class="well">
 
-        <h3>{{ ('admin.' ~ type ~ '_manage.groups_' ~ prefix)|trans({'%name%': name}) }}</h3>
+        <h3>{{ ('admin.' ~ type ~ '_manage.groups_' ~ (grant ? grant) ~ '_' ~ prefix)|trans({'%name%': name}) }}</h3>
 
         {{ macros.search('filter' ~ (grant ? '-' ~ grant) ~ '-group-' ~ prefix) }}
 
@@ -38,7 +38,7 @@
             </tbody>
         </table>
 
-        {{ macros.pager(data.pager, (grant ? '-' ~ grant) ~ 'group-' ~ prefix) }}
+        {{ macros.pager(data.pager, (grant ? grant ~ '-') ~ 'group-' ~ prefix) }}
 
     </div>
 

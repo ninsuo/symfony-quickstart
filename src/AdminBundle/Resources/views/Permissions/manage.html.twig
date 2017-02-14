@@ -16,9 +16,9 @@
             {% endfor %}
         </ul>
         <div class="tab-content">
-            {% for grant in ['granted', 'denied'] %}
-                {% for type in ['users', 'groups'] %}
-                    <div class="tab-pane active" id="manage-{{ grant }}-{{ type }}">
+            {% for x, grant in ['granted', 'denied'] %}
+                {% for y, type in ['users', 'groups'] %}
+                    <div class="tab-pane {{ (x == 0 and y == 0 ? 'active') }}" id="manage-{{ grant }}-{{ type }}">
                         <h2>{{ ('admin.permissions_manage.' ~ grant ~ '_' ~ type)|trans }}</h2>
                         <div class="row">
                             <div class="col-md-6">

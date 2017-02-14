@@ -61,7 +61,11 @@ admin:
         granted_groups: Granted groups
         denied_groups: Denied groups
         title: 'Users & groups having permission %name%'
-        users_in: "Users having permission %name%:"
-        users_out: "Other users:"
-        groups_in: "Groups having permission %name%:"
-        groups_out: "Other groups:"
+        users_granted_in: "Users having permission %name%:"
+        users_granted_out: "Other users:"
+        users_denied_in: "Users denied from permission %name%:"
+        users_denied_out: "Other users:"
+        groups_granted_in: "Groups having permission %name%:"
+        groups_granted_out: "Other groups:"
+        groups_denied_in: "Groups denied from permission %name%:"
+        groups_denied_out: "Other groups:"
