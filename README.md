@@ -72,6 +72,6 @@ To use reCaptcha, you should get your site & secret keys:
 
 - This project is released under the MIT license
 
-- Fuz logo is © 2013-2016 Alain Tiemblo
+- Fuz logo is © 2013-2017 Alain Tiemblo
 
 - Default image used on social meta tags is CC0

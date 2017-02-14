@@ -33,8 +33,7 @@ base:
             title: 'Liste des %entity%'
         new:
             button: 'Créer une nouvelle entrée'
-            title: 'Nou
-            velle entrée %entity%'
+            title: 'Nouvelle entrée %entity%'
         update:
             success: 'Entrée modifiée avec succès.'
     error:
