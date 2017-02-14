@@ -209,7 +209,7 @@ class PermissionsController extends BaseController
         }
 
         return [
-            'order' => $this->orderBy($qb, Permission::class, 'u.nickname', 'ASC', "{$grant}-{$prefix}"),
+            'order' => $this->orderBy($qb, User::class, 'u.nickname', 'ASC', "{$grant}-{$prefix}"),
             'pager' => $this->getPager($qb, "{$grant}-{$prefix}"),
         ];
     }

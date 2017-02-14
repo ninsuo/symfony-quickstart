@@ -4,7 +4,7 @@
 
     <div class="well">
 
-        <h3>{{ ('admin.' ~ type ~ '_manage.users_' ~ (grant ? grant) ~ '_' ~ prefix)|trans({'%name%': name}) }}</h3>
+        <h3>{{ ('admin.' ~ type ~ '_manage.users_' ~ (grant ? grant ~ '_') ~ prefix)|trans({'%name%': name}) }}</h3>
 
         {{ macros.search('filter' ~ (grant ? '-' ~ grant) ~ '-user-' ~ prefix) }}
 
@@ -24,7 +24,7 @@
                         <td>{{ user.nickname }}</td>
                         <td>{{ user.contact }}</td>
                         <td>
-                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'users', toId: user.id, grant: (grant ? : null), token: csrf_token('administration')})) %}
+                            {% set path = path('admin_toggle', app.request.query.all|merge({fromType: type, fromId: id, toType: 'users', toId: user.id, grant: (grant ? grant : 'none'), token: csrf_token('administration')})) %}
                             {% if prefix == 'in' %}
                                 <a
                                     href="{{ path }}"
@@ -40,7 +40,7 @@
             </tbody>
         </table>
 
-        {{ macros.pager(data.pager, (grant ? grant ~ '-') ~ 'user-' ~ prefix) }}
+        {{ macros.pager(data.pager, (grant ? grant ~ '-') ~ 'user-' ~ prefix, 'manage-' ~ (grant ? grant ~ '-') ~ 'users') }}
 
     </div>
 
