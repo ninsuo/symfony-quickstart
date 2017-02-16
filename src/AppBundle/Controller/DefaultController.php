@@ -14,7 +14,6 @@ class DefaultController extends BaseController
      */
     public function indexAction(\Symfony\Component\HttpFoundation\Request $request)
     {
-        $this->get('security')->loginById(1);
         return [];
     }
 }
