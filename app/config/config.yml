@@ -51,12 +51,16 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:
+        - BaseBundle
     filters:
+       cssrewrite: ~
        lessphp:
             file: "%kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php"
             apply_to: '.less$'
-       cssrewrite: ~
+       jsqueeze: ~
+       scssphp:
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
 
 # Doctrine Configuration
 doctrine:

@@ -42,7 +42,9 @@
         "white-october/pagerfanta-bundle": "^1.0",
         "nabil1337/case-helper": "dev-master",
         "excelwebzone/recaptcha-bundle": "^1.4",
-        "friendsofphp/php-cs-fixer": "^2.0"
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "leafo/scssphp": "^0.6.6",
+        "patchwork/jsqueeze": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
