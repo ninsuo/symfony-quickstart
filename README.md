@@ -33,6 +33,8 @@ You'll find here 3 bundles:
 
 - Administration: interfaces to manage users, groups and permissions. You'll need to manually set is_admin = 1 on database for your first admin.
 
+- Key/value settings on the fly: if your app requires global settings set/stored by arbitrary people, use the Setting entity/repository/twig function to quickly get the job done.
+
 - A bunch of utilities to render filters, paginations, absolute urls, get real random numbers, manipulate images...
 
 - Integrated layouts are so simple that you can get all functionalities working in a totally different bootstrap template in a matter of minutes.
