@@ -2,7 +2,7 @@
 
 namespace AdminBundle\Controller;
 
-use AppBundle\Base\BaseController;
+use BaseBundle\Base\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;

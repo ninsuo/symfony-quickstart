@@ -2,7 +2,7 @@
 
 namespace AdminBundle\Controller;
 
-use AppBundle\Base\BaseController;
+use BaseBundle\Base\BaseController;
 use BaseBundle\Entity\Group;
 use BaseBundle\Entity\Permission;
 use BaseBundle\Entity\User;
