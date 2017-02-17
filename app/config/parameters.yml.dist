@@ -79,3 +79,6 @@ parameters:
     # Recaptcha
     recaptcha_public: <your recaptcha site key>
     recaptcha_private: <your recaptcha secret>
+
+    # Misc
+    role_file_upload: ROLE_ADMIN
