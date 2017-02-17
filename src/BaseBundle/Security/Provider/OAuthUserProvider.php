@@ -1,6 +1,6 @@
 <?php
 
-namespace BaseBundle\Provider;
+namespace BaseBundle\Security\Provider;
 
 use BaseBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;

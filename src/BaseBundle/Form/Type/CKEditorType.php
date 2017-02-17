@@ -31,7 +31,7 @@ class CKEditorType extends BaseType
             'extraPlugins' => 'embed,embedbase,emojione,notification,notificationaggregator,preview,widget,lineutils,widgetselection',
         ];
 
-        if ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_GROUP_EDITOR')) {
+        if ($this->isGranted('ROLE_ADMIN')) {
             $config = array_merge($config, [
                 'filebrowserBrowseRoute' => 'ckeditor_browse',
                 'filebrowserUploadRoute' => 'ckeditor_upload',
