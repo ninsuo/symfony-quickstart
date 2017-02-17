@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Base\BaseController;
+use BaseBundle\Base\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -12,9 +12,8 @@ class DefaultController extends BaseController
      * @Route("/", name="home")
      * @Template()
      */
-    public function indexAction(\Symfony\Component\HttpFoundation\Request $request)
+    public function indexAction()
     {
-        $this->get('security')->loginById(1);
-        return [];
+
     }
 }

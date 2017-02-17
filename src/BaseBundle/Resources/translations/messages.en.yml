@@ -4,6 +4,8 @@ base:
         back: 'Go back'
         home: 'Go back to the homepage'
         remove: 'Remove'
+        on: On
+        off: Off
     changepassword:
         title: 'Change password'
     ckeditor:
