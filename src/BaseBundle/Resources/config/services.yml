@@ -1,11 +1,15 @@
 parameters:
-    base.oauth_user_provider.class: BaseBundle\Provider\OAuthUserProvider
+    base.incomplete_profile.service.provider.class: BaseBundle\Provider\IncompleteProfileProvider
+    base.oauth_user_provider.class: BaseBundle\Security\Provider\OAuthUserProvider
     hwi_oauth.account.connector.class: BaseBundle\Connect\AccountConnect
     pagerfanta.view.light.class: BaseBundle\Pagerfanta\View\LightView
     pagerfanta.template.light.class: BaseBundle\Pagerfanta\Template\LightTemplate
     security.class: BaseBundle\Services\Security
 
 services:
+
+    base.incomplete_profile.service.provider:
+        class: '%base.incomplete_profile.service.provider.class%'
 
     base.oauth_user_provider:
         class: '%base.oauth_user_provider.class%'

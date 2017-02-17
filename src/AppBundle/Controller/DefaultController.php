@@ -14,6 +14,6 @@ class DefaultController extends BaseController
      */
     public function indexAction()
     {
-
+        return [];
     }
 }
