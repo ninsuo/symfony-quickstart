@@ -15,6 +15,7 @@ class LightExtension extends BaseTwigExtension
             new \Twig_SimpleFunction('current_route', [$this, 'currentRoute']),
             new \Twig_SimpleFunction('current_locale', [$this, 'currentLocale']),
             new \Twig_SimpleFunction('current_uri', [$this, 'currentUri']),
+            new \Twig_SimpleFunction('page_id', [$this, 'pageId']),
         ];
     }
 
@@ -55,6 +56,26 @@ class LightExtension extends BaseTwigExtension
     public function currentUri()
     {
         return $this->get('request_stack')->getMasterRequest()->getUri();
+    }
+
+    public function pageId($hashed = false, $ignoredParams = [])
+    {
+        $request = $this->get('request_stack')->getMasterRequest();
+        $route = $request->get('_route');
+        $params = $request->get('_route_params');
+
+        unset($params['_locale']);
+        foreach ($ignoredParams as $ignoredParam) {
+            unset($params[$ignoredParam]);
+        }
+
+        $data = $route . '/' . join('/', $params);
+
+        if ($hashed) {
+            return strtr(base64_encode(hex2bin(sha1($data))), '+/=', '-_,');
+        }
+
+        return $data;
     }
 
     public function getName()
