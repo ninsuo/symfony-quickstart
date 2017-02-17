@@ -28,7 +28,7 @@ class CKEditorController extends BaseController
         $funcNum  = $request->query->get('CKEditorFuncNum');
         $langCode = $request->query->get('langCode');
 
-        if (!$this->isGranted('ROLE_ADMIN') || $this->isGranted('GROUP_EDITOR')) {
+        if (!$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
 
@@ -58,7 +58,7 @@ class CKEditorController extends BaseController
      */
     public function uploadAction(Request $request)
     {
-        if (!$this->isGranted('ROLE_ADMIN') || $this->isGranted('GROUP_EDITOR')) {
+        if (!$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
 
@@ -102,7 +102,7 @@ class CKEditorController extends BaseController
     {
         $this->checkCsrfToken('gallery', $token);
 
-        if (!$this->isGranted('ROLE_ADMIN') || $this->isGranted('GROUP_EDITOR')) {
+        if (!$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
 
