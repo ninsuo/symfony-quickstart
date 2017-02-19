@@ -2,6 +2,7 @@ parameters:
     base.case.twig_extension.class: BaseBundle\Twig\Extension\CaseExtension
     base.light.twig_extension.class: BaseBundle\Twig\Extension\LightExtension
     base.setting.twig_extension.class: BaseBundle\Twig\Extension\SettingExtension
+    base.markdown.twig_extension.class: BaseBundle\Twig\Extension\MarkdownExtension
 
 services:
 
@@ -18,5 +19,10 @@ services:
 
     base.setting.twig_extension:
         class: '%base.setting.twig_extension.class%'
+        tags:
+            - { name: twig.extension }
+
+    base.markdown.twig_extension:
+        class: '%base.markdown.twig_extension.class%'
         tags:
             - { name: twig.extension }

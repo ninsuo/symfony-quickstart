@@ -4,6 +4,19 @@
 
 {% block body %}
 
-    world
+    {% set name = 'alain' %}
+
+    {% markdown %}
+
+        ## Hello!
+
+        My name is __{{ name }}__!
+
+        ```php
+        <?php
+        echo "Hello, world";
+        ?>
+         ```
+    {% endmarkdown %}
 
 {% endblock %}
