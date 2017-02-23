@@ -5,6 +5,10 @@ namespace BaseBundle\Twig\Extension;
 use BaseBundle\Base\BaseTwigExtension;
 use BaseBundle\Twig\TokenParser\MarkdownTokenParser;
 
+/**
+ * This extension is just a POC and should not be used at scale.
+ * In this implementation, HTML generation from markdown is not cached.
+ */
 class MarkdownExtension extends BaseTwigExtension
 {
     public function getTokenParsers()

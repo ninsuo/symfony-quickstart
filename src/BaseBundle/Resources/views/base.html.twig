@@ -86,13 +86,15 @@
         {% block js %}
             {% javascripts filter="?jsqueeze" output="js/base.js"
                 "js/jquery.js"
+                "js/bootstrap.js"
                 "bundles/base/jquery-ui-1.11.2/jquery-ui.min.js"
                 "bundles/base/js/base.js"
+                "bundles/base/js/autosize.js"
                 "bundles/base/js/jquery.collection.js"
                 "bundles/base/js/jquery.domajax.js"
-                "js/bootstrap.js"
                 "bundles/base/js/emojione.min.js"
                 "bundles/base/js/highlight.min.js"
+                "bundles/base/js/marked.js"
                 "bundles/base/js/bootstrap-toggle.min.js"
                 "bundles/base/bootstrap-submenu/js/bootstrap-submenu.min.js"
                 "bundles/app/js/app.js"
@@ -100,12 +102,6 @@
                 <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
-
-        <script type="text/javascript">
-            $('.dropdown-submenu > a').submenupicker();
-
-            hljs.initHighlightingOnLoad();
-        </script>
 
         {% block script %}{% endblock %}
     </body>

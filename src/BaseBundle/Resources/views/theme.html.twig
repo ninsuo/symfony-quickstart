@@ -1,34 +1,27 @@
-{% block search_filter_widget %}
 
-    <div class="pull-right" style="width: 300px;">
+{% block markdown_widget %}
 
-    {{
-        form_start(form, {
-            'attr': {
-                'class': 'form-inline'
-            },
-            'method': 'GET'
-        })
-    }}
-
-   <div class="input-group stylish-input-group" style="border:none;">
-        <span class="form-control" style="border-right:none;">
+    <div class="row">
+        <div class="col-md-{{ preview is sameas(true) ? 6 : 12 }}">
             {{
-                form_widget(form.filter, {
+                form_widget(form.markdown, {
                     'attr': {
-                        'style': 'border:none;'
-                    }
+                        'class': attr.class|default('') ~ ' markdown',
+                        'style': attr.style|default('') ~ ' min-height:100px;',
+                        'data-html': form.html.vars.id,
+                        'data-preview': preview is sameas(true) ? ('#' ~ id ~ '-rendered') : (preview ? : ''),
+                    }|merge(attr|default({}))
                 })
             }}
-        </span>
-        <span class="form-control" style="border-left:none;">
-            <button type="submit" class="btn btn-primary">
-                <span class="glyphicon glyphicon-search"></span>
-            </button>
-        </span>
-   </div>
-
-    {{ form_end(form) }}
-
+        </div>
+        <div class="hide">
+            {{ form_widget(form.html) }}
+        </div>
+        {% if preview is sameas(true) %}
+            <div id="{{ id }}-rendered" class="col-md-6 well" style="min-height:100px;">
+            </div>
+        {% endif %}
     </div>
+
 {% endblock %}
+

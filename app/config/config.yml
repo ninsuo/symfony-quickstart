@@ -28,6 +28,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form_themes:
+        - "BaseBundle::theme.html.twig"
         - "BraincraftedBootstrapBundle:Form:bootstrap.html.twig"
     globals:
         fuz:

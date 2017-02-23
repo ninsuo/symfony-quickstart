@@ -4,17 +4,8 @@
 
 {% block body %}
 
-    {% set name = 'alain' %}
+    {{ form(form) }}
 
-    {% markdown %}
-
-        ## Hello!
-
-        My name is __{{ name }}__!
-
-        ```javascript
-        document.location = "test";
-         ```
-    {% endmarkdown %}
+    <div class="markdown">{{ data.markdown }}</div>
 
 {% endblock %}
