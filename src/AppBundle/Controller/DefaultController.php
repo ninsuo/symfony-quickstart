@@ -15,16 +15,6 @@ class DefaultController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createFormBuilder()
-           ->add('test', \BaseBundle\Form\Type\MarkdownType::class)
-           ->add('submit', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class)
-           ->getForm()
-           ->handleRequest($request)
-        ;
 
-        return [
-            'form' => $form->createView(),
-            'data' => $form->get('test')->getData(),
-        ];
     }
 }

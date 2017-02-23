@@ -5,7 +5,6 @@ parameters:
     pagerfanta.view.light.class: BaseBundle\Pagerfanta\View\LightView
     pagerfanta.template.light.class: BaseBundle\Pagerfanta\Template\LightTemplate
     security.class: BaseBundle\Services\Security
-    parsedown.class: Parsedown
 
 services:
 
@@ -45,6 +44,3 @@ services:
           - '@security.role_hierarchy'
         calls:
           - [setContainer, ["@service_container"]]
-
-    parsedown:
-        class: '%parsedown.class%'
