@@ -29,7 +29,7 @@ class LightExtension extends BaseTwigExtension
 
         $inputs = '';
         foreach ($value as $childKey => $childValue) {
-            $inputs .= $this->arrayToQueryInputs($childKey, $childValue, $currentKey);
+            $inputs .= $this->arrayToQueryFields($childKey, $childValue, $currentKey);
         }
 
         return $inputs;

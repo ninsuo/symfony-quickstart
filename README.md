@@ -43,8 +43,7 @@ You'll find here 3 bundles:
 
 ```sh
 php -r "readfile('https://getcomposer.org/installer');" | php
-php composer.phar update
-php app/console assets:install web --symlink
+php composer.phar install
 php app/console doctrine:schema:create
 ```
 
