@@ -53,7 +53,7 @@ abstract class BaseMenu implements ContainerAwareInterface
     {
         $currentUri = $this->container->get('request_stack')->getCurrentRequest()->getRequestUri();
 
-        $key = sha1($name);
+        $key = hash('sha256', $name);
 
         $item = $menu->addChild($key, array_merge($childParams, [
             'uri'   => $uri,

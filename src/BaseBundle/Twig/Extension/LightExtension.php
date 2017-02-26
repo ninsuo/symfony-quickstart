@@ -72,7 +72,7 @@ class LightExtension extends BaseTwigExtension
         $data = $route . '/' . join('/', $params);
 
         if ($hashed) {
-            return strtr(base64_encode(hex2bin(sha1($data))), '+/=', '-_,');
+            return strtr(base64_encode(hex2bin(hash('sha256', $data))), '+/=', '-_,');
         }
 
         return $data;
