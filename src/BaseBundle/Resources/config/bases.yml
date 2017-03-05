@@ -3,6 +3,7 @@ parameters:
     base.storage.class: BaseBundle\Base\BaseStorage
     base.type.class: BaseBundle\Base\BaseType
     base.twig_extension.class: BaseBundle\Base\BaseTwigExtension
+    base.voter.class: BaseBundle\Base\BaseVoter
 
 services:
 
@@ -29,3 +30,11 @@ services:
         abstract: true
         calls:
           - [setContainer, ["@service_container"]]
+
+    base.voter:
+        class: '%base.voter.class%'
+        abstract: true
+        public: false
+        calls:
+          - [setContainer, ["@service_container"]]
+          - [setDecisionManager, ["@security.access.decision_manager"]]

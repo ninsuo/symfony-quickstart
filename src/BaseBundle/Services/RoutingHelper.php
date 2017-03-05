@@ -19,7 +19,7 @@ class RoutingHelper extends BaseService
 
         return [
             'name'   => $request->get('_route'),
-            'params' => array_merge($request->get('_route_params') ?: [], $request->query->all()),
+            'params' => array_merge($request->get('_route_params', []), $request->query->all()),
         ];
     }
 }
