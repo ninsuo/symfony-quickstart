@@ -17,7 +17,6 @@ framework:
         version: 1.0.0
     default_locale:  "%locale%"
     trusted_hosts:   ~
-    trusted_proxies: ~
     session:
         handler_id:  ~
     fragments:       ~

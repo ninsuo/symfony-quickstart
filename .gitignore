@@ -9,6 +9,7 @@ app/config/parameters.yml
 app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
+app/Resources/views/jquery.collection.html.twig
 build/
 vendor/
 bin/
@@ -21,3 +22,4 @@ TODO
 !/web/upload/index.html
 !/web/upload/ckeditor
 !/web/upload/ckeditor/index.html
+.web-server-pid
