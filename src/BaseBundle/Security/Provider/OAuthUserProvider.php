@@ -93,6 +93,14 @@ class OAuthUserProvider extends BaseUserProvider
     {
         if ($user->isAdmin()) {
             $user->addRole('ROLE_ADMIN');
+
+            // Setting up all possible permissions
+            $all = $this->em->getRepository('BaseBundle:Permission')->findAll();
+            foreach ($all as $one) {
+                $user->addRole('ROLE_'.$one->getName());
+            }
+
+            return $user;
         }
 
         // Granted permissions
