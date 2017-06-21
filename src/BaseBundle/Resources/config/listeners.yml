@@ -12,6 +12,13 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    base.last_route.listener:
+        class: '%base.last_route.listener.class%'
+        arguments:
+            - '@base.routing.helper'
+        tags:
+            - { name: kernel.event_subscriber }
+
     base.locale.listener:
         class: '%base.locale.listener.class%'
         arguments:

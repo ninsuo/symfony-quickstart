@@ -18,7 +18,7 @@
                     {% block supported_locales %}
                         {% for locale, data in fuz.supported_locales %}
                         <li>
-                            <a href="{{ path(app.request.get('_route')|default('home'), app.request.get('_route_params')|default({})|merge({'_locale': locale})) }}">
+                            <a href="{{ path('reload', {'_locale': locale}) }}">
                                 <img class="lang-image" src="{{ asset('bundles/base/img/countries/' ~ data.flag ~ '.png') }}" alt=""/>
                                 {{ data.menu }}
                             </a>
