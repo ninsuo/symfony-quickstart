@@ -136,11 +136,6 @@ abstract class BaseController extends Controller
             return $this->redirect($this->generateUrl($route['name'], $route['params']));
         }
 
-        $referer = $request->headers->get('referer');
-        if (!is_null($referer)) {
-            return $this->redirect($referer);
-        }
-
-        return $this->redirect($this->generateUrl('home'));
+        return $this->redirectToRoute('home');
     }
 }
