@@ -40,7 +40,6 @@ services:
           - '@security.authorization_checker'
           - '@security.password_encoder'
           - '@security.authentication_utils'
-          - '@session'
           - '@security.role_hierarchy'
         calls:
           - [setContainer, ["@service_container"]]
