@@ -1,7 +1,6 @@
 parameters:
     base.case.twig_extension.class: BaseBundle\Twig\Extension\CaseExtension
     base.light.twig_extension.class: BaseBundle\Twig\Extension\LightExtension
-    base.setting.twig_extension.class: BaseBundle\Twig\Extension\SettingExtension
 
 services:
 
@@ -13,10 +12,5 @@ services:
     base.light.twig_extension:
         class: '%base.light.twig_extension.class%'
         parent: base.twig_extension
-        tags:
-            - { name: twig.extension }
-
-    base.setting.twig_extension:
-        class: '%base.setting.twig_extension.class%'
         tags:
             - { name: twig.extension }
