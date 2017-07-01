@@ -29,13 +29,15 @@ php composer.phar install
 php app/console doctrine:schema:create
 ```
 
-2) To use the login system, you need to get your client ID and token on at least one provider:
+2) To use the login system, you need to get your client ID and secret on at least one provider:
 
-GitHub Login: https://github.com/settings/developers
-StackExchange Login: https://stackapps.com/apps/oauth/
-Google Login: https://console.developers.google.com/project
-Twitter Login: https://apps.twitter.com/
-Facebook Login: https://developers.facebook.com/apps/
+| Provider       | Setup URL                                     |
+| -------------- | --------------------------------------------- |
+| GitHub         | https://github.com/settings/developers        |
+| StackExchange  | https://stackapps.com/apps/oauth/             |
+| Google         | https://console.developers.google.com/project |
+| Twitter        | https://apps.twitter.com/                     |
+| Facebook       | https://developers.facebook.com/apps/         |
 
 You can disable the providers you don't use during the configuration, or on `app/config/parameters.yml`.
 
@@ -78,13 +80,14 @@ parameters:
     site_keywords: twig,symfony,fiddle
     site_author: Alain Tiemblo
 
-    # Database
+    # Database (just put pdo_sqlite to switch)
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     twigfiddle
     database_user:     twigfiddle
     database_password: ¯\_(ツ)_/¯
+    database_path:     '%kernel.root_dir%/data.db3'
 
     # Emails (actually unused at all by twigfiddle.com)
     mailer_transport:    smtp
@@ -135,11 +138,16 @@ parameters:
 
     # User can only join if he has an email that matches the following regex (ex: '!@example\.org$!')
     # If you enable it and use twitter provider, explicitely configure your app to request email permission.
-    registration_restriction: ~
+    user_email_restriction: ~
 
     # If you wish to create a private website but can't use the restriction above, you can
     # let admins enable users manually by setting this option to false.
     user_auto_enabled: true
+
+    # When user connects using a provider (Facebook, ...), your app can synchronize user info (firstname, email...)
+    # automatically. If you prefer your admins having the ability to edit user names, this option should be set
+    # to false.
+    user_info_auto_update: true
 
     # Website menus at the top
     menu_left_enabled: true
@@ -158,11 +166,6 @@ parameters:
     # this feature requires a role. If you wish your users from the "writers" group to access this feature,
     # you should set ROLE_WRITERS here.
     role_file_upload: ROLE_ADMIN
-
-    # When user connects using a provider (Facebook, ...), your app can synchronize user info (firstname, email...)
-    # automatically. If you prefer your admins having the ability to edit user names, this option should be set
-    # to false.
-    user_info_auto_update: true
 ```
 ### Bundles
 

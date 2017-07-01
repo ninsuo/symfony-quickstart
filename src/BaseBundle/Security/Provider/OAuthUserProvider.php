@@ -54,10 +54,10 @@ class OAuthUserProvider extends BaseUserProvider implements ContainerAwareInterf
         $json            = json_encode([$resourceOwner, $resourceOwnerId]);
         $user            = $this->loadUserByUsername($json);
 
-        if ($this->getParameter('registration_restriction')
-           && !preg_match($this->getParameter('registration_restriction'), $response->getEmail())) {
+        if ($this->getParameter('user_email_restriction')
+           && !preg_match($this->getParameter('user_email_restriction'), $response->getEmail())) {
             throw new AuthenticationException(
-               $this->get('translator')->trans('base.error.registration_restriction', [
+               $this->get('translator')->trans('base.error.user_email_restriction', [
                    '%email%' => $response->getEmail(),
                ])
             );
