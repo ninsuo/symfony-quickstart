@@ -114,43 +114,11 @@ class User implements UserInterface, EquatableInterface
     protected $groups;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="grantedUsers")
-     * @ORM\JoinTable(name="users_permissions",
-     *     joinColumns={
-     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
-     *     },
-     *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="permission_id", referencedColumnName="id", onDelete="CASCADE")
-     *     }
-     * )
-     */
-    protected $permissions;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="Permission", cascade={"persist", "remove"}, inversedBy="deniedUsers")
-     * @ORM\JoinTable(name="users_denied_permissions",
-     *     joinColumns={
-     *         @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
-     *     },
-     *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="permission_id", referencedColumnName="id", onDelete="CASCADE")
-     *     }
-     * )
-     */
-    protected $deniedPermissions;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->groups            = new ArrayCollection();
-        $this->permissions       = new ArrayCollection();
-        $this->deniedPermissions = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     /**
@@ -431,102 +399,6 @@ class User implements UserInterface, EquatableInterface
 
         $this->groups->removeElement($group);
         $group->removeUser($this);
-
-        return $this;
-    }
-
-    /**
-     * Get permissions.
-     *
-     * @return ArrayCollection
-     */
-    public function getPermissions()
-    {
-        return $this->permissions;
-    }
-
-    /**
-     * Add permission.
-     *
-     * @param Permission $permission
-     *
-     * @return User
-     */
-    public function addPermission(Permission $permission)
-    {
-        if ($this->permissions->contains($permission)) {
-            return;
-        }
-
-        $this->permissions->add($permission);
-        $permission->addGrantedUser($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove permission.
-     *
-     * @param Permission $permission
-     *
-     * @return User
-     */
-    public function removePermission(Permission $permission)
-    {
-        if (!$this->permissions->contains($permission)) {
-            return;
-        }
-
-        $this->permissions->removeElement($permission);
-        $permission->removeGrantedUser($this);
-
-        return $this;
-    }
-
-    /**
-     * Get deniedPermissions.
-     *
-     * @return ArrayCollection
-     */
-    public function getDeniedPermissions()
-    {
-        return $this->deniedPermissions;
-    }
-
-    /**
-     * Add deniedPermission.
-     *
-     * @param Permission $deniedPermission
-     *
-     * @return User
-     */
-    public function addDeniedPermission(Permission $deniedPermission)
-    {
-        if ($this->deniedPermissions->contains($deniedPermission)) {
-            return;
-        }
-
-        $this->deniedPermissions->add($deniedPermission);
-        $deniedPermission->addDeniedUser($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove deniedPermission.
-     *
-     * @param Permission $deniedPermission
-     *
-     * @return User
-     */
-    public function removeDeniedPermission(Permission $deniedPermission)
-    {
-        if (!$this->deniedPermissions->contains($deniedPermission)) {
-            return;
-        }
-
-        $this->deniedPermissions->removeElement($deniedPermission);
-        $deniedPermission->removeDeniedUser($this);
 
         return $this;
     }

@@ -4,7 +4,6 @@ namespace AdminBundle\Controller;
 
 use BaseBundle\Base\BaseController;
 use BaseBundle\Entity\Group;
-use BaseBundle\Entity\Permission;
 use BaseBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -178,13 +177,9 @@ class GroupsController extends BaseController
         $group = $this->getEntityById('BaseBundle:Group', $id);
 
         return [
-            'group'          => $group,
-            'usersIn'        => $this->_getGroupUsers($request, $id, 'user-in'),
-            'usersOut'       => $this->_getGroupUsers($request, $id, 'user-out'),
-            'permissionsIn'  => $this->_getGroupPermissions($request, $id, 'permission-in', 'granted'),
-            'permissionsOut' => $this->_getGroupPermissions($request, $id, 'permission-out', 'granted'),
-            'deniedPermissionsIn'  => $this->_getGroupPermissions($request, $id, 'permission-in', 'denied'),
-            'deniedPermissionsOut' => $this->_getGroupPermissions($request, $id, 'permission-out', 'denied'),
+            'group'    => $group,
+            'usersIn'  => $this->_getGroupUsers($request, $id, 'user-in'),
+            'usersOut' => $this->_getGroupUsers($request, $id, 'user-out'),
         ];
     }
 
@@ -201,12 +196,6 @@ class GroupsController extends BaseController
                'label'    => 'admin.groups.notes',
                'required' => false,
            ])
-           ->add('permission', Type\CheckboxType::class, [
-               'label'    => 'admin.groups.create_permission',
-               'required' => false,
-               'mapped'   => false,
-               'data'     => true,
-           ])
            ->add('submit', Type\SubmitType::class, [
                'label' => 'base.crud.action.save',
            ])
@@ -220,22 +209,6 @@ class GroupsController extends BaseController
             $em->flush();
 
             $this->success('admin.groups.created');
-
-            if ($form->get('permission')->getData()) {
-                if (in_array(strtoupper($entity->getName()), ['USER', 'ADMIN'])) {
-                    $this->alert('admin.groups.permission_error');
-                }
-
-                $permission = $this->getManager('BaseBundle:Permission')->findOneByName($entity->getName());
-                if (!$permission) {
-                    $permission = new Permission();
-                    $permission->setName($entity->getName());
-                    $em->persist($permission);
-                    $entity->addPermission($permission);
-                    $em->persist($entity);
-                    $em->flush();
-                }
-            }
 
             $this->redirect('admin_groups');
         }
@@ -271,37 +244,6 @@ class GroupsController extends BaseController
         return [
             'order' => $this->orderBy($qb, User::class, 'u.nickname', 'ASC', $prefix),
             'pager' => $this->getPager($qb, $prefix),
-        ];
-    }
-
-    protected function _getGroupPermissions(Request $request, $groupId, $prefix, $grant)
-    {
-        $filter = $request->query->get("filter-{$grant}-{$prefix}");
-
-        $qb = $this
-           ->getManager()
-           ->createQueryBuilder()
-           ->select('p')
-           ->from(Permission::class, 'p')
-           ->setParameter('groupId', $groupId)
-        ;
-
-        if ('permission-in' == $prefix) {
-            $qb->where(":groupId MEMBER OF p.{$grant}Groups");
-        } else {
-            $qb->where(":groupId NOT MEMBER OF p.{$grant}Groups");
-        }
-
-        if ($filter) {
-            $qb
-               ->andWhere('p.name LIKE :criteria')
-               ->setParameter('criteria', '%'.$filter.'%')
-            ;
-        }
-
-        return [
-            'order' => $this->orderBy($qb, Permission::class, 'p.name', 'ASC',  "{$grant}-{$prefix}"),
-            'pager' => $this->getPager($qb, "{$grant}-{$prefix}"),
         ];
     }
 }
