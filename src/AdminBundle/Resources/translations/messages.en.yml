@@ -21,6 +21,7 @@ admin:
         network: Network
         nickname: Name
         contact: Email
+        enabled: Enabled
         admin: Admin
         actions: Actions
         manage: Groups

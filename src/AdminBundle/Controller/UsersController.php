@@ -50,6 +50,25 @@ class UsersController extends BaseController
     }
 
     /**
+     * @Route("/toggle/enabled/{token}", name="_admin_users_toggle_enabled")
+     * @Template()
+     */
+    public function toggleEnabledAction(Request $request, $token)
+    {
+        $this->checkCsrfToken('administration', $token);
+
+        $em   = $this->getManager();
+        $user = $this->getEntityById('BaseBundle:User', $request->request->get('id'));
+
+        $user->setIsEnabled(1 - intval($user->isEnabled()));
+
+        $em->persist($user);
+        $em->flush();
+
+        return new Response();
+    }
+
+    /**
      * @Route("/toggle/admin/{token}", name="_admin_users_toggle_admin")
      * @Template()
      */

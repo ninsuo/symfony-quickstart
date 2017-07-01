@@ -18,6 +18,7 @@
                     <th>{{ macros.orderBy(orderBy, 'nickname', 'admin.users.nickname') }}</th>
                     <th>{{ macros.orderBy(orderBy, 'contact', 'admin.users.contact') }}</th>
                     <th>{{ 'admin.users.actions' | trans }}</th>
+                    <th>{{ macros.orderBy(orderBy, 'isEnabled', 'admin.users.enabled') }}</th>
                     <th>{{ macros.orderBy(orderBy, 'isAdmin', 'admin.users.admin') }}</th>
                 </tr>
             </thead>
@@ -56,6 +57,24 @@
                             <a
                                 href="{{ path('admin_users_manage', {id: user.id}) }}"
                                 class="btn btn-warning btn-sm">{{ 'admin.users.manage' | trans }}</a>
+                        </td>
+                        <td>
+                            {% if me == user.id %}
+                                &nbsp;
+                            {% else %}
+                                <input
+                                    type="checkbox"
+                                    class="domajax change"
+                                    data-toggle="toggle"
+                                    data-on="{{ 'base.button.on'|trans }}"
+                                    data-off="{{ 'base.button.off'|trans }}"
+                                    data-style="ios"
+                                    data-endpoint="{{ path('_admin_users_toggle_enabled', {token: csrf_token('administration')}) }}"
+                                    data-input-attr="id"
+                                    data-id="{{ user.id }}"
+                                    {% if user.isEnabled %}checked{% endif %}
+                                />
+                            {% endif %}
                         </td>
                         <td>
                             {% if me == user.id %}

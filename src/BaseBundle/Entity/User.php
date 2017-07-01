@@ -82,6 +82,13 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var bool
      *
+     * @ORM\Column(name="is_enabled", type="boolean")
+     */
+    protected $isEnabled = true;
+
+    /**
+     * @var bool
+     *
      * @ORM\Column(name="is_admin", type="boolean")
      */
     protected $isAdmin = false;
@@ -298,6 +305,30 @@ class User implements UserInterface, EquatableInterface
     public function getSigninCount()
     {
         return $this->signinCount;
+    }
+
+    /**
+     * Set isEnabled.
+     *
+     * @param bool $isEnabled
+     *
+     * @return User
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isEnabled.
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->isEnabled;
     }
 
     /**
