@@ -23,3 +23,4 @@ TODO
 !/web/upload/ckeditor
 !/web/upload/ckeditor/index.html
 .web-server-pid
+app/data.db3

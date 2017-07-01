@@ -49,7 +49,7 @@ base:
             explain: 'If you got to that page, this is because something crashed somewhere.'
             title: 'It looks like something went wrong.'
         back_sentence: 'Use the Back button, the navigation menu or click on the Home button to continue.'
-        registration_restriction: 'Your email %email% doesn''t match with the website restrictions.'
+        user_email_restriction: 'Your email %email% doesn''t match with the website restrictions.'
         user_not_enabled: "Your account is not enabled yet, give your user id #%id% to this application's administrator."
     form:
         duplicate_error: 'This %entry% already exist.'

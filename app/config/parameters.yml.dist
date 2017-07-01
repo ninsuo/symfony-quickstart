@@ -9,15 +9,14 @@ parameters:
     site_keywords: base.site.keywords
     site_author: Alain Tiemblo
 
-    # Database
+    # Database (just put pdo_sqlite to switch)
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     fuz
     database_user:     root
     database_password: ~
-    # You should uncomment this if you want use pdo_sqlite
-    # database_path: "%kernel.root_dir%/data.db3"
+    database_path:     '%kernel.root_dir%/data.db3'
 
     # Emails
     mailer_transport:    smtp
@@ -66,9 +65,6 @@ parameters:
     facebook_client_id: <your client id>
     facebook_secret:    <your secret>
 
-    # User can only join if he has an email that matches the following regex (ex: '!@example\.org$!')
-    registration_restriction: ~
-
     # Website menus at the top
     menu_left_enabled: true
     menu_right_enabled: true
@@ -80,7 +76,14 @@ parameters:
     recaptcha_public: <your recaptcha site key>
     recaptcha_private: <your recaptcha secret>
 
+    # User can only join if he has an email that matches the following regex (ex: '!@example\.org$!')
+    user_email_restriction: ~
+
+    # User are automatically enabled (true) / an admin need to manually enable them after registration (false)
+    user_auto_enabled: true
+
+    # Admin can edit user information (true) / User information are updated from provider at login
+    user_info_auto_update: true
+
     # Misc
     role_file_upload: ROLE_ADMIN
-    user_info_auto_update: true
-    user_auto_enabled: true
