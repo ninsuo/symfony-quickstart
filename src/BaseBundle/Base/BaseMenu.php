@@ -51,8 +51,6 @@ abstract class BaseMenu implements ContainerAwareInterface
 
     protected function addUri(ItemInterface $menu, $name, $uri, array $childParams = [], $divider = false)
     {
-        $currentUri = $this->container->get('request_stack')->getCurrentRequest()->getRequestUri();
-
         $key = hash('sha256', $name);
 
         $item = $menu->addChild($key, array_merge($childParams, [
@@ -64,25 +62,65 @@ abstract class BaseMenu implements ContainerAwareInterface
             $menu[$key]->setAttribute('divider', true);
         }
 
-        $isCurrent = false;
-        $first     = null;
-        $elem      = $item;
-        while (!$elem->isRoot()) {
-            if (strcmp($currentUri, $elem->getUri()) == 0) {
-                $isCurrent = true;
+        return $item;
+    }
+
+    /**
+     * Strategy:
+     *
+     * A "main" page may directly match (if I just clicked on a link of the menu)
+     * Current uri = /admin/users and menu "Manage users" sends to /admin/users
+     *
+     * A "sub" page may match:
+     * Current uri = /admin/users/manage/3, menu that matches is still /admin/users
+     *
+     * We should keep the longest url that matches (else "/" would match everything).
+     *
+     * @param ItemInterface $menu
+     */
+    protected function selectActiveMenu(ItemInterface $menu)
+    {
+        // We look for the closest menu item that match current uri.
+        $currentUri   = $this->container->get('request_stack')->getCurrentRequest()->getRequestUri();
+        $length       = 0;
+        $active       = null;
+        $itemIterator = new \Knp\Menu\Iterator\RecursiveItemIterator($menu);
+        $iterator     = new \RecursiveIteratorIterator($itemIterator, \RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($iterator as $item) {
+            $compareUri = $item->getUri();
+            for ($i = strlen($currentUri); $i != -1; $i--) {
+                if (strncmp($currentUri, $compareUri, $i) == 0) {
+                    if ($i > $length) {
+                        $length = $i;
+                        $active = $item;
+                    }
+
+                    break ;
+                }
             }
+        }
+
+        // No match at all (there's the left & right menus, so it often happens)
+        if (!$active) {
+            return $menu;
+        }
+
+        // If current path doesn't match anything, we should prevent "Home" to be highlighted.
+        if ($active && $length == 1 && (strlen($currentUri) > 1 || strlen($active->getUri()) > 1)) {
+            return $menu;
+        }
+
+        // We go back to the last parent before root to highlight it.
+        $first = null;
+        $elem  = $active;
+        while (!$elem->isRoot()) {
             $first = $elem;
             $elem  = $elem->getParent();
         }
+        $first->setAttribute('class', $first->getAttribute('class').' active');
+        $first->setCurrent(true);
 
-        if (!is_null($first)) {
-            if ($isCurrent) {
-                $first->setAttribute('class', $first->getAttribute('class').' active');
-            }
-            $first->setCurrent($isCurrent);
-        }
-
-        return $item;
+        return $menu;
     }
 
     protected function addSubMenu(ItemInterface $menu, $label)

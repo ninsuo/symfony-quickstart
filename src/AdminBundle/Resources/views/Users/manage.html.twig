@@ -6,22 +6,12 @@
 
     {% import 'AdminBundle:Groups:macros.html.twig' as groupsMacros %}
 
-    <div id="tabs">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#manage-groups" data-toggle="tab">{{ 'base.menu.admin.groups'|trans }}</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="manage-groups">
-                <h2>{{ 'admin.users_manage.groups'|trans }}</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ groupsMacros.displayGroups('users', user.id, user.nickname, groupsIn, 'in') }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ groupsMacros.displayGroups('users', user.id, user.nickname, groupsOut, 'out') }}
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ groupsMacros.displayGroups('users', user.id, user.nickname, groupsIn, 'in') }}
+        </div>
+        <div class="col-md-6">
+            {{ groupsMacros.displayGroups('users', user.id, user.nickname, groupsOut, 'out') }}
         </div>
     </div>
 
