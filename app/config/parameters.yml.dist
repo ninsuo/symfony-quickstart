@@ -2,7 +2,6 @@
 parameters:
 
     # General
-    site_url: http://127.0.0.1:8000
     site_brand: app.site.brand
     site_description: app.site.description
     site_title: app.site.title
