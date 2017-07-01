@@ -39,8 +39,6 @@ php app/console doctrine:schema:create
 | Twitter        | https://apps.twitter.com/                     |
 | Facebook       | https://developers.facebook.com/apps/         |
 
-You can disable the providers you don't use during the configuration, or on `app/config/parameters.yml`.
-
 3) Be enabled and admin! Once you created your first user, you can run the following commands:
 
 ```sh
@@ -137,7 +135,6 @@ parameters:
     facebook_secret:    <your secret>
 
     # User can only join if he has an email that matches the following regex (ex: '!@example\.org$!')
-    # If you enable it and use twitter provider, explicitely configure your app to request email permission.
     user_email_restriction: ~
 
     # If you wish to create a private website but can't use the restriction above, you can

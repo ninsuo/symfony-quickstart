@@ -1,1 +1,7 @@
 app:
+    site:
+        brand: 'Light'
+        description: 'An empty Symfony project that provides lots of ready-to-use tools for quick and not-so-dirty development'
+        keywords: 'symfony,framework,development,fast,tool,efficien,quick'
+        title: 'Write down your mind'
+        author: "Your our your company's name"

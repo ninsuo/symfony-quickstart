@@ -1,1 +1,7 @@
 app:
+    site:
+        brand: 'Light'
+        description: 'Un projet Symfony contenant des outils indispensables pour un développement rapide et efficace.'
+        keywords: 'symfony,framework,développement,rapide,outil,indispensable,efficace'
+        title: 'Vos idées vite faites bien faites'
+        author: 'Votre nom ou le nom de votre entreprise'
