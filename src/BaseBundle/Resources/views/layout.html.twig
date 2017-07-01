@@ -39,16 +39,30 @@
                <li><a href="{{ path('logout') }}">{{ 'base.logout.title' | trans }}</a></li>
             {% endblock %}
         {% else %}
-           {% block logged_out %}
-               <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'base.login.title' | trans }} <span class="caret"></span></a>
-                   <ul class="dropdown-menu" role="menu">
-                       {% for service, enabled in fuz.services if enabled %}
-                           {% set serviceId = (service|split(' '))[0]|lower %}
-                           <li><a href="{{ hwi_oauth_login_url(serviceId) }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ serviceId ~ '-small.png') }}" alt=""/> {{ service }}</a></li>
-                       {% endfor %}
-                   </ul>
-               </li>
+            {% block logged_out %}
+                {% set servicesCount = 0 %}
+                {% for service, enabled in fuz.services if enabled %}
+                    {% set servicesCount = servicesCount + 1 %}
+                {% endfor %}
+
+                {% if servicesCount > 0 %}
+                    {% if servicesCount > 1 %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'base.login.title' | trans }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                    {% endif %}
+
+                    {% for service, enabled in fuz.services if enabled %}
+                        {% set serviceId = (service|split(' '))[0]|lower %}
+                        <li><a href="{{ hwi_oauth_login_url(serviceId) }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ serviceId ~ '-small.png') }}" alt=""/> {{ service }}</a></li>
+                    {% endfor %}
+
+                    {% if servicesCount > 1 %}
+                            </ul>
+                        </li>
+                    {% endif %}
+
+                {% endif %}
             {% endblock %}
         {% endif %}
     </ul>
