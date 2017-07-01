@@ -95,12 +95,6 @@ braincrafted_bootstrap:
     auto_configure:
       knp_menu: false
 
-# cache cleaning
-accelerator_cache:
-    host: "%site_url%"
-    web_dir: "%kernel.root_dir%/../web"
-    mode: "curl"
-
 # HWIOAuthBundle Configuration
 hwi_oauth:
     firewall_names: ["main"]

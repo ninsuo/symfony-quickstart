@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
             new EasyCorp\Bundle\EasySecurityBundle\EasySecurityBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),

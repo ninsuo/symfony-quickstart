@@ -2,7 +2,7 @@
     "name": "ninsuo/quickstart",
     "license": "MIT",
     "type": "project",
-    "description": "An empty Symfony2 project that provides lots of ready-to-use tools for quick & not-so-dirty developments",
+    "description": "An empty Symfony3 project that provides lots of ready-to-use tools for quick & not-so-dirty developments",
     "autoload": {
         "psr-4": {
             "": "src/"
@@ -34,7 +34,6 @@
         "hwi/oauth-bundle": "dev-master",
         "jms/translation-bundle": "~1.1",
         "knplabs/knp-menu-bundle": "^2.0",
-        "smart-core/accelerator-cache-bundle": "~1",
         "easycorp/easy-security-bundle": "^1.0",
         "egeloen/ckeditor-bundle": "^4.0",
         "exercise/htmlpurifier-bundle": "^0.2.3",
@@ -65,7 +64,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-            "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache",
             "php app/console assetic:dump web/",
             "php app/console assets:install web --symlink"
         ],
@@ -78,7 +76,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-            "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache",
             "php app/console assetic:dump web/",
             "php app/console assets:install web --symlink"
         ]
