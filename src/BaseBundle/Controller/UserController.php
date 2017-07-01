@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Validator\Constraints;
 
 class UserController extends BaseController
 {
@@ -85,7 +87,7 @@ class UserController extends BaseController
         // CRSF
         $form = $this
            ->createFormBuilder()
-           ->add('submit', 'submit', [
+           ->add('submit', Type\SubmitType::class, [
                'label' => 'base.unsuscribe.confirm',
                'attr'  => [
                    'class' => 'btn btn-danger',

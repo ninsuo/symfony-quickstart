@@ -42,9 +42,10 @@ class UsersController extends BaseController
         }
 
         return [
-            'orderBy' => $this->orderBy($qb, User::class, 'u.nickname', 'ASC', 'test'),
-            'pager'   => $this->getPager($qb),
-            'me'      => $this->getUser()->getId(),
+            'orderBy'      => $this->orderBy($qb, User::class, 'u.nickname', 'ASC', 'test'),
+            'pager'        => $this->getPager($qb),
+            'me'           => $this->getUser()->getId(),
+            'auto_updated' => $this->getParameter('user_info_auto_update'),
         ];
     }
 
@@ -68,31 +69,16 @@ class UsersController extends BaseController
     }
 
     /**
-     * @Route("/toggle/frozen/{token}", name="_admin_users_toggle_frozen")
-     * @Template()
-     */
-    public function toggleFrozenAction(Request $request, $token)
-    {
-        $this->checkCsrfToken('administration', $token);
-
-        $em   = $this->getManager();
-        $user = $this->getEntityById('BaseBundle:User', $request->request->get('id'));
-
-        $user->setIsFrozen(1 - intval($user->isFrozen()));
-
-        $em->persist($user);
-        $em->flush();
-
-        return new Response();
-    }
-
-    /**
      * @Route("/edit/contact/{id}", name="_admin_users_edit_contact")
      * @Template("BaseBundle::editOnClick.html.twig")
      */
     public function _editContactAction(Request $request, $id)
     {
         $manager = $this->getManager('BaseBundle:User');
+
+        if ($this->getParameter('user_info_auto_update')) {
+            throw $this->createNotFoundException();
+        }
 
         $entity = $manager->findOneById($id);
         if (!$entity) {
@@ -145,6 +131,10 @@ class UsersController extends BaseController
     public function _editNicknameAction(Request $request, $id)
     {
         $manager = $this->getManager('BaseBundle:User');
+
+        if ($this->getParameter('user_info_auto_update')) {
+            throw $this->createNotFoundException();
+        }
 
         $entity = $manager->findOneById($id);
         if (!$entity) {

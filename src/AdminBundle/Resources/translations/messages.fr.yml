@@ -22,7 +22,6 @@ admin:
         nickname: Nom
         contact: Email
         admin: Admin
-        frozen: Gelé
         actions: Actions
         manage: Groupes de cet utilisateur
     users_manage:
