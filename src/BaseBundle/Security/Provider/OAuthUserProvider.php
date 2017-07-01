@@ -95,9 +95,9 @@ class OAuthUserProvider extends BaseUserProvider
             $user->addRole('ROLE_ADMIN');
 
             // Setting up all possible permissions
-            $all = $this->em->getRepository('BaseBundle:Permission')->findAll();
+            $all = $this->em->getRepository('BaseBundle:Group')->findAll();
             foreach ($all as $one) {
-                $user->addRole('ROLE_'.$one->getName());
+                $user->addRole('ROLE_'.mb_strtoupper($one->getName()));
             }
 
             return $user;
@@ -105,22 +105,7 @@ class OAuthUserProvider extends BaseUserProvider
 
         // Granted permissions
         foreach ($user->getGroups()->toArray() as $group) {
-            foreach ($group->getPermissions() as $permission) {
-                $user->addRole('ROLE_'.$permission->getName());
-            }
-        }
-        foreach ($user->getPermissions() as $permission) {
-            $user->addRole('ROLE_'.$permission->getName());
-        }
-
-        // Denied permissions
-        foreach ($user->getGroups()->toArray() as $group) {
-            foreach ($group->getDeniedPermissions() as $permission) {
-                $user->removeRole('ROLE_'.$permission->getName());
-            }
-        }
-        foreach ($user->getDeniedPermissions() as $permission) {
-            $user->removeRole('ROLE_'.$permission->getName());
+            $user->addRole('ROLE_'.strtoupper($group->getName()));
         }
 
         return $user;

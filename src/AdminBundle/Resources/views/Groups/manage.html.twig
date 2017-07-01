@@ -5,7 +5,6 @@
 {% block body %}
 
     {% import 'AdminBundle:Users:macros.html.twig' as usersMacros %}
-    {% import 'AdminBundle:Permissions:macros.html.twig' as permissionsMacros %}
 
     <div id="tabs">
         <ul class="nav nav-tabs">
@@ -22,28 +21,6 @@
                     </div>
                     <div class="col-md-6">
                         {{ usersMacros.displayUsers('groups', group.id, group.name, usersOut, 'out') }}
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="manage-granted-permissions">
-                <h2>{{ 'admin.groups_manage.permissions'|trans }}</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ permissionsMacros.displayPermissions('groups', group.id, group.name, permissionsIn, 'in', 'granted') }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ permissionsMacros.displayPermissions('groups', group.id, group.name, permissionsOut, 'out', 'granted') }}
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="manage-denied-permissions">
-                <h2>{{ 'admin.groups_manage.denied_permissions'|trans }}</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ permissionsMacros.displayPermissions('groups', group.id, group.name, deniedPermissionsIn, 'in', 'denied') }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ permissionsMacros.displayPermissions('groups', group.id, group.name, deniedPermissionsOut, 'out', 'denied') }}
                     </div>
                 </div>
             </div>
