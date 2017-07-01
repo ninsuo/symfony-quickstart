@@ -21,7 +21,7 @@ class Builder extends BaseMenu
           $this->addRoute($menu['test'], 'testC', 'testc');
         */
 
-        return $menu;
+        return $this->selectActiveMenu($menu);
     }
 
     public function mainRightMenu(FactoryInterface $factory, array $options)
@@ -34,6 +34,6 @@ class Builder extends BaseMenu
             $this->addRoute($menu['base.menu.admin.main'], 'base.menu.admin.groups', 'admin_groups');
         }
 
-        return $menu;
+        return $this->selectActiveMenu($menu);
     }
 }
