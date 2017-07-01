@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a06c3cdc098b213984eebc1a1ab690dc",
-    "content-hash": "40b18549a59594ea4e0bde08d7404858",
+    "hash": "aa72dac8c9775cd6575b4fd29f8994c0",
+    "content-hash": "41453d38b36bfd49a6effb3f2e7ad341",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -2930,64 +2930,6 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2017-03-31 14:50:32"
-        },
-        {
-            "name": "smart-core/accelerator-cache-bundle",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Smart-Core/AcceleratorCacheBundle.git",
-                "reference": "f34417af9880f7dcf70865a5858d614a3c342faa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Smart-Core/AcceleratorCacheBundle/zipball/f34417af9880f7dcf70865a5858d614a3c342faa",
-                "reference": "f34417af9880f7dcf70865a5858d614a3c342faa",
-                "shasum": ""
-            },
-            "require": {
-                "sensio/distribution-bundle": ">=2.1",
-                "symfony/framework-bundle": ">=2.1"
-            },
-            "require-dev": {
-                "composer/composer": "1.0.*@dev",
-                "matthiasnoback/symfony-dependency-injection-test": "^0.7.3",
-                "symfony/console": ">=2.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SmartCore\\Bundle\\AcceleratorCacheBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Thibault Duplessis",
-                    "homepage": "https://github.com/ornicar"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/Smart-Core/AcceleratorCacheBundle/contributors"
-                }
-            ],
-            "description": "Provides a command line task to clear PHP Accelerators cache from the console",
-            "homepage": "https://github.com/Smart-Core/AcceleratorCacheBundle",
-            "keywords": [
-                "Opcache",
-                "apc",
-                "task",
-                "wincache"
-            ],
-            "time": "2016-05-11 04:54:09"
         },
         {
             "name": "swiftmailer/swiftmailer",
