@@ -105,20 +105,20 @@ abstract class BaseMenu implements ContainerAwareInterface
             return $menu;
         }
 
-        // If current path doesn't match anything, we should prevent "Home" to be highlighted.
+        // If current path doesn't match anything, we should prevent "Home" for being highlighted.
         if ($active && $length == 1 && (strlen($currentUri) > 1 || strlen($active->getUri()) > 1)) {
             return $menu;
         }
 
-        // We go back to the last parent before root to highlight it.
+        // We highlight all submenus until the root node, but except the root node
         $first = null;
         $elem  = $active;
         while (!$elem->isRoot()) {
             $first = $elem;
+            $first->setCurrent(true);
+            $first->setAttribute('class', $first->getAttribute('class').' active');
             $elem  = $elem->getParent();
         }
-        $first->setAttribute('class', $first->getAttribute('class').' active');
-        $first->setCurrent(true);
 
         return $menu;
     }
@@ -139,6 +139,13 @@ abstract class BaseMenu implements ContainerAwareInterface
         $menu[$label]->setLinkAttribute('aria-expanded', 'false');
     }
 
+    /**
+     * Can be useful if some part of the url could be article titles,
+     * or things that could be more seo-friendly.
+     *
+     * @param string $text
+     * @return string
+     */
     protected function slugify($text)
     {
         // replace non letter or digits by -

@@ -39,12 +39,21 @@ Facebook Login: https://developers.facebook.com/apps/
 
 You can disable the providers you don't use during the configuration, or on `app/config/parameters.yml`.
 
-3) Be admin, once you created your first user, update it:
+3) Be enabled and admin! Once you created your first user, you can run the following commands:
 
-```sql
-SELECT * from users;
-UPDATE users SET is_admin = 1 WHERE id = <your user id>;
+```sh
+# list your users, from here you can find your id (should be 1, but stay safe)
+php app/console user:list
+
+# enable user with id = 42
+php app/console user:enable 42
+
+# set user with id = 42 as admin
+php app/console user:admin 42
 ```
+
+Note that those commands are toggles, so running `php app/console user:admin 42` a second time will remove admin
+privileges for the given user.
 
 4) Feel home:
 
