@@ -96,6 +96,7 @@ braincrafted_bootstrap:
       knp_menu: false
 
 # HWIOAuthBundle Configuration
+# Don't forget to add new resource owners to twig > globals > services configuration
 hwi_oauth:
     firewall_names: ["main"]
     resource_owners:
