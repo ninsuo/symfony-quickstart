@@ -18,7 +18,6 @@
                     <th>{{ macros.orderBy(orderBy, 'nickname', 'admin.users.nickname') }}</th>
                     <th>{{ macros.orderBy(orderBy, 'contact', 'admin.users.contact') }}</th>
                     <th>{{ 'admin.users.actions' | trans }}</th>
-                    <th>{{ macros.orderBy(orderBy, 'isFrozen', 'admin.users.frozen') }}</th>
                     <th>{{ macros.orderBy(orderBy, 'isAdmin', 'admin.users.admin') }}</th>
                 </tr>
             </thead>
@@ -30,40 +29,33 @@
                             <img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/> {{ user.resourceOwner|title }}
                         </td>
                         <td>
-                            {{
-                                include('BaseBundle::editOnClick.html.twig', {
-                                    'text': macros.user(user),
-                                    'endpoint': path('_admin_users_edit_nickname', {id: user.id}),
-                                })
-                            }}
+                            {% if auto_updated %}
+                                {{ macros.user(user) }}
+                            {% else %}
+                                {{
+                                    include('BaseBundle::editOnClick.html.twig', {
+                                        'text': macros.user(user),
+                                        'endpoint': path('_admin_users_edit_nickname', {id: user.id}),
+                                    })
+                                }}
+                            {% endif %}
                         </td>
                         <td>
-                            {{
-                                include('BaseBundle::editOnClick.html.twig', {
-                                    'text': user.contact,
-                                    'endpoint': path('_admin_users_edit_contact', {id: user.id}),
-                                })
-                            }}
+                            {% if auto_updated %}
+                                {{ user.contact }}
+                            {% else %}
+                                {{
+                                    include('BaseBundle::editOnClick.html.twig', {
+                                        'text': user.contact,
+                                        'endpoint': path('_admin_users_edit_contact', {id: user.id}),
+                                    })
+                                }}
+                            {% endif %}
                         </td>
-
                         <td>
                             <a
                                 href="{{ path('admin_users_manage', {id: user.id}) }}"
                                 class="btn btn-warning btn-sm">{{ 'admin.users.manage' | trans }}</a>
-                        </td>
-                        <td>
-                            <input
-                                type="checkbox"
-                                class="domajax change"
-                                data-toggle="toggle"
-                                data-on="{{ 'base.button.on'|trans }}"
-                                data-off="{{ 'base.button.off'|trans }}"
-                                data-style="ios"
-                                data-endpoint="{{ path('_admin_users_toggle_frozen', {token: csrf_token('administration')}) }}"
-                                data-input-attr="id"
-                                data-id="{{ user.id }}"
-                                {% if user.isFrozen %}checked{% endif %}
-                            />
                         </td>
                         <td>
                             {% if me == user.id %}

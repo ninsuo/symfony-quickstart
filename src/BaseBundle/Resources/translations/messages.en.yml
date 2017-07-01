@@ -68,7 +68,6 @@ base:
             main: Administration
             users: Manage users
             groups: Manage groups
-            permissions: Manage permissions
     nav: 'Toggle navigation'
     pager:
         prev: '← Previous'

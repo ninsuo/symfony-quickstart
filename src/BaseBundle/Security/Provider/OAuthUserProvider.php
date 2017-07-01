@@ -14,12 +14,18 @@ class OAuthUserProvider extends BaseUserProvider
     protected $em;
     protected $translator;
     protected $registrationRestriction;
+    protected $syncUserWithProviders;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, $registrationRestriction)
+    public function __construct(
+       EntityManagerInterface $em,
+       TranslatorInterface $translator,
+       $registrationRestriction,
+       $syncUserWithProviders)
     {
         $this->em                      = $em;
         $this->translator              = $translator;
         $this->registrationRestriction = $registrationRestriction;
+        $this->syncUserWithProviders   = $syncUserWithProviders;
     }
 
     public function loadUserByUsername($username)
@@ -62,12 +68,11 @@ class OAuthUserProvider extends BaseUserProvider
             $user->setPicture($response->getProfilePicture());
             $user->setSigninCount(1);
             $user->setIsAdmin(false);
-            $user->setIsFrozen(false);
             $this->em->persist($user);
             $this->em->flush($user);
             $reload = true;
         } else {
-            if (!$user->isFrozen()) {
+            if ($this->syncUserWithProviders) {
                 $user->setNickname($name);
                 $user->setContact($response->getEmail());
                 $user->setPicture($response->getProfilePicture());

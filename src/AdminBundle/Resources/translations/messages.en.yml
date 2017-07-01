@@ -22,11 +22,10 @@ admin:
         nickname: Name
         contact: Email
         admin: Admin
-        frozen: Frozen
         actions: Actions
         manage: Groups
     users_manage:
         groups: Groups
-        title: User %name%'s groups and permissions
+        title: User %name%'s groups
         groups_in: "%name%'s groups:"
         groups_out: "Other groups:"

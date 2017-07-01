@@ -82,3 +82,4 @@ parameters:
 
     # Misc
     role_file_upload: ROLE_ADMIN
+    user_info_auto_update: true
