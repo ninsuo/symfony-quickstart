@@ -72,13 +72,13 @@ class UserController extends BaseController
     /**
      * User unsubscription confirmation.
      *
-     * @Route("/unsuscribe", name="unsuscribe")
+     * @Route("/unsubscribe", name="unsubscribe")
      *
      * @param Request $request
      *
      * @return RedirectResponse|Response
      */
-    public function unsuscribeAction(Request $request)
+    public function unsubscribeAction(Request $request)
     {
         if (!$this->getParameter('accounts_removable') || !$this->getUser()) {
             throw $this->createNotFoundException();
@@ -88,7 +88,7 @@ class UserController extends BaseController
         $form = $this
            ->createFormBuilder()
            ->add('submit', Type\SubmitType::class, [
-               'label' => 'base.unsuscribe.confirm',
+               'label' => 'base.unsubscribe.confirm',
                'attr'  => [
                    'class' => 'btn btn-danger',
                ],
@@ -110,7 +110,7 @@ class UserController extends BaseController
             return $this->goBack($request);
         }
 
-        return $this->render('BaseBundle:User:unsuscribe.html.twig', [
+        return $this->render('BaseBundle:User:unsubscribe.html.twig', [
                'form' => $form->createView(),
         ]);
     }

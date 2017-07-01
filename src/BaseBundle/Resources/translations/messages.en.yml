@@ -85,9 +85,9 @@ base:
         keywords: 'symfony,framework,development,fast,tool,efficien,quick'
         title: 'Write down your mind'
     undefined: Undefined
-    unsuscribe:
+    unsubscribe:
         confirm: Confirm
         explain: 'All data associated with your account will be'
         removed: removed
-        title: 'You are going to unsuscribe.'
+        title: 'You are going to unsubscribe.'
     wait: 'Please wait...'

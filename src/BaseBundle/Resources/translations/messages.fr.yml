@@ -85,7 +85,7 @@ base:
         keywords: 'symfony,framework,développement,rapide,outil,indispensable,efficace'
         title: 'Vos idées vite faites bien faites'
     undefined: Valeur non définie
-    unsuscribe:
+    unsubscribe:
         confirm: Confirmer
         explain: 'Toutes les données associées à votre compte vont être'
         removed: supprimées
