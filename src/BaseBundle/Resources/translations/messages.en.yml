@@ -80,10 +80,6 @@ base:
         go: 'Go'
     search: Search...
     share: 'Share:'
-    site:
-        description: 'An empty Symfony project that provides lots of ready-to-use tools for quick and not-so-dirty development'
-        keywords: 'symfony,framework,development,fast,tool,efficien,quick'
-        title: 'Write down your mind'
     undefined: Undefined
     unsubscribe:
         confirm: Confirm

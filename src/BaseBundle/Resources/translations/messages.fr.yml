@@ -80,10 +80,6 @@ base:
         go: 'Valider'
     search: Rechercher...
     share: 'Partager :'
-    site:
-        description: 'Un projet Symfony contenant des outils indispensables pour un développement rapide et efficace.'
-        keywords: 'symfony,framework,développement,rapide,outil,indispensable,efficace'
-        title: 'Vos idées vite faites bien faites'
     undefined: Valeur non définie
     unsubscribe:
         confirm: Confirmer

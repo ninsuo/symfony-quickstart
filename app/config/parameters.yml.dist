@@ -3,11 +3,11 @@ parameters:
 
     # General
     site_url: http://127.0.0.1:8000
-    site_brand: Light
-    site_description: base.site.description
-    site_title: base.site.title
-    site_keywords: base.site.keywords
-    site_author: Alain Tiemblo
+    site_brand: app.site.brand
+    site_description: app.site.description
+    site_title: app.site.title
+    site_keywords: app.site.keywords
+    site_author: app.site.author
 
     # Database (just put pdo_sqlite to switch)
     database_driver:   pdo_mysql
