@@ -50,6 +50,7 @@ base:
             title: 'Une erreur s''est produite.'
         back_sentence: 'Utilisez le bouton Page précédente, le menu de navigation ou cliquez sur le bouton Accueil pour continuer.'
         registration_restriction: 'Votre email %email% ne correspond pas aux restrictions définies sur la plateforme.'
+        user_not_enabled: "Votre compte n'est pas encore activé, veuillez donner votre numéro d'utilisateur #%id% à l'administrateur en charge de cette application."
     form:
         duplicate_error: 'Cette %entity% existe déjà.'
     locale:

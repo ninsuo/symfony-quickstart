@@ -3,29 +3,24 @@
 namespace BaseBundle\Security\Provider;
 
 use BaseBundle\Entity\User;
+use BaseBundle\Traits\ServiceTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseUserProvider;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class OAuthUserProvider extends BaseUserProvider
+class OAuthUserProvider extends BaseUserProvider implements ContainerAwareInterface
 {
-    protected $em;
-    protected $translator;
-    protected $registrationRestriction;
-    protected $syncUserWithProviders;
+    use ContainerAwareTrait;
+    use ServiceTrait;
 
-    public function __construct(
-       EntityManagerInterface $em,
-       TranslatorInterface $translator,
-       $registrationRestriction,
-       $syncUserWithProviders)
+    protected $em;
+
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->em                      = $em;
-        $this->translator              = $translator;
-        $this->registrationRestriction = $registrationRestriction;
-        $this->syncUserWithProviders   = $syncUserWithProviders;
+        $this->em = $em;
     }
 
     public function loadUserByUsername($username)
@@ -36,6 +31,15 @@ class OAuthUserProvider extends BaseUserProvider
            ->getUserByResourceOwnerId($resourceOwner, $resourceOwnerId);
 
         if ($user) {
+
+            if (!$user->isEnabled()) {
+                throw new AuthenticationException(
+                   $this->get('translator')->trans('base.error.user_not_enabled', [
+                       '%id%' => $user->getId(),
+                   ])
+                );
+            }
+
             $this->injectRoles($user);
         }
 
@@ -50,9 +54,10 @@ class OAuthUserProvider extends BaseUserProvider
         $json            = json_encode([$resourceOwner, $resourceOwnerId]);
         $user            = $this->loadUserByUsername($json);
 
-        if ($this->registrationRestriction && !preg_match($this->registrationRestriction, $response->getEmail())) {
+        if ($this->getParameter('registration_restriction')
+           && !preg_match($this->getParameter('registration_restriction'), $response->getEmail())) {
             throw new AuthenticationException(
-               $this->translator->trans('base.error.registration_restriction', [
+               $this->get('translator')->trans('base.error.registration_restriction', [
                    '%email%' => $response->getEmail(),
                ])
             );
@@ -67,12 +72,13 @@ class OAuthUserProvider extends BaseUserProvider
             $user->setContact($response->getEmail());
             $user->setPicture($response->getProfilePicture());
             $user->setSigninCount(1);
+            $user->setIsEnabled($this->getParameter('user_auto_enabled'));
             $user->setIsAdmin(false);
             $this->em->persist($user);
             $this->em->flush($user);
             $reload = true;
         } else {
-            if ($this->syncUserWithProviders) {
+            if ($this->getParameter('user_info_auto_update')) {
                 $user->setNickname($name);
                 $user->setContact($response->getEmail());
                 $user->setPicture($response->getProfilePicture());

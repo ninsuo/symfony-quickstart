@@ -31,11 +31,11 @@ php app/console doctrine:schema:create
 
 2) To use the login system, you need to get your client ID and token on at least one provider:
 
-- GitHub Login: https://github.com/settings/developers
-- StackExchange Login: https://stackapps.com/apps/oauth/
-- Google Login: https://console.developers.google.com/project
-- Twitter Login: https://apps.twitter.com/
-- Facebook Login: https://developers.facebook.com/apps/
+GitHub Login: https://github.com/settings/developers
+StackExchange Login: https://stackapps.com/apps/oauth/
+Google Login: https://console.developers.google.com/project
+Twitter Login: https://apps.twitter.com/
+Facebook Login: https://developers.facebook.com/apps/
 
 You can disable the providers you don't use during the configuration, or on `app/config/parameters.yml`.
 
@@ -48,22 +48,9 @@ UPDATE users SET is_admin = 1 WHERE id = <your user id>;
 
 4) Feel home:
 
-- Go to the web/ directory and replace icon, logo and image by yours.
+Go to the web/ directory and replace icon, logo and image by yours.
 
 ## Usage
-
-### Bundles
-
-You'll find here 3 bundles:
-
-- AdminBundle contains tools to manage the application (users, groups, settings, uploaded image galleries etc).
-
-- BaseBundle contains well-known bundles implementations as well as helpers, overloads and customizations.
-
-- AppBundle is a skeleton, it will contain your app implementation.
-
-Try to never modify `BaseBundle` and `AdminBundle` by yourself, because this project regularly evolves and it will
-be easier to upgrade it. I'll someday export those bundles on separate packages.
 
 ### Configuration
 
@@ -141,6 +128,10 @@ parameters:
     # If you enable it and use twitter provider, explicitely configure your app to request email permission.
     registration_restriction: ~
 
+    # If you wish to create a private website but can't use the restriction above, you can
+    # let admins enable users manually by setting this option to false.
+    user_auto_enabled: true
+
     # Website menus at the top
     menu_left_enabled: true
     menu_right_enabled: true
@@ -164,6 +155,18 @@ parameters:
     # to false.
     user_info_auto_update: true
 ```
+### Bundles
+
+You'll find here 3 bundles:
+
+- AdminBundle contains tools to manage the application (users, groups, settings, uploaded image galleries etc).
+
+- BaseBundle contains well-known bundles implementations as well as helpers, overloads and customizations.
+
+- AppBundle is a skeleton, it will contain your app implementation.
+
+Try to never modify `BaseBundle` and `AdminBundle` by yourself, because this project regularly evolves and it will
+be easier to upgrade it. I'll someday export those bundles on separate packages.
 
 ## License
 
