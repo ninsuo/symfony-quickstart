@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseUserProvider;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
@@ -18,29 +17,6 @@ class OAuthUserProvider extends BaseUserProvider implements ContainerAwareInterf
     use ServiceTrait;
 
     protected $em;
-//    protected $translator;
-//    protected $registrationRestriction;
-//    protected $syncUserWithProviders;
-//    protected $userAutoEnabled;
-//
-//    public function __construct(
-//       EntityManagerInterface $em,
-//       TranslatorInterface $translator,
-//       $registrationRestriction,
-//       $syncUserWithProviders,
-//       $userAutoEnabled)
-//    {
-//        $this->em                      = $em;
-//        $this->translator              = $translator;
-//        $this->registrationRestriction = $registrationRestriction;
-//        $this->syncUserWithProviders   = $syncUserWithProviders;
-//        $this->userAutoEnabled         = $userAutoEnabled;
-//    }
-//        arguments:
-//            - '@doctrine.orm.entity_manager'
-//            - '@translator'
-//            - '%registration_restriction%'
-//            - '%user_info_auto_update%'
 
     public function __construct(EntityManagerInterface $em)
     {
