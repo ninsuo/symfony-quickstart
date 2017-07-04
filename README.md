@@ -1,6 +1,15 @@
 Symfony Quick Start
 ===================
 
+## Disclaimer
+
+This project might have a better audience if I worked on it to create a CMS-like stuff that would do everything once
+installed. But it first aims to help myself: I don't want to bother install a login system and the many
+things required when I just want to solve a problem my colleagues, friends or I have.
+
+This website helps me create useful and value-added things in a matter of hours instead of days or weeks.
+That's the point. As this project uses many well-known bundles, you may adopt it as well for the same purpose.
+
 ## What is it?
 
 This is the [Symfony3 Standard Edition](https://github.com/symfony/symfony-standard) with some ready-to-use tools to
@@ -184,3 +193,4 @@ be easier to upgrade it. I'll someday export those bundles on separate packages.
 - Fuz logo is © 2013-2017 Alain Tiemblo
 
 - Default image used on social meta tags is CC0
+

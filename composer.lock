@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aa72dac8c9775cd6575b4fd29f8994c0",
+    "hash": "de3f8ddc4223929dc8827c8e5fbd469e",
     "content-hash": "41453d38b36bfd49a6effb3f2e7ad341",
     "packages": [
         {
@@ -2138,13 +2138,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nabil1337/case-helper.git",
-                "reference": "8cead5fe6470402d127ae0d759168f9778078992"
+                "reference": "6122dbda9d274ec4106b0a0c1c84c337f1a9c110"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nabil1337/case-helper/zipball/8cead5fe6470402d127ae0d759168f9778078992",
-                "reference": "8cead5fe6470402d127ae0d759168f9778078992",
+                "url": "https://api.github.com/repos/nabil1337/case-helper/zipball/6122dbda9d274ec4106b0a0c1c84c337f1a9c110",
+                "reference": "6122dbda9d274ec4106b0a0c1c84c337f1a9c110",
                 "shasum": ""
+            },
+            "require": {
+                "symfony/polyfill-mbstring": "^1.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "4.4.0"
@@ -2161,7 +2164,7 @@
                 "MIT"
             ],
             "description": "Easily convert between camelCase, PascalCase, kebab-case, snake_case, SCREAMING_SNAKE_CASE, Train-Case, and string case!",
-            "time": "2014-12-06 02:33:17"
+            "time": "2017-07-04 01:34:42"
         },
         {
             "name": "nikic/php-parser",
