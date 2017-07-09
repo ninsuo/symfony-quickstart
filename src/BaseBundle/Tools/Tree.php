@@ -10,6 +10,9 @@ class Tree
      * Takes an array of nodes having a path property defining their position in the tree.
      * Path is composed of strings separated by $separator.
      *
+     * The $pathCallback callback will be used on each node, it will receive a node in
+     * arguments and should return the path of this node as a string.
+     *
      * Example:
      *
      * If you have objects having the following paths:
@@ -29,6 +32,7 @@ class Tree
      *        |-- config_dev.yml => $objectC
      *
      * @param TreeInterface[] $nodes
+     * @param callable        $pathCallback
      * @param string          $separator
      * @param bool            $strictMode
      * @param string          $trim
@@ -38,17 +42,15 @@ class Tree
      * @throws \LogicException
      * @throws \RuntimeException
      */
-    public static function createTree($nodes, $separator = "\n", $strictMode = true, $trim = null)
+    public static function createTree($nodes, $pathCallback, $separator = "\n", $strictMode = true, $trim = null)
     {
         $tree = [];
 
         foreach ($nodes as $node) {
-            if (!($node instanceof TreeInterface)) {
-                throw new \LogicException('Tree nodes should implement TreeInterface class.');
-            }
             $ref  = &$tree;
             $path = [];
-            foreach ($arr = explode($separator, $node->getPath()) as $key => $elem) {
+            $stringPath = call_user_func($pathCallback, $node);
+            foreach ($arr = explode($separator, $stringPath) as $key => $elem) {
                 if (!is_null($trim)) {
                     $key  = trim($key, $trim);
                     $elem = trim($elem, $trim);
@@ -57,15 +59,19 @@ class Tree
                 if (empty($elem)) {
                     continue;
                 }
+
                 $path[] = $key;
+
                 if ($strictMode && isset($ref[$elem]) && (count($arr) == $key + 1 || is_object($ref[$elem]))) {
                     throw new \RuntimeException('Node is overwriting another one at '.implode($separator, $path));
                 }
+
                 if (count($arr) == $key + 1) {
                     $ref[$elem] = $node;
                 } elseif (!array_key_exists($elem, $ref)) {
                     $ref[$elem] = [];
                 }
+
                 $ref = &$ref[$elem];
             }
         }
