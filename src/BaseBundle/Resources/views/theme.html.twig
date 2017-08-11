@@ -25,3 +25,16 @@
 
 {% endblock %}
 
+{% block codemirror_widget %}
+    <div class="well">
+        {{
+            form_widget(form, {
+                'attr': {
+                    'class': form.vars.attr.class|default('') ~ ' codemirror',
+                    'data-modes': modes|json_encode,
+                    'data-options': codemirror|json_encode
+                }
+            })
+        }}
+    </div>
+{% endblock %}

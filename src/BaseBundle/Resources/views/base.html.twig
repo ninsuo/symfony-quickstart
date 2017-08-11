@@ -54,6 +54,7 @@
                 "bundles/base/css/emojione.min.css"
                 "bundles/base/css/highlight.min.css"
                 "bundles/base/css/bootstrap-toggle.min.css"
+                "bundles/base/codemirror-5.28.0/lib/codemirror.css"
                 "bundles/base/css/base.css"
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
@@ -96,10 +97,25 @@
                 "bundles/base/js/marked.js"
                 "bundles/base/js/bootstrap-toggle.min.js"
                 "bundles/base/bootstrap-submenu/js/bootstrap-submenu.min.js"
+                "bundles/base/codemirror-5.28.0/lib/codemirror.js"
+                "bundles/base/codemirror-5.28.0/addon/mode/loadmode.js"
             %}
                 <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
+
+        <script type="text/javascript">
+
+            CodeMirror.modeURL = '{{ asset('bundles/base/codemirror-5.28.0/mode/%N/%N.js')|e('js') }}'
+            $('.codemirror').each(function() {
+                var editor = CodeMirror.fromTextArea(this, $(this).data('options'));
+
+                $.each($(this).data('modes'), function (key, value) {
+                    CodeMirror.autoLoadMode(editor, value);
+                });
+            });
+
+        </script>
 
         {% block script %}{% endblock %}
     </body>

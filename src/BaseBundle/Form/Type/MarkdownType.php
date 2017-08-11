@@ -55,7 +55,7 @@ class MarkdownType extends BaseType
         $resolver->setDefaults([
             'data_class' => Markdown::class,
             'compound' => true,
-            'preview' => '#bobbbb',
+            'preview' => true,
         ]);
     }
 }
