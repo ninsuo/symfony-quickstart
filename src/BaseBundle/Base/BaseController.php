@@ -18,7 +18,7 @@ abstract class BaseController extends Controller
 {
     use ServiceTrait;
 
-    const PAGER_PER_PAGE_LIST    = [25, 50, 100];
+    const PAGER_PER_PAGE_LIST    = '25,50,100';
     const PAGER_PER_PAGE_DEFAULT = 25;
 
     public function info($message, array $parameters = [])
@@ -103,7 +103,7 @@ abstract class BaseController extends Controller
         $pager->setNormalizeOutOfRangePages(true);
 
         $perPage = $request->query->get($prefix.'per-page', self::PAGER_PER_PAGE_DEFAULT);
-        if (!in_array($perPage, self::PAGER_PER_PAGE_LIST)) {
+        if (!in_array($perPage, explode(',', self::PAGER_PER_PAGE_LIST))) {
             throw new NotValidMaxPerPageException();
         }
 
