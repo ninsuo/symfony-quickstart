@@ -1,1 +1,25 @@
 {% extends 'BaseBundle::layout.html.twig' %}
+
+{% block css %}
+
+    {{ parent() }}
+
+    {% stylesheets filter="scssphp" output="css/app.css"
+        "bundles/app/css/app.css"
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+{% endblock %}
+
+{% block js %}
+
+    {{ parent() }}
+
+    {% javascripts filter="?jsqueeze" output="js/app.js"
+        "bundles/app/js/app.js"
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}

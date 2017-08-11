@@ -53,6 +53,7 @@ assetic:
     use_controller: false
     bundles:
         - BaseBundle
+        - AppBundle
     filters:
        cssrewrite: ~
        lessphp:
