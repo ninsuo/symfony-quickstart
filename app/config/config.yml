@@ -109,11 +109,14 @@ hwi_oauth:
             type: github
             client_id: '%github_client_id%'
             client_secret: '%github_secret%'
+            options:
+                csrf: true
         stack:
             type: stack_exchange
             client_id: '%stack_client_id%'
             client_secret: '%stack_secret%'
             options:
+                csrf: true
                 key: '%stack_key%'
         google:
             type: "google"
@@ -123,10 +126,13 @@ hwi_oauth:
             options:
                 display: "page"
                 access_type: "online"
+                csrf: true
         twitter:
             type: "twitter"
             client_id: "%twitter_client_id%"
             client_secret: "%twitter_secret%"
+            options:
+                csrf: true
         facebook:
             type: "facebook"
             client_id: "%facebook_client_id%"
@@ -134,6 +140,7 @@ hwi_oauth:
             scope: "email"
             options:
                 display: "page"
+                csrf: true
 
 # Supported Website Languages
 jms_i18n_routing:
@@ -151,3 +158,12 @@ ewz_recaptcha:
     public_key:  "%recaptcha_public%"
     private_key: "%recaptcha_private%"
 
+# File upload
+oneup_uploader:
+    mappings:
+        files:
+            frontend: blueimp
+            namer: base.user.namer
+            storage:
+                type: filesystem
+                directory: %kernel.root_dir%/upload/

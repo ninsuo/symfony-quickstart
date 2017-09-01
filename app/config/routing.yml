@@ -22,6 +22,10 @@ twitter_login:
 facebook_login:
     path: /login/check-facebook
 
+oneup_uploader:
+    resource: .
+    type: uploader
+
 base:
     resource: "@BaseBundle/Controller/"
     type:     "annotation"

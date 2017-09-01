@@ -66,7 +66,7 @@
             "keywords": [
                 "bootstrap"
             ],
-            "time": "2016-01-23 17:44:32"
+            "time": "2016-01-23T17:44:32+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -886,7 +886,7 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2014-09-09 13:34:57"
+            "time": "2014-09-09T13:34:57+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -1074,7 +1074,7 @@
             "keywords": [
                 "CKEditor"
             ],
-            "time": "2016-10-28 16:59:01"
+            "time": "2016-10-28T16:59:01+00:00"
         },
         {
             "name": "egeloen/json-builder",
@@ -1127,7 +1127,7 @@
                 "builder",
                 "json"
             ],
-            "time": "2015-12-06 13:20:24"
+            "time": "2015-12-06T13:20:24+00:00"
         },
         {
             "name": "excelwebzone/recaptcha-bundle",
@@ -1174,7 +1174,7 @@
             "keywords": [
                 "recaptcha"
             ],
-            "time": "2017-05-28 00:57:14"
+            "time": "2017-05-28T00:57:14+00:00"
         },
         {
             "name": "exercise/htmlpurifier-bundle",
@@ -1225,7 +1225,7 @@
             "keywords": [
                 "htmlpurifier"
             ],
-            "time": "2016-08-25 13:24:39"
+            "time": "2016-08-25T13:24:39+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1272,7 +1272,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2017-06-03 02:28:16"
+            "time": "2017-06-03T02:28:16+00:00"
         },
         {
             "name": "fig/link-util",
@@ -1326,7 +1326,7 @@
                 "psr-13",
                 "rest"
             ],
-            "time": "2016-10-17 18:31:11"
+            "time": "2016-10-17T18:31:11+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
@@ -1651,7 +1651,7 @@
             "keywords": [
                 "parameters management"
             ],
-            "time": "2015-11-10 17:04:01"
+            "time": "2015-11-10T17:04:01+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1701,7 +1701,7 @@
                 "highlight",
                 "sql"
             ],
-            "time": "2014-01-12 16:20:24"
+            "time": "2014-01-12T16:20:24+00:00"
         },
         {
             "name": "jms/i18n-routing-bundle",
@@ -1825,7 +1825,7 @@
                 "ui",
                 "webinterface"
             ],
-            "time": "2017-04-20 19:44:02"
+            "time": "2017-04-20T19:44:02+00:00"
         },
         {
             "name": "knplabs/knp-menu",
@@ -1891,7 +1891,7 @@
                 "menu",
                 "tree"
             ],
-            "time": "2016-09-22 07:36:19"
+            "time": "2016-09-22T07:36:19+00:00"
         },
         {
             "name": "knplabs/knp-menu-bundle",
@@ -1948,7 +1948,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2016-09-22 12:24:40"
+            "time": "2016-09-22T12:24:40+00:00"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2025,7 +2025,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2016-11-11 18:43:20"
+            "time": "2016-11-11T18:43:20+00:00"
         },
         {
             "name": "kriswallsmith/buzz",
@@ -2126,7 +2126,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2017-02-23 05:07:33"
+            "time": "2017-02-23T05:07:33+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2238,7 +2238,7 @@
                 "MIT"
             ],
             "description": "Easily convert between camelCase, PascalCase, kebab-case, snake_case, SCREAMING_SNAKE_CASE, Train-Case, and string case!",
-            "time": "2017-07-04 01:34:42"
+            "time": "2017-07-04T01:34:42+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2325,6 +2325,76 @@
             "time": "2017-10-28 20:34:48"
         },
         {
+            "name": "oneup/uploader-bundle",
+            "version": "1.8.2",
+            "target-dir": "Oneup/UploaderBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/1up-lab/OneupUploaderBundle.git",
+                "reference": "5ff6a2e7bc9c7361fc719321f2fe3d620d9c7f8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/5ff6a2e7bc9c7361fc719321f2fe3d620d9c7f8a",
+                "reference": "5ff6a2e7bc9c7361fc719321f2fe3d620d9c7f8a",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/random_compat": "^1.1|^2.0",
+                "php": ">=5.4",
+                "symfony/finder": "^2.4.0|~3.0",
+                "symfony/framework-bundle": "^2.4.0|~3.0"
+            },
+            "require-dev": {
+                "amazonwebservices/aws-sdk-for-php": "1.5.*",
+                "knplabs/gaufrette": "0.2.*@dev",
+                "oneup/flysystem-bundle": "^1.2",
+                "phpunit/phpunit": "~4.4",
+                "sensio/framework-extra-bundle": "2.*|~3.0",
+                "symfony/browser-kit": "2.*|~3.0",
+                "symfony/class-loader": "2.*|~3.0",
+                "symfony/security-bundle": "2.*|~3.0"
+            },
+            "suggest": {
+                "knplabs/knp-gaufrette-bundle": "0.1.*",
+                "oneup/flysystem-bundle": "^1.2"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Oneup\\UploaderBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Schmid",
+                    "email": "js@1up.io",
+                    "homepage": "http://1up.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handles multi file uploads in Symfony2. Features included: Chunked upload, Orphans management, Gaufrette support.",
+            "homepage": "http://1up.io",
+            "keywords": [
+                "FancyUpload",
+                "FineUploader",
+                "MooUpload",
+                "Uploadify",
+                "YUI3 Uploader",
+                "blueimp",
+                "dropzone",
+                "fileupload",
+                "jQuery File Uploader",
+                "plupload",
+                "upload"
+            ],
+            "time": "2017-09-19T09:38:39+00:00"
+        },
+        {
             "name": "oyejorge/less.php",
             "version": "v1.7.0.14",
             "source": {
@@ -2384,7 +2454,7 @@
                 "php",
                 "stylesheet"
             ],
-            "time": "2017-03-28 22:19:25"
+            "time": "2017-03-28T22:19:25+00:00"
         },
         {
             "name": "pagerfanta/pagerfanta",
@@ -2453,7 +2523,7 @@
                 "paginator",
                 "paging"
             ],
-            "time": "2017-03-20 13:46:15"
+            "time": "2017-03-20T13:46:15+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2548,7 +2618,7 @@
                 "javascript",
                 "minification"
             ],
-            "time": "2016-04-19 09:28:22"
+            "time": "2016-04-19T09:28:22+00:00"
         },
         {
             "name": "php-cs-fixer/diff",
@@ -2642,7 +2712,7 @@
                 "psr",
                 "psr-6"
             ],
-            "time": "2016-08-06 20:24:11"
+            "time": "2016-08-06T20:24:11+00:00"
         },
         {
             "name": "psr/container",
@@ -2691,7 +2761,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14 16:28:37"
+            "time": "2017-02-14T16:28:37+00:00"
         },
         {
             "name": "psr/link",
@@ -2740,7 +2810,7 @@
                 "psr-13",
                 "rest"
             ],
-            "time": "2016-10-28 16:06:13"
+            "time": "2016-10-28T16:06:13+00:00"
         },
         {
             "name": "psr/log",
@@ -2787,7 +2857,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -2835,7 +2905,59 @@
                 "psr-16",
                 "simple-cache"
             ],
-            "time": "2017-01-02 13:31:39"
+            "time": "2017-01-02T13:31:39+00:00"
+        },
+        {
+            "name": "sebastian/diff",
+            "version": "1.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/diff.git",
+                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/7f066a26a962dbe58ddea9f72a4e82874a3975a4",
+                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kore Nordmann",
+                    "email": "mail@kore-nordmann.de"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Diff implementation",
+            "homepage": "https://github.com/sebastianbergmann/diff",
+            "keywords": [
+                "diff"
+            ],
+            "time": "2017-05-22T07:24:03+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -3056,7 +3178,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2017-05-01 15:54:03"
+            "time": "2017-05-01T15:54:03+00:00"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -3835,7 +3957,7 @@
                 "bootstrap",
                 "css"
             ],
-            "time": "2013-12-05 16:09:10"
+            "time": "2013-12-05T16:09:10+00:00"
         },
         {
             "name": "twig/extensions",
@@ -3891,7 +4013,7 @@
                 "i18n",
                 "text"
             ],
-            "time": "2017-06-08 18:19:53"
+            "time": "2017-06-08T18:19:53+00:00"
         },
         {
             "name": "twig/twig",
@@ -4008,7 +4130,7 @@
                 "page",
                 "paging"
             ],
-            "time": "2017-02-10 16:54:59"
+            "time": "2017-02-10T16:54:59+00:00"
         }
     ],
     "packages-dev": [

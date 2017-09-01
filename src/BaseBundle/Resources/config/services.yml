@@ -5,6 +5,7 @@ parameters:
     pagerfanta.view.light.class: BaseBundle\Pagerfanta\View\LightView
     pagerfanta.template.light.class: BaseBundle\Pagerfanta\Template\LightTemplate
     security.class: BaseBundle\Services\Security
+    base.user.namer.class: BaseBundle\Namer\UserNamer
 
 services:
 
@@ -41,4 +42,8 @@ services:
           - '@security.authentication_utils'
           - '@security.role_hierarchy'
         calls:
-          - [setContainer, ["@service_container"]]
+          - [setContainer, ['@service_container']]
+
+    base.user.namer:
+        class: '%base.user.namer.class%'
+        arguments: ['@security.token_storage']
