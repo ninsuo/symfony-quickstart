@@ -166,4 +166,4 @@ oneup_uploader:
             namer: base.user.namer
             storage:
                 type: filesystem
-                directory: %kernel.root_dir%/upload/
+                directory: "%kernel.root_dir%/upload/"
