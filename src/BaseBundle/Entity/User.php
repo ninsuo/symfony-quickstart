@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User.
@@ -17,6 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     }
  * )
  * @ORM\Entity(repositoryClass="BaseBundle\Repository\UserRepository")
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  * @ORM\HasLifecycleCallbacks
  */
 class User implements UserInterface, EquatableInterface
@@ -48,6 +50,7 @@ class User implements UserInterface, EquatableInterface
      * @var string
      *
      * @ORM\Column(name="nickname", type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $nickname;
 
@@ -55,6 +58,7 @@ class User implements UserInterface, EquatableInterface
      * @var string
      *
      * @ORM\Column(name="contact", type="string", length=255, nullable=true)
+     * @Assert\Email()
      */
     protected $contact;
 
@@ -62,6 +66,7 @@ class User implements UserInterface, EquatableInterface
      * @var string
      *
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     * @Assert\Url()
      */
     protected $picture;
 
@@ -122,13 +127,13 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get id.
+     * Get resourceOwner.
      *
-     * @return int
+     * @return string
      */
-    public function getId()
+    public function getResourceOwner()
     {
-        return $this->id;
+        return $this->resourceOwner;
     }
 
     /**
@@ -146,13 +151,13 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get resourceOwner.
+     * Get resourceOwnerId.
      *
      * @return string
      */
-    public function getResourceOwner()
+    public function getResourceOwnerId()
     {
-        return $this->resourceOwner;
+        return $this->resourceOwnerId;
     }
 
     /**
@@ -170,21 +175,21 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get resourceOwnerId.
-     *
-     * @return string
-     */
-    public function getResourceOwnerId()
-    {
-        return $this->resourceOwnerId;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getUsername()
     {
         return json_encode([$this->resourceOwner, $this->resourceOwnerId]);
+    }
+
+    /**
+     * Get nickname.
+     *
+     * @return string
+     */
+    public function getNickname()
+    {
+        return $this->nickname;
     }
 
     /**
@@ -202,13 +207,13 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get nickname.
+     * Get contact.
      *
      * @return string
      */
-    public function getNickname()
+    public function getContact()
     {
-        return $this->nickname;
+        return $this->contact;
     }
 
     /**
@@ -226,13 +231,13 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get contact.
+     * Get picture.
      *
      * @return string
      */
-    public function getContact()
+    public function getPicture()
     {
-        return $this->contact;
+        return $this->picture;
     }
 
     /**
@@ -250,13 +255,13 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get picture.
+     * Get lastSeen.
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getPicture()
+    public function getLastSeen()
     {
-        return $this->picture;
+        return $this->lastSeen;
     }
 
     /**
@@ -274,13 +279,13 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get lastSeen.
+     * Get signinCount.
      *
-     * @return \DateTime
+     * @return int
      */
-    public function getLastSeen()
+    public function getSigninCount()
     {
-        return $this->lastSeen;
+        return $this->signinCount;
     }
 
     /**
@@ -298,13 +303,13 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get signinCount.
+     * Get isEnabled.
      *
-     * @return int
+     * @return bool
      */
-    public function getSigninCount()
+    public function isEnabled()
     {
-        return $this->signinCount;
+        return $this->isEnabled;
     }
 
     /**
@@ -322,13 +327,13 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Get isEnabled.
+     * Get isAdmin.
      *
      * @return bool
      */
-    public function isEnabled()
+    public function isAdmin()
     {
-        return $this->isEnabled;
+        return $this->isAdmin;
     }
 
     /**
@@ -343,16 +348,6 @@ class User implements UserInterface, EquatableInterface
         $this->isAdmin = $isAdmin;
 
         return $this;
-    }
-
-    /**
-     * Get isAdmin.
-     *
-     * @return bool
-     */
-    public function isAdmin()
-    {
-        return $this->isAdmin;
     }
 
     /**
@@ -504,10 +499,20 @@ class User implements UserInterface, EquatableInterface
      */
     public function isEqualTo(UserInterface $user)
     {
-        if ((int) $this->getId() === $user->getId()) {
+        if ((int)$this->getId() === $user->getId()) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

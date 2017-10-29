@@ -1,0 +1,23 @@
+{# BaseBundle:User:profile.html.twig #}
+
+{% extends 'BaseBundle::layout.html.twig' %}
+{% import 'BaseBundle::macros.html.twig' as macros %}
+
+{% block title %}{{ 'base.profile.title'|trans }}{% endblock %}
+{% block body %}
+
+    <div class="jumbotron">
+
+        {{ macros.user(data, true) }} {% if data.contact %}({{ data.contact }}){% endif %}
+
+    </div>
+
+    {{ form(form) }}
+
+    {% if fuz.user.allow_remove %}
+        <div class="text-center">
+            <a href="{{ path('unsubscribe') }}">{{ 'base.unsubscribe.menu'|trans }}</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

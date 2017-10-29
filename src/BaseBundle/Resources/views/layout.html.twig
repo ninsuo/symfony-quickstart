@@ -8,7 +8,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     {% set current_locale = fuz.supported_locales[app.request.locale]|default(false) %}
                     {% if current_locale %}
-                        <img class="lang-image" src="{{ asset('bundles/base/img/countries/' ~ current_locale.flag ~ '.png') }}" alt=""/>
+                        <img class="lang-image"
+                             src="{{ asset('bundles/base/img/countries/' ~ current_locale.flag ~ '.png') }}" alt=""/>
                         {{ current_locale.menu }}
                     {% else %}
                         {{ 'base.locale.title' | trans }}
@@ -17,12 +18,13 @@
                 <ul class="dropdown-menu" role="menu">
                     {% block supported_locales %}
                         {% for locale, data in fuz.supported_locales %}
-                        <li>
-                            <a href="{{ path('reload', {'_locale': locale}) }}">
-                                <img class="lang-image" src="{{ asset('bundles/base/img/countries/' ~ data.flag ~ '.png') }}" alt=""/>
-                                {{ data.menu }}
-                            </a>
-                        </li>
+                            <li>
+                                <a href="{{ path('reload', {'_locale': locale}) }}">
+                                    <img class="lang-image"
+                                         src="{{ asset('bundles/base/img/countries/' ~ data.flag ~ '.png') }}" alt=""/>
+                                    {{ data.menu }}
+                                </a>
+                            </li>
                         {% endfor %}
                     {% endblock %}
                 </ul>
@@ -35,8 +37,19 @@
     <ul class="nav navbar-nav navbar-right">
         {% if is_granted('ROLE_USER') %}
             {% block logged_in %}
-               <p class="navbar-text">{{ 'base.login.as' | trans }} {{ macros.me() }}</p>
-               <li><a href="{{ path('logout') }}">{{ 'base.logout.title' | trans }}</a></li>
+                {% if fuz.user.allow_update %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false">&nbsp;&nbsp;&nbsp;{{ macros.me() }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ path('logout') }}">{{ 'base.logout.title' | trans }}</a></li>
+                            <li><a href="{{ path('profile') }}">{{ 'base.profile.title' | trans }}</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <p class="navbar-text">&nbsp;&nbsp;&nbsp;{{ 'base.login.as' | trans }} {{ macros.me() }}</p>
+                    <li><a href="{{ path('logout') }}">{{ 'base.logout.title' | trans }}</a></li>
+                {% endif %}
             {% endblock %}
         {% else %}
             {% block logged_out %}
@@ -48,17 +61,20 @@
                 {% if servicesCount > 0 %}
                     {% if servicesCount > 1 %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'base.login.title' | trans }} <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false">{{ 'base.login.title' | trans }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
                     {% endif %}
 
                     {% for service, enabled in fuz.services if enabled %}
                         {% set serviceId = (service|split(' '))[0]|lower %}
-                        <li><a href="{{ hwi_oauth_login_url(serviceId) }}"><img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ serviceId ~ '-small.png') }}" alt=""/> {{ service }}</a></li>
+                        <li><a href="{{ hwi_oauth_login_url(serviceId) }}"><img class="oauth-image"
+                                                                                src="{{ asset('bundles/base/img/oauth/' ~ serviceId ~ '-small.png') }}"
+                                                                                alt=""/> {{ service }}</a></li>
                     {% endfor %}
 
                     {% if servicesCount > 1 %}
-                            </ul>
+                        </ul>
                         </li>
                     {% endif %}
 

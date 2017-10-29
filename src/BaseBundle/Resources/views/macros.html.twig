@@ -2,11 +2,9 @@
 
 {% macro modal(id, title, body, options) %}
 
-    {%
-        set defaults = {
-            'modal-class': null,
-        }
-    %}
+    {% set defaults = {
+    'modal-class': null,
+    } %}
     {% set options = defaults|merge(options|default({})) %}
 
     <div class="modal fade" id="{{ id }}" tabindex="-1" role="dialog" aria-labelledby="{{ id }}" aria-hidden="true">
@@ -14,13 +12,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><div class="text-left">{{ title }}</div></h4>
+                    <h4 class="modal-title">
+                        <div class="text-left">{{ title }}</div>
+                    </h4>
                 </div>
                 <div class="modal-body">
                     {{ body }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" title="Close the window">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" title="Close the window">Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -45,50 +46,49 @@
 {% macro form_specific_errors(field) %}
     {% if field.vars.errors|length > 0 %}
         {%- for error in field.vars.errors -%}
-        <div class="control-label text-danger">{{ error.message }}</div>
+            <div class="control-label text-danger">{{ error.message }}</div>
         {%- endfor -%}
     {% endif %}
 {% endmacro %}
 
 {% macro box(color, title, message) %}
 
-    {%
-        set colors = {
-            'black': {
-                'img': asset('bundles/base/img/flags/black.gif'),
-                'background': '#DDDDDD',
-                'color': '#000000',
-            },
-            'red': {
-                'img': asset('bundles/base/img/flags/red.gif'),
-                'background': '#FFDDDD',
-                'color': '#FF0000',
-            },
-            'yellow': {
-                'img': asset('bundles/base/img/flags/yellow.gif'),
-                'background': '#FFFFDD',
-                'color': '#A76726',
-            },
-            'green': {
-                'img': asset('bundles/base/img/flags/green.gif'),
-                'background': '#DDFFDD',
-                'color': '#006600',
-            },
-            'blue': {
-                'img': asset('bundles/base/img/flags/blue.gif'),
-                'background': '#DDDDFF',
-                'color': '#000066',
-            },
-        }
-    %}
+    {% set colors = {
+    'black': {
+    'img': asset('bundles/base/img/flags/black.gif'),
+    'background': '#DDDDDD',
+    'color': '#000000',
+    },
+    'red': {
+    'img': asset('bundles/base/img/flags/red.gif'),
+    'background': '#FFDDDD',
+    'color': '#FF0000',
+    },
+    'yellow': {
+    'img': asset('bundles/base/img/flags/yellow.gif'),
+    'background': '#FFFFDD',
+    'color': '#A76726',
+    },
+    'green': {
+    'img': asset('bundles/base/img/flags/green.gif'),
+    'background': '#DDFFDD',
+    'color': '#006600',
+    },
+    'blue': {
+    'img': asset('bundles/base/img/flags/blue.gif'),
+    'background': '#DDDDFF',
+    'color': '#000066',
+    },
+    } %}
 
     {% set config = colors[color]|default(colors['black']) %}
 
     <div class="row">
         <div class="col-md-12">
-            <div class="box-style" style="background-color:{{ config.background }};color:{{ config.color }};border:1px solid {{ config.color }};">
+            <div class="box-style"
+                 style="background-color:{{ config.background }};color:{{ config.color }};border:1px solid {{ config.color }};">
                 <div class="text-center">
-                    <img src="{{ config.img }}" alt="{{ color|title }} Flag" class="flag" />
+                    <img src="{{ config.img }}" alt="{{ color|title }} Flag" class="flag"/>
                     <p><strong>{{ title }}</strong></p>
                     <p>{{ message }}</p>
                 </div>
@@ -109,10 +109,16 @@
     {% endspaceless %}
 {% endmacro %}
 
-{% macro user(user) %}
+{% macro user(user, large = false) %}
     {%- spaceless %}
         {% if user != null %}
-            {% if user.picture %}<img class="user-image" src="{{ user.picture }}" alt=""/>{% else %}<img class="oauth-image" src="{{ asset('bundles/base/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/>{% endif %} {{ user.nickname }}
+            {% if user.picture %}
+                <img class="user-image{{ large ? '-large' : '' }}" src="{{ user.picture }}" alt=""/>
+            {% else %}
+                <img class="oauth-image{{ large ? '-large' : '' }}"
+                     src="{{ asset('bundles/base/img/oauth/' ~ user.resourceOwner ~ '-small.png') }}" alt=""/>
+            {% endif %}
+            {{ user.nickname }}
         {% endif %}
     {% endspaceless -%}
 {% endmacro %}
@@ -120,12 +126,10 @@
 {% macro pager(pager, prefix = '', hash = '') %}
     <div class="row">
         <div class="text-center col-md-12">
-            {{
-                pagerfanta(pager, 'light', {
-                    'pageParameter': '[' ~ prefix ~ 'page]',
-                    'hash': hash,
-                })
-            }}
+            {{ pagerfanta(pager, 'light', {
+                'pageParameter': '[' ~ prefix ~ 'page]',
+                'hash': hash,
+            }) }}
         </div>
         <div class="text-left col-md-4">
             <div>{{ 'base.pager.per_page'|trans }}</div>
@@ -133,9 +137,10 @@
                 {% for perPage in constant('BaseBundle\\Base\\BaseController::PAGER_PER_PAGE_LIST') %}
                     {% set isCurrent = perPage == pager.maxPerPage %}
                     <li {% if isCurrent %}class="active"{% endif %}>
-                        {% if isCurrent %}<span>{% else %}<a href="?{{ http_build_query(app.request.query.all|merge({(prefix ~ 'per-page'): perPage})) ~ (hash ? '#' ~ hash : '') }}">{% endif %}
-                            {{ perPage }}
-                        {% if isCurrent %}</span>{% else %}</a>{% endif %}
+                        {% if isCurrent %}<span>{% else %}<a
+                                    href="?{{ http_build_query(app.request.query.all|merge({(prefix ~ 'per-page'): perPage})) ~ (hash ? '#' ~ hash : '') }}">{% endif %}
+                                {{ perPage }}
+                            {% if isCurrent %}</span>{% else %}</a>{% endif %}
                     </li>
                 {% endfor %}
             </ul>
@@ -147,7 +152,8 @@
         <div class="text-right col-md-4">
             <div>{{ 'base.pager.go_to'|trans }}</div>
             {% set currentRoute = current_route() %}
-            <form class="form-inline" action="{{ path(currentRoute.name, currentRoute.params) ~ (hash ? '#' ~ hash : '') }}" method="get">
+            <form class="form-inline"
+                  action="{{ path(currentRoute.name, currentRoute.params) ~ (hash ? '#' ~ hash : '') }}" method="get">
                 <div class="form-group">
                     <input class="form-control" name="{{ prefix }}page" style="width: 100px;" type="text"/>
                     {% for key, value in app.request.query.all if key != prefix ~ 'page' %}
@@ -163,7 +169,8 @@
 {% macro orderBy(order, column, label, hash = '') %}
     {% set isCurrent = order.column == column %}
     {% if isCurrent %}
-        <a style="color:black;" href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): order.direction == 'ASC' ? 'desc' : 'asc'})) ~ (hash ? '#' ~ hash : '') }}">{{ label|trans }}</a>
+        <a style="color:black;"
+           href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column, (order.prefix ~ 'order-by-direction'): order.direction == 'ASC' ? 'desc' : 'asc'})) ~ (hash ? '#' ~ hash : '') }}">{{ label|trans }}</a>
     {% else %}
         <a href="?{{ http_build_query(app.request.query.all|merge({(order.prefix ~ 'order-by'): column})) ~ (hash ? '#' ~ hash : '') }}">{{ label|trans }}</a>
     {% endif %}
@@ -185,7 +192,9 @@
             <div class="input-group stylish-input-group" style="border:none;">
                 <div class="input-group stylish-input-group" style="border:none;">
                     <span class="form-control" style="border-right:none;">
-                        <input name="{{ name }}" placeholder="{{ 'base.search'|trans|e('html_attr') }}" style="border:none;" class="form-control" value="{{ app.request.get(name)|e('html_attr') }}" type="search">
+                        <input name="{{ name }}" placeholder="{{ 'base.search'|trans|e('html_attr') }}"
+                               style="border:none;" class="form-control"
+                               value="{{ app.request.get(name)|e('html_attr') }}" type="search">
                         {% for key, value in app.request.query.all if key != name %}
                             {{ array_to_query_fields(key, value) }}
                         {% endfor %}

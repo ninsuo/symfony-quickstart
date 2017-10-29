@@ -6,8 +6,7 @@ base:
         remove: 'Remove'
         on: On
         off: Off
-    changepassword:
-        title: 'Change password'
+        submit: 'Submit'
     ckeditor:
         confirm_remove: "Do you really want to remove %name% image?"
         file_removed: "File have been successfully removed."
@@ -78,10 +77,17 @@ base:
         per_page: 'Results per page:'
         go_to: 'Go to page:'
         go: 'Go'
+    profile:
+        title: 'Profile'
+        nickname: 'Displayed nickname:'
+        contact: 'Contact information:'
+        picture: 'Picture URL'
+        updated: 'Profile has been saved.'
     search: Search...
     share: 'Share:'
     undefined: Undefined
     unsubscribe:
+        menu: "Remove your account"
         confirm: Confirm
         explain: 'All data associated with your account will be'
         removed: removed

@@ -16,6 +16,16 @@ trait ServiceTrait
         return $this->container->getParameter($parameter);
     }
 
+    protected function has($service)
+    {
+        return $this->container->has($service);
+    }
+
+    protected function hasParameter($parameter)
+    {
+        return $this->container->hasParameter($parameter);
+    }
+
     protected function dump($var)
     {
         VarDumper::dump($var);
