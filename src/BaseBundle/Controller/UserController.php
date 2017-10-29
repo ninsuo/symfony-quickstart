@@ -5,18 +5,19 @@ namespace BaseBundle\Controller;
 use BaseBundle\Base\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type;
-use Symfony\Component\Validator\Constraints;
 
 class UserController extends BaseController
 {
     /**
      * Login failure action or login direct access.
      *
-     * @Route("/login", name="login")
      * @Method({"GET"})
+     * @Route("/login", name="login")
      */
     public function loginAction()
     {
@@ -30,8 +31,8 @@ class UserController extends BaseController
     /**
      * Logout action.
      *
-     * @Route("/logout", name="logout")
      * @Method({"GET"})
+     * @Route("/logout", name="logout")
      */
     public function logoutAction(Request $request)
     {
@@ -43,8 +44,8 @@ class UserController extends BaseController
     /**
      * Login action.
      *
-     * @Route("/connect/{service}", name="connect")
      * @Method({"GET"})
+     * @Route("/connect/{service}", name="connect")
      */
     public function connectAction(Request $request, $service)
     {
@@ -56,8 +57,8 @@ class UserController extends BaseController
     /**
      * Login success action.
      *
-     * @Route("/welcome", name="welcome")
      * @Method({"GET"})
+     * @Route("/welcome", name="welcome")
      */
     public function welcomeAction()
     {
@@ -70,9 +71,60 @@ class UserController extends BaseController
     }
 
     /**
+     * User's profile update
+     *
+     * Take care, this option is incompatible with user_info_auto_update = true
+     *
+     * @Route("/profile", name="profile")
+     * @Security("has_role('ROLE_USER')")
+     * @Template()
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
+     */
+    public function profileAction(Request $request)
+    {
+        if (!$this->getParameter('accounts_updatable')) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createFormBuilder($this->getUser())
+            ->add('nickname', Type\TextType::class, [
+                'label' => 'base.profile.nickname',
+            ])
+            ->add('contact', Type\EmailType::class, [
+                'label' => 'base.profile.contact',
+            ])
+            ->add('picture', Type\UrlType::class, [
+                'label' => 'base.profile.picture',
+            ])
+            ->add('submit', Type\SubmitType::class, [
+                'label' => 'base.button.submit',
+            ])
+            ->getForm()
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getManager()->persist($this->getUser());
+            $this->getManager()->flush($this->getUser());
+
+            $this->success('base.profile.updated');
+
+            return $this->redirectToRoute('profile');
+        }
+
+        return [
+            'data' => $this->getUser(),
+            'form' => $form->createView(),
+        ];
+    }
+
+    /**
      * User unsubscription confirmation.
      *
      * @Route("/unsubscribe", name="unsubscribe")
+     * @Security("has_role('ROLE_USER')")
      *
      * @param Request $request
      *
@@ -80,27 +132,26 @@ class UserController extends BaseController
      */
     public function unsubscribeAction(Request $request)
     {
-        if (!$this->getParameter('accounts_removable') || !$this->getUser()) {
+        if (!$this->getParameter('accounts_removable')) {
             throw $this->createNotFoundException();
         }
 
         // CRSF
         $form = $this
-           ->createFormBuilder()
-           ->add('submit', Type\SubmitType::class, [
-               'label' => 'base.unsubscribe.confirm',
-               'attr'  => [
-                   'class' => 'btn btn-danger',
-               ],
-           ])
-           ->getForm()
-        ;
+            ->createFormBuilder()
+            ->add('submit', Type\SubmitType::class, [
+                'label' => 'base.unsubscribe.confirm',
+                'attr'  => [
+                    'class' => 'btn btn-danger',
+                ],
+            ])
+            ->getForm();
 
         if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $user = $this->getUser();
-                $em   = $this->get('doctrine.orm.entity_manager');
+                $em = $this->get('doctrine.orm.entity_manager');
                 $em->remove($user);
                 $em->flush($user);
 
@@ -111,7 +162,7 @@ class UserController extends BaseController
         }
 
         return $this->render('BaseBundle:User:unsubscribe.html.twig', [
-               'form' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }

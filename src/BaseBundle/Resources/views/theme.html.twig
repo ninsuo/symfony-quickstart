@@ -1,23 +1,20 @@
-
 {% block markdown_widget %}
 
     <div class="row">
-        <div class="col-md-{{ preview is sameas(true) ? 6 : 12 }}">
-            {{
-                form_widget(form.markdown, {
-                    'attr': {
-                        'class': attr.class|default('') ~ ' markdown',
-                        'style': attr.style|default('') ~ ' min-height:100px;',
-                        'data-html': form.html.vars.id,
-                        'data-preview': preview is sameas(true) ? ('#' ~ id ~ '-rendered') : (preview ? : ''),
-                    }|merge(attr|default({}))
-                })
-            }}
+        <div class="col-md-{{ preview is same as(true) ? 6 : 12 }}">
+            {{ form_widget(form.markdown, {
+                'attr': {
+                    'class': attr.class|default('') ~ ' markdown',
+                    'style': attr.style|default('') ~ ' min-height:100px;',
+                    'data-html': form.html.vars.id,
+                    'data-preview': preview is same as(true) ? ('#' ~ id ~ '-rendered') : (preview ? : ''),
+                }|merge(attr|default({}))
+            }) }}
         </div>
         <div class="hide">
             {{ form_widget(form.html) }}
         </div>
-        {% if preview is sameas(true) %}
+        {% if preview is same as(true) %}
             <div id="{{ id }}-rendered" class="col-md-6 well" style="min-height:100px;">
             </div>
         {% endif %}

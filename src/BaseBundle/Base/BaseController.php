@@ -136,6 +136,37 @@ abstract class BaseController extends Controller
             return $this->redirect($this->generateUrl($route['name'], $route['params']));
         }
 
-        return $this->redirectToRoute('home');
+        return new RedirectResponse(
+            $this->generateUrl($this->getSafeRefererOr($request, 'home'))
+        );
+    }
+
+    /**
+     * IF you wish to redirect your user to the referer (so he goes back from where he comes),
+     * use this method to ensure that referer URL is trusted (any link that comes from us).
+     *
+     * @param Request $request
+     * @param string  $url
+     *
+     * @return string
+     */
+    protected function getSafeRefererOr(Request $request, $url)
+    {
+        if ($request->headers->has('Referer')) {
+            $referer = $request->headers->get('Referer');
+
+            // URL starts by '/' but not '//'
+            if (strlen($referer) < 2 || ($referer[0] == '/' && $referer[1] != '/')) {
+                return $referer;
+            }
+
+            // URL starts by the same host
+            $baseUrl = $request->getScheme() . '://' . $request->getHost() . (($request->getPort() != 80 && $request->getPort() != 443) ? ':' . $request->getPort() : '') . '/';
+            if (strncmp($referer, $baseUrl, strlen($baseUrl)) === 0) {
+                return $referer;
+            }
+        }
+
+        return $url;
     }
 }

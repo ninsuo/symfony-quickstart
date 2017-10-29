@@ -1,4 +1,4 @@
-{# BaseBundle:Login:login.html.twig #}
+{# BaseBundle:User:login.html.twig #}
 
 <fieldset>
     <legend>{{ 'base.login.resource_owners'|trans }}</legend>
@@ -11,20 +11,21 @@
 
         <div class="col-md-10" id="login">
             <div class="row">
-               {% for service, enabled in fuz.services if enabled %}
-                   {% set serviceId = (service|split(' '))[0]|lower %}
+                {% for service, enabled in fuz.services if enabled %}
+                    {% set serviceId = (service|split(' '))[0]|lower %}
                     <a
-                        title="{{ 'base.login.using'|trans({'%provider%': service}) }}"
-                        href="{{ hwi_oauth_login_url(serviceId|lower) }}"
-                        class="black">
+                            title="{{ 'base.login.using'|trans({'%provider%': service}) }}"
+                            href="{{ hwi_oauth_login_url(serviceId|lower) }}"
+                            class="black">
                         <div class="col-md-4">
                             <div class="oauth">
-                                <img src="{{ asset('bundles/base/img/oauth/' ~ serviceId|lower ~ '.png') }}" alt="{{ service|title }}"/>
+                                <img src="{{ asset('bundles/base/img/oauth/' ~ serviceId|lower ~ '.png') }}"
+                                     alt="{{ service|title }}"/>
                                 <p>{{ 'base.login.using'|trans({'%provider%': service|title}) }}</p>
                             </div>
                         </div>
                     </a>
-               {% endfor %}
+                {% endfor %}
             </div>
         </div>
 

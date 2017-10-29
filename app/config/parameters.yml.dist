@@ -68,8 +68,11 @@ parameters:
     menu_left_enabled: true
     menu_right_enabled: true
 
-    # Members can remove their account
+    # Members can remove their account (use {{ path('unsubscribe') }})
     accounts_removable: true
+
+    # Members can edit their account
+    accounts_updatable: true
 
     # Recaptcha
     recaptcha_public: <your recaptcha site key>
