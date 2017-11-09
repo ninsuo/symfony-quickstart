@@ -33,6 +33,8 @@ recaptcha, markdown, toggles...)
 1) Install and run the project:
 
 ```sh
+git clone git@github.com:ninsuo/symfony-quickstart.git
+cd symfony-quickstart
 php -r "readfile('https://getcomposer.org/installer');" | php
 php composer.phar install
 php app/console doctrine:schema:create
