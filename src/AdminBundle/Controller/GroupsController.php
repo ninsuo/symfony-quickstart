@@ -46,6 +46,39 @@ class GroupsController extends BaseController
         ];
     }
 
+    protected function getCreateForm(Request $request)
+    {
+        $entity = new Group();
+
+        $form = $this
+           ->createNamedFormBuilder('create-group', Type\FormType::class, $entity)
+           ->add('name', Type\TextType::class, [
+               'label' => 'admin.groups.name',
+           ])
+           ->add('notes', Type\TextareaType::class, [
+               'label'    => 'admin.groups.notes',
+               'required' => false,
+           ])
+           ->add('submit', Type\SubmitType::class, [
+               'label' => 'base.crud.action.save',
+           ])
+           ->getForm()
+           ->handleRequest($request)
+        ;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            $this->success('admin.groups.created');
+
+            $this->redirect('admin_groups');
+        }
+
+        return $form->createView();
+    }
+
     /**
      * @Route("/delete/{id}/{token}", name="admin_groups_delete")
      * @Template()
@@ -69,7 +102,7 @@ class GroupsController extends BaseController
 
         $this->success('admin.groups.deleted', ['%id%' => $entity->getId()]);
 
-        return $this->redirect($this->generateUrl('admin_groups'));
+        return $this->redirect($this->generateUrl('admin_groups', $request->query->all()));
     }
 
     /**
@@ -181,39 +214,6 @@ class GroupsController extends BaseController
             'usersIn'  => $this->_getGroupUsers($request, $id, 'user-in'),
             'usersOut' => $this->_getGroupUsers($request, $id, 'user-out'),
         ];
-    }
-
-    protected function getCreateForm(Request $request)
-    {
-        $entity = new Group();
-
-        $form = $this
-           ->createNamedFormBuilder('create-group', Type\FormType::class, $entity)
-           ->add('name', Type\TextType::class, [
-               'label' => 'admin.groups.name',
-           ])
-           ->add('notes', Type\TextareaType::class, [
-               'label'    => 'admin.groups.notes',
-               'required' => false,
-           ])
-           ->add('submit', Type\SubmitType::class, [
-               'label' => 'base.crud.action.save',
-           ])
-           ->getForm()
-           ->handleRequest($request)
-        ;
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            $this->success('admin.groups.created');
-
-            $this->redirect('admin_groups');
-        }
-
-        return $form->createView();
     }
 
     protected function _getGroupUsers(Request $request, $groupId, $prefix)

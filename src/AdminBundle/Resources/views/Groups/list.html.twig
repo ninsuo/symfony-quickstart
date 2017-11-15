@@ -12,45 +12,41 @@
 
         <table class="table">
             <thead>
-                <tr>
-                    <th style="width: 20%;">{{ macros.orderBy(orderBy, 'id', 'admin.groups.id') }}</th>
-                    <th style="width: 25%;">{{ macros.orderBy(orderBy, 'name', 'admin.groups.name') }}</th>
-                    <th style="width: 25%;">{{ macros.orderBy(orderBy, 'notes', 'admin.groups.notes') }}</th>
-                    <th style="width: 30%;">{{ 'admin.groups.actions' | trans }}</th>
-                </tr>
+            <tr>
+                <th style="width: 20%;">{{ macros.orderBy(orderBy, 'id', 'admin.groups.id') }}</th>
+                <th style="width: 25%;">{{ macros.orderBy(orderBy, 'name', 'admin.groups.name') }}</th>
+                <th style="width: 25%;">{{ macros.orderBy(orderBy, 'notes', 'admin.groups.notes') }}</th>
+                <th style="width: 30%;">{{ 'admin.groups.actions' | trans }}</th>
+            </tr>
             </thead>
             <tbody>
-                {% for group in pager.currentPageResults %}
-                    <tr>
-                        <td>{{ group.id }}</td>
-                        <td>
-                            {{
-                                include('BaseBundle::editOnClick.html.twig', {
-                                    'text': group.name,
-                                    'endpoint': path('_admin_groups_edit_name', {id: group.id}),
-                                })
-                            }}
-                        </td>
-                        <td>
-                            {{
-                                include('BaseBundle::editOnClick.html.twig', {
-                                    'text': group.notes,
-                                    'endpoint': path('_admin_groups_edit_notes', {id: group.id}),
-                                })
-                            }}
-                        </td>
-                        <td>
-                            <a
+            {% for group in pager.currentPageResults %}
+                <tr>
+                    <td>{{ group.id }}</td>
+                    <td>
+                        {{ include('BaseBundle::editOnClick.html.twig', {
+                            'text': group.name,
+                            'endpoint': path('_admin_groups_edit_name', {id: group.id}),
+                        }) }}
+                    </td>
+                    <td>
+                        {{ include('BaseBundle::editOnClick.html.twig', {
+                            'text': group.notes,
+                            'endpoint': path('_admin_groups_edit_notes', {id: group.id}),
+                        }) }}
+                    </td>
+                    <td>
+                        <a
                                 href="{{ path('admin_groups_manage', {id: group.id}) }}"
                                 class="btn btn-warning btn-sm">{{ 'admin.groups.manage' | trans }}</a>
-                            &nbsp;&nbsp;&nbsp;
-                            <a
-                                href="{{ path('admin_groups_delete', {id: group.id, token: csrf_token('administration')}) }}"
+                        &nbsp;&nbsp;&nbsp;
+                        <a
+                                href="{{ path('admin_groups_delete', app.request.query.all|merge({id: group.id, token: csrf_token('administration')})) }}"
                                 data-message="{{ 'admin.groups.delete_confirm' | trans({'%group%': group.name}) | e('html_attr') }}"
                                 class="requires-confirmation btn btn-danger btn-sm">{{ 'admin.groups.delete' | trans }}</a>
-                        </td>
-                    </tr>
-                {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
 
@@ -58,6 +54,6 @@
 
     </div>
 
-    {{ macros.form(create, [], 'admin.groups.create' | trans) }}
+    {{ macros.form(create, {action: '?' ~ http_build_query(app.request.query.all)}, 'admin.groups.create' | trans) }}
 
 {% endblock %}
