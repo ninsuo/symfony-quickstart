@@ -68,6 +68,7 @@ base:
             main: Administration
             users: Gestion des utilisateurs
             groups: Gestion des groupes
+            settings: Gestion des paramètres
     nav: 'Afficher/Masquer le menu'
     pager:
         prev: '← Précédent'

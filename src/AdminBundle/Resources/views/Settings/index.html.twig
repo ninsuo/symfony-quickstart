@@ -1,0 +1,11 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% import 'BaseBundle::macros.html.twig' as macros %}
+
+{% block title %}{{ 'admin.settings.title'|trans }}{% endblock %}
+
+{% block body %}
+
+    {{ macros.form(form) }}
+
+{% endblock %}

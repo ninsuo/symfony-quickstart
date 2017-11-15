@@ -30,3 +30,5 @@ admin:
         title: Groupes de l'utilisateur %name%
         groups_in: 'Groupes de %name% :'
         groups_out: "Autres groupes :"
+    settings:
+        title: Paramètres de l'application

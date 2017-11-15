@@ -1,3 +1,9 @@
 parameters:
+    admin.twig_extension.settings.class: AdminBundle\Twig\Extension\SettingsExtension
 
 services:
+    admin.twig_extension.settings:
+        class: '%admin.twig_extension.settings.class%'
+        parent: base.twig_extension
+        tags:
+            - { name: twig.extension }
