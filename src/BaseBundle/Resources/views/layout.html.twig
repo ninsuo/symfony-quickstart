@@ -42,8 +42,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-expanded="false">&nbsp;&nbsp;&nbsp;{{ macros.me() }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            <li {% if app.request.pathInfo == path('profile') %}class="active"{% endif %}>
+                                <a href="{{ path('profile') }}">{{ 'base.profile.title' | trans }}</a>
+                            </li>
+                            <li class="divider"></li>
                             <li><a href="{{ path('logout') }}">{{ 'base.logout.title' | trans }}</a></li>
-                            <li><a href="{{ path('profile') }}">{{ 'base.profile.title' | trans }}</a></li>
                         </ul>
                     </li>
                 {% else %}

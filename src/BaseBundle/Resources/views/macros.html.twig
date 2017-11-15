@@ -134,7 +134,7 @@
         <div class="text-left col-md-4">
             <div>{{ 'base.pager.per_page'|trans }}</div>
             <ul class="pagination">
-                {% for perPage in constant('BaseBundle\\Base\\BaseController::PAGER_PER_PAGE_LIST') %}
+                {% for perPage in constant('BaseBundle\\Base\\BaseController::PAGER_PER_PAGE_LIST')|split(',') %}
                     {% set isCurrent = perPage == pager.maxPerPage %}
                     <li {% if isCurrent %}class="active"{% endif %}>
                         {% if isCurrent %}<span>{% else %}<a
