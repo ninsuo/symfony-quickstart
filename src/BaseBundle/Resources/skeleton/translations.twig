@@ -8,5 +8,5 @@
         deleted: '{{ entityName|lower|title }} #%id% removed successfully.'
         manage: Manage {{ entityName|pascalcase }}s
 {% for name, column in columns %}
-        {{ name|snakecase|lower }}: {{ name[:1]|upper ~ name[1:]|pascalcase }}
+        {{ name|snakecase|lower }}: {{ name|pascalcase }}
 {% endfor %}

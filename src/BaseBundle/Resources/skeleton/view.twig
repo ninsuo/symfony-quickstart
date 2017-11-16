@@ -34,7 +34,7 @@
                         </td>{% endverbatim %}{% endfor %}{% verbatim %}
                         <td>
                             <a
-                                href="{{ path('{% endverbatim %}{{ routePrefix }}{% verbatim %}_delete', {id: {% endverbatim %}{{ entityName|snakecase|lower }}{% verbatim %}.id, token: csrf_token('{% endverbatim %}{{ routePrefix }}{% verbatim %}')}) }}"
+                                href="{{ path('{% endverbatim %}{{ routePrefix }}{% verbatim %}_delete', app.request.query.all|merge({id: {% endverbatim %}{{ entityName|snakecase|lower }}{% verbatim %}.id, token: csrf_token('{% endverbatim %}{{ routePrefix }}{% verbatim %}')})) }}"
                                 data-message="{{ '{% endverbatim %}{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}{% verbatim %}.delete_confirm' | trans({'%id%': {% endverbatim %}{{ entityName|snakecase|lower }}{% verbatim %}.id}) | e('html_attr') }}"
                                 class="requires-confirmation btn btn-danger btn-sm">{{ '{% endverbatim %}{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}{% verbatim %}.delete' | trans }}</a>
                         </td>

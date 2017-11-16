@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateDoctrineLightCrudCommand extends BaseCommand
+class GenerateLightCrudCommand extends BaseCommand
 {
     private $input;
     private $output;
@@ -43,7 +43,7 @@ class GenerateDoctrineLightCrudCommand extends BaseCommand
         $bundleDir    = realpath(__DIR__.'/../../'.$bundle);
         $entityName   = substr($meta->rootEntityName, strrpos($meta->rootEntityName, '\\') + 1);
         $entityPrefix = strtolower(substr($entityName, 0, 1));
-        $routePrefix  = strtolower($o->toSnakeCase($bundleName).'_'.$o->toSnakeCase($entityName));
+        $routePrefix  = strtolower($o->toSnakeCase($bundleName).'_'.$o->toSnakeCase($entityName)).'s';
 
         $context = [
             'columns' => $columns,
@@ -69,13 +69,13 @@ class GenerateDoctrineLightCrudCommand extends BaseCommand
 
         $this->_renderFile(
             'controller.twig',
-            "{$bundleDir}/Controller/{$entityName}Controller.php",
+            "{$bundleDir}/Controller/{$entityName}sController.php",
             $context
         );
 
         $this->_renderFile(
             'view.twig',
-            "{$bundleDir}/Resources/views/{$entityName}/list.html.twig",
+            "{$bundleDir}/Resources/views/{$entityName}s/list.html.twig",
             $context
         );
 

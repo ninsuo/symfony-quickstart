@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints;
 /**
 * @Route("/{{ bundleName|kebabcase }}/{{ entityName|kebabcase }}")
  */
-class {{ entityName|pascalcase }}Controller extends BaseController
+class {{ entityName|pascalcase }}sController extends BaseController
 {
     /**
      * @Route("/", name="{{ routePrefix }}")
@@ -25,7 +25,9 @@ class {{ entityName|pascalcase }}Controller extends BaseController
     {
         $form = $this->getCreateForm($request);
         if (is_null($form)) {
-            return new RedirectResponse($this->generateUrl('{{ routePrefix }}'));
+            return new RedirectResponse(
+                $this->generateUrl('{{ routePrefix }}', $request->query->all())
+            );
         }
 
         $filter = $request->query->get('{{ entityName|kebabcase }}-filter');
@@ -106,7 +108,7 @@ class {{ entityName|pascalcase }}Controller extends BaseController
 
         $this->success("{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.deleted", ['%id%' => $entity->getId()]);
 
-        return $this->redirect($this->generateUrl('{{ routePrefix }}'));
+        return $this->redirect($this->generateUrl('{{ routePrefix }}', $request->query->all()));
     }
 
 {% for name, column in columns if name != 'id' %}
