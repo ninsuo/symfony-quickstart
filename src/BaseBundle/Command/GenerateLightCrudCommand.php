@@ -20,7 +20,7 @@ class GenerateDoctrineLightCrudCommand extends BaseCommand
         parent::configure();
 
         $this
-            ->setName('generate:doctrine:light-crud')
+            ->setName('generate:light-crud')
             ->setDescription('Generate a single-page crud from an entity')
             ->addArgument('entity', InputArgument::REQUIRED, 'Entity path (ex: AppBundle:User)')
         ;
