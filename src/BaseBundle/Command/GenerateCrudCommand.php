@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateLightCrudCommand extends BaseCommand
+class GenerateCrudCommand extends BaseCommand
 {
     private $input;
     private $output;
@@ -20,7 +20,7 @@ class GenerateLightCrudCommand extends BaseCommand
         parent::configure();
 
         $this
-            ->setName('generate:light-crud')
+            ->setName('generate:crud')
             ->setDescription('Generate a single-page crud from an entity')
             ->addArgument('entity', InputArgument::REQUIRED, 'Entity path (ex: AppBundle:User)')
         ;
@@ -34,7 +34,7 @@ class GenerateLightCrudCommand extends BaseCommand
         $o = CaseHelperFactory::make(CaseHelperFactory::INPUT_TYPE_PASCAL_CASE);
 
         $entity  = $input->getArgument('entity');
-        $factory = new DisconnectedMetadataFactory($this->getContainer()->get('doctrine'));
+        $factory = new DisconnectedMetadataFactory($this->get('doctrine'));
         $meta    = $factory->getClassMetadata($entity)->getMetadata()[0];
 
         $columns      = $meta->fieldMappings;
