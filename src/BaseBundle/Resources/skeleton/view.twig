@@ -14,8 +14,8 @@
         <table class="table">
             <thead>
                 <tr>{% endverbatim %}{% for name, column in columns %}{% verbatim %}
-                    <th style="width: {% endverbatim %}{{ 70 / columns|length }}{% verbatim %}%;">{{ macros.orderBy(orderBy, '{% endverbatim %}{{ name }}{% verbatim %}', '{% endverbatim %}{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.{{ name|snakecase|lower }}{% verbatim %}') }}</th>{% endverbatim %}{% endfor %}{% verbatim %}
-                    <th style="width: 30%;">{{ '{% endverbatim %}{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.actions{% verbatim %}' | trans }}</th>
+                    <th style="width: {% endverbatim %}{{ 85 / columns|length }}{% verbatim %}%;">{{ macros.orderBy(orderBy, '{% endverbatim %}{{ name }}{% verbatim %}', '{% endverbatim %}{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.{{ name|snakecase|lower }}{% verbatim %}') }}</th>{% endverbatim %}{% endfor %}{% verbatim %}
+                    <th style="width: 15%;">{{ '{% endverbatim %}{{ bundleName|snakecase|lower }}.{{ entityName|snakecase|lower }}.actions{% verbatim %}' | trans }}</th>
                 </tr>
             </thead>
             <tbody>
