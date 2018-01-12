@@ -91,7 +91,7 @@ class {{ entityName|pascalcase }}sController extends BaseController
      * @Route("/delete/{id}/{token}", name="{{ routePrefix }}_delete")
      * @Template()
      */
-    public function deleteAction($id, $token)
+    public function deleteAction($id, $token, Request $request)
     {
         $this->checkCsrfToken('{{ routePrefix }}', $token);
 
