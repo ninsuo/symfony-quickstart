@@ -499,7 +499,11 @@ class User implements UserInterface, EquatableInterface
      */
     public function isEqualTo(UserInterface $user)
     {
-        if ((int)$this->getId() === $user->getId()) {
+        if (
+            (int)$this->getId() === $user->getId()
+            && $this->isEnabled() === $user->isEnabled()
+            && $this->isAdmin() === $user->isAdmin()
+        ) {
             return true;
         }
 
