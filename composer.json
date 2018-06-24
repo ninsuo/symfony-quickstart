@@ -31,7 +31,7 @@
     "braincrafted/bootstrap-bundle": "~2.0",
     "twbs/bootstrap": "3.0.*",
     "oyejorge/less.php": "~1.5",
-    "hwi/oauth-bundle": "^0.5",
+    "hwi/oauth-bundle": "^0.6",
     "jms/translation-bundle": "~1.1",
     "knplabs/knp-menu-bundle": "^2.0",
     "easycorp/easy-security-bundle": "^1.0",
@@ -46,7 +46,10 @@
     "patchwork/jsqueeze": "^2.0",
     "ninsuo/symfony-collection": "^2",
     "symfony/web-server-bundle": "^3.3",
-    "sensio/generator-bundle": "^3.0"
+    "sensio/generator-bundle": "^3.0",
+    "guzzlehttp/guzzle": "^6.3",
+    "php-http/httplug-bundle": "^1.10",
+    "php-http/guzzle6-adapter": "^1.1"
   },
   "require-dev": {
     "symfony/phpunit-bridge": "^3.0"

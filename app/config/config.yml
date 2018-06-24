@@ -135,6 +135,16 @@ hwi_oauth:
             options:
                 display: "page"
 
+httplug:
+    plugins:
+        logger: ~
+    clients:
+        default:
+            factory: 'httplug.factory.guzzle6'
+            plugins: ['httplug.plugin.logger']
+            config:
+                timeout: 2
+
 # Supported Website Languages
 jms_i18n_routing:
     default_locale: "en"
