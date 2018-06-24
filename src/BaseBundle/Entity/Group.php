@@ -33,7 +33,7 @@ class Group
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=191)
      * @Assert\NotBlank
      */
     protected $name;
@@ -71,6 +71,16 @@ class Group
     }
 
     /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set name.
      *
      * @param string $name
@@ -85,13 +95,13 @@ class Group
     }
 
     /**
-     * Get name.
+     * Get notes.
      *
      * @return string
      */
-    public function getName()
+    public function getNotes()
     {
-        return $this->name;
+        return $this->notes;
     }
 
     /**
@@ -106,16 +116,6 @@ class Group
         $this->notes = $notes;
 
         return $this;
-    }
-
-    /**
-     * Get notes.
-     *
-     * @return string
-     */
-    public function getNotes()
-    {
-        return $this->notes;
     }
 
     /**

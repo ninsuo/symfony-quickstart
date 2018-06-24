@@ -42,14 +42,14 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="resource_owner_id", type="string", length=255)
+     * @ORM\Column(name="resource_owner_id", type="string", length=191)
      */
     protected $resourceOwnerId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=255)
+     * @ORM\Column(name="nickname", type="string", length=191)
      * @Assert\NotBlank()
      */
     protected $nickname;
@@ -57,7 +57,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="contact", type="string", length=255, nullable=true)
+     * @ORM\Column(name="contact", type="string", length=191, nullable=true)
      * @Assert\Email()
      */
     protected $contact;
@@ -65,7 +65,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     * @ORM\Column(name="picture", type="string", length=191, nullable=true)
      * @Assert\Url()
      */
     protected $picture;
